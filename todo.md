@@ -59,3 +59,14 @@
 
 ## UX Improvements
 - [x] Add scroll to top when clicking Next Lesson button
+
+## Design Enhancement
+- [x] Add Google Fonts: Playfair Display, Poppins, Kanit, Prompt, Sarabun, Assistant
+- [x] Update hero banner with "Learn Thai Before You Fly" headline
+- [x] Add sample video preview section for Lesson 1
+- [x] Create Cultural Tips section with Thai etiquette facts
+- [x] Implement smooth scroll animations and transitions
+- [x] Apply warm color palette (gold, cream, light blue)
+- [x] Add Thai-style subtle patterns to background
+- [x] Improve spacing, rounded corners, and shadows
+- [x] Ensure mobile responsiveness across all pages

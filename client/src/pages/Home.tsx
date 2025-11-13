@@ -12,35 +12,35 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto py-20">
-          <div className="inline-block mb-6 px-6 py-2 bg-orange-500/90 rounded-full text-sm font-semibold tracking-wide">
+          <div className="inline-block mb-6 px-6 py-3 bg-gradient-to-r from-amber-500/90 to-yellow-500/90 rounded-full text-sm font-semibold tracking-wide backdrop-blur-sm">
             🇹🇭 FOR ISRAELI TRAVELERS
           </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 animate-fade-in leading-tight">
-            Learn Thai,<br/>Travel Confidently
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 animate-fade-in leading-tight" style={{fontFamily: 'Playfair Display, serif'}}>
+            Learn Thai<br/>Before You Fly
           </h1>
-          <p className="text-xl md:text-3xl mb-4 font-light">
-            Master Essential Thai Phrases for Your Journey
+          <p className="text-xl md:text-3xl mb-4 font-light" style={{fontFamily: 'Poppins, sans-serif'}}>
+            Simple lessons for Israeli travelers to Thailand
           </p>
-          <p className="text-lg md:text-2xl mb-12 font-light" dir="rtl">
-            שלטו בביטויים תאילנדיים חיוניים למסע שלכם
+          <p className="text-lg md:text-2xl mb-12 font-light hebrew-text" dir="rtl">
+            שיעורים פשוטים למטיילים ישראלים לתאילנד
           </p>
           <Link href="/lessons">
-            <Button size="lg" className="text-xl px-12 py-8 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 hover:scale-105">
-              🎓 Start Learning Now
+            <Button size="lg" className="text-xl px-12 py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
+              🎓 Start Learning Free
             </Button>
           </Link>
-          <div className="mt-12 flex justify-center gap-8 text-sm opacity-80">
-            <div className="flex items-center gap-2">
+          <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full">
               <span className="text-2xl">✓</span>
-              <span>10 Lessons</span>
+              <span className="font-medium">10 Lessons</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full">
               <span className="text-2xl">✓</span>
-              <span>Native Audio</span>
+              <span className="font-medium">Native Audio</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full">
               <span className="text-2xl">✓</span>
-              <span>100% Free</span>
+              <span className="font-medium">100% Free</span>
             </div>
           </div>
         </div>
@@ -54,23 +54,23 @@ export default function Home() {
           </h2>
           <p className="text-center text-gray-600 mb-16 text-lg">Everything you need for your Thai adventure</p>
           <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-orange-100">
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-amber-100">
               <div className="text-6xl mb-6">🎧</div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">Native Audio</h3>
               <p className="text-gray-600">Learn authentic pronunciation from native Thai speakers</p>
-              <p className="text-gray-600 mt-2" dir="rtl">למד הגייה אותנטית מדוברי תאילנדית שפת אם</p>
+              <p className="text-gray-600 mt-2 hebrew-text" dir="rtl">למד הגייה אותנטית מדוברי תאילנדית שפת אם</p>
             </div>
-            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-orange-100">
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-amber-100">
               <div className="text-6xl mb-6">🌍</div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">Travel-Focused</h3>
               <p className="text-gray-600">Practical phrases for real travel situations</p>
-              <p className="text-gray-600 mt-2" dir="rtl">ביטויים מעשיים למצבי נסיעה אמיתיים</p>
+              <p className="text-gray-600 mt-2 hebrew-text" dir="rtl">ביטויים מעשיים למצבי נסיעה אמיתיים</p>
             </div>
-            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-orange-100">
+            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-amber-100">
               <div className="text-6xl mb-6">✨</div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">Interactive</h3>
               <p className="text-gray-600">Engaging exercises and quizzes to test your knowledge</p>
-              <p className="text-gray-600 mt-2" dir="rtl">תרגילים וחידונים מרתקים לבדיקת הידע שלך</p>
+              <p className="text-gray-600 mt-2 hebrew-text" dir="rtl">תרגילים וחידונים מרתקים לבדיקת הידע שלך</p>
             </div>
           </div>
         </div>
@@ -96,8 +96,8 @@ export default function Home() {
               { en: "Practice Dialogues", he: "תרגול דיאלוגים" },
               { en: "Review & Survival Phrases", he: "סיכום וביטויי הישרדות" }
             ].map((lesson, index) => (
-              <div key={index} className="flex items-center p-5 bg-white rounded-xl hover:bg-orange-50 transition-all duration-300 hover:shadow-lg border border-gray-100 hover:border-orange-200">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-5 shadow-md">
+              <div key={index} className="flex items-center p-5 bg-white rounded-xl hover:bg-amber-50 transition-all duration-300 hover:shadow-lg border border-gray-100 hover:border-amber-200">
+                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-yellow-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-5 shadow-md">
                   {index + 1}
                 </div>
                 <div className="flex-1">
@@ -109,10 +109,82 @@ export default function Home() {
           </div>
           <div className="text-center mt-16">
             <Link href="/lessons">
-              <Button size="lg" className="text-lg px-10 py-7 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+              <Button size="lg" className="text-lg px-10 py-7 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-full font-semibold">
                 📚 View All Lessons / צפה בכל השיעורים
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Preview Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-5xl font-bold text-center mb-4 text-gray-900">
+            See How It Works
+          </h2>
+          <p className="text-center text-gray-600 mb-12 text-lg">Watch a preview of Lesson 1: Greetings & Introductions</p>
+          <div className="max-w-4xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-amber-100 to-yellow-100 aspect-video flex items-center justify-center">
+              <div className="text-center p-8">
+                <div className="text-6xl mb-4">🎥</div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">Video Coming Soon</h3>
+                <p className="text-gray-600 mb-6">We're preparing high-quality video lessons for you!</p>
+                <Link href="/lessons">
+                  <Button size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700">
+                    Start with Interactive Lessons
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cultural Tips Section */}
+      <section className="py-24 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-5xl font-bold text-center mb-4 text-gray-900">
+            Thai Cultural Tips
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg">Essential etiquette for your Thailand journey</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">🙏</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">The Wai Greeting</h3>
+              <p className="text-gray-600 leading-relaxed">Press your palms together at chest level and bow slightly. The higher your hands, the more respect you show. Always return a wai when greeted.</p>
+              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">לחץ את כפות הידיים יחד וקוד קל - ידיים גבוהות יותר = יותר כבוד</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">👟</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Remove Your Shoes</h3>
+              <p className="text-gray-600 leading-relaxed">Always remove shoes before entering homes, temples, and some shops. Look for shoes at the entrance as a sign. This shows respect for sacred and clean spaces.</p>
+              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">הסר נעליים לפני כניסה לבתים ומקדשים - זה מראה כבוד</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">👑</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Respect the Head</h3>
+              <p className="text-gray-600 leading-relaxed">Never touch someone's head - it's considered the most sacred part of the body. Don't point your feet at people or Buddha images, as feet are seen as the lowest.</p>
+              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">אל תיגע בראש - זה חלק הגוף הקדוש ביותר</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">👗</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Dress Modestly</h3>
+              <p className="text-gray-600 leading-relaxed">Cover shoulders and knees when visiting temples. Wear respectful clothing in religious sites. Beachwear is only for the beach!</p>
+              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">כסה כתפיים וברכיים במקדשים</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">😊</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Smile Always</h3>
+              <p className="text-gray-600 leading-relaxed">Thailand is called the "Land of Smiles" for a reason. A smile goes a long way in all interactions. Stay calm and friendly, even in difficult situations.</p>
+              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">חיוך פותח דלתות בתאילנד</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">👑</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Respect the Royal Family</h3>
+              <p className="text-gray-600 leading-relaxed">The Thai Royal Family is deeply revered. Never speak negatively about them. Stand respectfully during the national anthem played in public places.</p>
+              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">המשפחה המלכותית מוערכת מאוד - הראה כבוד</p>
+            </div>
           </div>
         </div>
       </section>

@@ -66,7 +66,7 @@ export default function LessonDetail() {
   const nextLessonId = lesson.id < lessons.length ? lesson.id + 1 : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+    <div className="min-h-screen" style={{background: 'linear-gradient(to bottom, oklch(0.98 0.01 75), white)'}}>
       {/* Header */}
       <header 
         className="relative h-64 bg-cover bg-center"
@@ -81,11 +81,11 @@ export default function LessonDetail() {
             </Button>
           </Link>
           <div>
-            <div className="inline-block bg-orange-500 text-white px-4 py-2 rounded-full font-bold mb-4">
+            <div className="inline-block bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-4 py-2 rounded-full font-bold mb-4">
               Lesson {lesson.id}
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-2">{lesson.title}</h1>
-            <p className="text-xl" dir="rtl">{lesson.titleHebrew}</p>
+            <p className="text-xl hebrew-text" dir="rtl">{lesson.titleHebrew}</p>
           </div>
         </div>
       </header>
@@ -111,7 +111,7 @@ export default function LessonDetail() {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between gap-6">
                     <div className="flex-1">
-                      <div className="text-4xl font-bold text-orange-600 mb-3">
+                      <div className="text-4xl font-bold text-amber-600 mb-3 thai-title" lang="th">
                         {phrase.thai}
                       </div>
                       <div className="text-xl text-gray-500 mb-2 italic font-light">
@@ -120,17 +120,17 @@ export default function LessonDetail() {
                       <div className="text-xl font-semibold text-gray-900 mb-1">
                         {phrase.english}
                       </div>
-                      <div className="text-xl text-gray-700" dir="rtl">
+                      <div className="text-xl text-gray-700 hebrew-text" dir="rtl">
                         {phrase.hebrew}
                       </div>
                     </div>
                     <Button
                       size="lg"
                       variant="outline"
-                      className="shrink-0 hover:bg-orange-50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 hover:scale-110"
+                      className="shrink-0 hover:bg-amber-50 border-2 border-amber-200 hover:border-amber-400 transition-all duration-300 hover:scale-110"
                       onClick={() => playAudio(phrase.audio)}
                     >
-                      <Volume2 className="h-7 w-7 text-orange-500" />
+                      <Volume2 className="h-7 w-7 text-amber-500" />
                     </Button>
                   </div>
                 </CardContent>
@@ -272,7 +272,7 @@ export default function LessonDetail() {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Link href="/lessons">
-            <Button size="lg" variant="outline" className="border-2 hover:bg-orange-50 hover:border-orange-300">
+            <Button size="lg" variant="outline" className="border-2 hover:bg-amber-50 hover:border-amber-300">
               <ArrowLeft className="mr-2 h-5 w-5" />
               All Lessons
             </Button>
@@ -280,7 +280,7 @@ export default function LessonDetail() {
           {nextLessonId && (
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-full font-semibold"
               onClick={() => handleNextLesson(nextLessonId)}
             >
               Next Lesson →
