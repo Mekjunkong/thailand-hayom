@@ -77,6 +77,27 @@ export const lessons: Lesson[] = [
         english: "Excuse me / Sorry",
         hebrew: "סליחה",
         audio: "/audio/lesson1-sorry.wav"
+      },
+      {
+        thai: "ลาก่อนครับ/ค่ะ",
+        phonetic: "laa-gàawn khráp/khâ",
+        english: "Goodbye",
+        hebrew: "להתראות",
+        audio: "/audio/lesson1-goodbye.wav"
+      },
+      {
+        thai: "แล้วพบกันใหม่",
+        phonetic: "láew phóp gan mài",
+        english: "See you later",
+        hebrew: "נתראה מאוחר יותר",
+        audio: "/audio/lesson1-seeyou.wav"
+      },
+      {
+        thai: "ยินดีต้อนรับ",
+        phonetic: "yin-dii tâawn-ráp",
+        english: "Welcome",
+        hebrew: "ברוך הבא",
+        audio: "/audio/lesson1-welcome.wav"
       }
     ],
     exercises: [
@@ -236,6 +257,20 @@ export const lessons: Lesson[] = [
         english: "Check, please",
         hebrew: "חשבון בבקשה",
         audio: "/audio/lesson3-check.wav"
+      },
+      {
+        thai: "ขอน้ำหน่อยครับ/ค่ะ",
+        phonetic: "khǎaw náam nàauy khráp/khâ",
+        english: "Can I have some water, please?",
+        hebrew: "אפשר מים בבקשה?",
+        audio: "/audio/lesson3-water.wav"
+      },
+      {
+        thai: "อร่อยมาก",
+        phonetic: "a-ròi mâak",
+        english: "Very delicious!",
+        hebrew: "טעים מאוד!",
+        audio: "/audio/lesson3-delicious.wav"
       }
     ],
     exercises: [
@@ -320,6 +355,20 @@ export const lessons: Lesson[] = [
         english: "Go straight",
         hebrew: "לך ישר",
         audio: "/audio/lesson5-directions.wav"
+      },
+      {
+        thai: "ไปสนามบินเท่าไหร่",
+        phonetic: "bpai sǎnǍam-bin thâo-rài",
+        english: "How much to the airport?",
+        hebrew: "כמה עולה לשדה התעופה?",
+        audio: "/audio/lesson5-taxi.wav"
+      },
+      {
+        thai: "จอดตรงนี้",
+        phonetic: "jàawt dtrong-níí",
+        english: "Stop here",
+        hebrew: "עצור כאן",
+        audio: "/audio/lesson5-stop.wav"
       }
     ],
     exercises: [

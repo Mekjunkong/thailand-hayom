@@ -78,3 +78,9 @@
 - [x] Change "Smile Always" card to "Don't Yell or Be Loud at Night"
 - [x] Add cultural tip about not parking in middle of the road
 - [x] Add cultural tip about motorbike rental requiring international license
+
+## Content Expansion
+- [x] Remove "See How It Works" video section from homepage
+- [x] Add more phrases to Lesson 1 (added 3 new phrases: goodbye, see you later, welcome)
+- [x] Add more phrases to Lesson 3 (added 2 new phrases: water, delicious)
+- [x] Add more phrases to Lesson 5 (added 2 new phrases: taxi to airport, stop here)

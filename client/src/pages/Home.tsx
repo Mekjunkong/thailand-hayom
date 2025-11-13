@@ -117,30 +117,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Preview Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-bold text-center mb-4 text-gray-900">
-            See How It Works
-          </h2>
-          <p className="text-center text-gray-600 mb-12 text-lg">Watch a preview of Lesson 1: Greetings & Introductions</p>
-          <div className="max-w-4xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-amber-100 to-yellow-100 aspect-video flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="text-6xl mb-4">🎥</div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">Video Coming Soon</h3>
-                <p className="text-gray-600 mb-6">We're preparing high-quality video lessons for you!</p>
-                <Link href="/lessons">
-                  <Button size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700">
-                    Start with Interactive Lessons
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Cultural Tips Section */}
       <section className="py-24 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
         <div className="container mx-auto px-4">
