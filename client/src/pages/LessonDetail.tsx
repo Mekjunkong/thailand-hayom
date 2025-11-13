@@ -238,33 +238,73 @@ export default function LessonDetail() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <div className="text-4xl">📱</div>
-                <div className="flex-1">
-                  <p className="font-semibold text-gray-800">WhatsApp</p>
-                  <a href="https://wa.me/66929894495" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-medium text-lg">
-                    +66 92 989 4495
-                  </a>
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* WhatsApp with QR Code */}
+              <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                <div className="text-5xl mb-4">📱</div>
+                <h3 className="font-bold text-xl text-gray-800 mb-2">WhatsApp</h3>
+                <a href="https://wa.me/66929894495" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-semibold text-lg block mb-4">
+                  +66 92 989 4495
+                </a>
+                {/* QR Code using public API */}
+                <div className="flex justify-center mb-3">
+                  <img 
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/66929894495" 
+                    alt="WhatsApp QR Code" 
+                    className="w-48 h-48 border-4 border-green-500 rounded-lg shadow-lg"
+                  />
                 </div>
+                <p className="text-sm text-gray-600">Scan to chat on WhatsApp</p>
+                <p className="text-sm text-gray-600" dir="rtl">סרוק כדי לשוחח בוואטסאפ</p>
               </div>
-              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <div className="text-4xl">✉️</div>
-                <div className="flex-1">
-                  <p className="font-semibold text-gray-800">Email</p>
-                  <a href="mailto:Pasuthunjunkong@gmail.com" className="text-blue-600 hover:text-blue-700 font-medium text-lg break-all">
-                    Pasuthunjunkong@gmail.com
-                  </a>
-                </div>
+
+              {/* Contact Form */}
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <div className="text-5xl mb-4 text-center">✉️</div>
+                <h3 className="font-bold text-xl text-gray-800 mb-4 text-center">Email Inquiry</h3>
+                <form className="space-y-3" onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const name = formData.get('name');
+                  const email = formData.get('email');
+                  const message = formData.get('message');
+                  window.location.href = `mailto:Pasuthunjunkong@gmail.com?subject=Thai Course Inquiry from ${name}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                }}>
+                  <input 
+                    type="text" 
+                    name="name"
+                    placeholder="Your Name / שמך"
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
+                  <input 
+                    type="email" 
+                    name="email"
+                    placeholder="Your Email / האימייל שלך"
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
+                  <textarea 
+                    name="message"
+                    placeholder="Your Message / ההודעה שלך"
+                    required
+                    rows={4}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+                  />
+                  <Button type="submit" className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
+                    Send Email / שלח אימייל
+                  </Button>
+                </form>
               </div>
-              <div className="mt-6 p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200">
-                <p className="text-center text-gray-700 font-medium">
-                  💡 Available for private lessons, group classes, and corporate training
-                </p>
-                <p className="text-center text-gray-600 text-sm mt-2" dir="rtl">
-                  זמין לשיעורים פרטיים, שיעורי קבוצה והדרכות לחברות
-                </p>
-              </div>
+            </div>
+            
+            <div className="mt-6 p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200">
+              <p className="text-center text-gray-700 font-medium">
+                💡 Available for private lessons, group classes, and corporate training
+              </p>
+              <p className="text-center text-gray-600 text-sm mt-2" dir="rtl">
+                זמין לשיעורים פרטיים, שיעורי קבוצה והדרכות לחברות
+              </p>
             </div>
           </CardContent>
         </Card>

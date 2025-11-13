@@ -94,3 +94,8 @@
 
 ## Bug Fixes
 - [x] Fix Thai flag icon display issue (replaced with palm tree emojis)
+
+## Contact Section Updates
+- [x] Change contact section to show only WhatsApp with QR code
+- [x] Remove email display from contact section
+- [x] Add contact form for email inquiries
