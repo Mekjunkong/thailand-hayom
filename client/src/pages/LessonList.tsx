@@ -5,6 +5,10 @@ import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 
 export default function LessonList() {
+  const handleLessonClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
       {/* Header */}
@@ -25,7 +29,7 @@ export default function LessonList() {
       <main className="container mx-auto px-4 py-16" style={{background: 'linear-gradient(to bottom, oklch(0.98 0.01 75), white)'}}>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {lessons.map((lesson) => (
-            <Link key={lesson.id} href={`/lesson/${lesson.id}`}>
+            <Link key={lesson.id} href={`/lesson/${lesson.id}`} onClick={handleLessonClick}>
               <Card className="h-full hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden border-2 border-transparent hover:border-amber-200">
                 <div 
                   className="h-48 bg-cover bg-center"

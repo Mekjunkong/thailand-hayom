@@ -8,7 +8,7 @@ export default function Home() {
       {/* Hero Section */}
       <section 
         className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/hero-background.jpg')" }}
+        style={{ backgroundImage: "url('/images/hero-beach.png')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto py-20">

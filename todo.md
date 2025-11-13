@@ -84,3 +84,7 @@
 - [x] Add more phrases to Lesson 1 (added 3 new phrases: goodbye, see you later, welcome)
 - [x] Add more phrases to Lesson 3 (added 2 new phrases: water, delicious)
 - [x] Add more phrases to Lesson 5 (added 2 new phrases: taxi to airport, stop here)
+
+## UI Improvements
+- [x] Change hero background to iconic Thai beach scene (Phang Nga Bay)
+- [x] Fix scroll-to-top when clicking lessons from lesson list page
