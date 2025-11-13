@@ -1,17 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { lessons } from "@/data/lessons";
-import { Link, useParams } from "wouter";
+import { Link, useParams, useLocation } from "wouter";
 import { ArrowLeft, Volume2, CheckCircle2, XCircle } from "lucide-react";
 import { useState, useRef } from "react";
 import { toast } from "sonner";
 
 export default function LessonDetail() {
   const { id } = useParams();
+  const [, setLocation] = useLocation();
   const lesson = lessons.find((l) => l.id === parseInt(id || "1"));
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [showResults, setShowResults] = useState(false);
   const audioRefs = useRef<{ [key: string]: HTMLAudioElement }>({});
+
+  const handleNextLesson = (nextId: number) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      setLocation(`/lesson/${nextId}`);
+    }, 300);
+  };
 
   if (!lesson) {
     return (
@@ -270,11 +278,13 @@ export default function LessonDetail() {
             </Button>
           </Link>
           {nextLessonId && (
-            <Link href={`/lesson/${nextLessonId}`}>
-              <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                Next Lesson →
-              </Button>
-            </Link>
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              onClick={() => handleNextLesson(nextLessonId)}
+            >
+              Next Lesson →
+            </Button>
           )}
         </div>
       </main>

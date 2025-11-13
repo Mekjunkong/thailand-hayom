@@ -56,3 +56,6 @@
 - [x] Expand lesson content with more phrases (added numbers 6-10)
 - [x] Add more practical examples and dialogues
 - [x] Enhance cultural notes with more details
+
+## UX Improvements
+- [x] Add scroll to top when clicking Next Lesson button
