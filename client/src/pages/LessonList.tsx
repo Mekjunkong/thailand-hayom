@@ -8,7 +8,7 @@ export default function LessonList() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
       {/* Header */}
-      <header className="bg-orange-500 text-white py-6 shadow-lg">
+      <header className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-8 shadow-2xl">
         <div className="container mx-auto px-4">
           <Link href="/">
             <Button variant="ghost" className="text-white hover:bg-orange-600 mb-4">
@@ -16,35 +16,35 @@ export default function LessonList() {
               Back to Home
             </Button>
           </Link>
-          <h1 className="text-4xl font-bold">All Lessons</h1>
-          <p className="text-lg opacity-90" dir="rtl">כל השיעורים</p>
+          <h1 className="text-5xl font-bold">All Lessons</h1>
+          <p className="text-xl mt-2" dir="rtl">כל השיעורים</p>
         </div>
       </header>
 
       {/* Lessons Grid */}
-      <main className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <main className="container mx-auto px-4 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {lessons.map((lesson) => (
             <Link key={lesson.id} href={`/lesson/${lesson.id}`}>
-              <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden">
+              <Card className="h-full hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden border-2 border-transparent hover:border-orange-200">
                 <div 
                   className="h-48 bg-cover bg-center"
                   style={{ backgroundImage: `url('${lesson.image}')` }}
                 >
-                  <div className="h-full bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                    <div className="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                  <div className="h-full bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                    <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-lg">
                       {lesson.id}
                     </div>
                   </div>
                 </div>
-                <CardHeader>
-                  <CardTitle className="text-xl">{lesson.title}</CardTitle>
-                  <CardDescription className="text-base" dir="rtl">{lesson.titleHebrew}</CardDescription>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-2xl font-bold text-gray-900">{lesson.title}</CardTitle>
+                  <CardDescription className="text-lg mt-1" dir="rtl">{lesson.titleHebrew}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-gray-600 mb-2">{lesson.description}</p>
                   <p className="text-sm text-gray-600" dir="rtl">{lesson.descriptionHebrew}</p>
-                  <div className="mt-4 flex items-center text-sm text-orange-600 font-semibold">
+                  <div className="mt-6 pt-4 border-t border-gray-100 flex items-center text-sm text-orange-600 font-bold">
                     <span>{lesson.phrases.length} phrases</span>
                     <span className="mx-2">•</span>
                     <span>{lesson.exercises.length} exercises</span>
@@ -57,7 +57,7 @@ export default function LessonList() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-12">
+      <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-12 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p>© 2024 Learn Thai for Israeli Travelers</p>
         </div>

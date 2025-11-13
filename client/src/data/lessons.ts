@@ -111,35 +111,35 @@ export const lessons: Lesson[] = [
         phonetic: "nìng",
         english: "One",
         hebrew: "אחד",
-        audio: "/audio/lesson2-numbers.wav"
+        audio: "/audio/number-1.wav"
       },
       {
         thai: "สอง",
         phonetic: "sǎawng",
         english: "Two",
         hebrew: "שניים",
-        audio: "/audio/lesson2-numbers.wav"
+        audio: "/audio/number-2.wav"
       },
       {
         thai: "สาม",
         phonetic: "sǎam",
         english: "Three",
         hebrew: "שלושה",
-        audio: "/audio/lesson2-numbers.wav"
+        audio: "/audio/number-3.wav"
       },
       {
         thai: "สี่",
         phonetic: "sìi",
         english: "Four",
         hebrew: "אַרבעה",
-        audio: "/audio/lesson2-numbers.wav"
+        audio: "/audio/number-4.wav"
       },
       {
         thai: "ห้า",
         phonetic: "hâa",
         english: "Five",
         hebrew: "חמישה",
-        audio: "/audio/lesson2-numbers.wav"
+        audio: "/audio/number-5.wav"
       },
       {
         thai: "ตอนนี้กี่โมงแล้ว",

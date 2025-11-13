@@ -101,28 +101,28 @@ export default function LessonDetail() {
             {lesson.phrases.map((phrase, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start justify-between gap-6">
                     <div className="flex-1">
-                      <div className="text-3xl font-bold text-orange-600 mb-2">
+                      <div className="text-4xl font-bold text-orange-600 mb-3">
                         {phrase.thai}
                       </div>
-                      <div className="text-lg text-gray-600 mb-1 italic">
+                      <div className="text-xl text-gray-500 mb-2 italic font-light">
                         {phrase.phonetic}
                       </div>
-                      <div className="text-lg font-semibold text-gray-800">
+                      <div className="text-xl font-semibold text-gray-900 mb-1">
                         {phrase.english}
                       </div>
-                      <div className="text-lg text-gray-700" dir="rtl">
+                      <div className="text-xl text-gray-700" dir="rtl">
                         {phrase.hebrew}
                       </div>
                     </div>
                     <Button
                       size="lg"
                       variant="outline"
-                      className="shrink-0 hover:bg-orange-50"
+                      className="shrink-0 hover:bg-orange-50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 hover:scale-110"
                       onClick={() => playAudio(phrase.audio)}
                     >
-                      <Volume2 className="h-6 w-6 text-orange-500" />
+                      <Volume2 className="h-7 w-7 text-orange-500" />
                     </Button>
                   </div>
                 </CardContent>
@@ -133,7 +133,7 @@ export default function LessonDetail() {
 
         {/* Cultural Note */}
         {lesson.culturalNote && (
-          <Card className="mb-12 bg-blue-50 border-blue-200">
+          <Card className="mb-12 bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <span>💡</span>
@@ -218,7 +218,7 @@ export default function LessonDetail() {
         )}
 
         {/* Support/Donation Section */}
-        <Card className="mb-12 bg-gradient-to-r from-orange-100 to-yellow-100 border-orange-300">
+        <Card className="mb-12 bg-gradient-to-br from-orange-100 via-yellow-50 to-orange-100 border-2 border-orange-300 shadow-xl">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2">
               <span>☕</span>
@@ -244,14 +244,14 @@ export default function LessonDetail() {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Link href="/lessons">
-            <Button variant="outline" size="lg">
-              <ArrowLeft className="mr-2 h-4 w-4" />
+            <Button size="lg" variant="outline" className="border-2 hover:bg-orange-50 hover:border-orange-300">
+              <ArrowLeft className="mr-2 h-5 w-5" />
               All Lessons
             </Button>
           </Link>
           {nextLessonId && (
             <Link href={`/lesson/${nextLessonId}`}>
-              <Button size="lg" className="bg-orange-500 hover:bg-orange-600">
+              <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 Next Lesson →
               </Button>
             </Link>
@@ -260,7 +260,7 @@ export default function LessonDetail() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-12">
+      <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-12 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p>© 2024 Learn Thai for Israeli Travelers</p>
         </div>
