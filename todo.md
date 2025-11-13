@@ -73,3 +73,8 @@
 
 ## Typography Improvements
 - [x] Make Hebrew text in Cultural Tips section more visible, bold, and elegant
+
+## Cultural Tips Content Updates
+- [x] Change "Smile Always" card to "Don't Yell or Be Loud at Night"
+- [x] Add cultural tip about not parking in middle of the road
+- [x] Add cultural tip about motorbike rental requiring international license

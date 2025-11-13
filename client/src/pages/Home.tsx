@@ -174,16 +174,28 @@ export default function Home() {
               <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">כסה כתפיים וברכיים במקדשים</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-5xl mb-4">😊</div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-900">Smile Always</h3>
-              <p className="text-gray-600 leading-relaxed">Thailand is called the "Land of Smiles" for a reason. A smile goes a long way in all interactions. Stay calm and friendly, even in difficult situations.</p>
-              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">חיוך פותח דלתות בתאילנד</p>
+              <div className="text-5xl mb-4">🤫</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Keep Noise Down at Night</h3>
+              <p className="text-gray-600 leading-relaxed">Thai culture values peace and quiet, especially at night. Avoid yelling, talking loudly, or making excessive noise after 10 PM. Be respectful in hotels, guesthouses, and residential areas. Thais appreciate considerate behavior.</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">אל תצעק או תדבר בקול רם בלילה - תרבות תאילנדית מעריכה שקט</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-5xl mb-4">👑</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900">Respect the Royal Family</h3>
               <p className="text-gray-600 leading-relaxed">The Thai Royal Family is deeply revered. Never speak negatively about them. Stand respectfully during the national anthem played in public places.</p>
               <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">המשפחה המלכותית מוערכת מאוד - הראה כבוד</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">🏍️</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Motorbike & Parking Rules</h3>
+              <p className="text-gray-600 leading-relaxed">To rent a motorbike, you MUST have an International Driving Permit (IDP) along with your regular license. Never park in the middle of the road or block traffic. Look for designated parking areas. Police actively check for proper licenses and can fine you heavily.</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">להשכרת אופנוע דרוש רישיון נהיגה בינלאומי - אל תחנה באמצע הדרך</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="text-5xl mb-4">😊</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">Smile & Stay Calm</h3>
+              <p className="text-gray-600 leading-relaxed">Thailand is the "Land of Smiles." A friendly smile opens doors and diffuses tension. Never lose your temper or raise your voice in public - it's seen as losing face. Stay patient and polite, even when frustrated.</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">חיוך ושמירה על רוגע - אל תאבד עשתונות בפומבי</p>
             </div>
           </div>
         </div>
