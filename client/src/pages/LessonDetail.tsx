@@ -217,27 +217,47 @@ export default function LessonDetail() {
           </section>
         )}
 
-        {/* Support/Donation Section */}
-        <Card className="mb-12 bg-gradient-to-br from-orange-100 via-yellow-50 to-orange-100 border-2 border-orange-300 shadow-xl">
+        {/* Contact Section */}
+        <Card className="mb-12 bg-gradient-to-br from-green-50 via-emerald-50 to-green-50 border-2 border-green-300 shadow-xl">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2">
-              <span>☕</span>
-              <span>Support Our Course</span>
+              <span>📚</span>
+              <span>Want to Learn More?</span>
             </CardTitle>
             <CardDescription className="text-base">
-              <p className="mb-1">Enjoying the lessons? Support us to keep creating free educational content!</p>
-              <p dir="rtl">נהנה מהשיעורים? תמכו בנו כדי להמשיך ליצור תוכן חינוכי חינמי!</p>
+              <p className="mb-1">Get personalized Thai lessons and advanced courses!</p>
+              <p dir="rtl">קבל שיעורי תאילנדית מותאמים אישית וקורסים מתקדמים!</p>
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-col items-center">
-            <img 
-              src="/images/donation-qr.jpg" 
-              alt="Donation QR Code" 
-              className="w-48 h-48 rounded-lg shadow-md mb-4"
-            />
-            <p className="text-center text-gray-600">
-              Scan to support / סרוק כדי לתמוך
-            </p>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div className="text-4xl">📱</div>
+                <div className="flex-1">
+                  <p className="font-semibold text-gray-800">WhatsApp</p>
+                  <a href="https://wa.me/66929894495" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-medium text-lg">
+                    +66 92 989 4495
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div className="text-4xl">✉️</div>
+                <div className="flex-1">
+                  <p className="font-semibold text-gray-800">Email</p>
+                  <a href="mailto:Pasuthunjunkong@gmail.com" className="text-blue-600 hover:text-blue-700 font-medium text-lg break-all">
+                    Pasuthunjunkong@gmail.com
+                  </a>
+                </div>
+              </div>
+              <div className="mt-6 p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200">
+                <p className="text-center text-gray-700 font-medium">
+                  💡 Available for private lessons, group classes, and corporate training
+                </p>
+                <p className="text-center text-gray-600 text-sm mt-2" dir="rtl">
+                  זמין לשיעורים פרטיים, שיעורי קבוצה והדרכות לחברות
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 

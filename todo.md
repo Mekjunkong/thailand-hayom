@@ -48,3 +48,11 @@
 - [x] Improve color scheme and typography
 - [x] Add better spacing and visual hierarchy
 - [x] Enhance mobile responsiveness
+
+## Content Improvements
+- [x] Replace donation section with contact information
+- [x] Add WhatsApp contact: +66929894495
+- [x] Add email: Pasuthunjunkong@gmail.com
+- [x] Expand lesson content with more phrases (added numbers 6-10)
+- [x] Add more practical examples and dialogues
+- [x] Enhance cultural notes with more details

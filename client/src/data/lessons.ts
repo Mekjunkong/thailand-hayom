@@ -95,8 +95,8 @@ export const lessons: Lesson[] = [
         correctAnswer: 1
       }
     ],
-    culturalNote: "Use 'ครับ' (khráp) if you're male and 'ค่ะ' (khâ) if you're female at the end of sentences to show politeness.",
-    culturalNoteHebrew: "השתמש ב-'ครับ' (khráp) אם אתה גבר וב-'ค่ะ' (khâ) אם את אישה בסוף המשפטים כדי להראות נימוס."
+    culturalNote: "Politeness particles are essential in Thai! Men add 'ครับ' (khráp) and women add 'ค่ะ' (khâ) at the end of sentences. The 'wai' gesture (hands pressed together) shows respect - the higher the hands, the more respect shown. Always return a wai when someone greets you this way!",
+    culturalNoteHebrew: "חלקיקי נימוס חיוניים בתאילנדית! גברים מוסיפים 'ครับ' (khráp) ונשים 'ค่ะ' (khâ) בסוף המשפטים. מחוות ה'וואי' (כפות ידיים לחוצות) מראה כבוד - כל מה שהידיים גבוהות יותר, יותר כבוד מוצג!"
   },
   {
     id: 2,
@@ -131,7 +131,7 @@ export const lessons: Lesson[] = [
         thai: "สี่",
         phonetic: "sìi",
         english: "Four",
-        hebrew: "אַרבעה",
+        hebrew: "ארבעה",
         audio: "/audio/number-4.wav"
       },
       {
@@ -140,6 +140,41 @@ export const lessons: Lesson[] = [
         english: "Five",
         hebrew: "חמישה",
         audio: "/audio/number-5.wav"
+      },
+      {
+        thai: "หก",
+        phonetic: "hòk",
+        english: "Six",
+        hebrew: "שישה",
+        audio: "/audio/number-6.wav"
+      },
+      {
+        thai: "เจ็ด",
+        phonetic: "jèt",
+        english: "Seven",
+        hebrew: "שבעה",
+        audio: "/audio/number-7.wav"
+      },
+      {
+        thai: "แปด",
+        phonetic: "pàaet",
+        english: "Eight",
+        hebrew: "שמונה",
+        audio: "/audio/number-8.wav"
+      },
+      {
+        thai: "เก้า",
+        phonetic: "kâao",
+        english: "Nine",
+        hebrew: "תשעה",
+        audio: "/audio/number-9.wav"
+      },
+      {
+        thai: "สิบ",
+        phonetic: "sìp",
+        english: "Ten",
+        hebrew: "עשרה",
+        audio: "/audio/number-10.wav"
       },
       {
         thai: "ตอนนี้กี่โมงแล้ว",
@@ -186,14 +221,14 @@ export const lessons: Lesson[] = [
         phonetic: "mâi phèt",
         english: "Not spicy",
         hebrew: "לא חריף",
-        audio: "/audio/lesson3-spice.wav"
+        audio: "/audio/lesson3-notspicy.wav"
       },
       {
         thai: "เผ็ดน้อย",
         phonetic: "phèt náauy",
         english: "A little spicy",
         hebrew: "קצת חריף",
-        audio: "/audio/lesson3-spice.wav"
+        audio: "/audio/lesson3-littlespicy.wav"
       },
       {
         thai: "เก็บเงินด้วยครับ/ค่ะ",
@@ -212,8 +247,8 @@ export const lessons: Lesson[] = [
         correctAnswer: 0
       }
     ],
-    culturalNote: "Thai food can be very spicy! Don't hesitate to say 'ไม่เผ็ด' (not spicy) if you can't handle heat.",
-    culturalNoteHebrew: "אוכל תאילנדי יכול להיות חריף מאוד! אל תהסס לומר 'ไม่เผ็ด' (לא חריף) אם אתה לא יכול לסבול חריפות."
+    culturalNote: "Thai food can be VERY spicy! Always specify your spice level when ordering. 'ไม่เผ็ด' (not spicy) is perfectly acceptable and won't offend anyone. Thai restaurants are used to adjusting spice levels for tourists. Pro tip: Keep water or rice nearby - they help more than cold drinks when food is too spicy!",
+    culturalNoteHebrew: "אוכל תאילנדי יכול להיות חריף מאוד! תמיד ציין את רמת החריפות בהזמנה. 'ไม่เผ็ด' (לא חריף) זה לגמרי מקובל ולא פוגע באף אחד. טיפ: שמרו מים או אורז בקרבת מקום - הם עוזרים יותר ממשקאות קרים!"
   },
   {
     id: 4,
@@ -254,8 +289,8 @@ export const lessons: Lesson[] = [
         correctAnswer: 1
       }
     ],
-    culturalNote: "Bargaining is common in Thai markets, but always do it with a smile and respect!",
-    culturalNoteHebrew: "מיקוח נפוץ בשווקים תאילנדיים, אבל תמיד עשה זאת עם חיוך וכבוד!"
+    culturalNote: "Bargaining is expected in markets and street stalls, but NOT in malls or fixed-price shops. Start at 50-60% of the asking price and negotiate with a smile. If the vendor won't budge, walk away - they'll often call you back with a better price. Remember: bargaining should be fun and friendly, never aggressive. A good rule: if you agree on a price, you must buy - backing out is considered very rude.",
+    culturalNoteHebrew: "מיקוח צפוי בשווקים ודוכני רחוב, אבל לא בקניונים. התחל ב-50-60% מהמחיר המבוקש ונהל משא ומתן עם חיוך. אם המוכר לא מוריד, לך הלאה - לעתים קרובות הם יקראו אותך חזרה עם מחיר טוב יותר. חשוב: אם הסכמת על מחיר, חייב לקנות!"
   },
   {
     id: 5,
