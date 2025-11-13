@@ -25,7 +25,7 @@ export default function Home() {
             שיעורים פשוטים למטיילים ישראלים לתאילנד
           </p>
           <Link href="/lessons">
-            <Button size="lg" className="text-xl px-12 py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
+            <Button size="lg" className="text-base md:text-xl px-8 md:px-12 py-6 md:py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
               🎓 Start Learning Free
             </Button>
           </Link>
@@ -49,26 +49,26 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-24 bg-gradient-to-b from-white via-orange-50/30 to-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-bold text-center mb-4 text-gray-900">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-4 text-gray-900">
             Why Learn Thai with Us?
           </h2>
           <p className="text-center text-gray-600 mb-16 text-lg">Everything you need for your Thai adventure</p>
           <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
             <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-amber-100">
-              <div className="text-6xl mb-6">🎧</div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Native Audio</h3>
+              <div className="text-5xl md:text-6xl mb-6">🎧</div>
+              <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-900">Native Audio</h3>
               <p className="text-gray-600">Learn authentic pronunciation from native Thai speakers</p>
               <p className="text-gray-600 mt-2 hebrew-text" dir="rtl">למד הגייה אותנטית מדוברי תאילנדית שפת אם</p>
             </div>
             <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-amber-100">
-              <div className="text-6xl mb-6">🌍</div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Travel-Focused</h3>
+              <div className="text-5xl md:text-6xl mb-6">🌍</div>
+              <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-900">Travel-Focused</h3>
               <p className="text-gray-600">Practical phrases for real travel situations</p>
               <p className="text-gray-600 mt-2 hebrew-text" dir="rtl">ביטויים מעשיים למצבי נסיעה אמיתיים</p>
             </div>
             <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-amber-100">
-              <div className="text-6xl mb-6">✨</div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Interactive</h3>
+              <div className="text-5xl md:text-6xl mb-6">✨</div>
+              <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-900">Interactive</h3>
               <p className="text-gray-600">Engaging exercises and quizzes to test your knowledge</p>
               <p className="text-gray-600 mt-2 hebrew-text" dir="rtl">תרגילים וחידונים מרתקים לבדיקת הידע שלך</p>
             </div>
@@ -79,7 +79,7 @@ export default function Home() {
       {/* Course Overview */}
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-bold text-center mb-4 text-gray-900">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-4 text-gray-900">
             10 Comprehensive Lessons
           </h2>
           <p className="text-center text-gray-600 mb-16 text-lg">From greetings to emergencies - everything you need</p>
@@ -109,7 +109,7 @@ export default function Home() {
           </div>
           <div className="text-center mt-16">
             <Link href="/lessons">
-              <Button size="lg" className="text-lg px-10 py-7 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-full font-semibold">
+              <Button size="lg" className="text-base md:text-lg px-6 md:px-10 py-5 md:py-7 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-full font-semibold">
                 📚 View All Lessons / צפה בכל השיעורים
               </Button>
             </Link>
@@ -120,7 +120,7 @@ export default function Home() {
       {/* Cultural Tips Section */}
       <section className="py-24 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-bold text-center mb-4 text-gray-900">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-4 text-gray-900">
             Thai Cultural Tips
           </h2>
           <p className="text-center text-gray-600 mb-16 text-lg">Essential etiquette for your Thailand journey</p>

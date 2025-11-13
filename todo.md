@@ -88,3 +88,6 @@
 ## UI Improvements
 - [x] Change hero background to iconic Thai beach scene (Phang Nga Bay)
 - [x] Fix scroll-to-top when clicking lessons from lesson list page
+
+## Mobile Optimization
+- [x] Optimize button and icon sizes for mobile/phone UI
