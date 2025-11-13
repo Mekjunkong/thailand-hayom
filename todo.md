@@ -91,3 +91,6 @@
 
 ## Mobile Optimization
 - [x] Optimize button and icon sizes for mobile/phone UI
+
+## Bug Fixes
+- [x] Fix Thai flag icon display issue (replaced with palm tree emojis)

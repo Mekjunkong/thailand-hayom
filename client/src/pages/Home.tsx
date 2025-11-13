@@ -13,7 +13,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto py-20">
           <div className="inline-block mb-6 px-6 py-3 bg-gradient-to-r from-amber-500/90 to-yellow-500/90 rounded-full text-sm font-semibold tracking-wide backdrop-blur-sm">
-            🇹🇭 FOR ISRAELI TRAVELERS
+            🌴 FOR ISRAELI TRAVELERS 🌴
           </div>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 animate-fade-in leading-tight" style={{fontFamily: 'Playfair Display, serif'}}>
             Learn Thai<br/>Before You Fly
