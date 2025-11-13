@@ -70,3 +70,6 @@
 - [x] Add Thai-style subtle patterns to background
 - [x] Improve spacing, rounded corners, and shadows
 - [x] Ensure mobile responsiveness across all pages
+
+## Typography Improvements
+- [x] Make Hebrew text in Cultural Tips section more visible, bold, and elegant

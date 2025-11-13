@@ -153,37 +153,37 @@ export default function Home() {
               <div className="text-5xl mb-4">🙏</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900">The Wai Greeting</h3>
               <p className="text-gray-600 leading-relaxed">Press your palms together at chest level and bow slightly. The higher your hands, the more respect you show. Always return a wai when greeted.</p>
-              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">לחץ את כפות הידיים יחד וקוד קל - ידיים גבוהות יותר = יותר כבוד</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">לחץ את כפות הידיים יחד וקוד קל - ידיים גבוהות יותר = יותר כבוד</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-5xl mb-4">👟</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900">Remove Your Shoes</h3>
               <p className="text-gray-600 leading-relaxed">Always remove shoes before entering homes, temples, and some shops. Look for shoes at the entrance as a sign. This shows respect for sacred and clean spaces.</p>
-              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">הסר נעליים לפני כניסה לבתים ומקדשים - זה מראה כבוד</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">הסר נעליים לפני כניסה לבתים ומקדשים - זה מראה כבוד</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-5xl mb-4">👑</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900">Respect the Head</h3>
               <p className="text-gray-600 leading-relaxed">Never touch someone's head - it's considered the most sacred part of the body. Don't point your feet at people or Buddha images, as feet are seen as the lowest.</p>
-              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">אל תיגע בראש - זה חלק הגוף הקדוש ביותר</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">אל תיגע בראש - זה חלק הגוף הקדוש ביותר</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-5xl mb-4">👗</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900">Dress Modestly</h3>
               <p className="text-gray-600 leading-relaxed">Cover shoulders and knees when visiting temples. Wear respectful clothing in religious sites. Beachwear is only for the beach!</p>
-              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">כסה כתפיים וברכיים במקדשים</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">כסה כתפיים וברכיים במקדשים</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-5xl mb-4">😊</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900">Smile Always</h3>
               <p className="text-gray-600 leading-relaxed">Thailand is called the "Land of Smiles" for a reason. A smile goes a long way in all interactions. Stay calm and friendly, even in difficult situations.</p>
-              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">חיוך פותח דלתות בתאילנד</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">חיוך פותח דלתות בתאילנד</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-5xl mb-4">👑</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900">Respect the Royal Family</h3>
               <p className="text-gray-600 leading-relaxed">The Thai Royal Family is deeply revered. Never speak negatively about them. Stand respectfully during the national anthem played in public places.</p>
-              <p className="text-gray-600 mt-3 hebrew-text" dir="rtl">המשפחה המלכותית מוערכת מאוד - הראה כבוד</p>
+              <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">המשפחה המלכותית מוערכת מאוד - הראה כבוד</p>
             </div>
           </div>
         </div>
