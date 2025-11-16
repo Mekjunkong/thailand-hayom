@@ -42,13 +42,25 @@ export default function Home() {
               <span className="font-medium">10 Lessons</span>
             </div>
             <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl">🎧</span>
               <span className="font-medium">Native Audio</span>
             </div>
             <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full">
-              <span className="text-2xl">✓</span>
-              <span className="font-medium">100% Free</span>
+              <span className="text-2xl">📱</span>
+              <span className="font-medium">Mobile Friendly</span>
             </div>
+          </div>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/emergency">
+              <Button variant="outline" size="lg" className="bg-red-500 hover:bg-red-600 text-white border-0 shadow-lg">
+                🆘 Emergency Contacts
+              </Button>
+            </Link>
+            <Link href="/blog">
+              <Button variant="outline" size="lg" className="bg-purple-500 hover:bg-purple-600 text-white border-0 shadow-lg">
+                📝 Travel Blog
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

@@ -6,6 +6,9 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import WelcomeKit from "./pages/WelcomeKit";
+import Emergency from "./pages/Emergency";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import LessonList from "./pages/LessonList";
 import LessonDetail from "./pages/LessonDetail";
 
@@ -13,7 +16,10 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/welcome-kit"} component={WelcomeKit} />
+        <Route path="/welcome-kit" component={WelcomeKit} />
+      <Route path="/emergency" component={Emergency} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/blog/:id" component={BlogPost} />
       <Route path={"/lessons"} component={LessonList} />
       <Route path="/lesson/:id" component={LessonDetail} />
       <Route path="/404" component={NotFound} />
