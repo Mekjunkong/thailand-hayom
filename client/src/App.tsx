@@ -4,6 +4,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ProgressProvider } from "./contexts/ProgressContext";
+import AIConcierge from "./components/AIConcierge";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import WelcomeKit from "./pages/WelcomeKit";
@@ -52,6 +53,7 @@ function App() {
           <TooltipProvider>
             <Toaster />
             <Router />
+            <AIConcierge />
           </TooltipProvider>
         </ProgressProvider>
       </ThemeProvider>

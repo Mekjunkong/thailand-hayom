@@ -141,3 +141,10 @@
 - [x] Create video pronunciation guide page
 - [x] Add video demonstrations for difficult Thai sounds
 - [x] Include mouth position comparison videos
+
+## AI Concierge Feature
+- [x] Create floating chat widget component
+- [x] Implement Chiang Mai AI Concierge with the provided prompt
+- [x] Add chat bubble to all pages
+- [x] Style chat interface with Thai theme
+- [x] Add conversation history storage
