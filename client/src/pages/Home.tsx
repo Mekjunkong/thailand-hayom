@@ -61,6 +61,21 @@ export default function Home() {
                 📝 Travel Blog
               </Button>
             </Link>
+            <Link href="/progress">
+              <Button variant="outline" size="lg" className="bg-blue-500 hover:bg-blue-600 text-white border-0 shadow-lg">
+                📈 My Progress
+              </Button>
+            </Link>
+            <Link href="/downloads">
+              <Button variant="outline" size="lg" className="bg-indigo-500 hover:bg-indigo-600 text-white border-0 shadow-lg">
+                📥 Downloads
+              </Button>
+            </Link>
+            <Link href="/pronunciation">
+              <Button variant="outline" size="lg" className="bg-pink-500 hover:bg-pink-600 text-white border-0 shadow-lg">
+                🗣️ Pronunciation
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

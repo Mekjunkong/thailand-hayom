@@ -130,3 +130,14 @@
 ## Payment Updates
 - [x] Update Welcome Kit purchase button to show contact form for manual payment
 - [x] Add WhatsApp quick purchase link
+
+## New Features - Phase 2
+- [x] Create downloadable PDF resources for Welcome Kit modules
+- [x] Add downloadable phrase cheat sheets (PDF)
+- [x] Implement progress tracking dashboard with localStorage
+- [x] Add lesson completion percentage display
+- [x] Create quiz score tracking system
+- [x] Add learning streak counter
+- [x] Create video pronunciation guide page
+- [x] Add video demonstrations for difficult Thai sounds
+- [x] Include mouth position comparison videos

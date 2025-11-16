@@ -3,8 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { lessons } from "@/data/lessons";
 import { Link, useParams, useLocation } from "wouter";
 import { ArrowLeft, Volume2, CheckCircle2, XCircle } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
+import { useProgress } from "@/contexts/ProgressContext";
 
 export default function LessonDetail() {
   const { id } = useParams();
@@ -13,6 +14,13 @@ export default function LessonDetail() {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [showResults, setShowResults] = useState(false);
   const audioRefs = useRef<{ [key: string]: HTMLAudioElement }>({});
+  const { markLessonComplete, saveQuizScore, updateStreak, isLessonCompleted } = useProgress();
+  const lessonId = parseInt(id || "1");
+  const isCompleted = isLessonCompleted(lessonId);
+
+  useEffect(() => {
+    updateStreak();
+  }, []);
 
   const handleNextLesson = (nextId: number) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -51,11 +59,20 @@ export default function LessonDetail() {
       (ex, idx) => selectedAnswers[idx] === ex.correctAnswer
     ).length;
     
+    const score = Math.round((correctCount / lesson.exercises.length) * 100);
+    saveQuizScore(lessonId, score);
+    
     if (correctCount === lesson.exercises.length) {
       toast.success("Perfect! All answers correct! 🎉");
+      markLessonComplete(lessonId);
     } else {
       toast.info(`You got ${correctCount} out of ${lesson.exercises.length} correct`);
     }
+  };
+
+  const handleMarkComplete = () => {
+    markLessonComplete(lessonId);
+    toast.success("Lesson marked as complete! ✓");
   };
 
   const resetQuiz = () => {
@@ -310,22 +327,41 @@ export default function LessonDetail() {
         </Card>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-4">
           <Link href="/lessons">
             <Button size="lg" variant="outline" className="border-2 hover:bg-amber-50 hover:border-amber-300">
               <ArrowLeft className="mr-2 h-5 w-5" />
               All Lessons
             </Button>
           </Link>
-          {nextLessonId && (
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-full font-semibold"
-              onClick={() => handleNextLesson(nextLessonId)}
-            >
-              Next Lesson →
-            </Button>
-          )}
+          <div className="flex gap-4">
+            {!isCompleted && (
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-2 border-green-500 text-green-600 hover:bg-green-50"
+                onClick={handleMarkComplete}
+              >
+                <CheckCircle2 className="mr-2 h-5 w-5" />
+                Mark as Complete
+              </Button>
+            )}
+            {isCompleted && (
+              <div className="flex items-center gap-2 px-6 py-3 bg-green-100 border-2 border-green-500 rounded-lg">
+                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <span className="font-semibold text-green-700">Completed ✓</span>
+              </div>
+            )}
+            {nextLessonId && (
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-full font-semibold"
+                onClick={() => handleNextLesson(nextLessonId)}
+              >
+                Next Lesson →
+              </Button>
+            )}
+          </div>
         </div>
       </main>
 

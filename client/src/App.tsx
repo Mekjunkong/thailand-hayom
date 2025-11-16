@@ -3,12 +3,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { ProgressProvider } from "./contexts/ProgressContext";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import WelcomeKit from "./pages/WelcomeKit";
 import Emergency from "./pages/Emergency";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Progress from "./pages/Progress";
+import Downloads from "./pages/Downloads";
+import Pronunciation from "./pages/Pronunciation";
 import LessonList from "./pages/LessonList";
 import LessonDetail from "./pages/LessonDetail";
 
@@ -20,6 +24,9 @@ function Router() {
       <Route path="/emergency" component={Emergency} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:id" component={BlogPost} />
+      <Route path="/progress" component={Progress} />
+      <Route path="/downloads" component={Downloads} />
+      <Route path="/pronunciation" component={Pronunciation} />
       <Route path={"/lessons"} component={LessonList} />
       <Route path="/lesson/:id" component={LessonDetail} />
       <Route path="/404" component={NotFound} />
@@ -41,10 +48,12 @@ function App() {
         defaultTheme="light"
         // switchable
       >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <ProgressProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </ProgressProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
