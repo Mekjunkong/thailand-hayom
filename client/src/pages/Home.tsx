@@ -81,6 +81,11 @@ export default function Home() {
                 🗣️ Pronunciation
               </Button>
             </Link>
+            <Link href="/profile">
+              <Button variant="outline" size="lg" className="bg-teal-500 hover:bg-teal-600 text-white border-0 shadow-lg">
+                👤 My Profile
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

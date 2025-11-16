@@ -5,6 +5,7 @@ import { publicProcedure, router } from "./_core/trpc";
 import { chatRouter } from "./chatRouter";
 import { stripeRouter } from "./stripeRouter";
 import { adminRouter } from "./adminRouter";
+import { userRouter } from "./userRouter";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -23,6 +24,7 @@ export const appRouter = router({
   chat: chatRouter,
   stripe: stripeRouter,
   admin: adminRouter,
+  user: userRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({

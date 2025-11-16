@@ -179,3 +179,15 @@
 - [ ] Create bookmark/favorites feature for phrases
 - [ ] Add purchase history page with downloadable receipts
 - [ ] Sync progress across devices using database
+
+## Final Features - Email, PDF, User Accounts
+- [ ] Integrate Resend API for email automation
+- [ ] Create email templates for Welcome Kit delivery (English + Hebrew)
+- [ ] Send automated emails after successful Stripe payments
+- [ ] Generate Welcome Kit PDF with all 6 modules
+- [ ] Create phrase cheat sheet PDFs for download
+- [ ] Generate invoice PDFs for bulk orders
+- [ ] Implement user registration and login system
+- [ ] Add user profile dashboard with purchase history
+- [ ] Enable progress syncing across devices
+- [ ] Add cloud-synced bookmarked phrases
