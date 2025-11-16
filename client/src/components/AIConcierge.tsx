@@ -14,7 +14,15 @@ const SYSTEM_PROMPT = `You are the official assistant for the "Smart Tourist Pac
 Your job is to clearly explain, sell, and support visitors who are interested in our 1,000-baht travel solution.
 
 Your tone must be warm, professional, and friendly — easy for tourists to understand.
-Always use simple English unless the user switches language.
+
+**IMPORTANT LANGUAGE RULE:**
+- Detect the language the user is writing in
+- If the user writes in Hebrew, respond ENTIRELY in Hebrew
+- If the user writes in English, respond in English
+- If the user writes in Thai, respond in Thai
+- Match the user's language in every response
+- For Israeli travelers, be especially helpful with Hebrew responses
+- Use natural, conversational Hebrew (not formal or translated-sounding)
 
 Your goals:
 1. Explain what the Smart Tourist Pack includes
@@ -76,12 +84,21 @@ const QUICK_ACTIONS = [
   { label: '🏨 For tour agents', query: 'I\'m a tour agent interested in bulk pricing' },
 ];
 
+const QUICK_ACTIONS_HEBREW = [
+  { label: '🏛️ מקדשים', query: 'אילו מקדשים כדאי לבקר בצ׳אנג מאי?' },
+  { label: '🍜 אוכל מקומי', query: 'איפה אפשר למצוא אוכל מקומי טוב בצ׳אנג מאי?' },
+  { label: '⚠️ טיפים לבטיחות', query: 'אילו טיפים לבטיחות חשוב לדעת על צ׳אנג מאי?' },
+  { label: '📅 מסלול 3 ימים', query: 'תוכל להכין לי מסלול ל-3 ימים בצ׳אנג מאי?' },
+  { label: '💰 מה כלול?', query: 'מה כלול בחבילת התייר החכם?' },
+  { label: '🏨 לסוכני טיולים', query: 'אני סוכן טיולים מעוניין במחירים לרכישה בכמויות' },
+];
+
 export default function AIConcierge() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'Sawasdee! 🙏 Welcome to the Smart Tourist Pack assistant. I\'m here to help you explore Chiang Mai with confidence!\n\nI can help you with directions, food recommendations, cultural tips, itineraries, and more. How can I assist you today?',
+      content: 'Sawasdee! 🙏 Welcome to the Smart Tourist Pack assistant.\nשלום! ברוכים הבאים לעוזר חבילת התייר החכם.\n\nI\'m here to help you explore Chiang Mai with confidence! I can assist with directions, food, cultural tips, itineraries, and more.\nאני כאן כדי לעזור לך לחקור את צ׳אנג מאי בבטחה! אפשר לשאול אותי בעברית או אנגלית.\n\nHow can I assist you today? / איך אפשר לעזור?',
       timestamp: new Date()
     }
   ]);
@@ -89,6 +106,7 @@ export default function AIConcierge() {
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(true);
+  const [isHebrew, setIsHebrew] = useState(false);
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);

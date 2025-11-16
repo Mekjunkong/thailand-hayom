@@ -270,3 +270,16 @@
 - [x] Integrate with Stripe webhook for payment success
 - [x] Attach PDF to welcome email automatically
 - [x] Test email delivery flow (ready for testing)
+
+## Master Prompt Template Creation
+- [x] Analyze project structure and design patterns
+- [x] Document key workflows and best practices
+- [x] Create reusable master prompt template
+- [x] Include all essential components and features
+- [x] Upload template to Notion Project workspace
+
+## AI Chatbot Hebrew Support
+- [ ] Check current chatbot language capabilities
+- [ ] Add Hebrew language detection
+- [ ] Configure chatbot to respond in Hebrew when user writes in Hebrew
+- [ ] Test bilingual chatbot (English + Hebrew)
