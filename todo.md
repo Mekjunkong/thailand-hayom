@@ -148,3 +148,12 @@
 - [x] Add chat bubble to all pages
 - [x] Style chat interface with Thai theme
 - [x] Add conversation history storage
+
+## AI Concierge Enhancements
+- [x] Update AI Concierge with Smart Tourist Pack sales assistant prompt
+- [x] Add quick action buttons for common questions
+- [x] Implement voice input (speech-to-text)
+- [x] Integrate AI response system (ready for API integration)
+- [x] Add Smart Tourist Pack purchase flow
+- [x] Add bulk pricing information for tour agents
+- [x] Add white-label option explanation

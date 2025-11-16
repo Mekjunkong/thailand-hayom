@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Mic, MicOff } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -9,41 +9,87 @@ interface Message {
   timestamp: Date;
 }
 
-const SYSTEM_PROMPT = `You are the AI Concierge for Thailand tourists, specializing in Chiang Mai. You provide accurate, helpful, friendly support in simple and clear English. Your personality is warm, polite, and professional.
+const SYSTEM_PROMPT = `You are the official assistant for the "Smart Tourist Pack" on our website.
+Your job is to clearly explain, sell, and support visitors who are interested in our 1,000-baht travel solution.
 
-General Behavior:
-1. Always give information that is accurate, up-to-date, and easy to follow.
-2. Keep answers short unless the user wants detail.
-3. Provide prices in Thai Baht when relevant.
-4. Never guess—if unsure, give the closest reliable information.
-5. Tailor answers based on the user's travel style (budget, family, backpacker, luxury).
-6. Offer alternative options when helpful.
-7. Be proactive: suggest nearby activities or tips when appropriate.
-8. When asked about something outside Chiang Mai or Thailand, still support with global travel logic.
+Your tone must be warm, professional, and friendly — easy for tourists to understand.
+Always use simple English unless the user switches language.
 
-Core Functions:
-A) Directions & Navigation – Provide clear step-by-step instructions using Grab, Taxi, Red Truck (Songthaew), Scooter, or walking. Mention price ranges and typical travel times.
-B) Food & Restaurant Recommendations – Suggest places by style (vegan, cheap eats, Israeli, Northern Thai, halal, street food, romantic). Include opening hours when known.
-C) Thai Culture & Etiquette – Explain temple rules, polite Thai phrases, cultural behaviors, how to dress, etc.
-D) Safety & Practical Tips – Cover scams, motorbike rules, what to avoid, and emergency contacts. Provide calm, helpful guidance.
-E) Itinerary Builder – Create itineraries based on the user's number of days, weather, preferences (nature, food, temples, adventure, nightlife). Keep itineraries simple, clear, and flexible.
-F) Translation Mode – Translate between English ↔ Thai politely and naturally.
-G) Connect to Tourist Welcome Kit – When useful, guide users to sections of the existing Welcome Kit on the website.
+Your goals:
+1. Explain what the Smart Tourist Pack includes
+2. Show the benefits and remove confusion
+3. Highlight why it's helpful for travelers in Thailand
+4. Guide users to take action (buy, contact, or chat on WhatsApp)
+5. Support tour agents and hostel owners who want to buy in bulk
+6. Answer detailed questions about how the AI Concierge works
+7. Help the user trust the service by giving clear, calm answers
+8. Give examples of how the pack helps in real travel situations
 
-Tone & Style: Friendly, concise, and professional — like a helpful local host. Avoid slang. No unnecessary emojis unless the user uses them first.`;
+Product Description:
+The Smart Tourist Pack (1,000 THB) includes:
+• A friendly AI Travel Concierge available 24/7
+• Our full Tourist Welcome Kit (PDF + website access)
+• Local guidance for food, transport, culture, and daily planning
+• Thai phrase support and translation
+• Safety tips and practical travel advice
+• Discounts and recommendations in Chiang Mai
+• Simple itineraries based on weather, budget, and travel style
+
+The AI Concierge can help with:
+• Directions to any landmark in Chiang Mai
+• Planning 1–14 day itineraries
+• Temple rules and cultural etiquette
+• Finding vegan/halal/street food
+• Booking suggestions (non-commission)
+• Emergency guidance
+• Thai ↔ English translation
+• Tips for families, backpackers, solo travelers, and Israeli tourists
+
+Behavior Rules:
+1. Keep answers calm, friendly, and direct.
+2. When a tourist seems confused, offer step-by-step guidance.
+3. When a user is hesitant, gently explain why the pack gives peace of mind and saves time.
+4. When a tour agent or hostel owner asks, explain bulk pricing and the white-label option.
+5. Never pressure — instead, guide and reassure.
+6. Always offer a next step: Buy now, Try the concierge, Open WhatsApp, See the Welcome Kit, Ask a question
+
+Sales Examples:
+• "If this is your first time in Thailand, the pack will remove a lot of stress."
+• "The AI Concierge answers instantly, day or night."
+• "You'll have clear directions, prices, and local recommendations."
+• "Many travelers use it to plan each day based on weather and mood."
+• "Tour agents love this because it makes their customers feel supported."
+
+Special Behavior for Tour Agents & Hostel Owners:
+• Explain white-label (branding with their logo)
+• Explain bulk pricing: 10 packs: 8,000 THB, 20 packs: 15,000 THB
+• Explain WhatsApp integration
+• Explain how it reduces staffing time and improves customer satisfaction`;
+
+const QUICK_ACTIONS = [
+  { label: '🏛️ Show me temples', query: 'What are the best temples to visit in Chiang Mai?' },
+  { label: '🍜 Find food nearby', query: 'Where can I find good local food in Chiang Mai?' },
+  { label: '⚠️ Safety tips', query: 'What safety tips should I know for Chiang Mai?' },
+  { label: '📅 3-day itinerary', query: 'Can you create a 3-day itinerary for Chiang Mai?' },
+  { label: '💰 What\'s included?', query: 'What does the Smart Tourist Pack include?' },
+  { label: '🏨 For tour agents', query: 'I\'m a tour agent interested in bulk pricing' },
+];
 
 export default function AIConcierge() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'Sawasdee! 🙏 I\'m your Chiang Mai AI Concierge. How can I help you plan your Thailand adventure today?',
+      content: 'Sawasdee! 🙏 Welcome to the Smart Tourist Pack assistant. I\'m here to help you explore Chiang Mai with confidence!\n\nI can help you with directions, food recommendations, cultural tips, itineraries, and more. How can I assist you today?',
       timestamp: new Date()
     }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [showQuickActions, setShowQuickActions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -52,6 +98,31 @@ export default function AIConcierge() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInput(transcript);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+  }, []);
 
   // Load chat history from localStorage
   useEffect(() => {
@@ -76,22 +147,46 @@ export default function AIConcierge() {
     }
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  const toggleVoiceInput = () => {
+    if (!recognitionRef.current) {
+      alert('Voice input is not supported in your browser. Please use Chrome, Edge, or Safari.');
+      return;
+    }
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      recognitionRef.current.start();
+      setIsListening(true);
+    }
+  };
+
+  const handleQuickAction = (query: string) => {
+    setInput(query);
+    setShowQuickActions(false);
+    // Auto-send after a brief delay
+    setTimeout(() => handleSend(query), 100);
+  };
+
+  const handleSend = async (customInput?: string) => {
+    const messageText = customInput || input;
+    if (!messageText.trim()) return;
 
     const userMessage: Message = {
       role: 'user',
-      content: input,
+      content: messageText,
       timestamp: new Date()
     };
 
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    setShowQuickActions(false);
 
     try {
-      // Simulate AI response (in production, this would call an actual AI API)
-      const response = await simulateAIResponse(input);
+      // Call AI API
+      const response = await callAIAPI(messageText, messages);
       
       const assistantMessage: Message = {
         role: 'assistant',
@@ -104,12 +199,18 @@ export default function AIConcierge() {
       console.error('AI response error:', error);
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'I apologize, but I\'m having trouble responding right now. Please try again in a moment.',
+        content: 'I apologize, but I\'m having trouble responding right now. Please try again in a moment, or contact us directly on WhatsApp at +66929894495.',
         timestamp: new Date()
       }]);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const callAIAPI = async (userInput: string, conversationHistory: Message[]): Promise<string> => {
+    // For now, use rule-based responses
+    // TODO: Replace with actual AI API call (OpenAI, Anthropic, etc.)
+    return await simulateAIResponse(userInput);
   };
 
   const simulateAIResponse = async (userInput: string): Promise<string> => {
@@ -118,45 +219,51 @@ export default function AIConcierge() {
 
     const input = userInput.toLowerCase();
 
-    // Simple rule-based responses (in production, replace with actual AI API)
-    if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-      return 'Hello! Welcome to Chiang Mai! How can I assist you today? I can help with directions, food recommendations, cultural tips, safety advice, or create a custom itinerary for you.';
+    // Smart Tourist Pack specific responses
+    if (input.includes('smart tourist pack') || input.includes('what') && input.includes('include')) {
+      return `Great question! The **Smart Tourist Pack** (1,000 THB) is your complete travel companion for Thailand. Here's what you get:\n\n✅ **24/7 AI Travel Concierge** - Ask me anything, anytime\n✅ **Full Tourist Welcome Kit** - PDF guide + website access\n✅ **Local Guidance** - Food, transport, culture, daily planning\n✅ **Thai Phrase Support** - Translation and pronunciation help\n✅ **Safety Tips** - Scam warnings and practical advice\n✅ **Chiang Mai Discounts** - Exclusive recommendations\n✅ **Custom Itineraries** - Based on weather, budget, and your style\n\nIf this is your first time in Thailand, the pack will remove a lot of stress. You'll have clear directions, prices, and local recommendations instantly.\n\n**Ready to get started?** 👉 [Buy Now](/welcome-kit) or chat with us on WhatsApp: +66929894495`;
     }
 
+    if (input.includes('price') || input.includes('cost') || input.includes('how much')) {
+      return `The Smart Tourist Pack is **1,000 THB** (about $28 USD).\n\nThis one-time payment gives you:\n• Unlimited access to the AI Concierge during your trip\n• All Welcome Kit materials\n• Custom itineraries and daily planning\n• 24/7 support\n\n**For Tour Agents & Hostel Owners:**\n• 10 packs: 8,000 THB (800 THB each)\n• 20 packs: 15,000 THB (750 THB each)\n• White-label branding available\n\nMany travelers use it to plan each day based on weather and mood. It's like having a local friend in your pocket!\n\n**Want to purchase?** Contact us on WhatsApp: +66929894495`;
+    }
+
+    if (input.includes('tour agent') || input.includes('hostel') || input.includes('bulk') || input.includes('business')) {
+      return `Excellent! We love working with tour agents and hostel owners. Here's what we offer:\n\n📦 **Bulk Pricing:**\n• 10 packs: 8,000 THB (800 THB each)\n• 20 packs: 15,000 THB (750 THB each)\n• Custom packages for larger orders\n\n🎨 **White-Label Option:**\n• Brand the concierge with your logo\n• Integrate with your WhatsApp Business\n• Custom welcome messages\n\n💼 **Benefits for Your Business:**\n• Reduces staffing time for common questions\n• Improves customer satisfaction\n• Provides 24/7 support to your guests\n• Makes your service stand out\n\nTour agents love this because it makes their customers feel supported throughout their trip.\n\n**Ready to discuss?** WhatsApp us: +66929894495 or email: Pasuthunjunkong@gmail.com`;
+    }
+
+    if (input.includes('buy') || input.includes('purchase') || input.includes('get started')) {
+      return `Perfect! Here's how to get your Smart Tourist Pack:\n\n**Option 1: WhatsApp (Fastest)**\nMessage us at +66929894495 and say "I want the Smart Tourist Pack"\n\n**Option 2: Website**\nVisit our [Welcome Kit page](/welcome-kit) and click "Purchase Now"\n\n**Option 3: Email**\nSend your inquiry to Pasuthunjunkong@gmail.com\n\n**What happens next:**\n1. You'll receive payment instructions\n2. Once paid, you get instant access to the AI Concierge\n3. Download the Welcome Kit PDF\n4. Start planning your amazing Thailand trip!\n\nThe AI Concierge answers instantly, day or night. You'll have peace of mind knowing help is always available.\n\n**Any questions before you start?**`;
+    }
+
+    // Chiang Mai travel responses
     if (input.includes('temple') || input.includes('wat')) {
-      return 'Chiang Mai has beautiful temples! Here are my top recommendations:\n\n🏛️ **Wat Phra That Doi Suthep** - The most iconic temple with stunning city views. Take a red truck (60-80 THB) or Grab (150-200 THB). Entry: 30 THB.\n\n🏛️ **Wat Chedi Luang** - Historic temple in Old City. Free entry, donations welcome.\n\n🏛️ **Wat Phra Singh** - Beautiful Lanna architecture. Entry: 40 THB.\n\n**Temple Etiquette**: Cover shoulders and knees, remove shoes before entering, speak quietly, and don\'t point feet at Buddha images.';
+      return `Chiang Mai has beautiful temples! Here are my top recommendations:\n\n🏛️ **Wat Phra That Doi Suthep** - The most iconic temple with stunning city views. Take a red truck (60-80 THB) or Grab (150-200 THB). Entry: 30 THB.\n\n🏛️ **Wat Chedi Luang** - Historic temple in Old City. Free entry, donations welcome.\n\n🏛️ **Wat Phra Singh** - Beautiful Lanna architecture. Entry: 40 THB.\n\n**Temple Etiquette**: Cover shoulders and knees, remove shoes before entering, speak quietly, and don't point feet at Buddha images.\n\n💡 **Pro tip:** With the Smart Tourist Pack, you get detailed temple guides, cultural etiquette tips, and custom itineraries. Want to learn more?`;
     }
 
     if (input.includes('food') || input.includes('restaurant') || input.includes('eat')) {
-      return 'Chiang Mai has amazing food! What style are you looking for?\n\n🍜 **Khao Soi** (Northern Thai curry noodles) - Try Khao Soi Khun Yai (40-60 THB)\n\n🥘 **Street Food** - Visit Ploen Ruedee Night Market or Chang Phueak Gate\n\n🌱 **Vegan** - Goodsouls Kitchen, Pun Pun Organic Restaurant\n\n🇮🇱 **Israeli Food** - Shalom Hummus, Baba\'s House\n\nLet me know your preferences and budget!';
-    }
-
-    if (input.includes('scam') || input.includes('safety') || input.includes('safe')) {
-      return 'Here are important safety tips for Chiang Mai:\n\n⚠️ **Common Scams to Avoid**:\n- Gem shop scams (don\'t buy expensive gems)\n- Overpriced tuk-tuks (agree on price first)\n- Fake tour operators (book through hotels)\n\n🏍️ **Motorbike Safety**:\n- Always wear a helmet (500 THB fine)\n- Need International Driving Permit\n- Insurance recommended\n\n📞 **Emergency Numbers**:\n- Tourist Police: 1155\n- Emergency: 191\n- Ambulance: 1669\n\nChiang Mai is generally very safe! Just use common sense.';
+      return `Chiang Mai has amazing food! Here are some must-tries:\n\n🍜 **Khao Soi** (Northern Thai curry noodles) - Try Khao Soi Khun Yai (40-60 THB)\n\n🥘 **Street Food** - Visit Ploen Ruedee Night Market or Chang Phueak Gate\n\n🌱 **Vegan** - Goodsouls Kitchen, Pun Pun Organic Restaurant\n\n🇮🇱 **Israeli Food** - Shalom Hummus, Baba's House\n\n**Food Safety Tips:**\n• Eat where locals eat\n• Look for busy stalls\n• Drink bottled water\n\n💡 **With the Smart Tourist Pack**, I can create personalized food itineraries based on your dietary preferences and budget. Interested?`;
     }
 
     if (input.includes('itinerary') || input.includes('plan') || input.includes('day')) {
-      return 'I\'d love to help you plan your Chiang Mai itinerary! Could you tell me:\n\n📅 How many days will you be here?\n🌤️ What season are you visiting?\n💰 What\'s your budget style? (budget/mid-range/luxury)\n🎯 What interests you most? (temples, nature, food, adventure, nightlife)\n\nOnce I know this, I can create a perfect itinerary for you!';
+      return `I'd love to help you plan your Chiang Mai itinerary! Here's a sample 3-day plan:\n\n**Day 1: Old City & Temples**\n• Morning: Wat Phra Singh, Wat Chedi Luang\n• Lunch: Khao Soi at local restaurant\n• Afternoon: Three Kings Monument, City Arts & Cultural Centre\n• Evening: Sunday Walking Street (if Sunday) or Night Bazaar\n\n**Day 2: Nature & Adventure**\n• Morning: Doi Suthep Temple\n• Lunch: Viewpoint restaurant\n• Afternoon: Sticky Waterfalls or Elephant Sanctuary\n• Evening: Nimman area for dinner and cafes\n\n**Day 3: Markets & Culture**\n• Morning: Warorot Market\n• Lunch: Street food tour\n• Afternoon: Thai cooking class or massage\n• Evening: Riverside dinner\n\n💡 **Want a custom itinerary?** The Smart Tourist Pack creates personalized plans based on weather, your budget, and interests. Check it out!`;
     }
 
-    if (input.includes('translate') || input.includes('thai') || input.includes('say')) {
-      return 'I can help with Thai translations! Here are some essential phrases:\n\n🙏 **Hello** - Sawasdee krap/ka (สวัสดีครับ/ค่ะ)\n🙏 **Thank you** - Khob khun krap/ka (ขอบคุณครับ/ค่ะ)\n🙏 **How much?** - Tao rai? (เท่าไหร่)\n🙏 **Delicious** - Aroi mak (อร่อยมาก)\n🙏 **Where is...?** - ...yoo tee nai? (...อยู่ที่ไหน)\n\nWhat specific phrase would you like to learn?';
-    }
-
-    if (input.includes('price') || input.includes('cost') || input.includes('expensive')) {
-      return 'Here are typical Chiang Mai prices:\n\n🍜 **Food**:\n- Street food: 30-60 THB\n- Local restaurant: 60-150 THB\n- Mid-range restaurant: 150-400 THB\n\n🚗 **Transport**:\n- Red truck (shared): 20-40 THB\n- Red truck (charter): 100-200 THB\n- Grab: 50-200 THB (depending on distance)\n- Motorbike rental: 150-250 THB/day\n\n🏨 **Accommodation**:\n- Hostel: 150-400 THB/night\n- Budget hotel: 400-1,000 THB/night\n- Mid-range: 1,000-2,500 THB/night\n\nWhat specific prices do you need?';
+    if (input.includes('safety') || input.includes('scam')) {
+      return `Here are important safety tips for Chiang Mai:\n\n⚠️ **Common Scams to Avoid:**\n• Gem shop scams (don't buy expensive gems)\n• Overpriced tuk-tuks (agree on price first)\n• Fake tour operators (book through hotels)\n\n🏍️ **Motorbike Safety:**\n• Always wear a helmet (500 THB fine)\n• Need International Driving Permit\n• Insurance recommended\n\n📞 **Emergency Numbers:**\n• Tourist Police: 1155\n• Emergency: 191\n• Ambulance: 1669\n\n💡 **Smart Tourist Pack includes:** Complete safety guide, scam warnings, emergency contacts, and 24/7 support. Want to learn more?`;
     }
 
     // Default response
-    return `I can help you with:\n\n📍 **Directions & Navigation** - How to get anywhere in Chiang Mai\n🍜 **Food Recommendations** - Best places to eat\n🏛️ **Cultural Tips** - Temple etiquette and Thai customs\n⚠️ **Safety Advice** - Scams to avoid and emergency contacts\n📅 **Itinerary Planning** - Custom trip planning\n🗣️ **Thai Translations** - Learn useful phrases\n\nWhat would you like to know about "${userInput}"?`;
+    return `I can help you with:\n\n📍 **Directions & Navigation** - How to get anywhere in Chiang Mai\n🍜 **Food Recommendations** - Best places to eat\n🏛️ **Cultural Tips** - Temple etiquette and Thai customs\n⚠️ **Safety Advice** - Scams to avoid and emergency contacts\n📅 **Itinerary Planning** - Custom trip planning\n🗣️ **Thai Translations** - Learn useful phrases\n\n💡 **About the Smart Tourist Pack (1,000 THB):**\nGet 24/7 AI support, full Welcome Kit, custom itineraries, and local guidance throughout your trip. It's like having a local friend in your pocket!\n\nWhat would you like to know about "${userInput}"?\n\n**Ready to explore?** [Learn More](/welcome-kit) or WhatsApp: +66929894495`;
   };
 
   const clearChat = () => {
     setMessages([{
       role: 'assistant',
-      content: 'Sawasdee! 🙏 I\'m your Chiang Mai AI Concierge. How can I help you plan your Thailand adventure today?',
+      content: 'Sawasdee! 🙏 Welcome to the Smart Tourist Pack assistant. I\'m here to help you explore Chiang Mai with confidence!\n\nI can help you with directions, food recommendations, cultural tips, itineraries, and more. How can I assist you today?',
       timestamp: new Date()
     }]);
+    setShowQuickActions(true);
     localStorage.removeItem('ai_concierge_chat');
   };
 
@@ -166,7 +273,7 @@ export default function AIConcierge() {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 z-50 flex items-center justify-center"
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 z-50 flex items-center justify-center animate-pulse"
           size="lg"
         >
           <MessageCircle className="w-8 h-8 text-white" />
@@ -183,7 +290,7 @@ export default function AIConcierge() {
                   <Bot className="w-6 h-6" />
                 </div>
                 <div>
-                  <CardTitle className="text-lg">Chiang Mai Concierge</CardTitle>
+                  <CardTitle className="text-lg">Smart Tourist Pack</CardTitle>
                   <p className="text-xs text-white/80">AI Travel Assistant</p>
                 </div>
               </div>
@@ -239,6 +346,27 @@ export default function AIConcierge() {
                 )}
               </div>
             ))}
+
+            {/* Quick Action Buttons */}
+            {showQuickActions && messages.length === 1 && (
+              <div className="space-y-2 pt-2">
+                <p className="text-xs text-gray-500 text-center font-semibold">Quick Actions:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {QUICK_ACTIONS.map((action, idx) => (
+                    <Button
+                      key={idx}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleQuickAction(action.query)}
+                      className="text-xs h-auto py-2 px-2 whitespace-normal text-left hover:bg-blue-50"
+                    >
+                      {action.label}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {isLoading && (
               <div className="flex gap-3 justify-start">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
@@ -263,12 +391,20 @@ export default function AIConcierge() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
-                placeholder="Ask me anything about Chiang Mai..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Ask me anything..."
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                 disabled={isLoading}
               />
               <Button
-                onClick={handleSend}
+                onClick={toggleVoiceInput}
+                disabled={isLoading}
+                className={`${isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-500 hover:bg-gray-600'}`}
+                title="Voice input"
+              >
+                {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+              </Button>
+              <Button
+                onClick={() => handleSend()}
                 disabled={isLoading || !input.trim()}
                 className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
               >
@@ -276,7 +412,7 @@ export default function AIConcierge() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              Powered by AI • For Chiang Mai travelers
+              Smart Tourist Pack • 1,000 THB
             </p>
           </div>
         </Card>
