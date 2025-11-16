@@ -99,3 +99,20 @@
 - [x] Change contact section to show only WhatsApp with QR code
 - [x] Remove email display from contact section
 - [x] Add contact form for email inquiries
+
+## LearnThaiB4Fly Expansion
+- [x] Create "Landing in Thailand" Welcome Kit page (1,000 THB product)
+- [x] Add Arrival Survival Guide module
+- [x] Create "Top Scams to Avoid" guide
+- [x] Add SIM Card Guide (True/DTAC/AIS comparison)
+- [x] Create Transport Rules guide (Bolt, InDriver, tuk-tuks, airport taxis)
+- [x] Add "How to Negotiate Politely" guide
+- [x] Create Temple Etiquette guide
+- [ ] Add Emergency Contacts & Embassy Info page
+- [ ] Create "Common Mistakes Israelis Make in Thailand" guide
+- [ ] Add Blog section with articles
+- [ ] Create WhatsApp AI Assistant page
+- [ ] Add Survival Guide landing page
+- [ ] Create downloadable PDF versions of guides
+- [ ] Update navigation to include all new pages
+- [ ] Add pricing and checkout for Welcome Kit

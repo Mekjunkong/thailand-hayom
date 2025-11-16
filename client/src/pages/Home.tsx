@@ -24,11 +24,18 @@ export default function Home() {
           <p className="text-lg md:text-2xl mb-12 font-light hebrew-text" dir="rtl">
             שיעורים פשוטים למטיילים ישראלים לתאילנד
           </p>
-          <Link href="/lessons">
-            <Button size="lg" className="text-base md:text-xl px-8 md:px-12 py-6 md:py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
-              🎓 Start Learning Free
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/lessons">
+              <Button size="lg" className="text-base md:text-xl px-8 md:px-12 py-6 md:py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
+                🎓 Start Learning Free
+              </Button>
+            </Link>
+            <Link href="/welcome-kit">
+              <Button size="lg" className="text-base md:text-xl px-8 md:px-12 py-6 md:py-8 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-2xl hover:shadow-green-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
+                ✈️ Welcome Kit (1,000 THB)
+              </Button>
+            </Link>
+          </div>
           <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm">
             <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full">
               <span className="text-2xl">✓</span>
