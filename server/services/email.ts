@@ -1,18 +1,29 @@
 import { Resend } from 'resend';
+import fs from 'fs';
+import path from 'path';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendWelcomeKitEmail(
-  to: string,
-  customerName: string,
-  pdfBuffer: Buffer,
-  language: 'en' | 'he' = 'en'
-) {
+interface SendWelcomeKitEmailParams {
+  to: string;
+  customerName: string;
+  language?: 'en' | 'he';
+}
+
+export async function sendWelcomeKitEmail({
+  to,
+  customerName,
+  language = 'en'
+}: SendWelcomeKitEmailParams) {
   try {
-    // Bilingual email content
+    // Read the PDF file
+    const pdfPath = path.join(process.cwd(), 'client/public/Thailand_Smart_Tourist_Pack_PREMIUM.pdf');
+    const pdfBuffer = fs.readFileSync(pdfPath);
+    const pdfBase64 = pdfBuffer.toString('base64');
+
+    // Email content based on language
     const emailContent = language === 'he' ? {
       subject: '🇹🇭 ברוכים הבאים! חבילת התייר החכם שלך לתאילנד',
-      from: 'Learn Thai Before You Fly <noreply@learnthaib4fly.com>',
       html: `
         <!DOCTYPE html>
         <html dir="rtl" lang="he">
@@ -79,6 +90,16 @@ export async function sendWelcomeKitEmail(
             .features li {
               margin-bottom: 10px;
               font-size: 15px;
+            }
+            .cta {
+              background: linear-gradient(135deg, #0EA5E9 0%, #14B8A6 100%);
+              color: white;
+              padding: 15px 40px;
+              text-decoration: none;
+              border-radius: 8px;
+              display: inline-block;
+              font-weight: 600;
+              margin: 20px 0;
             }
             .footer {
               background: #F8FAFC;
@@ -169,7 +190,6 @@ export async function sendWelcomeKitEmail(
       `
     } : {
       subject: '🇹🇭 Welcome! Your Thailand Smart Tourist Pack is Here',
-      from: 'Learn Thai Before You Fly <noreply@learnthaib4fly.com>',
       html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -235,6 +255,16 @@ export async function sendWelcomeKitEmail(
             .features li {
               margin-bottom: 10px;
               font-size: 15px;
+            }
+            .cta {
+              background: linear-gradient(135deg, #0EA5E9 0%, #14B8A6 100%);
+              color: white;
+              padding: 15px 40px;
+              text-decoration: none;
+              border-radius: 8px;
+              display: inline-block;
+              font-weight: 600;
+              margin: 20px 0;
             }
             .footer {
               background: #F8FAFC;
@@ -325,108 +355,30 @@ export async function sendWelcomeKitEmail(
       `
     };
 
+    // Send email with PDF attachment
     const { data, error } = await resend.emails.send({
-      from: emailContent.from,
+      from: 'Learn Thai Before You Fly <noreply@learnthaiB4fly.com>',
       to: [to],
       subject: emailContent.subject,
       html: emailContent.html,
       attachments: [
         {
           filename: 'Thailand_Smart_Tourist_Pack_Premium.pdf',
-          content: pdfBuffer,
+          content: pdfBase64,
         },
       ],
     });
 
     if (error) {
-      console.error('Resend email error:', error);
-      return { success: false, error };
+      console.error('Error sending email:', error);
+      throw new Error(`Failed to send email: ${error.message}`);
     }
 
-    console.log('Welcome Kit email sent successfully:', data);
-    return { success: true, data };
+    console.log('✅ Welcome Kit email sent successfully:', data);
+    return { success: true, messageId: data?.id };
+    
   } catch (error) {
-    console.error('Failed to send Welcome Kit email:', error);
-    return { success: false, error };
-  }
-}
-
-export async function sendBulkOrderInvoice(
-  to: string,
-  customerName: string,
-  invoicePDF: Buffer,
-  quantity: number
-) {
-  try {
-    const { data, error } = await resend.emails.send({
-      from: 'LearnThaiB4Fly <noreply@learnthaib4fly.com>',
-      to: [to],
-      subject: `Invoice for Bulk Order (${quantity} licenses)`,
-      html: `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: #1f2937; color: white; padding: 30px; text-align: center; }
-            .content { padding: 30px; background: #f9fafb; }
-            .footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h1>Invoice - Bulk Order</h1>
-            </div>
-            <div class="content">
-              <p>Dear ${customerName},</p>
-              
-              <p>Thank you for your bulk order of <strong>${quantity} Smart Tourist Pack licenses</strong>!</p>
-              
-              <p>Your invoice is attached to this email. Payment has been processed successfully.</p>
-              
-              <p><strong>Next Steps:</strong></p>
-              <ul>
-                <li>Download the attached invoice for your records</li>
-                <li>We'll send license codes within 24 hours</li>
-                <li>Distribute codes to your travelers</li>
-                <li>They can activate at learnthaib4fly.com</li>
-              </ul>
-              
-              <p>For white-label options or custom branding, please contact us:</p>
-              <p>
-                WhatsApp: +66 92 989 4495<br>
-                Email: bulk@learnthaib4fly.com
-              </p>
-              
-              <p>Thank you for your business!</p>
-              <p>The LearnThaiB4Fly Team</p>
-            </div>
-            <div class="footer">
-              <p>© 2024 LearnThaiB4Fly. All rights reserved.</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `,
-      attachments: [
-        {
-          filename: 'Invoice.pdf',
-          content: invoicePDF,
-        },
-      ],
-    });
-
-    if (error) {
-      console.error('Resend email error:', error);
-      return { success: false, error };
-    }
-
-    console.log('Invoice email sent successfully:', data);
-    return { success: true, data };
-  } catch (error) {
-    console.error('Failed to send invoice email:', error);
-    return { success: false, error };
+    console.error('Error in sendWelcomeKitEmail:', error);
+    throw error;
   }
 }
