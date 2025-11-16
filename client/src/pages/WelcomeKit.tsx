@@ -4,11 +4,30 @@ import { welcomeKitModules } from "@/data/welcomeKit";
 import { Check } from "lucide-react";
 import { Link } from "wouter";
 import { useState } from "react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function WelcomeKit() {
   const [selectedModule, setSelectedModule] = useState<number | null>(null);
+  const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
 
   const module = selectedModule ? welcomeKitModules.find(m => m.id === selectedModule) : null;
+
+  const handlePurchase = async () => {
+    try {
+      toast.info("Redirecting to secure checkout...");
+      const result = await createCheckout.mutateAsync({
+        productType: "single",
+      });
+      
+      if (result.url) {
+        window.open(result.url, "_blank");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("Failed to create checkout session. Please try WhatsApp instead.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
@@ -137,10 +156,18 @@ export default function WelcomeKit() {
           <p className="text-xl mb-2">1,000 THB • Lifetime Access • Instant Download</p>
           <p className="text-lg mb-8 hebrew-text" dir="rtl">1,000 באט • גישה לכל החיים • הורדה מיידית</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="text-xl px-12 py-8 bg-white text-amber-600 hover:bg-gray-100 shadow-2xl rounded-full font-semibold"
+              onClick={handlePurchase}
+              disabled={createCheckout.isPending}
+            >
+              💳 {createCheckout.isPending ? "Processing..." : "Buy Now with Card"}
+            </Button>
             <a href="https://wa.me/66929894495?text=Hi!%20I%20want%20to%20purchase%20the%20Welcome%20Kit%20(1,000%20THB)" target="_blank" rel="noopener noreferrer">
               <Button 
                 size="lg" 
-                className="text-xl px-12 py-8 bg-white text-amber-600 hover:bg-gray-100 shadow-2xl rounded-full font-semibold"
+                className="text-xl px-12 py-8 bg-green-600 text-white hover:bg-green-700 shadow-2xl rounded-full font-semibold"
               >
                 💬 Purchase via WhatsApp
               </Button>

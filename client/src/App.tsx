@@ -14,10 +14,12 @@ import BlogPost from "./pages/BlogPost";
 import Progress from "./pages/Progress";
 import Downloads from "./pages/Downloads";
 import Pronunciation from "./pages/Pronunciation";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import LessonList from "./pages/LessonList";
 import LessonDetail from "./pages/LessonDetail";
 
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -28,6 +30,7 @@ function Router() {
       <Route path="/progress" component={Progress} />
       <Route path="/downloads" component={Downloads} />
       <Route path="/pronunciation" component={Pronunciation} />
+      <Route path="/payment-success" component={PaymentSuccess} />
       <Route path={"/lessons"} component={LessonList} />
       <Route path="/lesson/:id" component={LessonDetail} />
       <Route path="/404" component={NotFound} />

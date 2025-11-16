@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageCircle, X, Send, Bot, User, Mic, MicOff } from 'lucide-react';
+import { trpc } from '@/lib/trpc';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -90,6 +91,8 @@ export default function AIConcierge() {
   const [showQuickActions, setShowQuickActions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
+  
+  const sendMessageMutation = trpc.chat.sendMessage.useMutation();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -208,9 +211,31 @@ export default function AIConcierge() {
   };
 
   const callAIAPI = async (userInput: string, conversationHistory: Message[]): Promise<string> => {
-    // For now, use rule-based responses
-    // TODO: Replace with actual AI API call (OpenAI, Anthropic, etc.)
-    return await simulateAIResponse(userInput);
+    try {
+      const history = conversationHistory.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+
+      const response = await sendMessageMutation.mutateAsync({
+        message: userInput,
+        history
+      });
+
+      // Handle both string and array responses
+      if (typeof response.message === 'string') {
+        return response.message;
+      } else {
+        // If it's an array of content blocks, extract text
+        return response.message
+          .filter((block: any) => block.type === 'text')
+          .map((block: any) => block.text)
+          .join('\n');
+      }
+    } catch (error) {
+      console.error('AI API call failed:', error);
+      throw error;
+    }
   };
 
   const simulateAIResponse = async (userInput: string): Promise<string> => {

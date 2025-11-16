@@ -157,3 +157,10 @@
 - [x] Add Smart Tourist Pack purchase flow
 - [x] Add bulk pricing information for tour agents
 - [x] Add white-label option explanation
+
+## Bug Fixes & New Features
+- [ ] Fix pronunciation page issues
+- [x] Integrate real AI API (using built-in LLM service)
+- [x] Add Stripe payment gateway for Smart Tourist Pack
+- [ ] Create admin dashboard for chat analytics and bulk orders
+- [ ] Add automated invoicing for tour agents
