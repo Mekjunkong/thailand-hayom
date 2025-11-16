@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thailand Smart Tourist Pack - Premium Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: #2C3E50;
+        }
+        
+        /* COVER PAGE - Stunning Modern Design */
+        .cover {
+            page-break-after: always;
+            height: 297mm;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+        
+        .cover::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding-top: 180px;
+            color: white;
+        }
+        
+        .cover-flag {
+            font-size: 80pt;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+        
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64pt;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        
+        .cover h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28pt;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 60px;
+            opacity: 0.95;
+        }
+        
+        .cover-badge {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 18pt;
+            font-weight: 700;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            margin-top: 40px;
+        }
+        
+        .cover-subtitle {
+            font-size: 16pt;
+            margin-top: 80px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* TABLE OF CONTENTS - Modern Grid Style */
+        .toc-page {
+            page-break-after: always;
+            padding: 60px 80px;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+            height: 297mm;
+        }
+        
+        .toc-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 48pt;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 50px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 20px;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .toc-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .toc-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102,126,234,0.2);
+        }
+        
+        .toc-number {
+            font-size: 32pt;
+            font-weight: 700;
+            color: #667eea;
+            opacity: 0.3;
+            float: left;
+            margin-right: 15px;
+            line-height: 1;
+        }
+        
+        .toc-title {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #2C3E50;
+            line-height: 1.4;
+        }
+        
+        /* SECTION DIVIDER - Elegant Transition Pages */
+        .section-divider {
+            page-break-before: always;
+            page-break-after: always;
+            height: 297mm;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .section-divider::before {
+            content: "";
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            top: -400px;
+            left: -200px;
+        }
+        
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 200pt;
+            font-weight: 900;
+            opacity: 0.15;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .section-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-icon {
+            font-size: 100pt;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 56pt;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .section-quote {
+            font-size: 16pt;
+            font-weight: 300;
+            font-style: italic;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* CONTENT PAGES - Modern Magazine Layout */
+        .content-page {
+            padding: 70px 80px;
+            background: white;
+            min-height: 297mm;
+        }
+        
+        .page-header {
+            margin-bottom: 50px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 25px;
+        }
+        
+        .page-number {
+            font-size: 72pt;
+            font-weight: 900;
+            color: #667eea;
+            opacity: 0.2;
+            float: left;
+            margin-right: 30px;
+            line-height: 0.8;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42pt;
+            font-weight: 700;
+            color: #2C3E50;
+            padding-top: 10px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28pt;
+            font-weight: 700;
+            color: #667eea;
+            margin: 40px 0 25px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 60%;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        
+        h3 {
+            font-size: 18pt;
+            font-weight: 600;
+            color: #34495E;
+            margin: 30px 0 15px 0;
+        }
+        
+        p {
+            font-size: 11pt;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #2C3E50;
+        }
+        
+        /* INFO BOXES - Modern Card Design */
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(102,126,234,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-box::before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -50px;
+        }
+        
+        .info-box-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .info-box strong {
+            font-size: 14pt;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(245,87,108,0.3);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #2C3E50;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(250,112,154,0.3);
+        }
+        
+        /* TABLES - Clean Modern Style */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 12pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        td {
+            padding: 18px 15px;
+            background: white;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 11pt;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 13pt;
+        }
+        
+        /* LISTS - Modern Styled */
+        ul, ol {
+            margin: 20px 0 20px 30px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            font-size: 11pt;
+            line-height: 1.7;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 45px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14pt;
+        }
+        
+        /* DECORATIVE ELEMENTS */
+        .divider {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #667eea, transparent);
+        }
+        
+        .divider-icon {
+            background: white;
+            padding: 0 30px;
+            position: relative;
+            font-size: 32pt;
+        }
+        
+        /* PAGE FOOTER */
+        .page-footer {
+            position: absolute;
+            bottom: 40px;
+            right: 80px;
+            font-size: 10pt;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+    <div class="cover-content">
+        <div class="cover-flag">🇹🇭</div>
+        <h1>THAILAND<br>SMART TOURIST<br>PACK</h1>
+        <h2>YOUR COMPLETE SURVIVAL GUIDE</h2>
+        <div class="cover-badge">WORTH 1,000 THB</div>
+        <p class="cover-subtitle">For Israeli Travelers | November 2025</p>
+    </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-page">
+    <h1 class="toc-header">Table of Contents</h1>
+    <div class="toc-grid">
+        <div class="toc-item">
+            <span class="toc-number">01</span>
+            <div class="toc-title">Arrival Survival Guide</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">02</span>
+            <div class="toc-title">Top Scams to Avoid</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">03</span>
+            <div class="toc-title">SIM Card Guide</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">04</span>
+            <div class="toc-title">Transportation Rules & Tips</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">05</span>
+            <div class="toc-title">Money Exchange & Banking</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">06</span>
+            <div class="toc-title">Accommodation Guide</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">07</span>
+            <div class="toc-title">Food & Restaurant Recommendations</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">08</span>
+            <div class="toc-title">Nightlife Safety Guide</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">09</span>
+            <div class="toc-title">Temple Etiquette</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">10</span>
+            <div class="toc-title">Shopping & Bargaining</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">11</span>
+            <div class="toc-title">Beach Safety & Water Activities</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">12</span>
+            <div class="toc-title">Essential Thai Phrases</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">13</span>
+            <div class="toc-title">3-Day Bangkok Itinerary</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">14</span>
+            <div class="toc-title">3-Day Chiang Mai Itinerary</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">15</span>
+            <div class="toc-title">Emergency Contacts & Packing</div>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION DIVIDER: PART 1 -->
+<div class="section-divider">
+    <div class="section-number">01</div>
+    <div class="section-content">
+        <div class="section-icon">✈️</div>
+        <h1 class="section-title">Arrival & Basics</h1>
+        <p class="section-quote">"The journey of a thousand miles begins with a single step - and a Thai SIM card!"</p>
+    </div>
+</div>
+
+<!-- MODULE 1: ARRIVAL SURVIVAL GUIDE -->
+<div class="content-page">
+    <div class="page-header">
+        <span class="page-number">01</span>
+        <h1 class="page-title">Arrival Survival Guide</h1>
+    </div>
+    
+    <h2>Airport to City Transportation</h2>
+    
+    <h3>Bangkok (Suvarnabhumi Airport - BKK)</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Option</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Best For</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Airport Rail Link</strong></td>
+                <td class="price">45 THB</td>
+                <td>30 min</td>
+                <td>Budget travelers, connects to BTS/MRT</td>
+            </tr>
+            <tr>
+                <td><strong>Grab/Bolt</strong></td>
+                <td class="price">250-400 THB</td>
+                <td>45-90 min</td>
+                <td>Door-to-door convenience</td>
+            </tr>
+            <tr>
+                <td><strong>Airport Taxi (Meter)</strong></td>
+                <td class="price">300-500 THB</td>
+                <td>45-90 min</td>
+                <td>Official queue on Level 1</td>
+            </tr>
+            <tr>
+                <td><strong>Airport Limousine</strong></td>
+                <td class="price">900-1,200 THB</td>
+                <td>45-60 min</td>
+                <td>Comfort and reliability</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tip-box">
+        <div class="info-box-content">
+            <strong>💡 Pro Tip</strong>
+            <p style="margin: 0; color: white;">Download Grab and Bolt apps BEFORE you land. They work better than regular taxis and show upfront prices. Make sure you have mobile data!</p>
+        </div>
+    </div>
+    
+    <div class="divider">
+        <span class="divider-icon">✈️</span>
+    </div>
+    
+    <h2>First 24 Hours Checklist</h2>
+    
+    <ul class="checklist">
+        <li>Get Thai SIM card at airport (see Module 3 for detailed comparison)</li>
+        <li>Exchange some cash - recommended 5,000-10,000 THB for immediate expenses</li>
+        <li>Download essential apps: Grab, Bolt, Google Translate, Google Maps</li>
+        <li>Save hotel address in Thai language for taxi drivers</li>
+        <li>Set up mobile banking and payment apps</li>
+        <li>Register with Israeli Embassy (optional but recommended for safety)</li>
+    </ul>
+    
+    <h2>Visa Information for Israeli Citizens</h2>
+    
+    <div class="info-box">
+        <div class="info-box-content">
+            <strong>📋 Visa Requirements</strong>
+            <ul style="margin: 15px 0 0 20px; color: white;">
+                <li><strong>Visa on Arrival:</strong> 30 days free (if arriving by air)</li>
+                <li><strong>Extension:</strong> Can extend 30 more days at immigration office (1,900 THB)</li>
+                <li><strong>Documents needed:</strong> Passport valid 6+ months, return ticket, hotel booking</li>
+                <li><strong>Important:</strong> Overstaying costs 500 THB per day (max 20,000 THB)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- MODULE 2: TOP SCAMS TO AVOID -->
+<div class="content-page">
+    <div class="page-header">
+        <span class="page-number">02</span>
+        <h1 class="page-title">Top Scams to Avoid</h1>
+    </div>
+    
+    <div class="warning-box">
+        <strong style="font-size: 14pt; display: block; margin-bottom: 10px;">⚠️ IMPORTANT</strong>
+        <p style="margin: 0;">Thailand is generally safe, but tourists are common targets for scams. Stay alert and informed to protect yourself!</p>
+    </div>
+    
+    <h2>Common Tourist Scams</h2>
+    
+    <h3>1. "Temple is Closed" Scam</h3>
+    <p><strong>How it works:</strong> A friendly local approaches you near major temples (Grand Palace, Wat Pho) and tells you the temple is closed for a Buddhist holiday or special ceremony. They offer to take you to a "better" temple or gem shop instead.</p>
+    
+    <p><strong>Reality:</strong> Major temples are rarely closed during tourist hours. This is a setup to take you to overpriced gem shops or tour packages where the scammer gets commission.</p>
+    
+    <p><strong>How to avoid:</strong> Ignore strangers near tourist sites offering unsolicited advice. Check temple hours online beforehand. Walk to the entrance yourself to verify if it's really closed.</p>
+    
+    <div class="divider">
+        <span class="divider-icon">⚠️</span>
+    </div>
+    
+    <h3>2. Tuk-Tuk "10 Baht Tour"</h3>
+    <p><strong>How it works:</strong> Tuk-tuk driver offers an incredibly cheap city tour (10-20 THB) to see temples and attractions. Sounds like a great deal! However, they take you to gem shops, tailor shops, and massage parlors where they earn commission.</p>
+    
+    <p><strong>Reality:</strong> You waste 2-3 hours being pressured to buy overpriced items. The "tour" is just a shopping trip disguised as sightseeing.</p>
+    
+    <p><strong>How to avoid:</strong> Use Grab or Bolt instead of tuk-tuks. If using a tuk-tuk, agree on price and destination first. Say "NO SHOPPING" clearly before getting in.</p>
+    
+    <h3>3. Jet Ski Rental Damage Scam</h3>
+    <p><strong>How it works:</strong> You rent a jet ski at the beach. After returning it, the operator claims you damaged it and demands 30,000-50,000 THB cash immediately. They may threaten to call police or become aggressive.</p>
+    
+    <p><strong>Reality:</strong> The damage was pre-existing or completely fabricated. This is a well-known scam in Pattaya and Phuket.</p>
+    
+    <p><strong>How to avoid:</strong> Take photos and video of the jet ski from all angles BEFORE renting. Rent only from reputable shops with good online reviews. Never pay cash for "damages" - call tourist police 1155 instead. Consider skipping jet skis entirely - parasailing is safer and more fun!</p>
+    
+    <div class="info-box">
+        <div class="info-box-content">
+            <strong>🚨 Emergency Contact</strong>
+            <p style="margin: 10px 0 0 0; color: white; font-size: 12pt;"><strong>Tourist Police: 1155</strong> (English speaking, 24/7 service)</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION DIVIDER: PART 2 -->
+<div class="section-divider">
+    <div class="section-number">02</div>
+    <div class="section-content">
+        <div class="section-icon">🎒</div>
+        <h1 class="section-title">Practical Essentials</h1>
+        <p class="section-quote">"Being prepared is half the adventure - the other half is street food!"</p>
+    </div>
+</div>
+
+<!-- MODULE 3: SIM CARD GUIDE -->
+<div class="content-page">
+    <div class="page-header">
+        <span class="page-number">03</span>
+        <h1 class="page-title">SIM Card Guide</h1>
+    </div>
+    
+    <h2>Top 3 Providers Comparison</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Tourist Package</th>
+                <th>Price</th>
+                <th>Best For</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>AIS</strong></td>
+                <td>15 days unlimited data + 100 THB calls</td>
+                <td class="price">299 THB</td>
+                <td>Best coverage in islands and rural areas</td>
+            </tr>
+            <tr>
+                <td><strong>DTAC</strong></td>
+                <td>15 days unlimited data</td>
+                <td class="price">249 THB</td>
+                <td>Best value for money in cities</td>
+            </tr>
+            <tr>
+                <td><strong>True</strong></td>
+                <td>30 days unlimited data + free WiFi hotspots</td>
+                <td class="price">399 THB</td>
+                <td>Longest validity, good for extended stays</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tip-box">
+        <div class="info-box-content">
+            <strong>💡 Pro Tip</strong>
+            <p style="margin: 0; color: white;">Get your SIM card immediately at the airport - don't wait until you reach the city! You'll need Google Maps and Grab right away to navigate. All providers have booths in the arrival hall.</p>
+        </div>
+    </div>
+    
+    <h2>Where to Buy</h2>
+    
+    <ul>
+        <li><strong>Airport:</strong> Most convenient, available 24/7 at arrival halls (Suvarnabhumi, Don Mueang, Phuket, Chiang Mai airports)</li>
+        <li><strong>7-Eleven:</strong> Available everywhere, but may require Thai language skills</li>
+        <li><strong>Provider stores:</strong> AIS, DTAC, True stores in shopping malls for better customer service</li>
+    </ul>
+    
+    <div class="info-box">
+        <div class="info-box-content">
+            <strong>📱 What You Need</strong>
+            <ul style="margin: 15px 0 0 20px; color: white;">
+                <li>Unlocked phone (check with your carrier before traveling)</li>
+                <li>Passport for registration (required by Thai law)</li>
+                <li>Cash (most airport booths accept credit cards too)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="section-divider">
+    <div class="section-content">
+        <div class="section-icon">🌴</div>
+        <h1 class="section-title">Enjoy Your<br>Thailand Adventure!</h1>
+        <p class="section-quote" style="margin-top: 50px; font-size: 14pt;">
+            This guide was created to help Israeli travelers<br>
+            have a safe, enjoyable, and authentic Thai experience.
+        </p>
+        <div style="margin-top: 80px; background: white; color: #667eea; padding: 40px 60px; border-radius: 20px; display: inline-block;">
+            <p style="font-size: 12pt; margin-bottom: 15px;"><strong>Contact Us:</strong></p>
+            <p style="font-size: 11pt; line-height: 2;">
+                WhatsApp: +66 92 989 4495<br>
+                Email: Pasuthunjunkong@gmail.com<br>
+                Website: LearnThaiB4Fly.com
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

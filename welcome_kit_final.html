@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thailand Smart Tourist Pack - Final Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;600;700&display=swap');
+        
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.9;
+            color: #2D3748;
+        }
+        
+        .hebrew {
+            font-family: 'Heebo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+        
+        /* Beautiful Tropical Color Palette */
+        :root {
+            --primary: #0EA5E9;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --coral: #FB7185;
+            --teal: #14B8A6;
+            --sand: #FEF3C7;
+            --cream: #FFFBEB;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+        }
+        
+        /* COVER PAGE - Website Banner Style */
+        .cover {
+            page-break-after: always;
+            height: 297mm;
+            background-image: url('thailand_cover.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Dark overlay for text readability */
+        .cover::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.85) 0%, rgba(20, 184, 166, 0.85) 50%, rgba(16, 185, 129, 0.75) 100%);
+            z-index: 1;
+        }
+        
+        /* Additional wave overlay */
+        .cover::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: rgba(255, 255, 255, 0.1);
+            clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
+            z-index: 2;
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding-top: 200px;
+            color: white;
+        }
+        
+        .cover-flag {
+            font-size: 100pt;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 15px 40px rgba(0,0,0,0.4));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 90pt;
+            font-weight: 900;
+            letter-spacing: 8px;
+            margin-bottom: 25px;
+            text-shadow: 0 6px 30px rgba(0,0,0,0.4);
+            line-height: 1;
+        }
+        
+        .cover h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 30pt;
+            font-weight: 500;
+            letter-spacing: 12px;
+            margin-bottom: 18px;
+            opacity: 0.98;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .cover h2.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-size: 28pt;
+            letter-spacing: 4px;
+        }
+        
+        .cover-divider {
+            width: 200px;
+            height: 4px;
+            background: white;
+            margin: 35px auto;
+            opacity: 0.9;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cover-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 32pt;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 18px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .cover-subtitle.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-size: 30pt;
+            font-style: normal;
+        }
+        
+        .cover-badge {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 28px 90px;
+            border-radius: 70px;
+            font-size: 24pt;
+            font-weight: 700;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            margin-top: 50px;
+            letter-spacing: 3px;
+        }
+        
+        .cover-footer {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 14pt;
+            color: white;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        
+        /* TABLE OF CONTENTS */
+        .toc-page {
+            page-break-after: always;
+            padding: 80px 90px;
+            background: var(--light);
+            height: 297mm;
+            position: relative;
+        }
+        
+        .toc-page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--teal), var(--secondary));
+        }
+        
+        .toc-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 56pt;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .toc-header.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-size: 50pt;
+        }
+        
+        .toc-subtitle {
+            text-align: center;
+            font-size: 14pt;
+            color: #64748B;
+            letter-spacing: 4px;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .toc-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .toc-item:nth-child(2n) {
+            border-left-color: var(--secondary);
+        }
+        
+        .toc-item:nth-child(3n) {
+            border-left-color: var(--accent);
+        }
+        
+        .toc-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 38pt;
+            font-weight: 700;
+            color: var(--primary);
+            opacity: 0.3;
+            float: left;
+            margin-right: 20px;
+            line-height: 1;
+        }
+        
+        .toc-title {
+            font-size: 15pt;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.5;
+            padding-top: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .toc-title-he {
+            font-family: 'Heebo', sans-serif;
+            font-size: 13pt;
+            color: #64748B;
+            direction: rtl;
+            clear: both;
+        }
+        
+        /* SECTION DIVIDER */
+        .section-divider {
+            page-break-before: always;
+            page-break-after: always;
+            height: 297mm;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .section-divider::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+        }
+        
+        .section-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-icon {
+            font-size: 120pt;
+            margin-bottom: 50px;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 64pt;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .section-title.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-size: 56pt;
+        }
+        
+        .section-divider-line {
+            width: 140px;
+            height: 4px;
+            background: white;
+            margin: 30px auto;
+            opacity: 0.8;
+        }
+        
+        .section-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 18pt;
+            font-weight: 300;
+            font-style: italic;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            line-height: 2;
+        }
+        
+        .section-quote.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-style: normal;
+            font-size: 17pt;
+        }
+        
+        /* CONTENT PAGES */
+        .content-page {
+            padding: 80px 90px;
+            background: white;
+            min-height: 297mm;
+            position: relative;
+        }
+        
+        .content-page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--teal));
+        }
+        
+        .page-header {
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #E2E8F0;
+        }
+        
+        .page-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 80pt;
+            font-weight: 700;
+            color: var(--primary);
+            opacity: 0.12;
+            float: left;
+            margin-right: 35px;
+            line-height: 0.8;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 46pt;
+            font-weight: 700;
+            color: var(--dark);
+            padding-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .page-title-he {
+            font-family: 'Heebo', sans-serif;
+            font-size: 32pt;
+            color: #64748B;
+            direction: rtl;
+            clear: both;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32pt;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 50px 0 25px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 7px;
+            height: 70%;
+            background: linear-gradient(to bottom, var(--primary), var(--teal));
+            border-radius: 4px;
+        }
+        
+        h2.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-size: 28pt;
+            padding-left: 0;
+            padding-right: 30px;
+            direction: rtl;
+            margin-top: 20px;
+        }
+        
+        h2.hebrew::before {
+            left: auto;
+            right: 0;
+        }
+        
+        h3 {
+            font-size: 20pt;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 40px 0 20px 0;
+        }
+        
+        h3.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-size: 18pt;
+            direction: rtl;
+            margin-top: 15px;
+        }
+        
+        p {
+            font-size: 13pt;
+            line-height: 2;
+            margin-bottom: 20px;
+            color: #475569;
+        }
+        
+        p.hebrew {
+            font-family: 'Heebo', sans-serif;
+            font-size: 12pt;
+            direction: rtl;
+            text-align: right;
+            margin-top: 10px;
+        }
+        
+        /* INFO BOXES */
+        .info-box, .tip-box, .warning-box {
+            padding: 40px;
+            border-radius: 18px;
+            margin: 40px 0;
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.2);
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
+            color: white;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--teal) 100%);
+            color: white;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--coral) 100%);
+            color: white;
+        }
+        
+        .box-content strong {
+            font-size: 17pt;
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .box-content p {
+            color: white;
+            margin: 0 0 15px 0;
+            font-size: 13pt;
+            line-height: 2;
+        }
+        
+        .box-content-he {
+            font-family: 'Heebo', sans-serif;
+            direction: rtl;
+            margin-top: 20px;
+            opacity: 0.95;
+            font-size: 12pt;
+            line-height: 2;
+        }
+        
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: left;
+            font-size: 14pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        td {
+            padding: 22px 20px;
+            background: white;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 13pt;
+            color: #475569;
+            line-height: 1.8;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:nth-child(even) td {
+            background: var(--light);
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 15pt;
+        }
+        
+        /* LISTS */
+        ul, ol {
+            margin: 25px 0 25px 35px;
+        }
+        
+        li {
+            margin-bottom: 18px;
+            font-size: 13pt;
+            line-height: 2;
+            color: #475569;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 55px;
+            position: relative;
+            margin-bottom: 22px;
+        }
+        
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16pt;
+        }
+        
+        /* DECORATIVE ELEMENTS */
+        .divider {
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+        }
+        
+        .divider-icon {
+            background: white;
+            padding: 0 35px;
+            position: relative;
+            font-size: 32pt;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE - Website Banner Style -->
+<div class="cover">
+    <div class="cover-content">
+        <div class="cover-flag">🇹🇭</div>
+        <h1>THAILAND</h1>
+        <h2>SMART TOURIST PACK</h2>
+        <h2 class="hebrew">חבילת התייר החכם</h2>
+        <div class="cover-divider"></div>
+        <p class="cover-subtitle">Your Complete Survival Guide</p>
+        <p class="cover-subtitle hebrew">המדריך המלא שלך להישרדות</p>
+        <div class="cover-badge">WORTH 1,000 THB</div>
+    </div>
+    <p class="cover-footer">FOR ISRAELI TRAVELERS | למטיילים ישראלים | NOVEMBER 2025</p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-page">
+    <h1 class="toc-header">Table of Contents</h1>
+    <h1 class="toc-header hebrew">תוכן עניינים</h1>
+    <p class="toc-subtitle">Your Journey Begins Here</p>
+    <div class="toc-grid">
+        <div class="toc-item">
+            <span class="toc-number">01</span>
+            <div class="toc-title">Arrival Survival Guide</div>
+            <div class="toc-title-he">מדריך הישרדות בהגעה</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">02</span>
+            <div class="toc-title">Top Scams to Avoid</div>
+            <div class="toc-title-he">הונאות נפוצות להימנע מהן</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">03</span>
+            <div class="toc-title">SIM Card Guide</div>
+            <div class="toc-title-he">מדריך כרטיסי SIM</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">04</span>
+            <div class="toc-title">Transportation Rules</div>
+            <div class="toc-title-he">כללי תחבורה</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">05</span>
+            <div class="toc-title">Money Exchange</div>
+            <div class="toc-title-he">החלפת כסף</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">06</span>
+            <div class="toc-title">Accommodation Guide</div>
+            <div class="toc-title-he">מדריך לינה</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">07</span>
+            <div class="toc-title">Food & Restaurants</div>
+            <div class="toc-title-he">אוכל ומסעדות</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">08</span>
+            <div class="toc-title">Nightlife Safety</div>
+            <div class="toc-title-he">בטיחות בחיי לילה</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">09</span>
+            <div class="toc-title">Temple Etiquette</div>
+            <div class="toc-title-he">נימוסים במקדשים</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">10</span>
+            <div class="toc-title">Shopping & Bargaining</div>
+            <div class="toc-title-he">קניות ומיקוח</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">11</span>
+            <div class="toc-title">Beach Safety</div>
+            <div class="toc-title-he">בטיחות בחוף</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">12</span>
+            <div class="toc-title">Essential Thai Phrases</div>
+            <div class="toc-title-he">ביטויים חיוניים</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">13</span>
+            <div class="toc-title">Bangkok Itinerary</div>
+            <div class="toc-title-he">מסלול בבנגקוק</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">14</span>
+            <div class="toc-title">Chiang Mai Itinerary</div>
+            <div class="toc-title-he">מסלול בצ'אנג מאי</div>
+        </div>
+        <div class="toc-item">
+            <span class="toc-number">15</span>
+            <div class="toc-title">Emergency Contacts</div>
+            <div class="toc-title-he">אנשי קשר חירום</div>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION DIVIDER -->
+<div class="section-divider">
+    <div class="section-content">
+        <div class="section-icon">✈️</div>
+        <h1 class="section-title">Arrival & Basics</h1>
+        <h1 class="section-title hebrew">הגעה ויסודות</h1>
+        <div class="section-divider-line"></div>
+        <p class="section-quote">"The journey of a thousand miles begins with a single step - and a Thai SIM card!"</p>
+        <p class="section-quote hebrew">"מסע של אלף מיילים מתחיל בצעד אחד - וכרטיס SIM תאילנדי!"</p>
+    </div>
+</div>
+
+<!-- MODULE 1: ARRIVAL SURVIVAL GUIDE -->
+<div class="content-page">
+    <div class="page-header">
+        <span class="page-number">01</span>
+        <h1 class="page-title">Arrival Survival Guide</h1>
+        <p class="page-title-he">מדריך הישרדות בהגעה</p>
+    </div>
+    
+    <h2>Airport to City Transportation</h2>
+    <h2 class="hebrew">תחבורה מהשדה לעיר</h2>
+    
+    <h3>Bangkok (Suvarnabhumi Airport - BKK)</h3>
+    <h3 class="hebrew">בנגקוק (נמל התעופה סוברנבהומי)</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Option</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Best For</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Airport Rail Link</strong></td>
+                <td class="price">45 THB</td>
+                <td>30 min</td>
+                <td>Budget travelers, connects to BTS/MRT</td>
+            </tr>
+            <tr>
+                <td><strong>Grab/Bolt</strong></td>
+                <td class="price">250-400 THB</td>
+                <td>45-90 min</td>
+                <td>Door-to-door convenience</td>
+            </tr>
+            <tr>
+                <td><strong>Airport Taxi</strong></td>
+                <td class="price">300-500 THB</td>
+                <td>45-90 min</td>
+                <td>Official queue on Level 1</td>
+            </tr>
+            <tr>
+                <td><strong>Airport Limousine</strong></td>
+                <td class="price">900-1,200 THB</td>
+                <td>45-60 min</td>
+                <td>Comfort and reliability</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tip-box">
+        <div class="box-content">
+            <strong>💡 Pro Tip</strong>
+            <p>Download Grab and Bolt apps BEFORE you land. They work better than regular taxis and show upfront prices.</p>
+            <p class="box-content-he">הורידו את אפליקציות Grab ו-Bolt לפני הנחיתה. הן עובדות טוב יותר ממוניות רגילות ומציגות מחירים מראש.</p>
+        </div>
+    </div>
+    
+    <div class="divider">
+        <span class="divider-icon">✈️</span>
+    </div>
+    
+    <h2>First 24 Hours Checklist</h2>
+    <h2 class="hebrew">רשימת משימות ל-24 שעות הראשונות</h2>
+    
+    <ul class="checklist">
+        <li>Get Thai SIM card at airport<br><span class="hebrew">קנו כרטיס SIM תאילנדי בשדה התעופה</span></li>
+        
+        <li>Exchange 5,000-10,000 THB cash<br><span class="hebrew">החליפו 5,000-10,000 בהט מזומן</span></li>
+        
+        <li>Download: Grab, Bolt, Google Maps<br><span class="hebrew">הורידו: Grab, Bolt, Google Maps</span></li>
+        
+        <li>Save hotel address in Thai<br><span class="hebrew">שמרו כתובת מלון בתאית</span></li>
+        
+        <li>Set up mobile banking apps<br><span class="hebrew">הגדירו אפליקציות בנקאות</span></li>
+        
+        <li>Register with Israeli Embassy<br><span class="hebrew">הירשמו בשגרירות ישראל</span></li>
+    </ul>
+    
+    <h2>Visa Information</h2>
+    <h2 class="hebrew">מידע על ויזה</h2>
+    
+    <div class="info-box">
+        <div class="box-content">
+            <strong>📋 For Israeli Citizens</strong>
+            <p><strong>Visa on Arrival:</strong> 30 days free (arriving by air)</p>
+            <p><strong>Extension:</strong> 30 more days at immigration office (1,900 THB)</p>
+            <p><strong>Documents:</strong> Passport valid 6+ months, return ticket, hotel booking</p>
+            <p><strong>Overstaying:</strong> 500 THB per day (max 20,000 THB)</p>
+            
+            <div class="box-content-he">
+                <strong>לאזרחים ישראלים:</strong><br>
+                • ויזה בהגעה: 30 יום חינם (בהגעה באוויר)<br>
+                • הארכה: 30 יום נוספים במשרד ההגירה (1,900 בהט)<br>
+                • מסמכים: דרכון בתוקף 6+ חודשים, כרטיס חזרה, הזמנת מלון<br>
+                • שהייה יתר: 500 בהט ליום (מקסימום 20,000 בהט)
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODULE 2: TOP SCAMS -->
+<div class="content-page">
+    <div class="page-header">
+        <span class="page-number">02</span>
+        <h1 class="page-title">Top Scams to Avoid</h1>
+        <p class="page-title-he">הונאות נפוצות להימנע מהן</p>
+    </div>
+    
+    <div class="warning-box">
+        <div class="box-content">
+            <strong>⚠️ IMPORTANT</strong>
+            <p>Thailand is generally safe, but tourists are common targets for scams. Stay alert!</p>
+            <p class="box-content-he">תאילנד בטוחה בדרך כלל, אבל תיירים הם מטרות נפוצות להונאות. הישארו ערניים!</p>
+        </div>
+    </div>
+    
+    <h2>Common Tourist Scams</h2>
+    <h2 class="hebrew">הונאות תיירים נפוצות</h2>
+    
+    <h3>1. "Temple is Closed" Scam</h3>
+    <h3 class="hebrew">1. הונאת "המקדש סגור"</h3>
+    
+    <p><strong>How it works:</strong> A friendly local tells you the temple is closed and offers to take you to a "better" temple or gem shop instead.</p>
+    
+    <p class="hebrew"><strong>איך זה עובד:</strong> מקומי ידידותי אומר שהמקדש סגור ומציע לקחת אתכם למקדש "טוב יותר" או לחנות אבני חן.</p>
+    
+    <p><strong>Reality:</strong> Major temples are rarely closed. This leads to overpriced gem shops.</p>
+    
+    <p class="hebrew"><strong>המציאות:</strong> מקדשים מרכזיים סגורים לעיתים רחוקות. זו מלכודת לחנויות אבני חן יקרות.</p>
+    
+    <p><strong>How to avoid:</strong> Ignore strangers near tourist sites. Check temple hours online. Walk to the entrance yourself.</p>
+    
+    <p class="hebrew"><strong>איך להימנע:</strong> התעלמו מזרים ליד אתרי תיירות. בדקו שעות פתיחה באינטרנט. הלכו לכניסה בעצמכם.</p>
+    
+    <div class="divider">
+        <span class="divider-icon">⚠️</span>
+    </div>
+    
+    <h3>2. Tuk-Tuk "10 Baht Tour"</h3>
+    <h3 class="hebrew">2. "סיור 10 בהט" בטוק-טוק</h3>
+    
+    <p><strong>How it works:</strong> Driver offers incredibly cheap city tour (10-20 THB). They take you to shops where they earn commission.</p>
+    
+    <p class="hebrew"><strong>איך זה עובד:</strong> נהג מציע סיור זול (10-20 בהט). הם לוקחים אתכם לחנויות שבהן הם מרוויחים עמלה.</p>
+    
+    <p><strong>Reality:</strong> You waste 2-3 hours being pressured to buy overpriced items.</p>
+    
+    <p class="hebrew"><strong>המציאות:</strong> אתם מבזבזים 2-3 שעות בלחץ לקנות פריטים יקרים מדי.</p>
+    
+    <p><strong>How to avoid:</strong> Use Grab or Bolt. If using tuk-tuk, say "NO SHOPPING" clearly.</p>
+    
+    <p class="hebrew"><strong>איך להימנע:</strong> השתמשו ב-Grab או Bolt. אם משתמשים בטוק-טוק, אמרו "בלי קניות" בבירור.</p>
+    
+    <h3>3. Jet Ski Damage Scam</h3>
+    <h3 class="hebrew">3. הונאת נזק בג'ט סקי</h3>
+    
+    <p><strong>How it works:</strong> After returning jet ski, operator claims you damaged it and demands 30,000-50,000 THB cash immediately.</p>
+    
+    <p class="hebrew"><strong>איך זה עובד:</strong> אחרי החזרת ג'ט סקי, המפעיל טוען שגרמתם נזק ודורש 30,000-50,000 בהט מזומן מיד.</p>
+    
+    <p><strong>Reality:</strong> The damage was pre-existing or fabricated. Well-known scam in Pattaya and Phuket.</p>
+    
+    <p class="hebrew"><strong>המציאות:</strong> הנזק היה קיים מראש או מפוברק. הונאה ידועה בפטאיה ופוקט.</p>
+    
+    <p><strong>How to avoid:</strong> Take photos/video BEFORE renting. Never pay cash for "damages" - call tourist police 1155.</p>
+    
+    <p class="hebrew"><strong>איך להימנע:</strong> צלמו תמונות וסרטון לפני השכרה. לעולם אל תשלמו מזומן - התקשרו למשטרת תיירות 1155.</p>
+    
+    <div class="info-box">
+        <div class="box-content">
+            <strong>🚨 Emergency Contact</strong>
+            <p><strong>Tourist Police: 1155</strong> (English speaking, 24/7)</p>
+            <p class="box-content-he"><strong>משטרת תיירות: 1155</strong> (דוברי אנגלית, 24/7)</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION DIVIDER -->
+<div class="section-divider">
+    <div class="section-content">
+        <div class="section-icon">🎒</div>
+        <h1 class="section-title">Practical Essentials</h1>
+        <h1 class="section-title hebrew">יסודות מעשיים</h1>
+        <div class="section-divider-line"></div>
+        <p class="section-quote">"Being prepared is half the adventure - the other half is street food!"</p>
+        <p class="section-quote hebrew">"להיות מוכן זה חצי מההרפתקה - החצי השני הוא אוכל רחוב!"</p>
+    </div>
+</div>
+
+<!-- MODULE 3: SIM CARD GUIDE -->
+<div class="content-page">
+    <div class="page-header">
+        <span class="page-number">03</span>
+        <h1 class="page-title">SIM Card Guide</h1>
+        <p class="page-title-he">מדריך כרטיסי SIM</p>
+    </div>
+    
+    <h2>Top 3 Providers Comparison</h2>
+    <h2 class="hebrew">השוואת 3 הספקים המובילים</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Package</th>
+                <th>Price</th>
+                <th>Best For</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>AIS</strong></td>
+                <td>15 days unlimited + 100 THB calls</td>
+                <td class="price">299 THB</td>
+                <td>Best coverage in islands</td>
+            </tr>
+            <tr>
+                <td><strong>DTAC</strong></td>
+                <td>15 days unlimited data</td>
+                <td class="price">249 THB</td>
+                <td>Best value in cities</td>
+            </tr>
+            <tr>
+                <td><strong>True</strong></td>
+                <td>30 days unlimited + WiFi</td>
+                <td class="price">399 THB</td>
+                <td>Longest validity</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="tip-box">
+        <div class="box-content">
+            <strong>💡 Pro Tip</strong>
+            <p>Get your SIM card immediately at the airport - don't wait! You'll need Google Maps and Grab right away.</p>
+            <p class="box-content-he">קנו את כרטיס ה-SIM מיד בשדה התעופה - אל תחכו! תצטרכו Google Maps ו-Grab מיד.</p>
+        </div>
+    </div>
+    
+    <h2>Where to Buy</h2>
+    <h2 class="hebrew">איפה לקנות</h2>
+    
+    <ul>
+        <li><strong>Airport:</strong> Most convenient, 24/7 at arrival halls<br><span class="hebrew"><strong>שדה תעופה:</strong> הכי נוח, 24/7 באולמות הגעה</span></li>
+        
+        <li><strong>7-Eleven:</strong> Everywhere, may need Thai language<br><span class="hebrew"><strong>7-Eleven:</strong> בכל מקום, עלול לדרוש תאית</span></li>
+        
+        <li><strong>Provider stores:</strong> In malls, better service<br><span class="hebrew"><strong>חנויות ספקים:</strong> בקניונים, שירות טוב יותר</span></li>
+    </ul>
+    
+    <div class="info-box">
+        <div class="box-content">
+            <strong>📱 What You Need</strong>
+            <p>• Unlocked phone (check before traveling)</p>
+            <p>• Passport for registration (Thai law)</p>
+            <p>• Cash or credit card</p>
+            
+            <div class="box-content-he">
+                <strong>מה אתם צריכים:</strong><br>
+                • טלפון פתוח (בדקו לפני הנסיעה)<br>
+                • דרכון לרישום (חוק תאילנדי)<br>
+                • מזומן או כרטיס אשראי
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="section-divider">
+    <div class="section-content">
+        <div class="section-icon">🌴</div>
+        <h1 class="section-title">Enjoy Your<br>Thailand Adventure!</h1>
+        <h1 class="section-title hebrew">תהנו מההרפתקה<br>שלכם בתאילנד!</h1>
+        <div class="section-divider-line"></div>
+        <p class="section-quote" style="margin-top: 50px;">
+            This guide was created to help Israeli travelers<br>
+            have a safe, enjoyable, and authentic Thai experience.
+        </p>
+        <p class="section-quote hebrew">
+            המדריך הזה נוצר כדי לעזור למטיילים ישראלים<br>
+            לחוות חוויה תאילנדית בטוחה, מהנה ואותנטית.
+        </p>
+        <div style="margin-top: 100px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; padding: 50px 70px; border-radius: 25px; display: inline-block;">
+            <p style="font-size: 16pt; margin-bottom: 20px; font-weight: 600;">Contact Us | צרו קשר</p>
+            <p style="font-size: 13pt; line-height: 2.5;">
+                WhatsApp: +66 92 989 4495<br>
+                Email: Pasuthunjunkong@gmail.com<br>
+                Website: LearnThaiB4Fly.com
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
