@@ -15,6 +15,7 @@ import Progress from "./pages/Progress";
 import Downloads from "./pages/Downloads";
 import Pronunciation from "./pages/Pronunciation";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import Admin from "./pages/Admin";
 import LessonList from "./pages/LessonList";
 import LessonDetail from "./pages/LessonDetail";
 
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/downloads" component={Downloads} />
       <Route path="/pronunciation" component={Pronunciation} />
       <Route path="/payment-success" component={PaymentSuccess} />
+      <Route path="/admin" component={Admin} />
       <Route path={"/lessons"} component={LessonList} />
       <Route path="/lesson/:id" component={LessonDetail} />
       <Route path="/404" component={NotFound} />

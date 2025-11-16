@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { publicProcedure, router } from "./_core/trpc";
 import { invokeLLM } from "./_core/llm";
+import { getDb } from "./db";
+import { chatLogs } from "../drizzle/schema";
 
 const CHIANG_MAI_CONCIERGE_PROMPT = `You are the AI Concierge for Thailand tourists, specializing in Chiang Mai and promoting the Smart Tourist Pack. You provide accurate, helpful, friendly support in simple and clear English. Your personality is warm, polite, and professional.
 
@@ -29,6 +31,7 @@ export const chatRouter = router({
     .input(
       z.object({
         message: z.string(),
+        sessionId: z.string(),
         history: z.array(
           z.object({
             role: z.enum(["user", "assistant"]),
@@ -51,7 +54,22 @@ export const chatRouter = router({
         messages,
       });
 
-      const reply = response.choices[0]?.message?.content || "I'm sorry, I couldn't process that. Please try again.";
+      const messageContent = response.choices[0]?.message?.content;
+      const reply = typeof messageContent === "string" ? messageContent : "I'm sorry, I couldn't process that. Please try again.";
+
+      // Save chat log to database
+      try {
+        const db = await getDb();
+        if (db) {
+          await db.insert(chatLogs).values({
+            sessionId: input.sessionId,
+            userMessage: input.message,
+            assistantMessage: reply,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to save chat log:", error);
+      }
 
       return {
         message: reply,

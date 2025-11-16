@@ -164,3 +164,18 @@
 - [x] Add Stripe payment gateway for Smart Tourist Pack
 - [ ] Create admin dashboard for chat analytics and bulk orders
 - [ ] Add automated invoicing for tour agents
+
+## Admin Dashboard & Advanced Features
+- [x] Create admin dashboard page with authentication
+- [x] Add payment analytics view (total revenue, transactions, conversion rate)
+- [x] Display chat conversation logs with search and filter
+- [x] Build bulk order management interface for tour agents
+- [ ] Implement automated invoice generation and PDF download
+- [ ] Add email automation using Resend API
+- [ ] Create email template for Welcome Kit delivery
+- [ ] Send automated emails after successful Stripe payments
+- [ ] Implement user registration and login system
+- [ ] Add user profile page with progress tracking
+- [ ] Create bookmark/favorites feature for phrases
+- [ ] Add purchase history page with downloadable receipts
+- [ ] Sync progress across devices using database

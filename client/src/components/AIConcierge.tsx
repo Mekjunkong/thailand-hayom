@@ -89,6 +89,7 @@ export default function AIConcierge() {
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(true);
+  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
   
@@ -219,19 +220,12 @@ export default function AIConcierge() {
 
       const response = await sendMessageMutation.mutateAsync({
         message: userInput,
+        sessionId,
         history
       });
 
-      // Handle both string and array responses
-      if (typeof response.message === 'string') {
-        return response.message;
-      } else {
-        // If it's an array of content blocks, extract text
-        return response.message
-          .filter((block: any) => block.type === 'text')
-          .map((block: any) => block.text)
-          .join('\n');
-      }
+      // Response is always a string now
+      return response.message;
     } catch (error) {
       console.error('AI API call failed:', error);
       throw error;
