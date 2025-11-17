@@ -283,3 +283,12 @@
 - [ ] Add Hebrew language detection
 - [ ] Configure chatbot to respond in Hebrew when user writes in Hebrew
 - [ ] Test bilingual chatbot (English + Hebrew)
+
+## Update Price from 1,000 THB to 500 THB
+- [x] Update price in landing page (Home.tsx)
+- [x] Update price in Welcome Kit page
+- [x] Update price in chatbot system prompt and responses
+- [x] Update price in Blog, BlogPost, Downloads pages
+- [x] Update price in chatRouter.ts
+- [x] Update Stripe product price configuration (shared/products.ts)
+- [x] Update bulk pricing (10 packs: 4,000 THB, 20 packs: 7,500 THB)

@@ -37,7 +37,7 @@ export default function Home() {
             </Link>
             <Link href="/welcome-kit">
               <Button size="lg" className="text-base md:text-xl px-8 md:px-12 py-6 md:py-8 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-2xl hover:shadow-green-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
-                ✈️ Welcome Kit (1,000 THB)
+                ✈️ Welcome Kit (500 THB)
               </Button>
             </Link>
           </div>
