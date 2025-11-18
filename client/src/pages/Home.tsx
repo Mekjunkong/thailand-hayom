@@ -30,7 +30,7 @@ export default function Home() {
             שיעורים פשוטים למטיילים ישראלים לתאילנד
           </p>
           <div className="flex justify-center">
-            <Link href="/lessons">
+            <Link href="/interactive-lessons">
               <Button size="lg" className="text-base md:text-xl px-10 md:px-16 py-6 md:py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
                 🎓 Start Learning Free
               </Button>

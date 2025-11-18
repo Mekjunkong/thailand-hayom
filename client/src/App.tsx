@@ -19,6 +19,7 @@ import Admin from "./pages/Admin";
 import Profile from "./pages/Profile";
 import LessonList from "./pages/LessonList";
 import LessonDetail from "./pages/LessonDetail";
+import InteractiveLessons from "./pages/InteractiveLessons";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/profile" component={Profile} />
       <Route path={"/lessons"} component={LessonList} />
       <Route path="/lesson/:id" component={LessonDetail} />
+      <Route path="/interactive-lessons" component={InteractiveLessons} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

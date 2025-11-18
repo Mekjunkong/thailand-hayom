@@ -320,3 +320,14 @@
 - [x] Add "Get Full Version" CTA at the end
 - [x] Update Downloads page to use sample version
 - [x] Keep full 38-page version for paying customers only (email delivery after payment)
+
+## Interactive Web-Based Thai Lessons
+- [x] Design interactive lesson component structure
+- [x] Create lesson content for all 10 modules (50 phrases total, 5 per lesson)
+- [x] Build lesson player with audio pronunciation (Web Speech API)
+- [x] Add animations and visual effects (fade-in, transitions)
+- [x] Implement progress tracking system (local state, progress bar)
+- [x] Add completion badges/rewards (checkmarks, congratulations)
+- [x] Make lessons bilingual (English + Hebrew with RTL support)
+- [x] Ensure mobile responsiveness (responsive design)
+- [x] Add "Next Lesson" flow (sequential unlocking, lesson navigation)
