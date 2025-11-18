@@ -292,3 +292,19 @@
 - [x] Update price in chatRouter.ts
 - [x] Update Stripe product price configuration (shared/products.ts)
 - [x] Update bulk pricing (10 packs: 4,000 THB, 20 packs: 7,500 THB)
+
+## QR Code & Sticker Design for Chabad Houses
+- [x] Generate QR code for website URL
+- [x] Design professional Hebrew sticker with QR code
+- [x] Include Hebrew text and branding
+- [x] Export sticker in print-ready format (1024x1024px PNG)
+
+## Update Price to 20 Shekels & Homepage Redesign
+- [x] Update price from 500 THB to 20 Shekels (₪20) across all pages
+- [x] Update chatbot responses with new pricing
+- [x] Update Stripe product configuration for Shekels (currency: ils)
+- [x] Update bulk pricing in Shekels (10 packs: ₪160, 20 packs: ₪300)
+- [x] Move Welcome Kit promotion to bottom of homepage
+- [x] Reorganize navigation buttons to be cleaner and smaller
+- [x] Remove sales-focused elements from hero section
+- [x] Create more professional, value-first layout

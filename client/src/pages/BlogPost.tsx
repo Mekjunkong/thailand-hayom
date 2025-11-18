@@ -108,7 +108,7 @@ export default function BlogPost() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/welcome-kit">
                 <Button size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700">
-                  ✈️ Get Welcome Kit (500 THB)
+                  ✈️ Get Welcome Kit (₪20)
                 </Button>
               </Link>
               <Link href="/lessons">

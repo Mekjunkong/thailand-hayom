@@ -29,15 +29,10 @@ export default function Home() {
           <p className="text-lg md:text-2xl mb-12 font-light hebrew-text" dir="rtl">
             שיעורים פשוטים למטיילים ישראלים לתאילנד
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center">
             <Link href="/lessons">
-              <Button size="lg" className="text-base md:text-xl px-8 md:px-12 py-6 md:py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
+              <Button size="lg" className="text-base md:text-xl px-10 md:px-16 py-6 md:py-8 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
                 🎓 Start Learning Free
-              </Button>
-            </Link>
-            <Link href="/welcome-kit">
-              <Button size="lg" className="text-base md:text-xl px-8 md:px-12 py-6 md:py-8 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-2xl hover:shadow-green-500/50 transition-all duration-500 hover:scale-105 rounded-full font-semibold">
-                ✈️ Welcome Kit (500 THB)
               </Button>
             </Link>
           </div>
@@ -55,35 +50,25 @@ export default function Home() {
               <span className="font-medium">Mobile Friendly</span>
             </div>
           </div>
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-8 flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
             <Link href="/emergency">
-              <Button variant="outline" size="lg" className="bg-red-500 hover:bg-red-600 text-white border-0 shadow-lg">
-                🆘 Emergency Contacts
+              <Button variant="outline" size="sm" className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm">
+                🆘 Emergency
               </Button>
             </Link>
             <Link href="/blog">
-              <Button variant="outline" size="lg" className="bg-purple-500 hover:bg-purple-600 text-white border-0 shadow-lg">
-                📝 Travel Blog
-              </Button>
-            </Link>
-            <Link href="/progress">
-              <Button variant="outline" size="lg" className="bg-blue-500 hover:bg-blue-600 text-white border-0 shadow-lg">
-                📈 My Progress
+              <Button variant="outline" size="sm" className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm">
+                📝 Blog
               </Button>
             </Link>
             <Link href="/downloads">
-              <Button variant="outline" size="lg" className="bg-indigo-500 hover:bg-indigo-600 text-white border-0 shadow-lg">
+              <Button variant="outline" size="sm" className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm">
                 📥 Downloads
               </Button>
             </Link>
             <Link href="/pronunciation">
-              <Button variant="outline" size="lg" className="bg-pink-500 hover:bg-pink-600 text-white border-0 shadow-lg">
+              <Button variant="outline" size="sm" className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm">
                 🗣️ Pronunciation
-              </Button>
-            </Link>
-            <Link href="/profile">
-              <Button variant="outline" size="lg" className="bg-teal-500 hover:bg-teal-600 text-white border-0 shadow-lg">
-                👤 My Profile
               </Button>
             </Link>
           </div>
@@ -217,6 +202,60 @@ export default function Home() {
               <p className="text-gray-600 leading-relaxed">Thailand is the "Land of Smiles." A friendly smile opens doors and diffuses tension. Never lose your temper or raise your voice in public - it's seen as losing face. Stay patient and polite, even when frustrated.</p>
               <p className="text-gray-800 mt-4 hebrew-text font-semibold text-lg" dir="rtl">חיוך ושמירה על רוגע - אל תאבד עשתונות בפומבי</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Welcome Kit CTA */}
+      <section className="py-16 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-emerald-200">
+            <div className="text-5xl mb-4">✈️</div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Complete Thailand Travel Guide
+            </h2>
+            <p className="text-lg text-gray-700 mb-2">Everything Israeli travelers need to know</p>
+            <p className="text-base text-gray-600 mb-6 hebrew-text" dir="rtl">כל מה שמטיילים ישראלים צריכים לדעת</p>
+            <div className="grid md:grid-cols-2 gap-4 mb-8 text-left">
+              <div className="flex items-start gap-3">
+                <div className="text-green-600 mt-1">✓</div>
+                <div>
+                  <p className="font-semibold text-gray-900">Arrival & Safety Guide</p>
+                  <p className="text-sm text-gray-600">Airport tips, scams to avoid, emergency contacts</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="text-green-600 mt-1">✓</div>
+                <div>
+                  <p className="font-semibold text-gray-900">Transportation & Money</p>
+                  <p className="text-sm text-gray-600">SIM cards, transport rules, money exchange</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="text-green-600 mt-1">✓</div>
+                <div>
+                  <p className="font-semibold text-gray-900">Culture & Etiquette</p>
+                  <p className="text-sm text-gray-600">Temple rules, Thai phrases, local customs</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="text-green-600 mt-1">✓</div>
+                <div>
+                  <p className="font-semibold text-gray-900">Complete Itineraries</p>
+                  <p className="text-sm text-gray-600">Bangkok & Chiang Mai 3-day plans</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-r from-emerald-100 to-teal-100 rounded-2xl p-6 mb-6">
+              <p className="text-4xl font-bold text-emerald-700 mb-2">₪20</p>
+              <p className="text-sm text-gray-700">One-time payment • Lifetime access • 38-page PDF guide</p>
+              <p className="text-xs text-gray-600 mt-1 hebrew-text" dir="rtl">תשלום חד-פעמי • גישה לצמיתות • מדריך PDF בן 38 עמודים</p>
+            </div>
+            <Link href="/welcome-kit">
+              <Button size="lg" className="text-lg px-10 py-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-full font-semibold">
+                📝 Get the Complete Guide
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

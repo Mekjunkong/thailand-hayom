@@ -35,7 +35,7 @@ Your goals:
 8. Give examples of how the pack helps in real travel situations
 
 Product Description:
-The Smart Tourist Pack (500 THB) includes:
+The Smart Tourist Pack (₪20) includes:
 • A friendly AI Travel Concierge available 24/7
 • Our full Tourist Welcome Kit (PDF + website access)
 • Local guidance for food, transport, culture, and daily planning
@@ -258,19 +258,19 @@ export default function AIConcierge() {
 
     // Smart Tourist Pack specific responses
     if (input.includes('smart tourist pack') || input.includes('what') && input.includes('include')) {
-      return `Great question! The **Smart Tourist Pack** (500 THB) is your complete travel companion for Thailand. Here's what you get:\n\n✅ **24/7 AI Travel Concierge** - Ask me anything, anytime\n✅ **Full Tourist Welcome Kit** - PDF guide + website access\n✅ **Local Guidance** - Food, transport, culture, daily planning\n✅ **Thai Phrase Support** - Translation and pronunciation help\n✅ **Safety Tips** - Scam warnings and practical advice\n✅ **Chiang Mai Discounts** - Exclusive recommendations\n✅ **Custom Itineraries** - Based on weather, budget, and your style\n\nIf this is your first time in Thailand, the pack will remove a lot of stress. You'll have clear directions, prices, and local recommendations instantly.\n\n**Ready to get started?** 👉 [Buy Now](/welcome-kit) or chat with us on WhatsApp: +66929894495`;
+      return `Great question! The **Smart Tourist Pack** (₪20) is your complete travel companion for Thailand. Here's what you get:\n\n✅ **24/7 AI Travel Concierge** - Ask me anything, anytime\n✅ **Full Tourist Welcome Kit** - PDF guide + website access\n✅ **Local Guidance** - Food, transport, culture, daily planning\n✅ **Thai Phrase Support** - Translation and pronunciation help\n✅ **Safety Tips** - Scam warnings and practical advice\n✅ **Chiang Mai Discounts** - Exclusive recommendations\n✅ **Custom Itineraries** - Based on weather, budget, and your style\n\nIf this is your first time in Thailand, the pack will remove a lot of stress. You'll have clear directions, prices, and local recommendations instantly.\n\n**Ready to get started?** 👉 [Buy Now](/welcome-kit) or chat with us on WhatsApp: +66929894495`;
     }
 
     if (input.includes('price') || input.includes('cost') || input.includes('how much')) {
-      return `The Smart Tourist Pack is **500 THB** (about $14 USD).\n\nThis one-time payment gives you:\n• Unlimited access to the AI Concierge during your trip\n• All Welcome Kit materials\n• Custom itineraries and daily planning\n• 24/7 support\n\n**For Tour Agents & Hostel Owners:**\n• 10 packs: 4,000 THB (400 THB each)\n• 20 packs: 7,500 THB (375 THB each)\n• White-label branding available\n\nMany travelers use it to plan each day based on weather and mood. It's like having a local friend in your pocket!\n\n**Want to purchase?** Contact us on WhatsApp: +66929894495`;
+      return `The Smart Tourist Pack is **₪20** (about $5.50 USD).\n\nThis one-time payment gives you:\n• Unlimited access to the AI Concierge during your trip\n• All Welcome Kit materials\n• Custom itineraries and daily planning\n• 24/7 support\n\n**For Tour Agents & Hostel Owners:**\n• 10 packs: ₪160 (₪16 each)\n• 20 packs: 7,₪20 (375 THB each)\n• White-label branding available\n\nMany travelers use it to plan each day based on weather and mood. It's like having a local friend in your pocket!\n\n**Want to purchase?** Contact us on WhatsApp: +66929894495`;
     }
 
     if (input.includes('tour agent') || input.includes('hostel') || input.includes('bulk') || input.includes('business')) {
         return `Excellent! We love working with tour agents and hostel owners. Here's what we offer:
 
 📦 **Bulk Pricing:**
-• 10 packs: 4,000 THB (400 THB each)
-• 20 packs: 7,500 THB (375 THB each))\n• Custom packages for larger orders\n\n🎨 **White-Label Option:**\n• Brand the concierge with your logo\n• Integrate with your WhatsApp Business\n• Custom welcome messages\n\n💼 **Benefits for Your Business:**\n• Reduces staffing time for common questions\n• Improves customer satisfaction\n• Provides 24/7 support to your guests\n• Makes your service stand out\n\nTour agents love this because it makes their customers feel supported throughout their trip.\n\n**Ready to discuss?** WhatsApp us: +66929894495 or email: Pasuthunjunkong@gmail.com`;
+• 10 packs: ₪160 (₪16 each)
+• 20 packs: 7,₪20 (375 THB each))\n• Custom packages for larger orders\n\n🎨 **White-Label Option:**\n• Brand the concierge with your logo\n• Integrate with your WhatsApp Business\n• Custom welcome messages\n\n💼 **Benefits for Your Business:**\n• Reduces staffing time for common questions\n• Improves customer satisfaction\n• Provides 24/7 support to your guests\n• Makes your service stand out\n\nTour agents love this because it makes their customers feel supported throughout their trip.\n\n**Ready to discuss?** WhatsApp us: +66929894495 or email: Pasuthunjunkong@gmail.com`;
     }
 
     if (input.includes('buy') || input.includes('purchase') || input.includes('get started')) {
@@ -291,11 +291,11 @@ export default function AIConcierge() {
     }
 
     if (input.includes('safety') || input.includes('scam')) {
-      return `Here are important safety tips for Chiang Mai:\n\n⚠️ **Common Scams to Avoid:**\n• Gem shop scams (don't buy expensive gems)\n• Overpriced tuk-tuks (agree on price first)\n• Fake tour operators (book through hotels)\n\n🏍️ **Motorbike Safety:**\n• Always wear a helmet (500 THB fine)\n• Need International Driving Permit\n• Insurance recommended\n\n📞 **Emergency Numbers:**\n• Tourist Police: 1155\n• Emergency: 191\n• Ambulance: 1669\n\n💡 **Smart Tourist Pack includes:** Complete safety guide, scam warnings, emergency contacts, and 24/7 support. Want to learn more?`;
+      return `Here are important safety tips for Chiang Mai:\n\n⚠️ **Common Scams to Avoid:**\n• Gem shop scams (don't buy expensive gems)\n• Overpriced tuk-tuks (agree on price first)\n• Fake tour operators (book through hotels)\n\n🏍️ **Motorbike Safety:**\n• Always wear a helmet (₪20 fine)\n• Need International Driving Permit\n• Insurance recommended\n\n📞 **Emergency Numbers:**\n• Tourist Police: 1155\n• Emergency: 191\n• Ambulance: 1669\n\n💡 **Smart Tourist Pack includes:** Complete safety guide, scam warnings, emergency contacts, and 24/7 support. Want to learn more?`;
     }
 
     // Default response
-    return `I can help you with:\n\n📍 **Directions & Navigation** - How to get anywhere in Chiang Mai\n🍜 **Food Recommendations** - Best places to eat\n🏛️ **Cultural Tips** - Temple etiquette and Thai customs\n⚠️ **Safety Advice** - Scams to avoid and emergency contacts\n📅 **Itinerary Planning** - Custom trip planning\n🗣️ **Thai Translations** - Learn useful phrases\n\n💡 **About the Smart Tourist Pack (500 THB):**\nGet 24/7 AI support, full Welcome Kit, custom itineraries, and local guidance throughout your trip. It's like having a local friend in your pocket!\n\nWhat would you like to know about "${userInput}"?\n\n**Ready to explore?** [Learn More](/welcome-kit) or WhatsApp: +66929894495`;
+    return `I can help you with:\n\n📍 **Directions & Navigation** - How to get anywhere in Chiang Mai\n🍜 **Food Recommendations** - Best places to eat\n🏛️ **Cultural Tips** - Temple etiquette and Thai customs\n⚠️ **Safety Advice** - Scams to avoid and emergency contacts\n📅 **Itinerary Planning** - Custom trip planning\n🗣️ **Thai Translations** - Learn useful phrases\n\n💡 **About the Smart Tourist Pack (₪20):**\nGet 24/7 AI support, full Welcome Kit, custom itineraries, and local guidance throughout your trip. It's like having a local friend in your pocket!\n\nWhat would you like to know about "${userInput}"?\n\n**Ready to explore?** [Learn More](/welcome-kit) or WhatsApp: +66929894495`;
   };
 
   const clearChat = () => {
@@ -453,7 +453,7 @@ export default function AIConcierge() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              Smart Tourist Pack • 500 THB
+              Smart Tourist Pack • ₪20
             </p>
           </div>
         </Card>
