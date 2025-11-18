@@ -78,3 +78,20 @@ export type UserProgress = typeof userProgress.$inferSelect;
 export type InsertUserProgress = typeof userProgress.$inferInsert;
 export type BookmarkedPhrase = typeof bookmarkedPhrases.$inferSelect;
 export type InsertBookmarkedPhrase = typeof bookmarkedPhrases.$inferInsert;
+
+export const quizPerformance = mysqlTable("quizPerformance", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id).notNull(),
+  phraseId: int("phraseId").notNull(),
+  correct: int("correct").default(0).notNull(),
+  incorrect: int("incorrect").default(0).notNull(),
+  lastReviewed: timestamp("lastReviewed").defaultNow().notNull(),
+  nextReview: timestamp("nextReview").defaultNow().notNull(),
+  easinessFactor: int("easinessFactor").default(250).notNull(), // SM-2 algorithm: 2.5 * 100
+  interval: int("interval").default(1).notNull(), // days until next review
+  repetitions: int("repetitions").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type QuizPerformance = typeof quizPerformance.$inferSelect;
+export type InsertQuizPerformance = typeof quizPerformance.$inferInsert;

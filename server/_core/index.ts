@@ -7,6 +7,9 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import progressRouter from "../progressRouter";
+import phraseCardsRouter from "../phraseCardsRouter";
+import cookieParser from "cookie-parser";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -33,8 +36,13 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  app.use(cookieParser());
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  // Progress API
+  app.use(progressRouter);
+  // Phrase Cards API
+  app.use(phraseCardsRouter);
   // tRPC API
   app.use(
     "/api/trpc",

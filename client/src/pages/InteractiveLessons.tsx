@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -6,10 +6,58 @@ import { CheckCircle2, Lock, Play } from "lucide-react";
 import InteractiveLessonPlayer from "@/components/InteractiveLessonPlayer";
 import { lessonsData } from "@/data/lessonsData";
 import { Link } from "wouter";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function InteractiveLessons() {
+  const { isAuthenticated } = useAuth();
   const [selectedLessonId, setSelectedLessonId] = useState<number | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<number>>(new Set());
+  const [loading, setLoading] = useState(true);
+
+  // Load progress from database on mount
+  useEffect(() => {
+    const loadProgress = async () => {
+      if (!isAuthenticated) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/progress");
+        if (response.ok) {
+          const data = await response.json();
+          const completed = new Set<number>();
+          data.progress.forEach((p: any) => {
+            if (p.completed === 1) {
+              completed.add(p.lessonId);
+            }
+          });
+          setCompletedLessons(completed);
+        }
+      } catch (error) {
+        console.error("Failed to load progress:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProgress();
+  }, [isAuthenticated]);
+
+  // Save progress to database
+  const saveProgress = async (lessonId: number, completed: number) => {
+    if (!isAuthenticated) return;
+
+    try {
+      await fetch("/api/progress/lesson", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lessonId, completed }),
+      });
+    } catch (error) {
+      console.error("Failed to save progress:", error);
+    }
+  };
 
   const selectedLesson = lessonsData.find(l => l.id === selectedLessonId);
   const totalProgress = (completedLessons.size / lessonsData.length) * 100;
@@ -19,6 +67,8 @@ export default function InteractiveLessons() {
       const newCompleted = new Set(completedLessons);
       newCompleted.add(selectedLessonId);
       setCompletedLessons(newCompleted);
+      // Save to database
+      saveProgress(selectedLessonId, 1);
     }
   };
 
@@ -80,6 +130,23 @@ export default function InteractiveLessons() {
                   </span>
                 </div>
                 <Progress value={totalProgress} className="h-4" />
+                <div className="flex justify-center gap-4 mt-4">
+                  <Button
+                    onClick={() => window.open('/api/phrase-cards/generate', '_blank')}
+                    variant="outline"
+                    className="bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600"
+                  >
+                    📥 Download Phrase Cards
+                  </Button>
+                  <Link href="/quiz">
+                    <Button
+                      variant="outline"
+                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
+                    >
+                      🧠 Practice Quiz
+                    </Button>
+                  </Link>
+                </div>
                 {completedLessons.size === lessonsData.length && (
                   <div className="text-center p-4 bg-green-100 rounded-lg border-2 border-green-400">
                     <CheckCircle2 className="inline-block mr-2 h-6 w-6 text-green-600" />

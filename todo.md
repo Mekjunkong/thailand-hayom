@@ -331,3 +331,24 @@
 - [x] Make lessons bilingual (English + Hebrew with RTL support)
 - [x] Ensure mobile responsiveness (responsive design)
 - [x] Add "Next Lesson" flow (sequential unlocking, lesson navigation)
+
+## Lesson Progress Persistence
+- [x] Create database schema for user lesson progress (userProgress table exists)
+- [x] Create API endpoints for saving/loading progress (progressRouter created)
+- [x] Update InteractiveLessons to save progress to database
+- [x] Load user progress on page load
+- [x] Sync progress across devices (via database)
+
+## Downloadable Phrase Cards
+- [x] Create PDF generator for phrase flashcards (phraseCardsRouter)
+- [x] Design printable card layout (front: Thai, back: English/Hebrew)
+- [x] Add download button to lessons page
+- [x] Generate all 50 phrases as printable cards
+- [x] Make cards travel-friendly (2 per page, easy to cut)
+## Spaced Repetition Quiz System
+- [x] Create quiz component with flashcard-style interface
+- [x] Implement spaced repetition algorithm (SM-2)
+- [x] Track user performance on each phrase (quizPerformance table)
+- [x] Schedule phrases for review based on performance
+- [x] Add quiz mode to lessons page (button added)
+- [x] Show daily review count and statsprogress

@@ -15,6 +15,13 @@
       "when": 1763275017762,
       "tag": "0001_kind_shadowcat",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1763439885548,
+      "tag": "0002_special_veda",
+      "breakpoints": true
     }
   ]
 }
