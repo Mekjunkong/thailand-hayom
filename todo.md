@@ -313,3 +313,10 @@
 - [x] Fix download button functionality on Downloads page (Welcome Kit now downloads)
 - [x] Create Canva design prompts for downloadable materials
 - [x] Include prompts for phrase cards, emergency contacts, cultural tips, food guide, transport guide, and more
+
+## Create Free Sample PDF
+- [x] Generate 6-page free sample version of Welcome Kit
+- [x] Include: Cover, Table of Contents, 3 sample modules (Arrival, Scams, SIM)
+- [x] Add "Get Full Version" CTA at the end
+- [x] Update Downloads page to use sample version
+- [x] Keep full 38-page version for paying customers only (email delivery after payment)

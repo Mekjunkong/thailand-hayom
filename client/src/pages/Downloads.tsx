@@ -6,17 +6,17 @@ import { toast } from "sonner";
 
 export default function Downloads() {
   const handleDownload = (type: string, filename?: string) => {
-    if (type === "Welcome Kit - Complete Guide" && filename) {
-      // Download the actual Welcome Kit PDF
+    if (filename) {
+      // Download the PDF
       const link = document.createElement('a');
       link.href = filename;
-      link.download = 'Thailand_Smart_Tourist_Pack_PREMIUM.pdf';
+      link.download = filename.split('/').pop() || 'download.pdf';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       toast.success(`${type} downloaded successfully!`);
     } else {
-      toast.info(`${type} will be available soon. For now, get the Complete Welcome Kit!`);
+      toast.info(`${type} will be available soon. For now, check out the FREE SAMPLE!`);
     }
   };
 
@@ -33,14 +33,14 @@ export default function Downloads() {
     },
     {
       id: 2,
-      title: "Welcome Kit - Complete Guide",
-      titleHebrew: "ערכת קבלה - מדריך מלא",
-      description: "All 6 modules: Arrival, Scams, SIM, Transport, Negotiation, Temples",
-      descriptionHebrew: "כל 6 המודולים: הגעה, הונאות, סים, תחבורה, מיקוח, מקדשים",
+      title: "Welcome Kit - FREE SAMPLE",
+      titleHebrew: "ערכת קבלה - דוגמה חינמית",
+      description: "3 sample modules: Arrival, Scams, SIM Card (Full version has 15 modules)",
+      descriptionHebrew: "3 מודולים לדוגמה: הגעה, הונאות, כרטיס SIM (גרסה מלאה כוללת 15 מודולים)",
       icon: <Book className="w-12 h-12 text-amber-600" />,
-      pages: "24 pages",
-      type: "welcome-kit",
-      downloadUrl: "/Thailand_Smart_Tourist_Pack_PREMIUM.pdf"
+      pages: "6 pages (Sample)",
+      type: "welcome-kit-sample",
+      downloadUrl: "/Thailand_Smart_Tourist_Pack_FREE_SAMPLE.pdf"
     },
     {
       id: 3,
