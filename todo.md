@@ -352,3 +352,7 @@
 - [x] Schedule phrases for review based on performance
 - [x] Add quiz mode to lessons page (button added)
 - [x] Show daily review count and statsprogress
+
+## Update Lesson Links
+- [x] Update "View All Lessons" button on homepage to link to /interactive-lessons
+- [ ] Remove old /lessons route if no longer needed (kept for backward compatibility)

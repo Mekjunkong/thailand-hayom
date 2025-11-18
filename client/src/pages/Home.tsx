@@ -137,7 +137,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-16">
-            <Link href="/lessons">
+            <Link href="/interactive-lessons">
               <Button size="lg" className="text-base md:text-lg px-6 md:px-10 py-5 md:py-7 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-full font-semibold">
                 📚 View All Lessons / צפה בכל השיעורים
               </Button>
