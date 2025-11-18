@@ -308,3 +308,8 @@
 - [x] Reorganize navigation buttons to be cleaner and smaller
 - [x] Remove sales-focused elements from hero section
 - [x] Create more professional, value-first layout
+
+## Fix Downloads & Create Canva Prompts
+- [x] Fix download button functionality on Downloads page (Welcome Kit now downloads)
+- [x] Create Canva design prompts for downloadable materials
+- [x] Include prompts for phrase cards, emergency contacts, cultural tips, food guide, transport guide, and more

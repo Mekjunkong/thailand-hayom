@@ -5,9 +5,19 @@ import { Download, FileText, Book, Map } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Downloads() {
-  const handleDownload = (type: string) => {
-    toast.info(`${type} PDF will be generated and downloaded`);
-    // In a real implementation, this would generate and download the PDF
+  const handleDownload = (type: string, filename?: string) => {
+    if (type === "Welcome Kit - Complete Guide" && filename) {
+      // Download the actual Welcome Kit PDF
+      const link = document.createElement('a');
+      link.href = filename;
+      link.download = 'Thailand_Smart_Tourist_Pack_PREMIUM.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success(`${type} downloaded successfully!`);
+    } else {
+      toast.info(`${type} will be available soon. For now, get the Complete Welcome Kit!`);
+    }
   };
 
   const resources = [
@@ -29,7 +39,8 @@ export default function Downloads() {
       descriptionHebrew: "כל 6 המודולים: הגעה, הונאות, סים, תחבורה, מיקוח, מקדשים",
       icon: <Book className="w-12 h-12 text-amber-600" />,
       pages: "24 pages",
-      type: "welcome-kit"
+      type: "welcome-kit",
+      downloadUrl: "/Thailand_Smart_Tourist_Pack_PREMIUM.pdf"
     },
     {
       id: 3,
@@ -135,7 +146,7 @@ export default function Downloads() {
 
                   <Button 
                     className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700"
-                    onClick={() => handleDownload(resource.title)}
+                    onClick={() => handleDownload(resource.title, (resource as any).downloadUrl)}
                   >
                     <Download className="mr-2 h-4 w-4" />
                     Download PDF
