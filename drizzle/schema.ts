@@ -95,3 +95,59 @@ export const quizPerformance = mysqlTable("quizPerformance", {
 
 export type QuizPerformance = typeof quizPerformance.$inferSelect;
 export type InsertQuizPerformance = typeof quizPerformance.$inferInsert;
+
+// Forum tables
+export const forumCategories = mysqlTable("forumCategories", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  nameHe: varchar("nameHe", { length: 100 }),
+  description: text("description"),
+  descriptionHe: text("descriptionHe"),
+  icon: varchar("icon", { length: 50 }),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export const forumPosts = mysqlTable("forumPosts", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id).notNull(),
+  categoryId: int("categoryId").references(() => forumCategories.id).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  titleHe: varchar("titleHe", { length: 255 }),
+  content: text("content").notNull(),
+  contentHe: text("contentHe"),
+  language: varchar("language", { length: 10 }).default("en"),
+  likes: int("likes").default(0),
+  views: int("views").default(0),
+  isPinned: int("isPinned").default(0),
+  isLocked: int("isLocked").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export const forumComments = mysqlTable("forumComments", {
+  id: int("id").autoincrement().primaryKey(),
+  postId: int("postId").references(() => forumPosts.id).notNull(),
+  userId: int("userId").references(() => users.id).notNull(),
+  content: text("content").notNull(),
+  likes: int("likes").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export const forumLikes = mysqlTable("forumLikes", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id).notNull(),
+  postId: int("postId").references(() => forumPosts.id),
+  commentId: int("commentId").references(() => forumComments.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ForumCategory = typeof forumCategories.$inferSelect;
+export type InsertForumCategory = typeof forumCategories.$inferInsert;
+export type ForumPost = typeof forumPosts.$inferSelect;
+export type InsertForumPost = typeof forumPosts.$inferInsert;
+export type ForumComment = typeof forumComments.$inferSelect;
+export type InsertForumComment = typeof forumComments.$inferInsert;
+export type ForumLike = typeof forumLikes.$inferSelect;
+export type InsertForumLike = typeof forumLikes.$inferInsert;

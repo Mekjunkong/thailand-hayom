@@ -21,6 +21,8 @@ import LessonList from "./pages/LessonList";
 import LessonDetail from "./pages/LessonDetail";
 import InteractiveLessons from "./pages/InteractiveLessons";
 import Quiz from "./pages/Quiz";
+import Forum from "./pages/Forum";
+import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -41,6 +43,7 @@ function Router() {
       <Route path="/lesson/:id" component={LessonDetail} />
       <Route path="/interactive-lessons" component={InteractiveLessons} />
       <Route path="/quiz" component={Quiz} />
+      <Route path="/forum" component={Forum} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -63,6 +66,7 @@ function App() {
         <ProgressProvider>
           <TooltipProvider>
             <Toaster />
+            <ScrollToTop />
             <Router />
             <AIConcierge />
           </TooltipProvider>

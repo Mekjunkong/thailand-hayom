@@ -22,6 +22,13 @@
       "when": 1763439885548,
       "tag": "0002_special_veda",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1763458939306,
+      "tag": "0003_whole_boom_boom",
+      "breakpoints": true
     }
   ]
 }

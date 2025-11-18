@@ -356,3 +356,19 @@
 ## Update Lesson Links
 - [x] Update "View All Lessons" button on homepage to link to /interactive-lessons
 - [ ] Remove old /lessons route if no longer needed (kept for backward compatibility)
+
+## Fix Page Scroll on Navigation
+- [x] Add scroll-to-top behavior when navigating between pages (ScrollToTop component)
+- [x] Ensure all page transitions start at the top
+
+## Community Forum
+- [x] Create database schema for forum posts, comments, categories
+- [x] Build forum homepage with post list and categories
+- [x] Seed initial forum categories (8 categories)
+- [x] Add Forum link to homepage navigation
+- [x] Create forum API backend (forumRouter)
+- [x] Implement upvote/like system
+- [x] Make forum bilingual (English + Hebrew)
+- [ ] Create post detail page with comments
+- [ ] Add create post functionality
+- [ ] Add comment functionality

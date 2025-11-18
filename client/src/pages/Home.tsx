@@ -71,6 +71,11 @@ export default function Home() {
                 🗣️ Pronunciation
               </Button>
             </Link>
+            <Link href="/forum">
+              <Button variant="outline" size="sm" className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm">
+                💬 Forum
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
