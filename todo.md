@@ -369,6 +369,10 @@
 - [x] Create forum API backend (forumRouter)
 - [x] Implement upvote/like system
 - [x] Make forum bilingual (English + Hebrew)
-- [ ] Create post detail page with comments
-- [ ] Add create post functionality
-- [ ] Add comment functionality
+- [x] Create post detail page with comments section
+- [x] Add create post form for authenticated users
+- [x] Add comment functionality with threading
+- [x] Create user profile pages with reputation display
+- [x] Show user's posts and comments on profile
+- [x] Implement reputation points system (+10 post, +5 comment, +2 like)
+- [x] Add achievement badges for forum activity (4 badges)

@@ -162,6 +162,16 @@ router.post("/api/forum/posts", async (req: Request, res: Response) => {
       })
       .execute();
 
+    // Update user stats: +10 points for creating a post
+    await db
+      .update(users)
+      .set({
+        reputationPoints: sql`${users.reputationPoints} + 10`,
+        postCount: sql`${users.postCount} + 1`,
+      })
+      .where(eq(users.id, user.id))
+      .execute();
+
     res.json({ success: true });
   } catch (error) {
     console.error("[Forum API] Error creating post:", error);
@@ -192,6 +202,16 @@ router.post("/api/forum/comments", async (req: Request, res: Response) => {
       })
       .execute();
 
+    // Update user stats: +5 points for creating a comment
+    await db
+      .update(users)
+      .set({
+        reputationPoints: sql`${users.reputationPoints} + 5`,
+        commentCount: sql`${users.commentCount} + 1`,
+      })
+      .where(eq(users.id, user.id))
+      .execute();
+
     res.json({ success: true });
   } catch (error) {
     console.error("[Forum API] Error creating comment:", error);
@@ -220,6 +240,10 @@ router.post("/api/forum/posts/:id/like", async (req: Request, res: Response) => 
       .where(and(eq(forumLikes.userId, user.id), eq(forumLikes.postId, Number(id))))
       .execute().then(r => r[0]);
 
+    // Get post author
+    const post = await db.select().from(forumPosts).where(eq(forumPosts.id, Number(id))).execute().then(r => r[0]);
+    if (!post) return res.status(404).json({ error: "Post not found" });
+
     if (existing) {
       // Unlike
       await db.delete(forumLikes).where(eq(forumLikes.id, existing.id)).execute();
@@ -228,6 +252,14 @@ router.post("/api/forum/posts/:id/like", async (req: Request, res: Response) => 
         .set({ likes: sql`${forumPosts.likes} - 1` })
         .where(eq(forumPosts.id, Number(id)))
         .execute();
+      
+      // Remove reputation point from post author
+      await db
+        .update(users)
+        .set({ reputationPoints: sql`${users.reputationPoints} - 2` })
+        .where(eq(users.id, post.userId))
+        .execute();
+      
       res.json({ liked: false });
     } else {
       // Like
@@ -237,11 +269,131 @@ router.post("/api/forum/posts/:id/like", async (req: Request, res: Response) => 
         .set({ likes: sql`${forumPosts.likes} + 1` })
         .where(eq(forumPosts.id, Number(id)))
         .execute();
+      
+      // Give reputation point to post author (+2 points per like)
+      await db
+        .update(users)
+        .set({ reputationPoints: sql`${users.reputationPoints} + 2` })
+        .where(eq(users.id, post.userId))
+        .execute();
+      
       res.json({ liked: true });
     }
   } catch (error) {
     console.error("[Forum API] Error toggling like:", error);
     res.status(500).json({ error: "Failed to toggle like" });
+  }
+});
+
+// Get user profile
+router.get("/api/forum/users/:id", async (req: Request, res: Response) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const db = await getDb();
+    if (!db) return res.status(503).json({ error: "Database not available" });
+    
+    const user = await db.select().from(users).where(eq(users.id, userId)).execute().then(r => r[0]);
+    
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({
+      id: user.id,
+      name: user.name,
+      reputationPoints: user.reputationPoints || 0,
+      postCount: user.postCount || 0,
+      commentCount: user.commentCount || 0,
+      createdAt: user.createdAt,
+    });
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({ error: "Failed to fetch user profile" });
+  }
+});
+
+// Get user posts
+router.get("/api/forum/users/:id/posts", async (req: Request, res: Response) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const db = await getDb();
+    if (!db) return res.status(503).json({ error: "Database not available" });
+    
+    const userPosts = await db
+      .select({
+        id: forumPosts.id,
+        title: forumPosts.title,
+        categoryId: forumPosts.categoryId,
+        likes: forumPosts.likes,
+        views: forumPosts.views,
+        createdAt: forumPosts.createdAt,
+      })
+      .from(forumPosts)
+      .where(eq(forumPosts.userId, userId))
+      .orderBy(desc(forumPosts.createdAt))
+      .execute();
+
+    const postsWithCategories = await Promise.all(
+      userPosts.map(async (post) => {
+        const category = await db
+          .select({ name: forumCategories.name })
+          .from(forumCategories)
+          .where(eq(forumCategories.id, post.categoryId))
+          .execute()
+          .then(r => r[0]);
+        return {
+          ...post,
+          categoryName: category?.name || "Unknown",
+        };
+      })
+    );
+
+    res.json(postsWithCategories);
+  } catch (error) {
+    console.error("Error fetching user posts:", error);
+    res.status(500).json({ error: "Failed to fetch user posts" });
+  }
+});
+
+// Get user comments
+router.get("/api/forum/users/:id/comments", async (req: Request, res: Response) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const db = await getDb();
+    if (!db) return res.status(503).json({ error: "Database not available" });
+    
+    const userComments = await db
+      .select({
+        id: forumComments.id,
+        content: forumComments.content,
+        postId: forumComments.postId,
+        likes: forumComments.likes,
+        createdAt: forumComments.createdAt,
+      })
+      .from(forumComments)
+      .where(eq(forumComments.userId, userId))
+      .orderBy(desc(forumComments.createdAt))
+      .execute();
+
+    const commentsWithPosts = await Promise.all(
+      userComments.map(async (comment) => {
+        const post = await db
+          .select({ title: forumPosts.title })
+          .from(forumPosts)
+          .where(eq(forumPosts.id, comment.postId))
+          .execute()
+          .then(r => r[0]);
+        return {
+          ...comment,
+          postTitle: post?.title || "Unknown Post",
+        };
+      })
+    );
+
+    res.json(commentsWithPosts);
+  } catch (error) {
+    console.error("Error fetching user comments:", error);
+    res.status(500).json({ error: "Failed to fetch user comments" });
   }
 });
 

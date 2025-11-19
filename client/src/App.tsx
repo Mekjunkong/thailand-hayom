@@ -22,6 +22,9 @@ import LessonDetail from "./pages/LessonDetail";
 import InteractiveLessons from "./pages/InteractiveLessons";
 import Quiz from "./pages/Quiz";
 import Forum from "./pages/Forum";
+import ForumPost from "./pages/ForumPost";
+import CreateForumPost from "./pages/CreateForumPost";
+import UserProfile from "./pages/UserProfile";
 import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
@@ -44,6 +47,9 @@ function Router() {
       <Route path="/interactive-lessons" component={InteractiveLessons} />
       <Route path="/quiz" component={Quiz} />
       <Route path="/forum" component={Forum} />
+      <Route path="/forum/new" component={CreateForumPost} />
+      <Route path="/forum/post/:id" component={ForumPost} />
+      <Route path="/forum/user/:id" component={UserProfile} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
