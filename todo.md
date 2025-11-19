@@ -376,3 +376,11 @@
 - [x] Show user's posts and comments on profile
 - [x] Implement reputation points system (+10 post, +5 comment, +2 like)
 - [x] Add achievement badges for forum activity (4 badges)
+
+## Remove Forum Feature
+- [x] Remove Forum link from homepage navigation
+- [x] Remove forum routes from App.tsx
+- [x] Remove Forum, ForumPost, CreatePost, UserProfile page components
+- [x] Keep database schema for potential future use (schema preserved in db/schema.ts)
+
+## Update Todo Status
