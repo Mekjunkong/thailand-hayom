@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -23,6 +23,9 @@ export interface Lesson {
   icon: string;
   phrases: Phrase[];
   completed?: boolean;
+  introText?: string;
+  introTextHebrew?: string;
+  backgroundMusicUrl?: string;
 }
 
 interface InteractiveLessonPlayerProps {
@@ -42,15 +45,73 @@ export default function InteractiveLessonPlayer({
   const [completedPhrases, setCompletedPhrases] = useState<Set<number>>(new Set());
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
+  const [bgMusicEnabled, setBgMusicEnabled] = useState(false);
+  const [bgMusicVolume, setBgMusicVolume] = useState(0.3);
+  const [showIntro, setShowIntro] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const currentPhrase = lesson.phrases[currentPhraseIndex];
   const progress = (completedPhrases.size / lesson.phrases.length) * 100;
+
+  // Initialize background music
+  useEffect(() => {
+    if (lesson.backgroundMusicUrl && !audioRef.current) {
+      audioRef.current = new Audio(lesson.backgroundMusicUrl);
+      audioRef.current.loop = true;
+      audioRef.current.volume = bgMusicVolume;
+    }
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [lesson.backgroundMusicUrl]);
+
+  // Control background music
+  useEffect(() => {
+    if (audioRef.current) {
+      if (bgMusicEnabled) {
+        audioRef.current.play().catch((err: Error) => console.log("Audio play failed:", err));
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [bgMusicEnabled]);
+
+  // Update volume
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = bgMusicVolume;
+    }
+  }, [bgMusicVolume]);
 
   // Auto-play pronunciation when phrase changes
   useEffect(() => {
     setShowTranslation(false);
     setIsPlaying(false);
   }, [currentPhraseIndex]);
+
+  const playIntroAudio = (language: 'en' | 'he') => {
+    const text = language === 'en' ? lesson.introText : lesson.introTextHebrew;
+    if (!text) return;
+
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = language === 'en' ? 'en-US' : 'he-IL';
+      utterance.rate = 0.9;
+      utterance.pitch = 1.0;
+      
+      utterance.onend = () => {
+        console.log("Intro audio finished");
+      };
+      
+      window.speechSynthesis.speak(utterance);
+    } else {
+      toast.info("Audio not supported on this device.");
+    }
+  };
 
   const playPronunciation = () => {
     setIsPlaying(true);
@@ -113,6 +174,64 @@ export default function InteractiveLessonPlayer({
         <h1 className="text-4xl font-bold text-gray-900">{lesson.title}</h1>
         <p className="text-2xl text-gray-600 hebrew-text" dir="rtl">{lesson.titleHebrew}</p>
       </div>
+
+      {/* Lesson Introduction Modal */}
+      {showIntro && lesson.introText && (
+        <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-300">
+          <CardContent className="p-6 space-y-4">
+            <div className="flex justify-between items-start">
+              <h3 className="text-xl font-bold text-gray-900">📚 Lesson Introduction</h3>
+              <Button variant="ghost" size="sm" onClick={() => setShowIntro(false)}>✕</Button>
+            </div>
+            <p className="text-gray-700 leading-relaxed">{lesson.introText}</p>
+            <p className="text-gray-700 leading-relaxed hebrew-text" dir="rtl">{lesson.introTextHebrew}</p>
+            <div className="flex gap-3 flex-wrap">
+              <Button onClick={() => playIntroAudio('en')} variant="outline" size="sm">
+                🔊 Listen in English
+              </Button>
+              <Button onClick={() => playIntroAudio('he')} variant="outline" size="sm">
+                🔊 האזן בעברית
+              </Button>
+              <Button onClick={() => setShowIntro(false)} variant="default" size="sm">
+                Start Lesson →
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Audio Controls */}
+      {lesson.backgroundMusicUrl && (
+        <Card className="bg-amber-50 border-amber-200">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <Button
+                  onClick={() => setBgMusicEnabled(!bgMusicEnabled)}
+                  variant={bgMusicEnabled ? "default" : "outline"}
+                  size="sm"
+                >
+                  {bgMusicEnabled ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
+                  Background Music
+                </Button>
+                <span className="text-sm text-gray-600">🎵</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-600">Volume:</span>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  value={bgMusicVolume}
+                  onChange={(e) => setBgMusicVolume(parseFloat(e.target.value))}
+                  className="w-24"
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Progress Bar */}
       <Card>

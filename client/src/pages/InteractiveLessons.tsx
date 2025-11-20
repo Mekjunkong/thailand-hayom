@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { CheckCircle2, Lock, Play } from "lucide-react";
 import InteractiveLessonPlayer from "@/components/InteractiveLessonPlayer";
 import { lessonsData } from "@/data/lessonsData";
+import { addAudioToLessons } from "@/data/lessonsDataWithAudio";
 import { Link } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 
@@ -59,7 +60,8 @@ export default function InteractiveLessons() {
     }
   };
 
-  const selectedLesson = lessonsData.find(l => l.id === selectedLessonId);
+  const lessonsWithAudio = addAudioToLessons(lessonsData);
+  const selectedLesson = lessonsWithAudio.find(l => l.id === selectedLessonId);
   const totalProgress = (completedLessons.size / lessonsData.length) * 100;
 
   const handleLessonComplete = () => {

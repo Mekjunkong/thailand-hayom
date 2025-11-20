@@ -384,3 +384,14 @@
 - [x] Keep database schema for potential future use (schema preserved in db/schema.ts)
 
 ## Update Todo Status
+
+## Audio Enhancements for Interactive Lessons
+- [x] Add background music URLs for each lesson (royalty-free tracks)
+- [x] Create lesson introduction text for text-to-speech in English
+- [x] Create lesson introduction text for text-to-speech in Hebrew
+- [x] Keep Web Speech API for Thai pronunciation (works well)
+- [x] Add background music player with toggle and volume control
+- [x] Add intro modal with text-to-speech in English and Hebrew
+- [x] Keep existing Web Speech API for Thai (no replacement needed)
+- [x] Add audio controls (background music toggle, volume slider)
+- [ ] Test all audio playback functionality
