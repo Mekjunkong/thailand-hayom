@@ -384,3 +384,9 @@
 - [x] Keep database schema for potential future use (schema preserved in db/schema.ts)
 
 ## Update Todo Status
+
+## Simplified Audio Fix
+- [ ] Fix server startup issue (remove forum router properly)
+- [ ] Test Web Speech API pronunciation in lessons
+- [ ] Remove complex downloadable audio features
+- [ ] Focus on core lesson audio functionality
