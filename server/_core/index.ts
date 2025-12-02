@@ -9,7 +9,6 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import progressRouter from "../progressRouter";
 import phraseCardsRouter from "../phraseCardsRouter";
-import forumRouter from "../forumRouter";
 import cookieParser from "cookie-parser";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -44,8 +43,6 @@ async function startServer() {
   app.use(progressRouter);
   // Phrase Cards API
   app.use(phraseCardsRouter);
-  // Forum API
-  app.use(forumRouter);
   // tRPC API
   app.use(
     "/api/trpc",
