@@ -44,19 +44,18 @@ export const lessonIntros = {
   }
 };
 
-// Background music URLs - temporarily disabled due to CORS/accessibility issues
-// Will be replaced with generated audio files
-export const backgroundMusicUrls: Record<number, string | undefined> = {
-  1: undefined,
-  2: undefined,
-  3: undefined,
-  4: undefined,
-  5: undefined,
-  6: undefined,
-  7: undefined,
-  8: undefined,
-  9: undefined,
-  10: undefined
+// Royalty-free background music URLs (using ambient/relaxing tracks)
+export const backgroundMusicUrls = {
+  1: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3", // Calm ambient
+  2: "https://assets.mixkit.co/music/preview/mixkit-dreaming-big-31.mp3", // Upbeat learning
+  3: "https://assets.mixkit.co/music/preview/mixkit-a-very-happy-christmas-897.mp3", // Cheerful
+  4: "https://assets.mixkit.co/music/preview/mixkit-games-worldbeat-466.mp3", // Market vibes
+  5: "https://assets.mixkit.co/music/preview/mixkit-hip-hop-02-738.mp3", // Travel energy
+  6: "https://assets.mixkit.co/music/preview/mixkit-sleepy-cat-135.mp3", // Relaxing hotel
+  7: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3", // Calm focus
+  8: "https://assets.mixkit.co/music/preview/mixkit-meditation-bell-sound-514.mp3", // Temple atmosphere
+  9: "https://assets.mixkit.co/music/preview/mixkit-dreaming-big-31.mp3", // Practice energy
+  10: "https://assets.mixkit.co/music/preview/mixkit-games-worldbeat-466.mp3" // Review celebration
 };
 
 export function addAudioToLessons(lessons: Lesson[]): Lesson[] {
@@ -64,6 +63,6 @@ export function addAudioToLessons(lessons: Lesson[]): Lesson[] {
     ...lesson,
     introText: lessonIntros[lesson.id as keyof typeof lessonIntros]?.english,
     introTextHebrew: lessonIntros[lesson.id as keyof typeof lessonIntros]?.hebrew,
-    backgroundMusicUrl: backgroundMusicUrls[lesson.id as keyof typeof backgroundMusicUrls] || undefined
+    backgroundMusicUrl: backgroundMusicUrls[lesson.id as keyof typeof backgroundMusicUrls]
   }));
 }
