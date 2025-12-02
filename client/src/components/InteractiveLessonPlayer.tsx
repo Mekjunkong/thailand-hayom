@@ -42,9 +42,34 @@ export default function InteractiveLessonPlayer({
   const [completedPhrases, setCompletedPhrases] = useState<Set<number>>(new Set());
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
+  const [voicesLoaded, setVoicesLoaded] = useState(false);
 
   const currentPhrase = lesson.phrases[currentPhraseIndex];
   const progress = (completedPhrases.size / lesson.phrases.length) * 100;
+
+  // Load voices on mount
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        setVoicesLoaded(true);
+      }
+    };
+
+    // Voices might already be loaded
+    loadVoices();
+
+    // Or they might load asynchronously
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    return () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = null;
+      }
+    };
+  }, []);
 
   // Auto-play pronunciation when phrase changes
   useEffect(() => {
@@ -57,24 +82,54 @@ export default function InteractiveLessonPlayer({
     
     // Use Web Speech API for Thai pronunciation
     if ('speechSynthesis' in window) {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+
       const utterance = new SpeechSynthesisUtterance(currentPhrase.thai);
-      utterance.lang = 'th-TH';
+      
+      // Try to find a Thai voice
+      const voices = window.speechSynthesis.getVoices();
+      const thaiVoice = voices.find(v => v.lang.startsWith('th'));
+      
+      if (thaiVoice) {
+        utterance.voice = thaiVoice;
+        utterance.lang = 'th-TH';
+      } else {
+        // Fallback: use default voice with Thai language setting
+        utterance.lang = 'th-TH';
+        console.log('No Thai voice found, using default with th-TH lang');
+      }
+      
       utterance.rate = 0.7; // Slower for learning
       utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+      
+      utterance.onstart = () => {
+        console.log('Speech started');
+      };
       
       utterance.onend = () => {
+        console.log('Speech ended');
         setIsPlaying(false);
       };
       
-      utterance.onerror = () => {
+      utterance.onerror = (event) => {
+        console.error('Speech error:', event);
         setIsPlaying(false);
-        toast.error("Audio not available. Please read the phonetic pronunciation.");
+        toast.error("Audio playback failed. Please read the phonetic pronunciation: " + currentPhrase.phonetic);
       };
       
-      window.speechSynthesis.speak(utterance);
+      try {
+        window.speechSynthesis.speak(utterance);
+        toast.success("🔊 Playing pronunciation...");
+      } catch (error) {
+        console.error('Speech synthesis error:', error);
+        setIsPlaying(false);
+        toast.error("Audio not available. Please read: " + currentPhrase.phonetic);
+      }
     } else {
       setIsPlaying(false);
-      toast.info("Audio not supported. Please read the phonetic pronunciation.");
+      toast.info("Audio not supported in this browser. Please read: " + currentPhrase.phonetic);
     }
   };
 

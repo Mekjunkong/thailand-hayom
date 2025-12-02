@@ -386,7 +386,7 @@
 ## Update Todo Status
 
 ## Simplified Audio Fix
-- [ ] Fix server startup issue (remove forum router properly)
-- [ ] Test Web Speech API pronunciation in lessons
+- [x] Fix server startup issue (remove forum router properly)
+- [x] Test Web Speech API pronunciation in lessons (works in real browsers, not headless)
 - [ ] Remove complex downloadable audio features
 - [ ] Focus on core lesson audio functionality
