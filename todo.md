@@ -390,3 +390,9 @@
 - [x] Test Web Speech API pronunciation in lessons (works in real browsers, not headless)
 - [ ] Remove complex downloadable audio features
 - [ ] Focus on core lesson audio functionality
+
+## Unlock All Lessons & Simplify
+- [x] Remove lesson locking - allow access to all lessons
+- [x] Remove progress tracking requirements
+- [x] Simplify UI to focus on pronunciation practice
+- [x] Remove "mark complete" functionality

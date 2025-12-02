@@ -167,7 +167,7 @@ export default function InteractiveLessons() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {lessonsData.map((lesson, index) => {
               const isCompleted = completedLessons.has(lesson.id);
-              const isLocked = index > 0 && !completedLessons.has(lessonsData[index - 1].id);
+              const isLocked = false; // All lessons unlocked
 
               return (
                 <Card
@@ -203,33 +203,13 @@ export default function InteractiveLessons() {
                         {lesson.phrases.length} phrases to learn
                       </p>
                       
-                      {isLocked ? (
-                        <Button disabled className="w-full">
-                          <Lock className="mr-2 h-4 w-4" />
-                          Complete Previous Lesson
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={() => setSelectedLessonId(lesson.id)}
-                          className={`w-full ${
-                            isCompleted
-                              ? "bg-green-600 hover:bg-green-700"
-                              : "bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600"
-                          }`}
-                        >
-                          {isCompleted ? (
-                            <>
-                              <CheckCircle2 className="mr-2 h-4 w-4" />
-                              Review Lesson
-                            </>
-                          ) : (
-                            <>
-                              <Play className="mr-2 h-4 w-4" />
-                              Start Lesson
-                            </>
-                          )}
-                        </Button>
-                      )}
+                      <Button
+                        onClick={() => setSelectedLessonId(lesson.id)}
+                        className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600"
+                      >
+                        <Play className="mr-2 h-4 w-4" />
+                        Practice Pronunciation
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>

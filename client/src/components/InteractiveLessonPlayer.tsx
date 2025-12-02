@@ -262,26 +262,10 @@ export default function InteractiveLessonPlayer({
             </div>
           )}
 
-          {/* Mark Complete Button */}
-          {!isPhraseCompleted && (
-            <div className="text-center">
-              <Button
-                size="lg"
-                onClick={markPhraseComplete}
-                className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
-              >
-                <CheckCircle2 className="mr-2 h-5 w-5" />
-                I've Learned This Phrase
-              </Button>
-            </div>
-          )}
-
-          {isPhraseCompleted && (
-            <div className="text-center p-4 bg-green-100 rounded-lg border-2 border-green-400">
-              <CheckCircle2 className="inline-block mr-2 h-6 w-6 text-green-600" />
-              <span className="text-green-800 font-semibold text-lg">Phrase Completed!</span>
-            </div>
-          )}
+          {/* Simple instruction */}
+          <div className="text-center p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+            <p className="text-blue-900 text-lg">🎯 Listen and repeat until you feel confident with the pronunciation</p>
+          </div>
         </CardContent>
       </Card>
 
@@ -297,19 +281,18 @@ export default function InteractiveLessonPlayer({
           Previous Phrase
         </Button>
 
-        <div className="flex gap-2">
-          {lesson.phrases.map((_, index) => (
-            <div
-              key={index}
-              className={`w-3 h-3 rounded-full ${
-                index === currentPhraseIndex
-                  ? "bg-blue-600 scale-125"
-                  : completedPhrases.has(lesson.phrases[index].id)
-                  ? "bg-green-500"
-                  : "bg-gray-300"
-              } transition-all`}
-            />
-          ))}
+        <div className="flex gap-2 items-center">
+          {lesson.phrases.map((_, index) => {
+            const isActive = index === currentPhraseIndex;
+            return (
+              <div
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  isActive ? "bg-blue-600 scale-125" : "bg-gray-300"
+                }`}
+              />
+            );
+          })}
         </div>
 
         {currentPhraseIndex < lesson.phrases.length - 1 ? (
