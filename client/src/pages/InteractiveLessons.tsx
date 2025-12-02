@@ -8,6 +8,7 @@ import { lessonsData } from "@/data/lessonsData";
 import { addAudioToLessons } from "@/data/lessonsDataWithAudio";
 import { Link } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { checkMilestone, getAchievedMilestones, saveAchievedMilestone } from "@/utils/milestoneRewards";
 
 export default function InteractiveLessons() {
   const { isAuthenticated } = useAuth();
@@ -71,6 +72,13 @@ export default function InteractiveLessons() {
       setCompletedLessons(newCompleted);
       // Save to database
       saveProgress(selectedLessonId, 1);
+      
+      // Check for milestone achievements
+      const achievedMilestones = getAchievedMilestones();
+      const milestone = checkMilestone(newCompleted.size, 'lessons', achievedMilestones);
+      if (milestone) {
+        saveAchievedMilestone(milestone.id);
+      }
     }
   };
 
