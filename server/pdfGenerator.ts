@@ -353,3 +353,141 @@ export async function generateInvoicePDF(purchase: any): Promise<Buffer> {
     doc.end();
   });
 }
+
+export async function generateLessonPDF(lesson: any): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ size: 'A4', margin: 50 });
+    const chunks: Buffer[] = [];
+
+    doc.on('data', (chunk) => chunks.push(chunk));
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
+    doc.on('error', reject);
+
+    // Title
+    doc.fontSize(24).font('Helvetica-Bold').text(`${lesson.icon} Lesson ${lesson.id}: ${lesson.title}`, { align: 'center' });
+    doc.moveDown(0.5);
+    doc.fontSize(16).text(lesson.titleHebrew, { align: 'center' });
+    doc.moveDown(2);
+
+    // Phrases
+    lesson.phrases.forEach((phrase: any, index: number) => {
+      // Check if we need a new page
+      if (doc.y > 650) {
+        doc.addPage();
+      }
+
+      // Phrase number and English
+      doc.fontSize(14).font('Helvetica-Bold').text(`${index + 1}. ${phrase.english}`);
+      doc.moveDown(0.3);
+
+      // Hebrew
+      doc.fontSize(12).font('Helvetica').text(`Hebrew: ${phrase.hebrew}`);
+      doc.moveDown(0.3);
+
+      // Thai
+      doc.fontSize(16).font('Helvetica-Bold').text(`Thai: ${phrase.thai}`);
+      doc.moveDown(0.3);
+
+      // Phonetic
+      doc.fontSize(12).font('Helvetica-Oblique').text(`Pronunciation: ${phrase.phonetic}`);
+      doc.moveDown(0.5);
+
+      // Scenario
+      doc.fontSize(10).font('Helvetica').text(`When to use: ${phrase.scenario}`, { width: 500 });
+      doc.moveDown(0.3);
+
+      // Cultural tip
+      doc.fontSize(10).font('Helvetica-Oblique').fillColor('blue').text(`💡 Cultural Tip: ${phrase.culturalTip}`, { width: 500 });
+      doc.fillColor('black');
+      doc.moveDown(1.5);
+    });
+
+    // Footer
+    doc.fontSize(9).text('LearnThaiB4Fly.com - Thai Language for Israeli Travelers', { align: 'center' });
+
+    doc.end();
+  });
+}
+
+export async function generateAllLessonsPDF(lessons: any[]): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ size: 'A4', margin: 50 });
+    const chunks: Buffer[] = [];
+
+    doc.on('data', (chunk) => chunks.push(chunk));
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
+    doc.on('error', reject);
+
+    // Cover page
+    doc.fontSize(32).font('Helvetica-Bold').text('Thai Language', { align: 'center' });
+    doc.fontSize(28).text('Cheat Sheet', { align: 'center' });
+    doc.moveDown();
+    doc.fontSize(18).font('Helvetica').text('Complete Guide for Israeli Travelers', { align: 'center' });
+    doc.fontSize(16).text('מדריך מלא לתיירים ישראלים', { align: 'center' });
+    doc.moveDown(2);
+    doc.fontSize(14).text(`${lessons.length} Lessons • 150 Essential Phrases`, { align: 'center' });
+    doc.moveDown(3);
+    doc.fontSize(12).text('LearnThaiB4Fly.com', { align: 'center' });
+
+    doc.addPage();
+
+    // Table of Contents
+    doc.fontSize(22).font('Helvetica-Bold').text('Table of Contents');
+    doc.moveDown();
+
+    lessons.forEach((lesson, index) => {
+      if (doc.y > 700) {
+        doc.addPage();
+      }
+      doc.fontSize(11).font('Helvetica');
+      doc.text(`${lesson.icon} ${lesson.id}. ${lesson.title} - ${lesson.titleHebrew}`);
+      doc.moveDown(0.3);
+    });
+
+    // Add each lesson
+    lessons.forEach((lesson) => {
+      doc.addPage();
+
+      // Lesson header
+      doc.fontSize(22).font('Helvetica-Bold').text(`${lesson.icon} Lesson ${lesson.id}: ${lesson.title}`);
+      doc.moveDown(0.3);
+      doc.fontSize(16).text(lesson.titleHebrew);
+      doc.moveDown(1.5);
+
+      // Phrases
+      lesson.phrases.forEach((phrase: any, index: number) => {
+        if (doc.y > 650) {
+          doc.addPage();
+        }
+
+        // Phrase number and English
+        doc.fontSize(13).font('Helvetica-Bold').text(`${index + 1}. ${phrase.english}`);
+        doc.moveDown(0.2);
+
+        // Hebrew
+        doc.fontSize(11).font('Helvetica').text(phrase.hebrew);
+        doc.moveDown(0.2);
+
+        // Thai
+        doc.fontSize(14).font('Helvetica-Bold').text(phrase.thai);
+        doc.moveDown(0.2);
+
+        // Phonetic
+        doc.fontSize(11).font('Helvetica-Oblique').text(`🗣️ ${phrase.phonetic}`);
+        doc.moveDown(0.8);
+      });
+    });
+
+    // Footer on last page
+    doc.addPage();
+    doc.fontSize(18).font('Helvetica-Bold').text('Thank You!', { align: 'center' });
+    doc.moveDown();
+    doc.fontSize(12).font('Helvetica').text('We hope this guide helps you communicate confidently in Thailand.', { align: 'center' });
+    doc.moveDown(0.5);
+    doc.text('For more resources, visit LearnThaiB4Fly.com', { align: 'center' });
+    doc.moveDown(2);
+    doc.fontSize(10).text('© 2024 LearnThaiB4Fly - All Rights Reserved', { align: 'center' });
+
+    doc.end();
+  });
+}

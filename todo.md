@@ -401,3 +401,18 @@
 - [x] Change currency from Thai Baht (THB) to Israeli Shekels (ILS)
 - [x] Update pricing display to show ₪ instead of ฿
 - [x] Test payment flow with ILS currency
+
+## Reset Stripe Configuration
+- [ ] Remove current Stripe test keys from project
+- [ ] Document how to add new Stripe keys
+- [ ] Test with new Stripe account
+
+## Content & Learning Enhancements
+- [x] Expand lessons from 10 to 30 (add 20 new lesson topics)
+- [x] Create downloadable PDF cheat sheets for all lessons
+- [ ] Build quiz/assessment system with scoring
+- [ ] Implement flashcard system for vocabulary practice
+- [ ] Add video tutorial placeholders for pronunciation
+- [ ] Create Downloads page for PDF access
+- [ ] Add Quiz page with results tracking
+- [ ] Build Flashcards page with spaced repetition
