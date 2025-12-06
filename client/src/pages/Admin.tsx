@@ -55,9 +55,9 @@ export default function Admin() {
   }
 
   const formatCurrency = (cents: number | string | null) => {
-    if (!cents) return "฿0.00";
+    if (!cents) return "₪0.00";
     const amount = typeof cents === "string" ? parseFloat(cents) : cents;
-    return `฿${(amount / 100).toFixed(2)}`;
+    return `₪${(amount / 100).toFixed(2)}`;
   };
 
   return (

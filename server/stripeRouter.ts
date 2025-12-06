@@ -28,7 +28,7 @@ export const stripeRouter = router({
         lineItems = [
           {
             price_data: {
-              currency: "thb",
+              currency: "ils",
               product_data: {
                 name: PRODUCTS.SMART_TOURIST_PACK.name,
                 description: PRODUCTS.SMART_TOURIST_PACK.description,
@@ -42,7 +42,7 @@ export const stripeRouter = router({
         lineItems = [
           {
             price_data: {
-              currency: "thb",
+              currency: "ils",
               product_data: {
                 name: `${PRODUCTS.SMART_TOURIST_PACK.name} - Bulk (10 packs)`,
                 description: "10 Smart Tourist Packs for tour agents/hostels",
@@ -57,7 +57,7 @@ export const stripeRouter = router({
         lineItems = [
           {
             price_data: {
-              currency: "thb",
+              currency: "ils",
               product_data: {
                 name: `${PRODUCTS.SMART_TOURIST_PACK.name} - Bulk (20 packs)`,
                 description: "20 Smart Tourist Packs for tour agents/hostels",

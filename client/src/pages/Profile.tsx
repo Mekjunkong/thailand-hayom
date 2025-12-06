@@ -189,7 +189,7 @@ export default function Profile() {
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-green-600">
-                        ฿{(purchase.amount / 100).toFixed(2)}
+                        ₪{(purchase.amount / 100).toFixed(2)}
                       </p>
                       <p className="text-sm text-gray-600 capitalize">{purchase.status}</p>
                     </div>

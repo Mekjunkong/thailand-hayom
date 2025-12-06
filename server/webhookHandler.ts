@@ -62,7 +62,7 @@ async function handleSuccessfulPayment(session: Stripe.Checkout.Session) {
       customerEmail,
       customerName,
       amount: session.amount_total || 0,
-      currency: session.currency || "thb",
+      currency: session.currency || "ils",
       productType,
       status: "completed",
       metadata: JSON.stringify({ quantity }),

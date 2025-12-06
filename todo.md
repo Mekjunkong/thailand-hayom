@@ -396,3 +396,8 @@
 - [x] Remove progress tracking requirements
 - [x] Simplify UI to focus on pronunciation practice
 - [x] Remove "mark complete" functionality
+
+## Fix Stripe Payment Currency
+- [x] Change currency from Thai Baht (THB) to Israeli Shekels (ILS)
+- [x] Update pricing display to show ₪ instead of ฿
+- [x] Test payment flow with ILS currency
