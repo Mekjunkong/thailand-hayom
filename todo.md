@@ -435,3 +435,12 @@
 - [x] Updated lesson player UI with tabs (Phrases, Dialogue, Exercises)
 - [x] Added route for /emergency-scripts
 - [x] All enhancements align with AI engine specification
+
+## Bug Fix
+- [ ] Fix empty lesson content when clicking on lessons
+
+## Bug Fix - Lesson Content Display
+- [x] Fix empty lesson content when clicking on lessons (Web Speech API error)
+- [x] Add proper null checks and error handling for getVoices()
+- [x] Fix JSX indentation issues in InteractiveLessonPlayer
+- [x] Add fallback timer for voice loading

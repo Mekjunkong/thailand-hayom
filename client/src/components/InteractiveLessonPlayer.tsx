@@ -73,8 +73,16 @@ export default function InteractiveLessonPlayer({
   // Load voices on mount
   useEffect(() => {
     const loadVoices = () => {
-      const voices = window.speechSynthesis.getVoices();
-      if (voices.length > 0) {
+      try {
+        if ('speechSynthesis' in window && window.speechSynthesis) {
+          const voices = window.speechSynthesis.getVoices();
+          if (voices && voices.length > 0) {
+            setVoicesLoaded(true);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading voices:', error);
+        // Set to true anyway so the component doesn't block
         setVoicesLoaded(true);
       }
     };
@@ -87,7 +95,13 @@ export default function InteractiveLessonPlayer({
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
 
+    // Fallback: assume voices are loaded after 1 second
+    const fallbackTimer = setTimeout(() => {
+      setVoicesLoaded(true);
+    }, 1000);
+
     return () => {
+      clearTimeout(fallbackTimer);
       if ('speechSynthesis' in window) {
         window.speechSynthesis.onvoiceschanged = null;
       }
@@ -104,45 +118,45 @@ export default function InteractiveLessonPlayer({
     setIsPlaying(true);
     
     // Use Web Speech API for Thai pronunciation
-    if ('speechSynthesis' in window) {
-      // Cancel any ongoing speech
-      window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(currentPhrase.thai);
-      
-      // Try to find a Thai voice
-      const voices = window.speechSynthesis.getVoices();
-      const thaiVoice = voices.find(v => v.lang.startsWith('th'));
-      
-      if (thaiVoice) {
-        utterance.voice = thaiVoice;
-        utterance.lang = 'th-TH';
-      } else {
-        // Fallback: use default voice with Thai language setting
-        utterance.lang = 'th-TH';
-        console.log('No Thai voice found, using default with th-TH lang');
-      }
-      
-      utterance.rate = 0.7; // Slower for learning
-      utterance.pitch = 1.0;
-      utterance.volume = 1.0;
-      
-      utterance.onstart = () => {
-        console.log('Speech started');
-      };
-      
-      utterance.onend = () => {
-        console.log('Speech ended');
-        setIsPlaying(false);
-      };
-      
-      utterance.onerror = (event) => {
-        console.error('Speech error:', event);
-        setIsPlaying(false);
-        toast.error("Audio playback failed. Please read the phonetic pronunciation: " + currentPhrase.phonetic);
-      };
-      
+    if ('speechSynthesis' in window && window.speechSynthesis) {
       try {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(currentPhrase.thai);
+        
+        // Try to find a Thai voice
+        const voices = window.speechSynthesis.getVoices();
+        const thaiVoice = voices && voices.find(v => v.lang && v.lang.startsWith('th'));
+        
+        if (thaiVoice) {
+          utterance.voice = thaiVoice;
+          utterance.lang = 'th-TH';
+        } else {
+          // Fallback: use default voice with Thai language setting
+          utterance.lang = 'th-TH';
+          console.log('No Thai voice found, using default with th-TH lang');
+        }
+        
+        utterance.rate = 0.7; // Slower for learning
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        
+        utterance.onstart = () => {
+          console.log('Speech started');
+        };
+        
+        utterance.onend = () => {
+          console.log('Speech ended');
+          setIsPlaying(false);
+        };
+        
+        utterance.onerror = (event) => {
+          console.error('Speech error:', event);
+          setIsPlaying(false);
+          toast.error("Audio playback failed. Please read the phonetic pronunciation: " + currentPhrase.phonetic);
+        };
+        
         window.speechSynthesis.speak(utterance);
         toast.success("🔊 Playing pronunciation...");
       } catch (error) {
@@ -247,77 +261,77 @@ export default function InteractiveLessonPlayer({
                 Phrase {currentPhraseIndex + 1} of {lesson.phrases.length}
               </div>
 
-          {/* Thai Script - Large */}
-          <div className="text-center space-y-4">
-            <div className="text-7xl font-bold text-blue-600 mb-4">
-              {currentPhrase.thai}
-            </div>
-            
-            {/* Phonetic Pronunciation */}
-            <div className="text-3xl text-gray-700 font-medium">
-              {currentPhrase.phonetic}
-            </div>
-
-            {/* Play Button */}
-            <Button
-              size="lg"
-              onClick={playPronunciation}
-              disabled={isPlaying}
-              className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600"
-            >
-              {isPlaying ? (
-                <>
-                  <Pause className="mr-2 h-5 w-5" />
-                  Playing...
-                </>
-              ) : (
-                <>
-                  <Volume2 className="mr-2 h-5 w-5" />
-                  Listen to Pronunciation
-                </>
-              )}
-            </Button>
-          </div>
-
-          {/* Translation Toggle */}
-          <div className="text-center">
-            <Button
-              variant="outline"
-              onClick={() => setShowTranslation(!showTranslation)}
-              className="mb-4"
-            >
-              {showTranslation ? "Hide" : "Show"} Translation
-            </Button>
-
-            {showTranslation && (
-              <div className="space-y-4 animate-in fade-in duration-300">
-                <div className="text-2xl text-gray-800 font-semibold">
-                  {currentPhrase.english}
+              {/* Thai Script - Large */}
+              <div className="text-center space-y-4">
+                <div className="text-7xl font-bold text-blue-600 mb-4">
+                  {currentPhrase.thai}
                 </div>
-                <div className="text-2xl text-gray-700 hebrew-text" dir="rtl">
-                  {currentPhrase.hebrew}
+                
+                {/* Phonetic Pronunciation */}
+                <div className="text-3xl text-gray-700 font-medium">
+                  {currentPhrase.phonetic}
                 </div>
+
+                {/* Play Button */}
+                <Button
+                  size="lg"
+                  onClick={playPronunciation}
+                  disabled={isPlaying}
+                  className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600"
+                >
+                  {isPlaying ? (
+                    <>
+                      <Pause className="mr-2 h-5 w-5" />
+                      Playing...
+                    </>
+                  ) : (
+                    <>
+                      <Volume2 className="mr-2 h-5 w-5" />
+                      Listen to Pronunciation
+                    </>
+                  )}
+                </Button>
               </div>
-            )}
-          </div>
 
-          {/* Scenario Example */}
-          <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-lg border-2 border-amber-200">
-            <h3 className="text-lg font-bold text-amber-900 mb-2 flex items-center gap-2">
-              🎭 When to Use This
-            </h3>
-            <p className="text-gray-700 text-lg">{currentPhrase.scenario}</p>
-          </div>
+              {/* Translation Toggle */}
+              <div className="text-center">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowTranslation(!showTranslation)}
+                  className="mb-4"
+                >
+                  {showTranslation ? "Hide" : "Show"} Translation
+                </Button>
 
-          {/* Cultural Tip */}
-          {currentPhrase.culturalTip && (
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
-              <h3 className="text-lg font-bold text-purple-900 mb-2 flex items-center gap-2">
-                💡 Cultural Tip
-              </h3>
-              <p className="text-gray-700 text-lg">{currentPhrase.culturalTip}</p>
-            </div>
-          )}
+                {showTranslation && (
+                  <div className="space-y-4 animate-in fade-in duration-300">
+                    <div className="text-2xl text-gray-800 font-semibold">
+                      {currentPhrase.english}
+                    </div>
+                    <div className="text-2xl text-gray-700 hebrew-text" dir="rtl">
+                      {currentPhrase.hebrew}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Scenario Example */}
+              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-lg border-2 border-amber-200">
+                <h3 className="text-lg font-bold text-amber-900 mb-2 flex items-center gap-2">
+                  🎭 When to Use This
+                </h3>
+                <p className="text-gray-700 text-lg">{currentPhrase.scenario}</p>
+              </div>
+
+              {/* Cultural Tip */}
+              {currentPhrase.culturalTip && (
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                  <h3 className="text-lg font-bold text-purple-900 mb-2 flex items-center gap-2">
+                    💡 Cultural Tip
+                  </h3>
+                  <p className="text-gray-700 text-lg">{currentPhrase.culturalTip}</p>
+                </div>
+              )}
 
               {/* Simple instruction */}
               <div className="text-center p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
