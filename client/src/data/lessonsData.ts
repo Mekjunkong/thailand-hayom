@@ -52,6 +52,65 @@ export const lessonsData: Lesson[] = [
         scenario: "Ask this when you need help and aren't sure if the person speaks English. Most young Thais in tourist areas speak some English.",
         culturalTip: "Even if they say 'yes', their English might be basic. Speak slowly and use simple words."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "Yossi",
+        speakerHebrew: "יוסי",
+        thai: "สวัสดีครับ",
+        phonetic: "sa-wat-dee khrap",
+        hebrew: "שלום (גבר)"
+      },
+      {
+        speaker: "Thai shopkeeper",
+        speakerHebrew: "בעל חנות תאילנדי",
+        thai: "สวัสดีค่ะ ยินดีต้อนรับ",
+        phonetic: "sa-wat-dee kha yin-dee ton-rap",
+        hebrew: "שלום, ברוכים הבאים"
+      },
+      {
+        speaker: "Yossi",
+        speakerHebrew: "יוסי",
+        thai: "ขอบคุณครับ",
+        phonetic: "khop-khun khrap",
+        hebrew: "תודה רבה"
+      },
+      {
+        speaker: "Shopkeeper",
+        speakerHebrew: "בעל החנות",
+        thai: "ไม่เป็นไรค่ะ",
+        phonetic: "mai-pen-rai kha",
+        hebrew: "אין בעד מה"
+      }
+    ],
+    exercises: [
+      {
+        id: 1,
+        question: "How do you say 'Hello' in Thai?",
+        questionHebrew: "איך אומרים 'שלום' בתאילנדית?",
+        options: ["สวัสดี", "ขอบคุณ", "ไม่เป็นไร", "ขอโทษ"],
+        correctAnswer: 0,
+        explanation: "สวัสดี (sa-wat-dee) is the universal greeting in Thai, used for both hello and goodbye.",
+        explanationHebrew: "סוואסדี היא הברכה האוניברסלית בתאילנדית, משמשת גם לשלום וגם להתראות."
+      },
+      {
+        id: 2,
+        question: "What should a male add after 'สวัสดี' to be polite?",
+        questionHebrew: "מה גבר צריך להוסיף אחרי 'סוואסדี' כדי להיות מנומס?",
+        options: ["ค่ะ (kha)", "ครับ (khrap)", "มาก (maak)", "ได้ (dai)"],
+        correctAnswer: 1,
+        explanation: "Males use 'ครับ' (khrap) at the end of sentences for politeness, while females use 'ค่ะ' (kha).",
+        explanationHebrew: "גברים משתמשים ב-'คราบ' בסוף משפטים לנימוס, בעוד נשים משתמשות ב-'คะ'."
+      },
+      {
+        id: 3,
+        question: "What gesture should accompany 'สวัสดี' in formal situations?",
+        questionHebrew: "איזו מחווה צריכה ללוות את 'סוואסדี' במצבים פורמליים?",
+        options: ["Handshake / לחיצת יד", "Wave / נפנוף", "Wai (prayer hands) / ווי (ידיים בתנוחת תפילה)", "Bow / קידה"],
+        correctAnswer: 2,
+        explanation: "The 'wai' gesture (hands together in prayer position) shows respect and is essential in formal greetings.",
+        explanationHebrew: "מחוות ה-'ווי' (ידיים ביחד בתנוחת תפילה) מראה כבוד והיא חיונית בברכות פורמליות."
+      }
     ]
   },
   {

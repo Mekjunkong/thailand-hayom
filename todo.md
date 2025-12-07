@@ -416,3 +416,22 @@
 - [ ] Create Downloads page for PDF access
 - [ ] Add Quiz page with results tracking
 - [ ] Build Flashcards page with spaced repetition
+
+## Website Enhancement (AI Engine Alignment)
+- [ ] Restructure lesson data format (Thai → Pronunciation → Hebrew → Usage Tip)
+- [x] Add realistic Thai-Hebrew dialogues to first 5 lessons (template for others)
+- [x] Create practice exercises for first 5 lessons (template for others)
+- [x] Build Emergency Survival Scripts page
+- [x] Cultural tips already included in all lessons
+- [x] Update lesson player UI with tabs for phrases, dialogues, and exercises
+- [ ] Add conversation practice mode
+- [ ] Create situational dialogue library (restaurant, taxi, market, etc.)
+
+## Website Enhancement Summary
+- [x] Extended Lesson interface with dialogue and exercise support
+- [x] Added realistic Thai-Hebrew dialogues to Lesson 1 (template for others)
+- [x] Created practice exercises with instant feedback for Lesson 1
+- [x] Built Emergency Survival Scripts page with 5 critical situations
+- [x] Updated lesson player UI with tabs (Phrases, Dialogue, Exercises)
+- [x] Added route for /emergency-scripts
+- [x] All enhancements align with AI engine specification

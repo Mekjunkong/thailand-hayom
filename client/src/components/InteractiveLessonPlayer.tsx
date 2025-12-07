@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Volume2, CheckCircle2, ArrowRight, ArrowLeft, Play, Pause } from "lucide-react";
+import { Volume2, CheckCircle2, ArrowRight, ArrowLeft, Play, Pause, MessageSquare, BookOpen, CheckSquare } from "lucide-react";
 import { toast } from "sonner";
 
 export interface Phrase {
@@ -14,6 +14,25 @@ export interface Phrase {
   audioUrl?: string;
   scenario: string;
   culturalTip?: string;
+  usageTip?: string;
+}
+
+export interface DialogueLine {
+  speaker: string;
+  speakerHebrew: string;
+  thai: string;
+  phonetic: string;
+  hebrew: string;
+}
+
+export interface Exercise {
+  id: number;
+  question: string;
+  questionHebrew: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  explanationHebrew: string;
 }
 
 export interface Lesson {
@@ -22,6 +41,8 @@ export interface Lesson {
   titleHebrew: string;
   icon: string;
   phrases: Phrase[];
+  dialogue?: DialogueLine[];
+  exercises?: Exercise[];
   completed?: boolean;
 }
 
@@ -43,6 +64,8 @@ export default function InteractiveLessonPlayer({
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
   const [voicesLoaded, setVoicesLoaded] = useState(false);
+  const [activeTab, setActiveTab] = useState<'phrases' | 'dialogue' | 'exercises'>('phrases');
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
 
   const currentPhrase = lesson.phrases[currentPhraseIndex];
   const progress = (completedPhrases.size / lesson.phrases.length) * 100;
@@ -182,13 +205,47 @@ export default function InteractiveLessonPlayer({
         </CardContent>
       </Card>
 
-      {/* Main Phrase Card */}
+      {/* Tabs */}
+      <div className="flex gap-2 justify-center">
+        <Button
+          variant={activeTab === 'phrases' ? 'default' : 'outline'}
+          onClick={() => setActiveTab('phrases')}
+          className="flex items-center gap-2"
+        >
+          <BookOpen className="w-4 h-4" />
+          Phrases
+        </Button>
+        {lesson.dialogue && lesson.dialogue.length > 0 && (
+          <Button
+            variant={activeTab === 'dialogue' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('dialogue')}
+            className="flex items-center gap-2"
+          >
+            <MessageSquare className="w-4 h-4" />
+            Dialogue
+          </Button>
+        )}
+        {lesson.exercises && lesson.exercises.length > 0 && (
+          <Button
+            variant={activeTab === 'exercises' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('exercises')}
+            className="flex items-center gap-2"
+          >
+            <CheckSquare className="w-4 h-4" />
+            Exercises
+          </Button>
+        )}
+      </div>
+
+      {/* Main Content Card */}
       <Card className="border-4 border-blue-200 shadow-2xl">
         <CardContent className="p-8 space-y-8">
-          {/* Phrase Counter */}
-          <div className="text-center text-sm text-gray-500">
-            Phrase {currentPhraseIndex + 1} of {lesson.phrases.length}
-          </div>
+          {activeTab === 'phrases' && (
+            <>
+              {/* Phrase Counter */}
+              <div className="text-center text-sm text-gray-500">
+                Phrase {currentPhraseIndex + 1} of {lesson.phrases.length}
+              </div>
 
           {/* Thai Script - Large */}
           <div className="text-center space-y-4">
@@ -262,10 +319,66 @@ export default function InteractiveLessonPlayer({
             </div>
           )}
 
-          {/* Simple instruction */}
-          <div className="text-center p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
-            <p className="text-blue-900 text-lg">🎯 Listen and repeat until you feel confident with the pronunciation</p>
-          </div>
+              {/* Simple instruction */}
+              <div className="text-center p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                <p className="text-blue-900 text-lg">🎯 Listen and repeat until you feel confident with the pronunciation</p>
+              </div>
+            </>
+          )}
+
+          {activeTab === 'dialogue' && lesson.dialogue && (
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold text-center mb-6">💬 Practice Dialogue</h2>
+              {lesson.dialogue.map((line, index) => (
+                <div key={index} className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border-2 border-blue-200">
+                  <div className="font-bold text-blue-900 mb-2">
+                    {line.speaker} ({line.speakerHebrew})
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900 mb-2">{line.thai}</div>
+                  <div className="text-xl italic text-gray-600 mb-2">{line.phonetic}</div>
+                  <div className="text-lg text-gray-700">{line.hebrew}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'exercises' && lesson.exercises && (
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold text-center mb-6">📝 Practice Exercises</h2>
+              {lesson.exercises.map((exercise) => (
+                <div key={exercise.id} className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border-2 border-green-200">
+                  <div className="mb-4">
+                    <div className="text-xl font-bold text-gray-900 mb-2">{exercise.question}</div>
+                    <div className="text-lg text-blue-600" dir="rtl">{exercise.questionHebrew}</div>
+                  </div>
+                  <div className="space-y-2">
+                    {exercise.options.map((option, optIndex) => (
+                      <button
+                        key={optIndex}
+                        onClick={() => setSelectedAnswers({ ...selectedAnswers, [exercise.id]: optIndex })}
+                        className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
+                          selectedAnswers[exercise.id] === optIndex
+                            ? optIndex === exercise.correctAnswer
+                              ? 'bg-green-100 border-green-500 text-green-900'
+                              : 'bg-red-100 border-red-500 text-red-900'
+                            : 'bg-white border-gray-300 hover:border-blue-400'
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                  {selectedAnswers[exercise.id] !== undefined && (
+                    <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                      <div className="font-bold text-blue-900 mb-1">Explanation:</div>
+                      <div className="text-gray-700">{exercise.explanation}</div>
+                      <div className="text-blue-600 mt-1" dir="rtl">{exercise.explanationHebrew}</div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
 
