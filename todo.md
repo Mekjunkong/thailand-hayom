@@ -606,3 +606,11 @@
 - [x] Implement internal linking between articles
 - [x] Add related articles section
 - [x] Add article search functionality
+
+
+## Fix Local Guides Navigation
+- [x] Link "Vegan Restaurants" card to /articles?category=food
+- [x] Link "Where to Go" card to /articles?category=attractions
+- [x] Link "What to See" card to /articles?category=attractions
+- [x] Link "Food Scene" card to /articles?category=food
+- [ ] Test all guide card links work correctly

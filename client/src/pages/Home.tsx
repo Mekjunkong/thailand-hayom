@@ -211,7 +211,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <Link href="/guides/vegan-restaurants">
+            <Link href="/articles?category=food">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-green-100">
                 <div className="text-5xl mb-4 text-center">🥗</div>
                 <h3 className="font-bold text-xl mb-3 text-center text-gray-900">{t({ he: "מסעדות טבעוניות", en: "Vegan Restaurants" })}</h3>
@@ -219,7 +219,7 @@ export default function Home() {
               </div>
             </Link>
 
-            <Link href="/guides/where-to-go">
+            <Link href="/articles?category=attractions">
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-blue-100">
                 <div className="text-5xl mb-4 text-center">🏛️</div>
                 <h3 className="font-bold text-xl mb-3 text-center text-gray-900">{t({ he: "לאן ללכת", en: "Where to Go" })}</h3>
@@ -227,15 +227,14 @@ export default function Home() {
               </div>
             </Link>
 
-            <Link href="/guides/what-to-see">
+            <Link href="/articles?category=attractions">
               <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-purple-100">
                 <div className="text-5xl mb-4 text-center">👀</div>
                 <h3 className="font-bold text-xl mb-3 text-center text-gray-900">{t({ he: "מה לראות", en: "What to See" })}</h3>
                 <p className="text-sm text-gray-600 text-center">{t({ he: "נקודות תצפית ושווקים", en: "Viewpoints & markets" })}</p>
               </div>
             </Link>
-
-            <Link href="/guides/food-scene">
+            <Link href="/articles?category=food">
               <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-orange-100">
                 <div className="text-5xl mb-4 text-center">🍜</div>
                 <h3 className="font-bold text-xl mb-3 text-center text-gray-900">{t({ he: "אוכל", en: "Food Scene" })}</h3>
