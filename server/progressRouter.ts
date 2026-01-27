@@ -58,7 +58,7 @@ router.post("/api/progress/lesson", async (req: Request, res: Response) => {
   try {
     const { lessonId, completed } = req.body;
 
-    if (typeof lessonId !== "number" || typeof completed !== "number") {
+    if (typeof lessonId !== "number" || typeof completed !== "boolean") {
       return res.status(400).json({ error: "Invalid request body" });
     }
 

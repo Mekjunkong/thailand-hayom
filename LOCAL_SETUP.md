@@ -6,7 +6,7 @@ This guide explains how to run **Thailand Hayom** on your local machine.
 
 - Node.js 22+ installed
 - pnpm installed (`npm install -g pnpm`)
-- MySQL database (or compatible service)
+- PostgreSQL database (Supabase recommended)
 
 ## Quick Start
 
@@ -29,15 +29,15 @@ Create a `.env` file in the root directory:
 
 ```bash
 # Minimum required for local development
-DATABASE_URL=mysql://user:password@localhost:3306/thailand_hayom
+DATABASE_URL=postgresql://postgres:password@localhost:5432/thailand_hayom
 JWT_SECRET=your-random-secret-min-32-characters-long
 NODE_ENV=development
 ```
 
 **Where to get a database:**
-- **PlanetScale** (recommended): https://planetscale.com - Free tier available
-- **Railway**: https://railway.app - Easy MySQL setup
-- **Local MySQL**: Install MySQL locally
+- **Supabase** (recommended): https://supabase.com - Free PostgreSQL with 500MB storage
+- **Railway**: https://railway.app - Easy PostgreSQL setup
+- **Local PostgreSQL**: Install PostgreSQL locally
 
 ### 4. Push Database Schema
 
@@ -94,7 +94,7 @@ Contact Manus support for OAuth credentials
 ## Environment Variables Reference
 
 ### Required
-- `DATABASE_URL` - MySQL connection string
+- `DATABASE_URL` - PostgreSQL connection string (from Supabase or other provider)
 - `JWT_SECRET` - Random string (min 32 chars) for session cookies
 
 ### Optional (Stripe)

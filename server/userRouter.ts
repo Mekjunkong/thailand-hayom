@@ -23,7 +23,7 @@ export const userRouter = router({
     .input(
       z.object({
         lessonId: z.number(),
-        completed: z.number(),
+        completed: z.boolean(),
         quizScore: z.number().optional(),
       })
     )

@@ -614,3 +614,13 @@
 - [x] Link "What to See" card to /articles?category=attractions
 - [x] Link "Food Scene" card to /articles?category=food
 - [ ] Test all guide card links work correctly
+
+## Supabase PostgreSQL Conversion
+- [ ] Replace mysql2 with pg (PostgreSQL driver)
+- [ ] Update Drizzle ORM imports to PostgreSQL
+- [ ] Convert schema from MySQL to PostgreSQL syntax
+- [ ] Update drizzle.config.ts for PostgreSQL
+- [ ] Update database connection in server/db.ts
+- [ ] Test database connection
+- [ ] Push schema to Supabase
+- [ ] Update LOCAL_SETUP.md with Supabase instructions

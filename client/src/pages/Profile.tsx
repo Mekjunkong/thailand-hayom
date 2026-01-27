@@ -35,7 +35,7 @@ export default function Profile() {
     );
   }
 
-  const completedLessons = progress.filter(p => p.completed === 1).length;
+  const completedLessons = progress.filter(p => p.completed === true).length;
   const totalLessons = 10;
   const completionPercentage = Math.round((completedLessons / totalLessons) * 100);
 
@@ -117,7 +117,7 @@ export default function Profile() {
                       <div key={p.id} className="flex items-center justify-between p-3 bg-white rounded-lg">
                         <span>Lesson {p.lessonId}</span>
                         <div className="flex items-center gap-4">
-                          {p.completed === 1 && <span className="text-green-600">✓ Completed</span>}
+                          {p.completed === true && <span className="text-green-600">✓ Completed</span>}
                           {p.quizScore && <span className="text-gray-600">Quiz: {p.quizScore}%</span>}
                         </div>
                       </div>
