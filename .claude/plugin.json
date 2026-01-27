@@ -1,0 +1,39 @@
+{
+  "name": "thailand-hayom-helpers",
+  "version": "1.0.0",
+  "description": "Custom agents and skills for Thailand Hayom development",
+  "agents": [
+    {
+      "name": "bilingual-content-generator",
+      "file": "agents/bilingual-content-generator.md",
+      "description": "Generate bilingual Hebrew/English content for articles, events, and lessons",
+      "autoDiscovery": true
+    },
+    {
+      "name": "thai-lesson-builder",
+      "file": "agents/thai-lesson-builder.md",
+      "description": "Build comprehensive Thai language lessons with phrases, dialogues, and exercises",
+      "autoDiscovery": true
+    },
+    {
+      "name": "newsletter-composer",
+      "file": "agents/newsletter-composer.md",
+      "description": "Create bilingual email newsletters and templates for subscribers",
+      "autoDiscovery": true
+    },
+    {
+      "name": "stripe-payment-debugger",
+      "file": "agents/stripe-payment-debugger.md",
+      "description": "Debug and test Stripe payment integration",
+      "autoDiscovery": true
+    },
+    {
+      "name": "database-migration-assistant",
+      "file": "agents/database-migration-assistant.md",
+      "description": "Help create and manage PostgreSQL database migrations using Drizzle ORM",
+      "autoDiscovery": true
+    }
+  ],
+  "skills": [],
+  "hooks": []
+}

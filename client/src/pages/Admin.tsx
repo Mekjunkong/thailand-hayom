@@ -80,6 +80,15 @@ export default function Admin() {
       </header>
 
       <div className="container mx-auto px-4 py-8">
+        {/* Quick Actions */}
+        <div className="mb-8">
+          <Link href="/admin/content">
+            <Button size="lg" className="w-full md:w-auto">
+              Manage Content (Articles, Events, Newsletter)
+            </Button>
+          </Link>
+        </div>
+
         {/* Analytics Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>

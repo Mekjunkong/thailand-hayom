@@ -7,6 +7,8 @@ import { stripeRouter } from "./stripeRouter";
 import { adminRouter } from "./adminRouter";
 import { userRouter } from "./userRouter";
 import { newsletterRouter } from "./newsletterRouter";
+import { articleRouter } from "./articleRouter";
+import { eventRouter } from "./eventRouter";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -27,6 +29,8 @@ export const appRouter = router({
   admin: adminRouter,
   user: userRouter,
   newsletter: newsletterRouter,
+  article: articleRouter,
+  event: eventRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({
