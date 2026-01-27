@@ -444,3 +444,128 @@
 - [x] Add proper null checks and error handling for getVoices()
 - [x] Fix JSX indentation issues in InteractiveLessonPlayer
 - [x] Add fallback timer for voice loading
+
+
+---
+
+# 🆕 THAILAND HAYOM (תאילנד היום) - Newsletter Transformation
+
+## Phase 1: Branding & Structure
+- [ ] Update app title to "Thailand Hayom" (תאילנד היום) - (needs Management UI update)
+- [ ] Update app logo/favicon for newsletter brand
+- [x] Create new homepage with newsletter focus
+- [ ] Update navigation: Home, Articles, Events, Thai Lessons, Subscribe, Login
+- [x] Ensure Hebrew RTL support throughout
+
+## Phase 2: Database Schema
+- [ ] Create articles table (title, content, category, published_at, is_premium)
+- [ ] Create newsletter_subscribers table (email, tier: free/premium, subscribed_at)
+- [ ] Create events table (title, description, date, location, price, is_featured)
+- [ ] Create event_packages table (name, description, price, events_included)
+- [ ] Create subscriptions table (user_id, tier, status, stripe_subscription_id, started_at, ends_at)
+- [ ] Add subscription_tier to users table (free/premium/lifetime)
+
+## Phase 3: Article/Blog System
+- [ ] Create article listing page with categories
+- [ ] Categories: Travel Tips, Visa Updates, Events & Festivals, Food & Restaurants, Safety Tips, Special Deals
+- [ ] Article detail page with Hebrew content support
+- [ ] Premium content lock (show preview, require subscription to read full)
+- [ ] Article search and filtering by category
+- [ ] Related articles section
+- [ ] Article comments system (optional)
+
+## Phase 4: Newsletter Subscription
+- [ ] Newsletter signup form (homepage + footer)
+- [ ] Email collection and validation
+- [ ] Welcome email automation for new subscribers
+- [ ] Unsubscribe functionality with one-click link
+- [ ] Subscription preferences (categories, frequency)
+- [ ] Double opt-in confirmation email
+
+## Phase 5: Monetization - Subscription Tiers
+- [ ] Free tier: Basic weekly newsletter, evergreen content
+- [ ] Premium tier (₪49/month): Real-time alerts, exclusive deals, full calendar
+- [ ] Annual subscription (₪490/year - save 2 months)
+- [ ] Subscription management page (upgrade/downgrade/cancel)
+- [ ] Payment integration with existing Stripe setup
+- [ ] Subscription renewal reminders
+
+## Phase 6: Event System
+- [ ] Event calendar page (public view with filters)
+- [ ] Event detail pages with full information
+- [ ] Premium-only events (locked for free users)
+- [ ] Event alert system (email notifications for premium)
+- [ ] Event registration/RSVP functionality
+- [ ] Past events archive
+
+## Phase 7: À La Carte Event Packages
+- [ ] Event package listing page
+- [ ] Package detail page (₪15-29 each)
+- [ ] One-time payment flow via Stripe
+- [ ] Package delivery (PDF guide + email alerts)
+- [ ] Example packages: "Songkran 2026 Complete Guide", "Yi Peng Lantern Festival VIP Access"
+- [ ] Package purchase confirmation email
+
+## Phase 8: Admin Panel
+- [ ] Article management (create, edit, publish, delete, draft)
+- [ ] Newsletter composer and sender (HTML email editor)
+- [ ] Subscriber management (view, export CSV, segment by tier)
+- [ ] Event management (create, edit, send alerts)
+- [ ] Event package management
+- [ ] Revenue analytics dashboard (MRR, churn, LTV)
+- [ ] Subscription analytics (free vs premium count, conversion rate)
+- [ ] Email campaign analytics (open rate, click rate)
+
+## Phase 9: Content Migration & Setup
+- [ ] Keep Thai lessons in separate section (existing functionality)
+- [ ] Update Thai lessons navigation to be secondary
+- [ ] Create initial Hebrew articles (10-15 samples across categories)
+- [ ] Create sample events (5-10 upcoming events)
+- [ ] Create sample event packages (3-5 packages)
+- [ ] Write welcome email template (Hebrew + English)
+
+## Phase 10: Email System
+- [ ] Weekly newsletter template (Hebrew, mobile-responsive)
+- [ ] Event alert email template
+- [ ] Premium upgrade promotional email
+- [ ] Package purchase confirmation email
+- [ ] Subscription renewal reminder email
+- [ ] Re-engagement email for inactive subscribers
+
+## Phase 11: Testing & Polish
+- [ ] Test free tier user experience
+- [ ] Test premium subscription purchase flow
+- [ ] Test à la carte package purchase
+- [ ] Test email delivery (all templates)
+- [ ] Test admin panel functionality
+- [ ] Mobile responsiveness check
+- [ ] Hebrew RTL layout verification
+- [ ] Payment flow testing (Stripe sandbox)
+- [ ] Test subscription cancellation and refunds
+
+## Phase 12: Launch Preparation
+- [ ] Create launch announcement article
+- [ ] Prepare initial content library (20+ articles)
+- [ ] Set up analytics tracking (Google Analytics or similar)
+- [ ] Create user documentation/FAQ
+- [ ] Save checkpoint for deployment
+- [ ] Announce to existing Thai course users
+
+
+## Local Guides Content Categories
+- [ ] Where to Go (temples, attractions, day trips, hidden gems)
+- [ ] What to See (viewpoints, markets, cultural sites, photo spots)
+- [ ] Vegan Restaurants (plant-based dining with addresses & prices)
+- [ ] Food Scene (best restaurants by cuisine, street food)
+- [ ] Where to Stay (hotels/hostels by area & budget)
+- [ ] Nightlife (bars, clubs, live music venues)
+- [ ] Shopping (markets, malls, local crafts)
+- [ ] Wellness (yoga studios, spas, massage)
+- [ ] Activities (hiking, cycling, cooking classes, tours)
+
+## À La Carte Guide Packages
+- [ ] Create "Complete Vegan Guide to Chiang Mai" (₪25)
+- [ ] Create "Best Temples & Cultural Sites" (₪20)
+- [ ] Create "Hidden Gems & Secret Spots" (₪29)
+- [ ] Create "Ultimate Food Lover's Map" (₪25)
+- [ ] Create "Weekend Getaway Guide" (₪20)
