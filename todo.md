@@ -578,3 +578,14 @@
 - [x] Add code splitting for routes
 - [x] Optimize bundle size
 - [x] Add loading skeletons for better UX
+
+
+## Homepage Redesign
+- [x] Redesign hero banner for more elegance
+- [x] Move subscription tier comparison to bottom
+- [x] Create side-by-side subscription comparison
+- [x] Keep free email signup at top
+- [x] Premium payment subscription at bottom only
+- [x] Improve overall visual hierarchy
+- [x] Remove blue overlay from hero banner to show clear sea view
+- [x] Add parallax scrolling effects throughout the website
