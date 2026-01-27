@@ -595,3 +595,14 @@
 - [x] Add meta keywords
 - [x] Add Open Graph tags for social sharing
 - [ ] Add structured data for better search results
+
+
+## Article System
+- [x] Create article listing page (/articles)
+- [x] Add category filters (Vegan Restaurants, Temples, Visa, Events, etc.)
+- [x] Build article detail page with SEO optimization
+- [x] Write 5-10 Hebrew articles about Chiang Mai
+- [x] Add proper H1/H2/H3 tags for SEO
+- [x] Implement internal linking between articles
+- [x] Add related articles section
+- [x] Add article search functionality

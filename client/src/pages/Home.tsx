@@ -245,9 +245,9 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <Link href="/guides">
+            <Link href="/articles">
               <Button size="lg" className="px-10 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all">
-                {t({ he: "צפה בכל המדריכים", en: "View All Guides" })}
+                {t({ he: "קרא מאמרים", en: "Read Articles" })}
               </Button>
             </Link>
           </div>

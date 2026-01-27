@@ -22,6 +22,8 @@ import LessonDetail from "./pages/LessonDetail";
 import InteractiveLessons from "./pages/InteractiveLessons";
 import Quiz from "./pages/Quiz";
 import EmergencyScripts from "./pages/EmergencyScripts";
+import Articles from "./pages/Articles";
+import ArticleDetail from "./pages/ArticleDetail";
 import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
@@ -44,6 +46,8 @@ function Router() {
       <Route path="/interactive-lessons" component={InteractiveLessons} />
       <Route path="/quiz" component={Quiz} />
       <Route path="/emergency-scripts" component={EmergencyScripts} />
+      <Route path="/articles" component={Articles} />
+      <Route path="/articles/:slug" component={ArticleDetail} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
