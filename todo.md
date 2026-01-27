@@ -569,3 +569,12 @@
 - [ ] Create "Hidden Gems & Secret Spots" (₪29)
 - [ ] Create "Ultimate Food Lover's Map" (₪25)
 - [ ] Create "Weekend Getaway Guide" (₪20)
+
+
+## Language Toggle & Performance
+- [x] Create language context (Hebrew/English)
+- [x] Add language toggle button with flag icons (🇮🇱/🇬🇧)
+- [x] Implement lazy loading for images
+- [x] Add code splitting for routes
+- [x] Optimize bundle size
+- [x] Add loading skeletons for better UX
