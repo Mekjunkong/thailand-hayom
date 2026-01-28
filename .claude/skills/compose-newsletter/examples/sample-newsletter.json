@@ -1,0 +1,90 @@
+{
+  "subject": "Chiang Mai Food Guide & Songkran 2026",
+  "subjectHe": "מדריך אוכל צ'אנג מאי וסונגקראן 2026",
+  "articleIds": [5, 8, 12],
+  "eventIds": [15, 18],
+  "customContent": "Spring is here! We're excited to share this week's top recommendations for exploring Thailand. Don't miss our exclusive Songkran festival guide and the best vegan restaurants in Chiang Mai.",
+  "customContentHe": "האביב הגיע! אנחנו נרגשים לשתף את ההמלצות המובילות שלנו לשבוע זה לחקר תאילנד. אל תפספסו את המדריך הבלעדי שלנו לפסטיבל סונגקראן ואת המסעדות הטבעוניות הטובות ביותר בצ'אנג מאי.",
+  "tier": "all",
+  "expectedRecipients": 1247,
+  "articles": [
+    {
+      "id": 5,
+      "title": "10 Best Vegan Restaurants in Chiang Mai",
+      "titleHe": "10 המסעדות הטבעוניות הטובות ביותר בצ'אנג מאי",
+      "excerpt": "Complete guide to the best vegan restaurants in Chiang Mai, including addresses, prices and insider tips from local experts.",
+      "excerptHe": "מדריך מקיף למסעדות הטבעוניות הטובות ביותר בצ'אנג מאי, כולל כתובות, מחירים וטיפים מומחים מקומיים.",
+      "slug": "best-vegan-restaurants-chiang-mai",
+      "category": "food",
+      "isPremium": false,
+      "publishedAt": "2026-01-20T10:00:00Z",
+      "coverImage": "/images/vegan-food.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Thailand Visa Update 2026 - Everything You Need to Know",
+      "titleHe": "עדכון ויזה לתאילנד 2026 - כל מה שצריך לדעת",
+      "excerpt": "Latest visa requirements for Thailand in 2026, including tourist visa, DTV, and long-term visa options for Israeli travelers.",
+      "excerptHe": "דרישות הויזה העדכניות ביותר לתאילנד ב-2026, כולל ויזת תיירות, DTV ואפשרויות ויזה ארוכות טווח למטיילים ישראלים.",
+      "slug": "thailand-visa-update-2026",
+      "category": "visa",
+      "isPremium": false,
+      "publishedAt": "2026-01-18T14:30:00Z",
+      "coverImage": "/images/visa-passport.jpg"
+    },
+    {
+      "id": 12,
+      "title": "Songkran Festival 2026 Complete Guide",
+      "titleHe": "מדריך מלא לפסטיבל סונגקראן 2026",
+      "excerpt": "Ultimate guide to Thailand's biggest water festival. Dates, locations, events, what to bring, and safety tips for the best Songkran experience.",
+      "excerptHe": "המדריך המושלם לפסטיבל המים הגדול ביותר בתאילנד. תאריכים, מיקומים, אירועים, מה להביא וטיפי בטיחות לחוויית סונגקראן הטובה ביותר.",
+      "slug": "songkran-festival-2026-guide",
+      "category": "events",
+      "isPremium": true,
+      "publishedAt": "2026-01-15T08:00:00Z",
+      "coverImage": "/images/songkran-water.jpg"
+    }
+  ],
+  "events": [
+    {
+      "id": 15,
+      "title": "Digital Nomad Meetup - Chiang Mai",
+      "titleHe": "מפגש נוודים דיגיטליים - צ'אנג מאי",
+      "description": "Monthly meetup for digital nomads and remote workers in Chiang Mai. Network, share tips, and make friends. Free entry, drinks available for purchase.",
+      "descriptionHe": "מפגש חודשי לנוודים דיגיטליים ועובדים מרחוק בצ'אנג מאי. יצירת קשרים, שיתוף טיפים ויצירת חברויות חדשות. כניסה חינם, משקאות לרכישה.",
+      "eventDate": "2026-02-15T18:00:00Z",
+      "location": "Punspace Coworking, Nimman Road",
+      "locationHe": "Punspace קו-וורקינג, נימאן רואד",
+      "price": null,
+      "isPremium": false,
+      "registrationUrl": "https://thailandhayom.com/events/nomad-meetup-feb"
+    },
+    {
+      "id": 18,
+      "title": "VIP Songkran Pool Party 2026",
+      "titleHe": "מסיבת בריכה VIP סונגקראן 2026",
+      "description": "Exclusive Songkran pool party with DJ, food, drinks, and water activities. Limited to 100 guests. Premium subscriber discount: ₪50 off!",
+      "descriptionHe": "מסיבת בריכה בלעדית לסונגקראן עם DJ, אוכל, משקאות ופעילויות מים. מוגבל ל-100 אורחים. הנחה למנויי פרימיום: ₪50 הנחה!",
+      "eventDate": "2026-04-13T14:00:00Z",
+      "location": "Horizon Village & Resort, Chiang Mai",
+      "locationHe": "Horizon Village & Resort, צ'אנג מאי",
+      "price": 299,
+      "isPremium": true,
+      "registrationUrl": "https://thailandhayom.com/events/vip-songkran-party"
+    }
+  ],
+  "metadata": {
+    "sendDate": "2026-01-28T10:00:00Z",
+    "timezone": "Asia/Bangkok",
+    "batchSize": 50,
+    "delayBetweenBatches": 1000,
+    "estimatedSendTime": "25 batches × 1s = ~25 minutes"
+  },
+  "notes": [
+    "This example shows a typical 'all tiers' newsletter with mixed content",
+    "Includes 2 free articles, 1 premium article, 1 free event, 1 premium event",
+    "Custom content in both Hebrew and English provides context",
+    "Premium content marked with badges in HTML template",
+    "Estimated send time: ~25 minutes for 1,247 subscribers at 50/batch"
+  ]
+}
