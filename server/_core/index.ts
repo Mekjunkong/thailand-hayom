@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express from "express";
+import express, { Request, Response } from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
@@ -10,6 +10,7 @@ import { serveStatic, setupVite } from "./vite";
 import progressRouter from "../progressRouter";
 import phraseCardsRouter from "../phraseCardsRouter";
 import cookieParser from "cookie-parser";
+import { handleStripeWebhook } from "../webhookHandler";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -33,10 +34,35 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+
+  app.use(cookieParser());
+
+  // Stripe webhook (must be before express.json() to preserve raw body for signature verification)
+  app.post(
+    "/api/stripe/webhook",
+    express.raw({ type: "application/json" }),
+    async (req: Request, res: Response) => {
+      try {
+        const signature = req.headers["stripe-signature"];
+        if (!signature) {
+          return res.status(400).send("No signature provided");
+        }
+
+        // Convert raw body buffer to string for signature verification
+        const body = req.body.toString("utf8");
+        await handleStripeWebhook(body, signature as string);
+
+        res.json({ received: true });
+      } catch (error: any) {
+        console.error("Webhook error:", error.message);
+        res.status(400).send(`Webhook Error: ${error.message}`);
+      }
+    }
+  );
+
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  app.use(cookieParser());
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Progress API
