@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "@/components/LanguageToggle";
-import { Search, Calendar, Tag } from "lucide-react";
+import { Search } from "lucide-react";
 import { trpc } from "@/lib/trpc";
+import ArticleCard from "@/components/ArticleCard";
 
 const categories = [
   { id: "all", nameHe: "הכל", nameEn: "All" },
@@ -110,62 +111,7 @@ export default function Articles() {
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {articles.map(article => (
-                  <Link key={article.id} href={`/articles/${article.slug}`}>
-                    <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-pointer group">
-                      {/* Article Image */}
-                      <div className="relative h-56 bg-gradient-to-br from-blue-100 to-teal-100 overflow-hidden">
-                        {article.isPremium && (
-                          <div className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10 flex items-center gap-2">
-                            <span>👑</span>
-                            {t({ he: "פרימיום", en: "Premium" })}
-                          </div>
-                        )}
-                        {article.coverImage ? (
-                          <img
-                            src={article.coverImage}
-                            alt={language === 'he' ? article.titleHe : article.title}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-teal-400 group-hover:scale-110 transition-transform duration-500" />
-                        )}
-                      </div>
-
-                      {/* Article Content */}
-                      <div className="p-6">
-                        {/* Category Badge */}
-                        <div className="flex items-center gap-2 mb-3">
-                          <Tag className="w-4 h-4 text-blue-500" />
-                          <span className="text-sm font-semibold text-blue-600 capitalize">
-                            {article.category}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="text-xl font-bold mb-3 text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                          {language === 'he' ? article.titleHe : article.title}
-                        </h3>
-
-                        {/* Excerpt */}
-                        {(article.excerpt || article.excerptHe) && (
-                          <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                            {language === 'he' ? article.excerptHe : article.excerpt}
-                          </p>
-                        )}
-
-                        {/* Date */}
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <Calendar className="w-4 h-4" />
-                          <span>
-                            {new Date(article.publishedAt || article.createdAt).toLocaleDateString(
-                              language === 'he' ? 'he-IL' : 'en-US',
-                              { year: 'numeric', month: 'long', day: 'numeric' }
-                            )}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
+                  <ArticleCard key={article.id} article={article} />
                 ))}
               </div>
             )}

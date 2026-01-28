@@ -8,6 +8,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "@/components/LanguageToggle";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import AnimatedCounter from "@/components/AnimatedCounter";
+import ThailandMap from "@/components/ThailandMap";
 
 // Lazy load heavy components for better performance
 const TrendingUp = lazy(() => import("lucide-react").then(mod => ({ default: mod.TrendingUp })));
@@ -126,6 +128,49 @@ export default function Home() {
               <p className="mt-4 text-sm text-gray-500">
                 {t({ he: "הצטרף ל-5,000+ מטיילים ישראלים", en: "Join 5,000+ Israeli travelers" })}
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Statistics Section */}
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                {t({ he: "הצטרף לקהילה", en: "Join the Community" })}
+              </h2>
+              <p className="text-lg text-gray-600">
+                {t({ he: "אלפי מטיילים ישראלים כבר נהנים מהתוכן שלנו", en: "Thousands of Israeli travelers already enjoying our content" })}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <AnimatedCounter
+                end={5000}
+                suffix="+"
+                label="Subscribers"
+                labelHe="מנויים"
+                language={language}
+                duration={2500}
+              />
+              <AnimatedCounter
+                end={150}
+                suffix="+"
+                label="Articles Published"
+                labelHe="מאמרים פורסמו"
+                language={language}
+                duration={2000}
+              />
+              <AnimatedCounter
+                end={20}
+                suffix="+"
+                label="Cities Covered"
+                labelHe="ערים מכוסות"
+                language={language}
+                duration={1800}
+              />
             </div>
           </div>
         </div>
@@ -250,6 +295,24 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Interactive Thailand Map Section */}
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              {t({ he: "חקור את תאילנד", en: "Explore Thailand" })}
+            </h2>
+            <p className="text-xl text-gray-600">
+              {t({
+                he: "בחר עיר במפה כדי לגלות מדריכים, מאמרים ואירועים",
+                en: "Click on a city to discover guides, articles and events"
+              })}
+            </p>
+          </div>
+          <ThailandMap />
         </div>
       </section>
 
