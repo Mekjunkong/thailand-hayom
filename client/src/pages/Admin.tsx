@@ -81,10 +81,15 @@ export default function Admin() {
 
       <div className="container mx-auto px-4 py-8">
         {/* Quick Actions */}
-        <div className="mb-8">
+        <div className="mb-8 grid md:grid-cols-2 gap-4">
           <Link href="/admin/content">
-            <Button size="lg" className="w-full md:w-auto">
-              Manage Content (Articles, Events, Newsletter)
+            <Button size="lg" className="w-full">
+              📝 Manage Content (Articles, Events, Newsletter)
+            </Button>
+          </Link>
+          <Link href="/admin/financial">
+            <Button size="lg" className="w-full bg-green-600 hover:bg-green-700">
+              💰 Financial Management & AI Assistant
             </Button>
           </Link>
         </div>

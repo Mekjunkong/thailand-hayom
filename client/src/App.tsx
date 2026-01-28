@@ -17,6 +17,7 @@ import Pronunciation from "./pages/Pronunciation";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Admin from "./pages/Admin";
 import AdminContent from "./pages/AdminContent";
+import AdminFinancial from "./pages/AdminFinancial";
 import Profile from "./pages/Profile";
 import LessonList from "./pages/LessonList";
 import LessonDetail from "./pages/LessonDetail";
@@ -42,6 +43,7 @@ function Router() {
       <Route path="/payment-success" component={PaymentSuccess} />
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={AdminContent} />
+      <Route path="/admin/financial" component={AdminFinancial} />
       <Route path="/profile" component={Profile} />
       <Route path={"/lessons"} component={LessonList} />
       <Route path="/lesson/:id" component={LessonDetail} />
