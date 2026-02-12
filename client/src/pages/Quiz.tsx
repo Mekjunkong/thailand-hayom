@@ -155,7 +155,7 @@ export default function Quiz() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white flex items-center justify-center pt-16">
         <div className="text-center">
           <Brain className="w-16 h-16 animate-pulse text-purple-500 mx-auto mb-4" />
           <p className="text-xl text-gray-600">Loading quiz...</p>
@@ -170,7 +170,7 @@ export default function Quiz() {
       : 0;
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white pt-20 py-12 px-4">
         <div className="container mx-auto max-w-2xl">
           <Card className="border-4 border-purple-400 shadow-2xl">
             <CardHeader className="text-center bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-t-lg">
@@ -234,7 +234,7 @@ export default function Quiz() {
 
   if (!currentPhrase || quizPhrases.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white pt-20 py-12 px-4">
         <div className="container mx-auto max-w-2xl text-center">
           <Card>
             <CardContent className="pt-12 pb-12">
@@ -258,7 +258,7 @@ export default function Quiz() {
   const progress = ((currentIndex + 1) / quizPhrases.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white pt-20 py-12 px-4">
       <div className="container mx-auto max-w-3xl">
         {/* Header Stats */}
         <div className="mb-8 flex justify-between items-center">

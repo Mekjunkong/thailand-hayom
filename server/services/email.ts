@@ -2,7 +2,12 @@ import { Resend } from 'resend';
 import fs from 'fs';
 import path from 'path';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY not configured");
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 interface SendWelcomeKitEmailParams {
   to: string;
@@ -356,7 +361,7 @@ export async function sendWelcomeKitEmail({
     };
 
     // Send email with PDF attachment
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: 'Learn Thai Before You Fly <noreply@learnthaiB4fly.com>',
       to: [to],
       subject: emailContent.subject,

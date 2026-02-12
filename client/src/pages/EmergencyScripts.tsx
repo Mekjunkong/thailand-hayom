@@ -235,7 +235,7 @@ export default function EmergencyScripts() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-red-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-red-50 to-white pt-16">
       {/* Header */}
       <div className="bg-red-600 text-white py-12">
         <div className="container">

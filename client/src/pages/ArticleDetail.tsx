@@ -1,7 +1,6 @@
 import { useRoute, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageToggle from "@/components/LanguageToggle";
 import { Calendar, Tag, Clock, ArrowLeft, Crown } from "lucide-react";
 import { useEffect } from "react";
 
@@ -234,8 +233,7 @@ export default function ArticleDetail() {
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <LanguageToggle />
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-16">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 text-gray-900">
             {t({ he: "המאמר לא נמצא", en: "Article Not Found" })}
@@ -253,9 +251,7 @@ export default function ArticleDetail() {
   const content = language === 'he' ? article.contentHe : article.contentEn;
 
   return (
-    <div className="min-h-screen bg-white">
-      <LanguageToggle />
-
+    <div className="min-h-screen bg-white pt-16">
       {/* Article Header */}
       <article className="max-w-4xl mx-auto px-4 py-12">
         {/* Back Button */}

@@ -19,7 +19,7 @@ export default function Profile() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-50 pt-16">
         <Card className="max-w-md w-full">
           <CardHeader>
             <CardTitle className="text-center">Please Sign In</CardTitle>
@@ -40,7 +40,7 @@ export default function Profile() {
   const completionPercentage = Math.round((completedLessons / totalLessons) * 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 pt-20 py-12 px-4">
       <div className="container max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">

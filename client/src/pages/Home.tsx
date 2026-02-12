@@ -5,11 +5,11 @@ import { Link } from "wouter";
 import { useState, lazy, Suspense, useEffect, useRef } from "react";
 import { Mail, Check, Crown, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageToggle from "@/components/LanguageToggle";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import ThailandMap from "@/components/ThailandMap";
+import ScrollReveal from "@/components/ScrollReveal";
 
 // Lazy load heavy components for better performance
 const TrendingUp = lazy(() => import("lucide-react").then(mod => ({ default: mod.TrendingUp })));
@@ -58,9 +58,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Language Toggle */}
-      <LanguageToggle />
-
       {/* Hero Section - Clear Sea View with Parallax */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div 
@@ -137,14 +134,16 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                {t({ he: "הצטרף לקהילה", en: "Join the Community" })}
-              </h2>
-              <p className="text-lg text-gray-600">
-                {t({ he: "אלפי מטיילים ישראלים כבר נהנים מהתוכן שלנו", en: "Thousands of Israeli travelers already enjoying our content" })}
-              </p>
-            </div>
+            <ScrollReveal>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                  {t({ he: "הצטרף לקהילה", en: "Join the Community" })}
+                </h2>
+                <p className="text-lg text-gray-600">
+                  {t({ he: "אלפי מטיילים ישראלים כבר נהנים מהתוכן שלנו", en: "Thousands of Israeli travelers already enjoying our content" })}
+                </p>
+              </div>
+            </ScrollReveal>
 
             <div className="grid md:grid-cols-3 gap-8">
               <AnimatedCounter
@@ -179,14 +178,16 @@ export default function Home() {
       {/* What You Get Section */}
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              {t({ he: "מה תקבל בניוזלטר?", en: "What's in the Newsletter?" })}
-            </h2>
-            <p className="text-xl text-gray-600">
-              {t({ he: "תוכן שבועי מותאם למטיילים ישראלים", en: "Weekly content for Israeli travelers" })}
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+                {t({ he: "מה תקבל בניוזלטר?", en: "What's in the Newsletter?" })}
+              </h2>
+              <p className="text-xl text-gray-600">
+                {t({ he: "תוכן שבועי מותאם למטיילים ישראלים", en: "Weekly content for Israeli travelers" })}
+              </p>
+            </div>
+          </ScrollReveal>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <Suspense fallback={<div className="h-72 bg-gray-100 animate-pulse rounded-3xl" />}>
@@ -246,14 +247,16 @@ export default function Home() {
       {/* Local Guides Preview */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              {t({ he: "מדריכים מקומיים", en: "Local Guides" })}
-            </h2>
-            <p className="text-xl text-gray-600">
-              {t({ he: "גלה את הטוב ביותר בצ'אנג מאי ותאילנד", en: "Discover the best of Chiang Mai & Thailand" })}
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+                {t({ he: "מדריכים מקומיים", en: "Local Guides" })}
+              </h2>
+              <p className="text-xl text-gray-600">
+                {t({ he: "גלה את הטוב ביותר בצ'אנג מאי ותאילנד", en: "Discover the best of Chiang Mai & Thailand" })}
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <Link href="/articles?category=food">
@@ -301,24 +304,29 @@ export default function Home() {
       {/* Interactive Thailand Map Section */}
       <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              {t({ he: "חקור את תאילנד", en: "Explore Thailand" })}
-            </h2>
-            <p className="text-xl text-gray-600">
-              {t({
-                he: "בחר עיר במפה כדי לגלות מדריכים, מאמרים ואירועים",
-                en: "Click on a city to discover guides, articles and events"
-              })}
-            </p>
-          </div>
-          <ThailandMap />
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+                {t({ he: "חקור את תאילנד", en: "Explore Thailand" })}
+              </h2>
+              <p className="text-xl text-gray-600">
+                {t({
+                  he: "בחר עיר במפה כדי לגלות מדריכים, מאמרים ואירועים",
+                  en: "Click on a city to discover guides, articles and events"
+                })}
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <ThailandMap />
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Thai Lessons CTA */}
       <section className="py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
         <div className="container mx-auto px-4 text-center">
+          <ScrollReveal>
           <div className="max-w-3xl mx-auto">
             <div className="text-7xl mb-8">🎓</div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
@@ -336,20 +344,23 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Subscription Tiers Comparison - Bottom Section */}
       <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">
-              {t({ he: "בחר את התוכנית המתאימה לך", en: "Choose Your Plan" })}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {t({ he: "תוכניות גמישות לכל סוג מטייל - מחדשות בסיסיות ועד גישה בלעדית", en: "Flexible plans for every traveler - from basic news to exclusive access" })}
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">
+                {t({ he: "בחר את התוכנית המתאימה לך", en: "Choose Your Plan" })}
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                {t({ he: "תוכניות גמישות לכל סוג מטייל - מחדשות בסיסיות ועד גישה בלעדית", en: "Flexible plans for every traveler - from basic news to exclusive access" })}
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">

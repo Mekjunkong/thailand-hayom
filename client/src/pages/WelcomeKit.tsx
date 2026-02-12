@@ -30,7 +30,7 @@ export default function WelcomeKit() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white pt-16">
       {/* Header */}
       <header className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white py-16 shadow-2xl">
         <div className="container mx-auto px-4 text-center">

@@ -24,7 +24,7 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-16">
       {/* Hero Image */}
       <div className="relative h-96 overflow-hidden">
         <img 

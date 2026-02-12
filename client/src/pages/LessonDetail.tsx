@@ -31,7 +31,7 @@ export default function LessonDetail() {
 
   if (!lesson) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center pt-16">
         <p>Lesson not found</p>
       </div>
     );
@@ -83,7 +83,7 @@ export default function LessonDetail() {
   const nextLessonId = lesson.id < lessons.length ? lesson.id + 1 : null;
 
   return (
-    <div className="min-h-screen" style={{background: 'linear-gradient(to bottom, oklch(0.98 0.01 75), white)'}}>
+    <div className="min-h-screen pt-16" style={{background: 'linear-gradient(to bottom, oklch(0.98 0.01 75), white)'}}>
       {/* Header */}
       <header 
         className="relative h-64 bg-cover bg-center"

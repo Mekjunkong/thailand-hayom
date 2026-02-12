@@ -3,10 +3,10 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageToggle from "@/components/LanguageToggle";
 import { Search } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import ArticleCard from "@/components/ArticleCard";
+import ArticleCardSkeleton from "@/components/ArticleCardSkeleton";
 
 const categories = [
   { id: "all", nameHe: "הכל", nameEn: "All" },
@@ -20,7 +20,9 @@ const categories = [
 
 export default function Articles() {
   const { language, t } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
+  const [selectedCategory, setSelectedCategory] = useState<string | undefined>(
+    undefined,
+  );
   const [searchQuery, setSearchQuery] = useState("");
 
   const { data, isLoading } = trpc.article.list.useQuery({
@@ -34,9 +36,7 @@ export default function Articles() {
   const articles = data?.articles || [];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <LanguageToggle />
-
+    <div className="min-h-screen bg-gray-50 pt-16">
       {/* Header */}
       <section className="bg-gradient-to-r from-blue-600 to-teal-500 text-white py-20">
         <div className="container mx-auto px-4">
@@ -45,9 +45,9 @@ export default function Articles() {
               {t({ he: "מאמרים ומדריכים", en: "Articles & Guides" })}
             </h1>
             <p className="text-xl md:text-2xl opacity-90">
-              {t({ 
+              {t({
                 he: "כל מה שצריך לדעת על תאילנד וצ'אנג מאי",
-                en: "Everything you need to know about Thailand and Chiang Mai"
+                en: "Everything you need to know about Thailand and Chiang Mai",
               })}
             </p>
           </div>
@@ -64,9 +64,12 @@ export default function Articles() {
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <Input
                   type="text"
-                  placeholder={t({ he: "חפש מאמרים...", en: "Search articles..." })}
+                  placeholder={t({
+                    he: "חפש מאמרים...",
+                    en: "Search articles...",
+                  })}
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="pl-12 pr-4 py-6 text-lg rounded-xl border-2 border-gray-200 focus:border-blue-400"
                 />
               </div>
@@ -77,15 +80,25 @@ export default function Articles() {
               {categories.map(category => (
                 <Button
                   key={category.id}
-                  onClick={() => setSelectedCategory(category.id === "all" ? undefined : category.id)}
-                  variant={(category.id === "all" && !selectedCategory) || selectedCategory === category.id ? "default" : "outline"}
+                  onClick={() =>
+                    setSelectedCategory(
+                      category.id === "all" ? undefined : category.id,
+                    )
+                  }
+                  variant={
+                    (category.id === "all" && !selectedCategory) ||
+                    selectedCategory === category.id
+                      ? "default"
+                      : "outline"
+                  }
                   className={`px-6 py-3 rounded-full transition-all ${
-                    (category.id === "all" && !selectedCategory) || selectedCategory === category.id
+                    (category.id === "all" && !selectedCategory) ||
+                    selectedCategory === category.id
                       ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg"
                       : "hover:border-blue-400"
                   }`}
                 >
-                  {language === 'he' ? category.nameHe : category.nameEn}
+                  {language === "he" ? category.nameHe : category.nameEn}
                 </Button>
               ))}
             </div>
@@ -98,9 +111,10 @@ export default function Articles() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             {isLoading ? (
-              <div className="text-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                <p className="text-gray-600">{t({ he: "טוען מאמרים...", en: "Loading articles..." })}</p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <ArticleCardSkeleton key={i} />
+                ))}
               </div>
             ) : articles.length === 0 ? (
               <div className="text-center py-20">
@@ -124,16 +138,22 @@ export default function Articles() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              {t({ he: "רוצה גישה לכל המאמרים?", en: "Want Access to All Articles?" })}
+              {t({
+                he: "רוצה גישה לכל המאמרים?",
+                en: "Want Access to All Articles?",
+              })}
             </h2>
             <p className="text-xl mb-10 opacity-90">
-              {t({ 
+              {t({
                 he: "שדרג לפרימיום וקבל גישה בלתי מוגבלת לכל התוכן, כולל מדריכים בלעדיים והנחות",
-                en: "Upgrade to Premium and get unlimited access to all content, including exclusive guides and discounts"
+                en: "Upgrade to Premium and get unlimited access to all content, including exclusive guides and discounts",
               })}
             </p>
             <Link href="/#pricing">
-              <Button size="lg" className="px-12 py-7 text-xl bg-white text-blue-600 hover:bg-gray-50 font-bold rounded-xl shadow-2xl">
+              <Button
+                size="lg"
+                className="px-12 py-7 text-xl bg-white text-blue-600 hover:bg-gray-50 font-bold rounded-xl shadow-2xl"
+              >
                 {t({ he: "שדרג לפרימיום", en: "Upgrade to Premium" })}
               </Button>
             </Link>

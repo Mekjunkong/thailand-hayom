@@ -1,11 +1,20 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import Stripe from "stripe";
+import { TRPCError } from "@trpc/server";
 import { PRODUCTS } from "@shared/products";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-10-29.clover",
-});
+function getStripe(): Stripe {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new TRPCError({
+      code: "PRECONDITION_FAILED",
+      message: "Stripe is not configured. Set STRIPE_SECRET_KEY to enable payments.",
+    });
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2025-10-29.clover",
+  });
+}
 
 export const stripeRouter = router({
   createCheckoutSession: publicProcedure
@@ -102,7 +111,7 @@ export const stripeRouter = router({
         sessionParams.client_reference_id = ctx.user.id.toString();
       }
 
-      const session = await stripe.checkout.sessions.create(sessionParams);
+      const session = await getStripe().checkout.sessions.create(sessionParams);
 
       return {
         sessionId: session.id,
@@ -117,7 +126,7 @@ export const stripeRouter = router({
       })
     )
     .query(async ({ input }) => {
-      const session = await stripe.checkout.sessions.retrieve(input.sessionId);
+      const session = await getStripe().checkout.sessions.retrieve(input.sessionId);
 
       return {
         status: session.payment_status,

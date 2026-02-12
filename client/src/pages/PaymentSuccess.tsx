@@ -13,7 +13,7 @@ export default function PaymentSuccess() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex items-center justify-center p-4 pt-20">
       <Card className="max-w-2xl w-full shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-6">

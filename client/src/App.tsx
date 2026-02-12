@@ -5,6 +5,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ProgressProvider } from "./contexts/ProgressContext";
 import AIConcierge from "./components/AIConcierge";
+import Navbar from "./components/Navbar";
+import AnimatedPage from "./components/AnimatedPage";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import WelcomeKit from "./pages/WelcomeKit";
@@ -28,29 +30,69 @@ import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import ScrollToTop from "./components/ScrollToTop";
 
+function AnimatedRoute({
+  component: Component,
+}: {
+  component: React.ComponentType;
+}) {
+  return (
+    <AnimatedPage>
+      <Component />
+    </AnimatedPage>
+  );
+}
+
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-        <Route path="/welcome-kit" component={WelcomeKit} />
-      <Route path="/emergency" component={Emergency} />
-      <Route path="/blog" component={Blog} />
+      <Route path={"/"}>
+        <AnimatedRoute component={Home} />
+      </Route>
+      <Route path="/welcome-kit">
+        <AnimatedRoute component={WelcomeKit} />
+      </Route>
+      <Route path="/emergency">
+        <AnimatedRoute component={Emergency} />
+      </Route>
+      <Route path="/blog">
+        <AnimatedRoute component={Blog} />
+      </Route>
       <Route path="/blog/:id" component={BlogPost} />
-      <Route path="/progress" component={Progress} />
-      <Route path="/downloads" component={Downloads} />
-      <Route path="/pronunciation" component={Pronunciation} />
-      <Route path="/payment-success" component={PaymentSuccess} />
+      <Route path="/progress">
+        <AnimatedRoute component={Progress} />
+      </Route>
+      <Route path="/downloads">
+        <AnimatedRoute component={Downloads} />
+      </Route>
+      <Route path="/pronunciation">
+        <AnimatedRoute component={Pronunciation} />
+      </Route>
+      <Route path="/payment-success">
+        <AnimatedRoute component={PaymentSuccess} />
+      </Route>
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={AdminContent} />
       <Route path="/admin/financial" component={AdminFinancial} />
-      <Route path="/profile" component={Profile} />
-      <Route path={"/lessons"} component={LessonList} />
+      <Route path="/profile">
+        <AnimatedRoute component={Profile} />
+      </Route>
+      <Route path={"/lessons"}>
+        <AnimatedRoute component={LessonList} />
+      </Route>
       <Route path="/lesson/:id" component={LessonDetail} />
-      <Route path="/interactive-lessons" component={InteractiveLessons} />
-      <Route path="/quiz" component={Quiz} />
-      <Route path="/emergency-scripts" component={EmergencyScripts} />
-      <Route path="/articles" component={Articles} />
+      <Route path="/interactive-lessons">
+        <AnimatedRoute component={InteractiveLessons} />
+      </Route>
+      <Route path="/quiz">
+        <AnimatedRoute component={Quiz} />
+      </Route>
+      <Route path="/emergency-scripts">
+        <AnimatedRoute component={EmergencyScripts} />
+      </Route>
+      <Route path="/articles">
+        <AnimatedRoute component={Articles} />
+      </Route>
       <Route path="/articles/:slug" component={ArticleDetail} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
@@ -75,6 +117,7 @@ function App() {
           <TooltipProvider>
             <Toaster />
             <ScrollToTop />
+            <Navbar />
             <Router />
             <AIConcierge />
           </TooltipProvider>

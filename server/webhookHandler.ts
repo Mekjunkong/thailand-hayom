@@ -4,16 +4,18 @@ import { purchases } from "../drizzle/schema";
 import { generateWelcomeKitPDF, generateInvoicePDF } from "./pdfGenerator";
 import { sendWelcomeKitEmail, sendBulkOrderInvoice } from "./emailService";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-10-29.clover",
-});
-
 export async function handleStripeWebhook(body: string, signature: string) {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error("STRIPE_SECRET_KEY not configured");
+  }
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
   if (!webhookSecret) {
     throw new Error("STRIPE_WEBHOOK_SECRET not configured");
   }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2025-10-29.clover",
+  });
 
   let event: Stripe.Event;
 

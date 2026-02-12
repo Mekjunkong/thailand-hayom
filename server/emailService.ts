@@ -1,6 +1,11 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY not configured");
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function sendWelcomeKitEmail(
   to: string,
@@ -325,7 +330,7 @@ export async function sendWelcomeKitEmail(
       `
     };
 
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: emailContent.from,
       to: [to],
       subject: emailContent.subject,
@@ -358,7 +363,7 @@ export async function sendBulkOrderInvoice(
   quantity: number
 ) {
   try {
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: 'LearnThaiB4Fly <noreply@learnthaib4fly.com>',
       to: [to],
       subject: `Invoice for Bulk Order (${quantity} licenses)`,

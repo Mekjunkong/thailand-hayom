@@ -15,7 +15,7 @@ export default function Progress() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-16">
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16 shadow-2xl">
         <div className="container mx-auto px-4 text-center">
