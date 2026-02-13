@@ -16,7 +16,7 @@ jobs:
           response=$(curl -s -w "\n%{http_code}" \
             --request POST \
             --url https://api.manus.ai/v1/tasks \
-            --header "API_KEY: ${{ secrets.MANUS_API_KEY }}" \
+            --header "API_KEY: ${{ secrets.THAILANDHAYOM }}" \
             --header "Content-Type: application/json" \
             --data '{
               "prompt": "Pull the latest code from the GitHub repository https://github.com/Mekjunkong/thailand-hayom (main branch) and redeploy the Thailand Hayom website. Run pnpm install, then pnpm build, and deploy the updated build.",
