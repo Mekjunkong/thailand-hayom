@@ -39,7 +39,7 @@ export default function InteractiveLessons() {
           const data = await response.json();
           const completed = new Set<number>();
           data.progress.forEach((p: any) => {
-            if (p.completed === 1) {
+            if (p.completed) {
               completed.add(p.lessonId);
             }
           });
@@ -56,7 +56,7 @@ export default function InteractiveLessons() {
   }, [isAuthenticated]);
 
   // Save progress to database
-  const saveProgress = async (lessonId: number, completed: number) => {
+  const saveProgress = async (lessonId: number, completed: boolean) => {
     if (!isAuthenticated) return;
 
     try {
@@ -79,7 +79,7 @@ export default function InteractiveLessons() {
       newCompleted.add(selectedLessonId);
       setCompletedLessons(newCompleted);
       // Save to database
-      saveProgress(selectedLessonId, 1);
+      saveProgress(selectedLessonId, true);
     }
   };
 

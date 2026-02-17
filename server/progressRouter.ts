@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { eq, and } from "drizzle-orm";
+import { eq, and, lte } from "drizzle-orm";
 import { getDb, getUserByOpenId } from "./db";
 import { userProgress, quizPerformance } from "../drizzle/schema";
 import { sdk } from "./_core/sdk";
@@ -261,13 +261,15 @@ router.get("/api/progress/quiz/due", async (req: Request, res: Response) => {
     }
 
     const now = new Date();
-    const dueForReview = await db
+    const due = await db
       .select()
       .from(quizPerformance)
-      .where(eq(quizPerformance.userId, user.id));
-
-    // Filter in JavaScript since drizzle-orm might not support date comparison easily
-    const due = dueForReview.filter(p => p.nextReview <= now);
+      .where(
+        and(
+          eq(quizPerformance.userId, user.id),
+          lte(quizPerformance.nextReview, now)
+        )
+      );
 
     res.json({ due, count: due.length });
   } catch (error) {
