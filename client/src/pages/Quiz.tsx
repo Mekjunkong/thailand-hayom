@@ -38,10 +38,10 @@ export default function Quiz() {
       if (!isAuthenticated) {
         // If not logged in, use all phrases
         const allPhrases: QuizPhrase[] = [];
-        lessonsData.forEach((lesson, lessonIndex) => {
-          lesson.phrases.forEach((phrase, phraseIndex) => {
+        lessonsData.forEach((lesson) => {
+          lesson.phrases.forEach((phrase) => {
             allPhrases.push({
-              id: lessonIndex * 100 + phraseIndex,
+              id: lesson.id * 100 + phrase.id,
               thai: phrase.thai,
               phonetic: phrase.phonetic,
               english: phrase.english,
@@ -67,10 +67,10 @@ export default function Quiz() {
           // If no phrases due, use random phrases
           if (data.count === 0) {
             const allPhrases: QuizPhrase[] = [];
-            lessonsData.forEach((lesson, lessonIndex) => {
-              lesson.phrases.forEach((phrase, phraseIndex) => {
+            lessonsData.forEach((lesson) => {
+              lesson.phrases.forEach((phrase) => {
                 allPhrases.push({
-                  id: lessonIndex * 100 + phraseIndex,
+                  id: lesson.id * 100 + phrase.id,
                   thai: phrase.thai,
                   phonetic: phrase.phonetic,
                   english: phrase.english,
@@ -84,13 +84,13 @@ export default function Quiz() {
           } else {
             // Use phrases due for review
             const duePhrases = data.due.map((d: any) => {
-              const lessonIndex = Math.floor(d.phraseId / 100);
-              const phraseIndex = d.phraseId % 100;
-              const lesson = lessonsData[lessonIndex];
-              const phrase = lesson?.phrases[phraseIndex];
+              const lessonId = Math.floor(d.phraseId / 100);
+              const phraseId = d.phraseId % 100;
+              const lesson = lessonsData.find(l => l.id === lessonId);
+              const phrase = lesson?.phrases.find(p => p.id === phraseId);
               
-              if (!phrase) return null;
-              
+              if (!lesson || !phrase) return null;
+
               return {
                 id: d.phraseId,
                 thai: phrase.thai,
