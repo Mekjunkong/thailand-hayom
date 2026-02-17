@@ -1,18 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "wouter";
 import { useState, useEffect, useRef } from "react";
-import { Mail, Check, Crown, Sparkles, ArrowRight } from "lucide-react";
+import { Mail, Check, Crown, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import ThailandMap from "@/components/ThailandMap";
 import ScrollReveal from "@/components/ScrollReveal";
-import ContentCarousel from "@/components/ContentCarousel";
-import ThaiTextAnimation from "@/components/ThaiTextAnimation";
+import CategoryGrid from "@/components/CategoryGrid";
+import FeaturedStrip from "@/components/FeaturedStrip";
 
 export default function Home() {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -54,9 +53,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* ============================================================
-          Section 1: Hero (~70vh)
+          Section 1: Compact Hero (~30vh)
           ============================================================ */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[30vh] flex items-center justify-center overflow-hidden">
         {/* Parallax background image */}
         <div
           ref={heroRef}
@@ -69,41 +68,19 @@ export default function Home() {
         {/* Heavy bottom gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/70" />
 
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto py-20">
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto py-14">
           {/* Bold headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
             {t({ he: "תאילנד היום", en: "Thailand Hayom" })}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-2xl mb-10 text-white/90">
+          <p className="text-base md:text-xl mb-6 text-white/90">
             {t({
               he: "המדריך שלך לתאילנד — חדשות, שיעורים וטיפים מקומיים בעברית",
               en: "Your guide to Thailand — news, lessons, and local tips in Hebrew",
             })}
           </p>
-
-          {/* Two CTAs side-by-side */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Link href="/interactive-lessons">
-              <Button
-                size="lg"
-                className="px-8 py-6 text-lg bg-white text-gray-900 hover:bg-gray-100 font-semibold rounded-xl shadow-lg transition-all"
-              >
-                {t({ he: "התחל ללמוד תאילנדית", en: "Start Learning Thai" })}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/articles">
-              <Button
-                size="lg"
-                variant="outline"
-                className="px-8 py-6 text-lg border-white/60 text-white hover:bg-white/10 font-semibold rounded-xl transition-all"
-              >
-                {t({ he: "קרא מדריכים", en: "Read Guides" })}
-              </Button>
-            </Link>
-          </div>
 
           {/* Compact inline stat pills */}
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -121,12 +98,17 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          Section 2: Content Carousel
+          Section 2: Category Grid
           ============================================================ */}
-      <ContentCarousel />
+      <CategoryGrid />
 
       {/* ============================================================
-          Section 3: Interactive Thailand Map (dark bg)
+          Section 3: Featured Strip
+          ============================================================ */}
+      <FeaturedStrip />
+
+      {/* ============================================================
+          Section 4: Interactive Thailand Map (dark bg)
           ============================================================ */}
       <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-800">
         <div className="container mx-auto px-4">
@@ -146,49 +128,6 @@ export default function Home() {
           <ScrollReveal delay={0.1}>
             <ThailandMap />
           </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ============================================================
-          Section 4: Learn Thai CTA
-          ============================================================ */}
-      <section className="py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            {/* Left: Thai Text Animation */}
-            <ScrollReveal>
-              <ThaiTextAnimation />
-            </ScrollReveal>
-
-            {/* Right: Copy + CTA */}
-            <ScrollReveal delay={0.15}>
-              <div
-                className={language === "he" ? "text-right" : "text-left"}
-              >
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                  {t({
-                    he: "למד תאילנדית לפני הטיסה",
-                    en: "Learn Thai Before You Fly",
-                  })}
-                </h2>
-                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                  {t({
-                    he: "30 שיעורים אינטראקטיביים שיכינו אותך לתקשורת בסיסית בתאילנדית. למד ביטויים חיוניים, הזמנת אוכל, מיקוח ועוד.",
-                    en: "30 interactive lessons to prepare you for basic Thai communication. Learn essential phrases, ordering food, bargaining and more.",
-                  })}
-                </p>
-                <Link href="/lesson/1">
-                  <Button
-                    size="lg"
-                    className="px-10 py-6 text-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
-                  >
-                    {t({ he: "התחל שיעור 1", en: "Start Lesson 1" })}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
         </div>
       </section>
 
