@@ -2635,6 +2635,72 @@ export const lessonsData: Lesson[] = [
         scenario: "After resting or treatment. Reassures concerned Thais.",
         culturalTip: "Thais are genuinely concerned about tourists' wellbeing. They'll help."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เท้าเจ็บมากครับ เดินเยอะ",
+        phonetic: "tao jep maak khrap dern yoe",
+        hebrew: "כואב לי הרגל, הלכתי הרבה"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "ไปนวดไทยดีไหมคะ",
+        phonetic: "pai nuat thai dee mai kha",
+        hebrew: "בוא נלך לעיסוי תאילנדי?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ดีครับ ปวดหลังด้วย",
+        phonetic: "dee khrap puat lang duay",
+        hebrew: "מצוין, גם כואב לי הגב"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "บอกเขาตรงที่เจ็บนะคะ",
+        phonetic: "bok khao trong tee jep na kha",
+        hebrew: "תגיד להם איפה כואב"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "รู้สึกดีขึ้นมากครับ",
+        phonetic: "roo-seuk dee keun maak khrap",
+        hebrew: "אני מרגיש הרבה יותר טוב"
+      }
+    ],
+    exercises: [
+      {
+        id: 69,
+        question: "What does 'เท้าเจ็บ' (tao jep) mean?",
+        questionHebrew: "מה המשמעות של 'เท้าเจ็บ' (เท้า เจ็บ)?",
+        options: ["My head hurts / כואב לי הראש", "My foot hurts / כואב לי הרגל", "My back hurts / כואב לי הגב", "I'm tired / אני עייף"],
+        correctAnswer: 1,
+        explanation: "'เท้าเจ็บ' (tao jep) means 'my foot hurts'. Common after lots of walking. Thai massage can help!",
+        explanationHebrew: "'เท้าเจ็บ' (เท้า เจ็บ) פירושו 'כואב לי הרגל'. נפוץ אחרי הליכה רבה. עיסוי תאילנדי יכול לעזור!"
+      },
+      {
+        id: 70,
+        question: "Why are feet considered disrespectful in Thai culture?",
+        questionHebrew: "למה רגליים נחשבות לא מכובדות בתרבות התאילנדית?",
+        options: ["They are dirty from walking / הן מלוכלכות מהליכה", "Feet are the lowest part of the body, considered unclean / הרגליים הן החלק הנמוך ביותר בגוף, נחשבות לא טהורות", "There's no specific reason / אין סיבה ספציפית", "Only in temples / רק במקדשים"],
+        correctAnswer: 1,
+        explanation: "In Thai culture, feet are the lowest and dirtiest part of the body. Never point feet at people or Buddha images. Tuck them aside when sitting.",
+        explanationHebrew: "בתרבות התאילנדית, הרגליים הן החלק הנמוך והמלוכלך ביותר בגוף. לעולם אל תצביעו עם הרגליים לאנשים או לפסלי בודהה. הכניסו אותן הצידה בישיבה."
+      },
+      {
+        id: 71,
+        question: "How do you say 'I feel better' in Thai?",
+        questionHebrew: "איך אומרים 'אני מרגיש יותר טוב' בתאילנדית?",
+        options: ["เหนื่อย (neuay)", "วิงเวียน (wing wian)", "รู้สึกดีขึ้น (roo-seuk dee keun)", "เท้าเจ็บ (tao jep)"],
+        correctAnswer: 2,
+        explanation: "'รู้สึกดีขึ้น' (roo-seuk dee keun) means 'I feel better'. Use after resting or treatment to reassure concerned Thais.",
+        explanationHebrew: "'รู้สึกดีขึ้น' (רู-ซึก ดี เขิน) פירושו 'אני מרגיש יותר טוב'. השתמשו אחרי מנוחה או טיפול כדי להרגיע תאילנדים מודאגים."
+      }
     ]
   },
   {
@@ -2687,6 +2753,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "plaek jai",
         scenario: "Reacting to Thai culture, food, or unexpected situations.",
         culturalTip: "Thailand is full of surprises! Express wonder - Thais enjoy your reactions."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "ชอบเมืองไทยไหมคะ",
+        phonetic: "chop meuang thai mai kha",
+        hebrew: "אתה אוהב את תאילנד?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "มีความสุขมากครับ",
+        phonetic: "mee kwam suk maak khrap",
+        hebrew: "אני מאוד שמח"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "ดีใจค่ะ ตื่นเต้นไหม",
+        phonetic: "dee jai kha teun ten mai",
+        hebrew: "שמחה לשמוע, נרגש?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ตื่นเต้นมากครับ แต่เศร้าที่ต้องกลับ",
+        phonetic: "teun ten maak khrap tae sao tee tong klap",
+        hebrew: "מאוד נרגש, אבל עצוב שצריך לחזור"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "กลับมาอีกนะคะ",
+        phonetic: "klap maa eek na kha",
+        hebrew: "תחזור שוב"
+      }
+    ],
+    exercises: [
+      {
+        id: 72,
+        question: "How do you say 'I'm happy' in Thai?",
+        questionHebrew: "איך אומרים 'אני שמח' בתאילנדית?",
+        options: ["เศร้า (sao)", "มีความสุข (mee kwam suk)", "กลัว (klua)", "ตื่นเต้น (teun ten)"],
+        correctAnswer: 1,
+        explanation: "'มีความสุข' (mee kwam suk) means 'I'm happy'. Thais value happiness ('สุข' - suk) and a positive attitude goes far.",
+        explanationHebrew: "'มีความสุข' (מי ความ สุข) פירושו 'אני שמח'. תאילנדים מעריכים אושר ('สุข' - סุק) וגישה חיובית עוזרת מאוד."
+      },
+      {
+        id: 73,
+        question: "What does 'กลัว' (klua) mean?",
+        questionHebrew: "מה המשמעות של 'กลัว' (กลัว)?",
+        options: ["I'm happy / אני שמח", "I'm excited / אני נרגש", "I'm scared / אני מפחד", "I'm surprised / אני מופתע"],
+        correctAnswer: 2,
+        explanation: "'กลัว' (klua) means 'I'm scared'. Thais will reassure and encourage you - it's perfectly okay to express fear.",
+        explanationHebrew: "'กลัว' (กลัว) פירושו 'אני מפחד'. תאילנדים ירגיעו ויעודדו אתכם - זה בסדר גמור להביע פחד."
+      },
+      {
+        id: 74,
+        question: "How do you say 'I'm excited' in Thai?",
+        questionHebrew: "איך אומרים 'אני נרגש' בתאילנדית?",
+        options: ["แปลกใจ (plaek jai)", "เศร้า (sao)", "ตื่นเต้น (teun ten)", "มีความสุข (mee kwam suk)"],
+        correctAnswer: 2,
+        explanation: "'ตื่นเต้น' (teun ten) means 'I'm excited'. Enthusiasm is contagious - Thais love seeing tourists enjoy their country!",
+        explanationHebrew: "'ตื่นเต้น' (ตืน เต้น) פירושו 'אני נרגש'. התלהבות מדבקת - תאילנדים אוהבים לראות תיירים נהנים מהארץ שלהם!"
       }
     ]
   },
@@ -2741,6 +2873,72 @@ export const lessonsData: Lesson[] = [
         scenario: "Popular tourist attractions. Best during/after rainy season.",
         culturalTip: "Bring swimsuit. Many waterfalls allow swimming in pools."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อยากไปดูช้างครับ",
+        phonetic: "yaak pai doo chaang khrap",
+        hebrew: "אני רוצה ללכת לראות פילים"
+      },
+      {
+        speaker: "Guide",
+        speakerHebrew: "מדריך",
+        thai: "มีสถานที่ดูแลช้างดีๆ ค่ะ",
+        phonetic: "mee sa-taan-tee doo lae chaang dee dee kha",
+        hebrew: "יש שמורת פילים טובה"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ไม่ขี่ช้างนะครับ ดูอย่างเดียว",
+        phonetic: "mai kee chaang na khrap doo yaang diao",
+        hebrew: "לא לרכוב על פילים, רק להסתכל"
+      },
+      {
+        speaker: "Guide",
+        speakerHebrew: "מדריך",
+        thai: "ดีค่ะ มีหาดสวยๆ ใกล้ๆ ด้วย",
+        phonetic: "dee kha mee haat suay suay klai klai duay",
+        hebrew: "מצוין, יש גם חוף יפה בקרבת מקום"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อยากไปน้ำตกด้วยครับ",
+        phonetic: "yaak pai nam tok duay khrap",
+        hebrew: "אני רוצה גם ללכת למפל"
+      }
+    ],
+    exercises: [
+      {
+        id: 75,
+        question: "What does 'ช้าง' (chaang) mean?",
+        questionHebrew: "מה המשמעות של 'ช้าง' (ช้าง)?",
+        options: ["Monkey / קוף", "Beach / חוף", "Elephant / פיל", "Mountain / הר"],
+        correctAnswer: 2,
+        explanation: "'ช้าง' (chaang) means 'elephant' - Thailand's national symbol. Always visit ethical sanctuaries, not riding camps.",
+        explanationHebrew: "'ช้าง' (ช้าง) פירושו 'פיל' - הסמל הלאומי של תאילנד. תמיד בקרו בשמורות אתיות, לא במחנות רכיבה."
+      },
+      {
+        id: 76,
+        question: "Why should you avoid elephant riding in Thailand?",
+        questionHebrew: "למה צריך להימנע מרכיבה על פילים בתאילנד?",
+        options: ["It's expensive / זה יקר", "It's illegal / זה לא חוקי", "Choose ethical sanctuaries where elephants roam freely / בחרו שמורות אתיות שבהן פילים מסתובבים בחופשיות", "Elephants are dangerous / פילים מסוכנים"],
+        correctAnswer: 2,
+        explanation: "Elephant riding is harmful. Choose ethical sanctuaries where elephants roam freely and are treated well.",
+        explanationHebrew: "רכיבה על פילים מזיקה. בחרו שמורות אתיות שבהן פילים מסתובבים בחופשיות ומטופלים היטב."
+      },
+      {
+        id: 77,
+        question: "What does 'หาด' (haat) mean?",
+        questionHebrew: "מה המשמעות של 'หาด' (หาด)?",
+        options: ["Mountain / הר", "Waterfall / מפל", "Beach / חוף", "Forest / יער"],
+        correctAnswer: 2,
+        explanation: "'หาด' (haat) means 'beach'. Thailand has amazing beaches: Krabi, Phuket, Koh Samui. 'ไปหาด' (pai haat) = 'go to beach'.",
+        explanationHebrew: "'หาด' (หาด) פירושו 'חוף'. בתאילנד יש חופים מדהימים: קראבי, פוקט, קו סמוי. 'ไปหาด' (ไป หาด) = 'ללכת לחוף'."
+      }
     ]
   },
   {
@@ -2793,6 +2991,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "class yoga",
         scenario: "Popular in Chiang Mai, Koh Phangan. Many retreats available.",
         culturalTip: "Thailand is a yoga hub. From budget to luxury retreats."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อยากไปดูมวยไทยครับ",
+        phonetic: "yaak pai doo muay thai khrap",
+        hebrew: "אני רוצה ללכת לראות מוואי תאי"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "ไปลุมพินีดีไหมคะ",
+        phonetic: "pai lum-pi-nee dee mai kha",
+        hebrew: "נלך ללומפיני?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ดีครับ มีสระว่ายน้ำที่โรงแรมไหม",
+        phonetic: "dee khrap mee sa waai naam tee rohng raem mai",
+        hebrew: "מצוין, יש בריכה במלון?"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "มีค่ะ อยากเช่าจักรยานพรุ่งนี้ไหม",
+        phonetic: "mee kha yaak chao jak-ka-yaan proong nee mai",
+        hebrew: "כן, רוצה לשכור אופניים מחר?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อยากครับ อยากไปดำน้ำด้วย",
+        phonetic: "yaak khrap yaak pai dam naam duay",
+        hebrew: "כן, ואני גם רוצה לצלול"
+      }
+    ],
+    exercises: [
+      {
+        id: 78,
+        question: "What is 'มวยไทย' (muay thai)?",
+        questionHebrew: "מה זה 'มวยไทย' (มวย ไท)?",
+        options: ["Thai food / אוכל תאילנדי", "Thai boxing - Thailand's national sport / אגרוף תאילנדי - הספורט הלאומי של תאילנד", "Thai massage / עיסוי תאילנדי", "Thai temple / מקדש תאילנדי"],
+        correctAnswer: 1,
+        explanation: "'มวยไทย' (muay thai) is Thai boxing - Thailand's national sport. Watch at Lumpinee or Rajadamnern stadiums in Bangkok.",
+        explanationHebrew: "'มวยไทย' (מוuay ไท) הוא אגרוף תאילנדי - הספורט הלאומי של תאילנד. צפו באצטדיון לומפיני או ראג'דמנרן בבנגקוק."
+      },
+      {
+        id: 79,
+        question: "How do you say 'I want to go diving' in Thai?",
+        questionHebrew: "איך אומרים 'אני רוצה לצלול' בתאילנדית?",
+        options: ["อยากเช่าจักรยาน (yaak chao jak-ka-yaan)", "อยากไปดำน้ำ (yaak pai dam naam)", "มีสระว่ายน้ำไหม (mee sa waai naam mai)", "คลาสโยคะ (class yoga)"],
+        correctAnswer: 1,
+        explanation: "'อยากไปดำน้ำ' (yaak pai dam naam) means 'I want to go diving'. Thailand has world-class diving at Similan Islands and Koh Tao.",
+        explanationHebrew: "'อยากไปดำน้ำ' (ยาก ไป ดำ น้ำ) פירושו 'אני רוצה לצלול'. בתאילנד יש צלילה ברמה עולמית באיי סימילאן וקו טאו."
+      },
+      {
+        id: 80,
+        question: "What should you remember when renting a bicycle in Thailand?",
+        questionHebrew: "מה צריך לזכור כששוכרים אופניים בתאילנד?",
+        options: ["Drive on the right side / לנהוג בצד ימין", "Drive on the left, wear a helmet, watch for traffic / לנהוג בצד שמאל, לחבוש קסדה, להיזהר מתנועה", "Bicycles are very expensive / אופניים מאוד יקרים", "You need a license / צריך רישיון"],
+        correctAnswer: 1,
+        explanation: "Drive on the left side (like UK), wear a helmet, and watch for traffic. Bikes are cheap to rent - great for exploring islands.",
+        explanationHebrew: "נוהגים בצד שמאל (כמו בבריטניה), חובשים קסדה, ונזהרים מתנועה. אופניים זולים להשכרה - מצוין לסיורים באיים."
       }
     ]
   },
@@ -2847,6 +3111,81 @@ export const lessonsData: Lesson[] = [
         scenario: "For achievements, weddings, new jobs, or any good news.",
         culturalTip: "Thais are genuinely happy for others' success. Share good news!"
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "สงกรานต์เมื่อไหร่ครับ",
+        phonetic: "song-kraan meua rai khrap",
+        hebrew: "מתי סונגקראן?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "สิบสามถึงสิบห้าเมษายนค่ะ",
+        phonetic: "sip-saam teung sip-haa me-saa-yon kha",
+        hebrew: "13 עד 15 באפריל"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "สนุกไหมครับ",
+        phonetic: "sa-nuk mai khrap",
+        hebrew: "כיף?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "สนุกมากค่ะ เล่นน้ำกัน สวัสดีปีใหม่",
+        phonetic: "sa-nuk maak kha len naam kan sa-wat-dee pee mai",
+        hebrew: "מאוד כיף, משחקים במים. שנה טובה!"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "สวัสดีปีใหม่ครับ",
+        phonetic: "sa-wat-dee pee mai khrap",
+        hebrew: "שנה טובה!"
+      }
+    ],
+    exercises: [
+      {
+        id: 81,
+        question: "When is Songkran (Thai New Year)?",
+        questionHebrew: "מתי סונגקראן (ראש השנה התאילנדי)?",
+        options: ["January 1 / 1 בינואר", "April 13-15 / 13-15 באפריל", "November 15 / 15 בנובמבר", "December 31 / 31 בדצמבר"],
+        correctAnswer: 1,
+        explanation: "Songkran (สงกรานต์) is April 13-15 - Thai New Year with massive water fights nationwide! Protect your electronics.",
+        explanationHebrew: "סונגקראן (สงกรานต์) הוא 13-15 באפריל - ראש השנה התאילנדי עם קרבות מים ענקיים ברחבי הארץ! הגנו על המכשירים האלקטרוניים."
+      },
+      {
+        id: 82,
+        question: "What is 'ลอยกระทง' (Loy Krathong)?",
+        questionHebrew: "מה זה 'ลอยกระทง' (לוי קרתונג)?",
+        options: ["Water festival / פסטיבל מים", "Lantern festival with floating baskets / פסטיבל פנסים עם סירות צפות", "Food festival / פסטיבל אוכל", "Music festival / פסטיבל מוזיקה"],
+        correctAnswer: 1,
+        explanation: "'ลอยกระทง' (Loy Krathong) is the Lantern Festival in November. Float decorated baskets on water and release sky lanterns. Chiang Mai's Yi Peng is spectacular.",
+        explanationHebrew: "'ลอยกระทง' (לוי קרתונג) הוא פסטיבל הפנסים בנובמבר. מציפים סירות מקושטות על המים ומשחררים פנסי שמיים. יי-פנג בצ'יאנג מאי מרהיב."
+      },
+      {
+        id: 83,
+        question: "How do you say 'Happy New Year' in Thai?",
+        questionHebrew: "איך אומרים 'שנה טובה' בתאילנדית?",
+        options: ["สุขสันต์วันเกิด (suk-san wan kert)", "ยินดีด้วย (yin dee duay)", "สวัสดีปีใหม่ (sa-wat-dee pee mai)", "ขอบคุณ (khop-khun)"],
+        correctAnswer: 2,
+        explanation: "'สวัสดีปีใหม่' (sa-wat-dee pee mai) means 'Happy New Year'. Used for both Western New Year and Songkran.",
+        explanationHebrew: "'สวัสดีปีใหม่' (สวัสดี ปี ใหม่) פירושו 'שנה טובה'. משתמשים גם לשנה החדשה המערבית וגם לסונגקראן."
+      },
+      {
+        id: 84,
+        question: "What is unique about Thai birthday culture?",
+        questionHebrew: "מה ייחודי בתרבות ימי ההולדת התאילנדית?",
+        options: ["They don't celebrate birthdays / הם לא חוגגים ימי הולדת", "The birthday person treats others / חוגג יום ההולדת מכבד את האחרים", "They only celebrate every 5 years / חוגגים רק כל 5 שנים", "Birthdays are private / ימי הולדת הם פרטיים"],
+        correctAnswer: 1,
+        explanation: "In Thai culture, the birthday person often treats others - the opposite of Western culture! Say 'สุขสันต์วันเกิด' (suk-san wan kert) for Happy Birthday.",
+        explanationHebrew: "בתרבות התאילנדית, חוגג יום ההולדת לרוב מכבד את האחרים - ההפך מהתרבות המערבית! אמרו 'สุขสันต์วันเกิด' (สุข สัน วัน เกิด) ליום הולדת שמח."
+      }
     ]
   },
   {
@@ -2899,6 +3238,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "ja song email hai",
         scenario: "Follow-up after meetings. Thais prefer LINE but email is professional.",
         culturalTip: "Follow up promptly. Thais may not respond immediately - be patient."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "สวัสดีครับ มาทำธุรกิจ",
+        phonetic: "sa-wat-dee khrap maa tam tu-ra-kit",
+        hebrew: "שלום, אני כאן לעסקים"
+      },
+      {
+        speaker: "Colleague",
+        speakerHebrew: "עמית",
+        thai: "ยินดีต้อนรับค่ะ นี่นามบัตรดิฉัน",
+        phonetic: "yin dee ton rap kha nee naam bat dichan",
+        hebrew: "ברוכים הבאים, הנה כרטיס הביקור שלי"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอบคุณครับ นี่นามบัตรผม",
+        phonetic: "khop-khun khrap nee naam bat pom",
+        hebrew: "תודה, הנה כרטיס הביקור שלי"
+      },
+      {
+        speaker: "Colleague",
+        speakerHebrew: "עמית",
+        thai: "นัดประชุมพรุ่งนี้ดีไหมคะ",
+        phonetic: "nat pra-chum proong nee dee mai kha",
+        hebrew: "נקבע פגישה למחר?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ดีครับ ขอบคุณสำหรับเวลา จะส่งอีเมลให้",
+        phonetic: "dee khrap khop-khun sam-rap we-laa ja song email hai",
+        hebrew: "מצוין, תודה על הזמן. אשלח אימייל"
+      }
+    ],
+    exercises: [
+      {
+        id: 85,
+        question: "How should you present a business card in Thailand?",
+        questionHebrew: "איך צריך להגיש כרטיס ביקור בתאילנד?",
+        options: ["Toss it on the table / לזרוק על השולחן", "Present with both hands and a slight bow / להגיש בשתי ידיים עם קידה קלה", "Put it in your pocket / לשים בכיס", "Leave it at reception / להשאיר בקבלה"],
+        correctAnswer: 1,
+        explanation: "Present business cards with both hands and a slight bow. When receiving, use both hands, read it, and don't pocket it immediately.",
+        explanationHebrew: "הגישו כרטיסי ביקור בשתי ידיים עם קידה קלה. כשמקבלים, השתמשו בשתי ידיים, קראו אותו, ואל תכניסו לכיס מיד."
+      },
+      {
+        id: 86,
+        question: "What do Thais value more in business relationships?",
+        questionHebrew: "מה תאילנדים מעריכים יותר ביחסים עסקיים?",
+        options: ["Strict punctuality / דייקנות קפדנית", "Building rapport and relationships / בניית יחסים וקשר אישי", "Aggressive negotiation / משא ומתן אגרסיבי", "Formal dress code / קוד לבוש פורמלי"],
+        correctAnswer: 1,
+        explanation: "Thais value relationships over punctuality in business. Build rapport first before diving into business discussions.",
+        explanationHebrew: "תאילנדים מעריכים יחסים מעל דייקנות בעסקים. בנו קשר אישי קודם לפני שנכנסים לדיונים עסקיים."
+      },
+      {
+        id: 87,
+        question: "How do you say 'Thank you for your time' in Thai?",
+        questionHebrew: "איך אומרים 'תודה על הזמן שלך' בתאילנדית?",
+        options: ["นัดประชุมกัน (nat pra-chum kan)", "จะส่งอีเมลให้ (ja song email hai)", "ขอบคุณสำหรับเวลา (khop-khun sam-rap we-laa)", "มาทำธุรกิจ (maa tam tu-ra-kit)"],
+        correctAnswer: 2,
+        explanation: "'ขอบคุณสำหรับเวลา' (khop-khun sam-rap we-laa) means 'Thank you for your time'. Shows respect and is appreciated in business settings.",
+        explanationHebrew: "'ขอบคุณสำหรับเวลา' (ขอบคุณ สำหรับ เวลา) פירושו 'תודה על הזמן שלך'. מראה כבוד ומוערך בסביבה עסקית."
       }
     ]
   },
@@ -2953,6 +3358,79 @@ export const lessonsData: Lesson[] = [
         scenario: "Usually 12pm. Ask about late checkout if needed.",
         culturalTip: "Late checkout often available for small fee or free if not busy."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "แอร์เสียครับ ร้อนมาก",
+        phonetic: "air sia khrap ron maak",
+        hebrew: "המזגן לא עובד, חם מאוד"
+      },
+      {
+        speaker: "Receptionist",
+        speakerHebrew: "פקיד קבלה",
+        thai: "ขอโทษค่ะ ส่งช่างไปดูเลยนะคะ",
+        phonetic: "khor-toht kha song chang pai doo loei na kha",
+        hebrew: "סליחה, נשלח טכנאי מיד"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอเปลี่ยนห้องได้ไหมครับ",
+        phonetic: "khor plian hong dai mai khrap",
+        hebrew: "אפשר להחליף חדר?"
+      },
+      {
+        speaker: "Receptionist",
+        speakerHebrew: "פקיד קבלה",
+        thai: "ได้ค่ะ ขอผ้าเช็ดตัวเพิ่มไหมคะ",
+        phonetic: "dai kha khor paa chet tua perm mai kha",
+        hebrew: "כן, צריך עוד מגבות?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ได้ครับ เช็คเอาท์กี่โมงครับ",
+        phonetic: "dai khrap check-out kee mong khrap",
+        hebrew: "כן. מה שעת היציאה?"
+      },
+      {
+        speaker: "Receptionist",
+        speakerHebrew: "פקיד קבלה",
+        thai: "เที่ยงค่ะ",
+        phonetic: "tiang kha",
+        hebrew: "בשתים עשרה בצהריים"
+      }
+    ],
+    exercises: [
+      {
+        id: 88,
+        question: "How do you say 'Can I change rooms?' in Thai?",
+        questionHebrew: "איך אומרים 'אפשר להחליף חדר?' בתאילנדית?",
+        options: ["แอร์เสีย (air sia)", "ขอผ้าเช็ดตัวเพิ่ม (khor paa chet tua perm)", "ขอเปลี่ยนห้องได้ไหม (khor plian hong dai mai)", "เช็คเอาท์กี่โมง (check-out kee mong)"],
+        correctAnswer: 2,
+        explanation: "'ขอเปลี่ยนห้องได้ไหม' (khor plian hong dai mai) means 'Can I change rooms?' Hotels usually accommodate politely-made requests.",
+        explanationHebrew: "'ขอเปลี่ยนห้องได้ไหม' (kor plian hong dai mai) פירושו 'אפשר להחליף חדר?' מלונות בדרך כלל נענים לבקשות שנאמרות בנימוס."
+      },
+      {
+        id: 89,
+        question: "What does 'ไวไฟไม่ทำงาน' (wifi mai tam ngaan) mean?",
+        questionHebrew: "מה המשמעות של 'ไวไฟไม่ทำงาน' (wifi mai tam ngaan)?",
+        options: ["The AC is broken / המזגן שבור", "The WiFi is not working / ה-WiFi לא עובד", "I need towels / אני צריך מגבות", "The room is dirty / החדר מלוכלך"],
+        correctAnswer: 1,
+        explanation: "'ไวไฟไม่ทำงาน' (wifi mai tam ngaan) means 'The WiFi is not working'. Get the WiFi password at check-in and test it before staff leaves.",
+        explanationHebrew: "'ไวไฟไม่ทำงาน' (wifi mai tam ngaan) פירושו 'ה-WiFi לא עובד'. קבלו את סיסמת ה-WiFi בצ'ק-אין ובדקו אותה לפני שהצוות עוזב."
+      },
+      {
+        id: 90,
+        question: "What is the typical checkout time in Thai hotels?",
+        questionHebrew: "מהי שעת היציאה האופיינית במלונות תאילנדיים?",
+        options: ["10 AM", "12 PM (noon)", "2 PM", "3 PM"],
+        correctAnswer: 1,
+        explanation: "Checkout is usually at 12 PM (noon). Late checkout is often available for a small fee or free if the hotel isn't busy.",
+        explanationHebrew: "שעת היציאה היא בדרך כלל ב-12 בצהריים. יציאה מאוחרת לרוב אפשרית בתשלום קטן או בחינם אם המלון לא מלא."
+      }
     ]
   },
   {
@@ -3005,6 +3483,88 @@ export const lessonsData: Lesson[] = [
         phonetic: "khop-khun tee son",
         scenario: "After Thais help you learn language, customs, or anything.",
         culturalTip: "Gratitude goes far. Thais love helping tourists learn."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เคารพวัฒนธรรมไทยครับ",
+        phonetic: "kao-rop wat-ta-na-tam thai khrap",
+        hebrew: "אני מכבד את התרבות התאילנדית"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ดีใจค่ะ คุณใจดีมาก",
+        phonetic: "dee jai kha khun jai dee maak",
+        hebrew: "שמחה לשמוע, אתה מאוד נחמד"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ถ่ายรูปได้ไหมครับ",
+        phonetic: "taai roop dai mai khrap",
+        hebrew: "אפשר לצלם?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ได้ค่ะ ถ่ายเลย",
+        phonetic: "dai kha taai loei",
+        hebrew: "כן, צלם"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอบคุณที่สอนครับ อยากเรียนรู้ประเพณีไทย",
+        phonetic: "khop-khun tee son khrap yaak rian roo pra-pe-nee thai",
+        hebrew: "תודה שלימדת, אני רוצה ללמוד מנהגים תאילנדיים"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ยินดีค่ะ กลับมาอีกนะคะ",
+        phonetic: "yin dee kha klap maa eek na kha",
+        hebrew: "בשמחה, תחזור שוב"
+      }
+    ],
+    exercises: [
+      {
+        id: 91,
+        question: "How do you say 'I respect Thai culture' in Thai?",
+        questionHebrew: "איך אומרים 'אני מכבד את התרבות התאילנדית' בתאילנדית?",
+        options: ["เหมาะสมไหม (maw-som mai)", "เคารพวัฒนธรรมไทย (kao-rop wat-ta-na-tam thai)", "อยากเรียนรู้ประเพณีไทย (yaak rian roo pra-pe-nee thai)", "ขอบคุณที่สอน (khop-khun tee son)"],
+        correctAnswer: 1,
+        explanation: "'เคารพวัฒนธรรมไทย' (kao-rop wat-ta-na-tam thai) means 'I respect Thai culture'. Thais deeply appreciate this sentiment from visitors.",
+        explanationHebrew: "'เคารพวัฒนธรรมไทย' (เคารพ วัฒนธรรม ไท) פירושו 'אני מכבד את התרבות התאילנדית'. תאילנדים מעריכים מאוד את הרגש הזה ממבקרים."
+      },
+      {
+        id: 92,
+        question: "What are the three basic Thai customs every tourist should know?",
+        questionHebrew: "מהם שלושת המנהגים התאילנדיים הבסיסיים שכל תייר צריך לדעת?",
+        options: ["Eat spicy food, drink beer, dance / לאכול חריף, לשתות בירה, לרקוד", "Remove shoes, dress modestly at temples, respect the monarchy / להוריד נעליים, להתלבש בצניעות במקדשים, לכבד את המלוכה", "Speak Thai, eat with chopsticks, tip 20% / לדבר תאילנדית, לאכול עם מקלות, לתת 20% טיפ", "Bow to everyone, wear white, avoid markets / לקוד לכולם, ללבוש לבן, להימנע משווקים"],
+        correctAnswer: 1,
+        explanation: "Three essential customs: remove shoes indoors, dress modestly at temples (cover shoulders and knees), and show respect for the Thai monarchy.",
+        explanationHebrew: "שלושה מנהגים חיוניים: להוריד נעליים בפנים, להתלבש בצניעות במקדשים (כיסוי כתפיים וברכיים), ולהראות כבוד למלוכה התאילנדית."
+      },
+      {
+        id: 93,
+        question: "What does 'เหมาะสมไหม' (maw-som mai) mean?",
+        questionHebrew: "מה המשמעות של 'เหมาะสมไหม' (מאוว-สום มาย)?",
+        options: ["Is this delicious? / זה טעים?", "Is this expensive? / זה יקר?", "Is this appropriate? / זה מתאים?", "Is this far? / זה רחוק?"],
+        correctAnswer: 2,
+        explanation: "'เหมาะสมไหม' (maw-som mai) means 'Is this appropriate?' Use when unsure about clothing, behavior, or actions. Better to ask than offend.",
+        explanationHebrew: "'เหมาะสมไหม' (מאוว-สום מาย) פירושו 'זה מתאים?' השתמשו כשלא בטוחים לגבי לבוש, התנהגות, או פעולות. עדיף לשאול מאשר לפגוע."
+      },
+      {
+        id: 94,
+        question: "How do you say 'Thank you for teaching me' in Thai?",
+        questionHebrew: "איך אומרים 'תודה שלימדת אותי' בתאילנדית?",
+        options: ["ถ่ายรูปได้ไหม (taai roop dai mai)", "เคารพวัฒนธรรมไทย (kao-rop wat-ta-na-tam thai)", "เหมาะสมไหม (maw-som mai)", "ขอบคุณที่สอน (khop-khun tee son)"],
+        correctAnswer: 3,
+        explanation: "'ขอบคุณที่สอน' (khop-khun tee son) means 'Thank you for teaching me'. Gratitude goes far in Thailand - Thais love helping tourists learn!",
+        explanationHebrew: "'ขอบคุณที่สอน' (ขอบคุณ ที สอน) פירושו 'תודה שלימדת אותי'. הכרת תודה עוברת דרך ארוכה בתאילנד - תאילנדים אוהבים לעזור לתיירים ללמוד!"
       }
     ]
   }
