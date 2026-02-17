@@ -226,6 +226,15 @@ export const lessonsData: Lesson[] = [
     icon: "🛍️",
     phrases: [
       {
+        id: 51,
+        english: "How much is this?",
+        hebrew: "כמה זה עולה?",
+        thai: "นี่เท่าไหร่",
+        phonetic: "nee tao-rai",
+        scenario: "Essential for shopping at markets, street vendors, or anywhere without price tags.",
+        culturalTip: "Always ask the price before buying. Prices at markets are often negotiable, but stay polite and smile."
+      },
+      {
         id: 16,
         english: "Too expensive",
         hebrew: "יקר מדי",
@@ -269,6 +278,15 @@ export const lessonsData: Lesson[] = [
         phonetic: "doo gon",
         scenario: "Vendors at markets can be pushy. Say this politely to browse without pressure.",
         culturalTip: "Smile and say 'ดูก่อนนะ' (doo gon na) - the 'นะ' (na) makes it softer and more polite."
+      },
+      {
+        id: 55,
+        english: "Do you have a smaller size?",
+        hebrew: "יש לך מידה קטנה יותר?",
+        thai: "มีไซส์เล็กกว่านี้ไหม",
+        phonetic: "mee size lek kwa nee mai",
+        scenario: "For clothing shopping. Replace 'เล็ก' (small) with 'ใหญ่' (yai) for larger.",
+        culturalTip: "Thai sizes run small. Try before buying, and don't be shy about asking for different sizes."
       }
     ]
   },
@@ -591,59 +609,6 @@ export const lessonsData: Lesson[] = [
     ]
   },
   {
-    id: 11,
-    title: "Shopping & Bargaining",
-    titleHebrew: "קניות ומיקוח",
-    icon: "🛍️",
-    phrases: [
-      {
-        id: 51,
-        english: "How much is this?",
-        hebrew: "כמה זה עולה?",
-        thai: "นี่เท่าไหร่",
-        phonetic: "nee tao-rai",
-        scenario: "Essential for shopping at markets, street vendors, or anywhere without price tags.",
-        culturalTip: "Always ask the price before buying. Prices at markets are often negotiable, but stay polite and smile."
-      },
-      {
-        id: 52,
-        english: "Too expensive",
-        hebrew: "יקר מדי",
-        thai: "แพงไป",
-        phonetic: "paeng pai",
-        scenario: "Use when bargaining at markets. Follow with your counter-offer or walk away slowly.",
-        culturalTip: "Bargaining is expected at markets but not in malls or 7-Eleven. Start at 50-60% of asking price."
-      },
-      {
-        id: 53,
-        english: "Can you give me a discount?",
-        hebrew: "אתה יכול לתת לי הנחה?",
-        thai: "ลดได้ไหม",
-        phonetic: "lot dai mai",
-        scenario: "Polite way to ask for a better price. Works best when buying multiple items.",
-        culturalTip: "Smile and be friendly. Thais respond better to charm than aggressive haggling."
-      },
-      {
-        id: 54,
-        english: "I'll take it",
-        hebrew: "אני אקח את זה",
-        thai: "เอาค่ะ/ครับ",
-        phonetic: "ao kha/khrap",
-        scenario: "When you've agreed on a price and want to buy.",
-        culturalTip: "Once you say this, you're committed. Don't continue bargaining after."
-      },
-      {
-        id: 55,
-        english: "Do you have a smaller size?",
-        hebrew: "יש לך מידה קטנה יותר?",
-        thai: "มีไซส์เล็กกว่านี้ไหม",
-        phonetic: "mee size lek kwa nee mai",
-        scenario: "For clothing shopping. Replace 'เล็ก' (small) with 'ใหญ่' (yai) for larger.",
-        culturalTip: "Thai sizes run small. Try before buying, and don't be shy about asking for different sizes."
-      }
-    ]
-  },
-  {
     id: 12,
     title: "Medical & Health",
     titleHebrew: "רפואה ובריאות",
@@ -804,9 +769,9 @@ export const lessonsData: Lesson[] = [
   },
   {
     id: 15,
-    title: "Numbers & Counting",
-    titleHebrew: "מספרים וספירה",
-    icon: "🔢",
+    title: "Counting & Math",
+    titleHebrew: "ספירה ומתמטיקה",
+    icon: "🧮",
     phrases: [
       {
         id: 71,
