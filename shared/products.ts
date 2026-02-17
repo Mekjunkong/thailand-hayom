@@ -32,3 +32,26 @@ export const PRODUCTS = {
 } as const;
 
 export type ProductKey = keyof typeof PRODUCTS;
+
+export const SUBSCRIPTION_PLANS = {
+  MONTHLY: {
+    name: "Thailand Hayom Premium",
+    description: "Monthly premium subscription — exclusive articles, guides, and insider tips",
+    price: 29,
+    currency: "ils",
+    interval: "month" as const,
+    priceInAgorot: 2900,
+  },
+  ANNUAL: {
+    name: "Thailand Hayom Premium (Annual)",
+    description: "Annual premium subscription — save 41% compared to monthly",
+    price: 199,
+    currency: "ils",
+    interval: "year" as const,
+    priceInAgorot: 19900,
+    savingsPercent: 41,
+    monthlyEquivalent: 17,
+  },
+} as const;
+
+export type SubscriptionPlan = keyof typeof SUBSCRIPTION_PLANS;
