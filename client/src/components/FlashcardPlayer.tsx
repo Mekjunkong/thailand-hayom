@@ -279,12 +279,12 @@ export default function FlashcardPlayer({
               {/* Front */}
               <div className="backface-hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl border-2 border-black bg-white p-8">
                 <span
-                  className="text-6xl sm:text-7xl font-bold text-black mb-4 leading-tight text-center"
+                  className="text-4xl sm:text-5xl font-bold text-black mb-4 leading-tight text-center"
                   lang="th"
                 >
                   {currentPhrase.thai}
                 </span>
-                <span className="text-xl sm:text-2xl text-gray-500 mb-6 text-center">
+                <span className="text-lg sm:text-xl text-gray-500 mb-6 text-center">
                   {currentPhrase.phonetic}
                 </span>
                 <button
@@ -308,7 +308,7 @@ export default function FlashcardPlayer({
               {/* Back */}
               <div className="backface-hidden rotate-y-180 absolute inset-0 flex flex-col rounded-2xl border-2 border-black bg-white p-8 overflow-y-auto">
                 <span
-                  className="text-2xl font-bold text-black mb-2 text-center"
+                  className="text-lg font-bold text-black mb-2 text-center"
                   lang="th"
                 >
                   {currentPhrase.thai}
@@ -317,7 +317,7 @@ export default function FlashcardPlayer({
                   {currentPhrase.english}
                 </span>
                 <span
-                  className="text-xl text-gray-700 mb-4 text-center hebrew-text"
+                  className="text-2xl text-gray-700 mb-4 text-center hebrew-text"
                   dir="rtl"
                 >
                   {currentPhrase.hebrew}
@@ -434,10 +434,10 @@ export default function FlashcardPlayer({
 
           {/* Exercise card */}
           <div className="rounded-2xl border-2 border-black p-6 mb-6">
-            <p className="text-xl font-bold text-black mb-1">
+            <p className="text-lg font-bold text-black mb-1">
               {exercise.question}
             </p>
-            <p className="text-lg text-gray-600 hebrew-text mb-6" dir="rtl">
+            <p className="text-xl text-gray-600 hebrew-text mb-6" dir="rtl">
               {exercise.questionHebrew}
             </p>
 
@@ -477,7 +477,7 @@ export default function FlashcardPlayer({
                   {exercise.explanation}
                 </p>
                 <p
-                  className="text-sm text-gray-500 mt-1 hebrew-text"
+                  className="text-base text-gray-500 mt-1 hebrew-text"
                   dir="rtl"
                 >
                   {exercise.explanationHebrew}
@@ -539,14 +539,14 @@ export default function FlashcardPlayer({
                     <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
                       {line.speaker}
                     </span>
-                    <p className="text-2xl font-bold text-black mt-1" lang="th">
+                    <p className="text-lg font-bold text-black mt-1" lang="th">
                       {line.thai}
                     </p>
                     <p className="text-sm text-gray-500 mt-0.5">
                       {line.phonetic}
                     </p>
                     <p
-                      className="text-sm text-gray-600 mt-1 hebrew-text"
+                      className="text-base text-gray-600 mt-1 hebrew-text"
                       dir="rtl"
                     >
                       {line.hebrew}
