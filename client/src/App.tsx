@@ -25,6 +25,7 @@ import Quiz from "./pages/Quiz";
 import EmergencyScripts from "./pages/EmergencyScripts";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
+import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 import ScrollToTop from "./components/ScrollToTop";
 
 function AnimatedRoute({
@@ -67,6 +68,9 @@ function Router() {
       </Route>
       <Route path="/payment-success">
         <AnimatedRoute component={PaymentSuccess} />
+      </Route>
+      <Route path="/subscription-success">
+        <AnimatedRoute component={SubscriptionSuccess} />
       </Route>
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={AdminContent} />
