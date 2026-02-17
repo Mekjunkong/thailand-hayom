@@ -16,51 +16,51 @@ interface City {
 
 const cities: City[] = [
   {
-    id: "bangkok",
-    name: "Bangkok",
-    nameHe: "בנגקוק",
-    x: 280,
-    y: 340,
-    keywords: ["bangkok", "בנגקוק"],
-    description: "Capital city & cultural hub",
-    descriptionHe: "בירה ומרכז תרבותי",
-  },
-  {
     id: "chiang-mai",
     name: "Chiang Mai",
     nameHe: "צ'אנג מאי",
-    x: 220,
-    y: 160,
+    x: 150,
+    y: 115,
     keywords: ["chiang mai", "chiangmai", "צ'אנג מאי"],
     description: "Mountains & temples",
     descriptionHe: "הרים ומקדשים",
   },
   {
-    id: "phuket",
-    name: "Phuket",
-    nameHe: "פוקט",
-    x: 200,
-    y: 450,
-    keywords: ["phuket", "פוקט"],
-    description: "Beaches & islands",
-    descriptionHe: "חופים ואיים",
+    id: "bangkok",
+    name: "Bangkok",
+    nameHe: "בנגקוק",
+    x: 230,
+    y: 330,
+    keywords: ["bangkok", "בנגקוק"],
+    description: "Capital city & cultural hub",
+    descriptionHe: "בירה ומרכז תרבותי",
   },
   {
     id: "pattaya",
     name: "Pattaya",
     nameHe: "פטאיה",
-    x: 290,
+    x: 255,
     y: 360,
     keywords: ["pattaya", "פטאיה"],
     description: "Beach resort city",
     descriptionHe: "עיר נופש על החוף",
   },
   {
+    id: "phuket",
+    name: "Phuket",
+    nameHe: "פוקט",
+    x: 145,
+    y: 500,
+    keywords: ["phuket", "פוקט"],
+    description: "Beaches & islands",
+    descriptionHe: "חופים ואיים",
+  },
+  {
     id: "krabi",
     name: "Krabi",
     nameHe: "קראבי",
-    x: 210,
-    y: 470,
+    x: 165,
+    y: 480,
     keywords: ["krabi", "קראבי"],
     description: "Limestone cliffs & beaches",
     descriptionHe: "צוקי גיר וחופים",
@@ -82,9 +82,9 @@ export default function ThailandMap() {
             className="w-full h-auto"
             style={{ maxHeight: "600px" }}
           >
-            {/* Simplified Thailand outline */}
+            {/* Thailand outline — recognizable shape with northern mountains, central plains, and southern peninsula */}
             <path
-              d="M 250 100 Q 260 120, 270 150 L 280 200 Q 290 250, 295 300 L 300 350 Q 295 380, 290 400 L 280 450 Q 270 480, 250 500 Q 230 520, 210 510 Q 190 500, 180 480 L 170 450 Q 160 420, 165 390 L 170 350 Q 175 320, 180 290 L 190 240 Q 200 190, 210 150 L 220 120 Q 230 100, 250 100 Z"
+              d="M 170 60 L 190 55 L 210 60 L 225 50 L 240 55 L 250 70 L 260 65 L 270 75 L 265 90 L 255 100 L 260 115 L 255 130 L 265 140 L 275 155 L 280 170 L 290 180 L 295 195 L 290 210 L 280 220 L 275 240 L 280 255 L 290 270 L 300 280 L 305 295 L 295 310 L 280 320 L 270 335 L 260 345 L 255 360 L 250 375 L 240 385 L 225 390 L 215 400 L 210 415 L 200 425 L 195 440 L 185 450 L 175 460 L 168 475 L 160 485 L 150 495 L 140 510 L 135 525 L 130 540 L 140 545 L 148 535 L 155 520 L 160 510 L 170 505 L 175 495 L 168 485 L 175 475 L 185 465 L 190 450 L 200 440 L 205 425 L 215 415 L 220 400 L 210 395 L 195 390 L 185 380 L 175 370 L 165 355 L 155 340 L 145 330 L 135 320 L 130 305 L 125 290 L 120 275 L 115 260 L 110 245 L 115 230 L 120 215 L 115 200 L 110 185 L 115 170 L 125 155 L 130 140 L 125 125 L 130 110 L 140 100 L 145 85 L 155 75 L 170 60 Z"
               fill="url(#gradient)"
               stroke="#60a5fa"
               strokeWidth="2"
