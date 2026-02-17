@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Thailand Hayom** (תאילנד היום) is a bilingual Hebrew/English travel platform for Israeli travelers in Thailand. Features: newsletter articles, 30 interactive Thai language lessons with audio, AI travel concierge (OpenAI), Stripe payments in ILS, event calendar, and premium subscriptions.
+**Thailand Hayom** (תאילנד היום) is a bilingual Hebrew/English travel platform for Israeli travelers in Thailand. Features: newsletter articles, 30 interactive Thai language lessons with audio, AI travel concierge (OpenAI), Stripe payments in ILS, event calendar, premium subscriptions (₪29/month or ₪199/year), and a category-first content hub inspired by Diia Education.
 
 ## Commands
 
@@ -27,7 +27,7 @@ Tests are server-side only: `vitest` runs files matching `server/**/*.test.ts` a
 - **Frontend**: React 19, Vite 7, TailwindCSS v4, Wouter (routing), Radix UI, Framer Motion
 - **Backend**: Express 4, tRPC 11 (SuperJSON transformer), Drizzle ORM
 - **Database**: PostgreSQL (Supabase), schema at `drizzle/schema.ts`
-- **Payments**: Stripe (ILS currency), products defined in `shared/products.ts`
+- **Payments**: Stripe (ILS currency), one-time products + subscriptions defined in `shared/products.ts`
 - **Email**: Resend API (`server/emailService.ts`)
 - **Auth**: Manus OAuth (optional — bypass for local dev by swapping `protectedProcedure` → `publicProcedure`)
 - **Package Manager**: pnpm (with patched wouter)
@@ -85,6 +85,34 @@ All user-facing content has dual columns: `title`/`titleHe`, `content`/`contentH
 
 The webhook route **must** be registered before `express.json()` middleware because Stripe signature verification requires the raw request body. This is handled in `server/_core/index.ts`.
 
+### Premium Subscription System
+
+**Products:** Smart Tourist Pack (₪20 one-time), Premium Monthly (₪29/month), Premium Annual (₪199/year). Defined in `shared/products.ts`.
+
+**Flow:** User clicks upgrade → `trpc.stripe.createSubscriptionCheckout` → Stripe Checkout (mode: subscription) → webhook `customer.subscription.created` → `subscriptions` table updated → content unlocked.
+
+**Content gating (soft paywall):** Premium articles (`isPremium: true`) show 200-word preview + blur overlay + upgrade CTA for non-premium users. Gating logic in `server/articleRouter.ts` `getBySlug` endpoint — returns `gated: boolean`.
+
+**Subscription management:** Stripe Customer Portal via `trpc.stripe.createCustomerPortalSession`. Self-service cancel/update/invoices.
+
+**Webhook events handled** (in `server/webhookHandler.ts`): `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.payment_failed`.
+
+**DB table:** `subscriptions` — `userId`, `tier` (free/premium), `status` (active/canceled/expired/past_due), `stripeSubscriptionId`, `stripeCustomerId`, `currentPeriodStart/End`.
+
+### Content Organization (Category-First Hub)
+
+Seven content categories defined in `client/src/data/categories.ts`: Thai Lessons (amber), Travel (teal), Food (rose), Visa (blue), Events (violet), Safety (orange), Premium (gold gradient).
+
+**Homepage layout:** Cinematic hero (65vh parallax) → CategoryGrid → FeaturedStrip → Thailand Map → Newsletter + Pricing (3-card: Free/Monthly/Annual).
+
+**Shared components:**
+- `ContentCard.tsx` — unified card with `article`/`lesson`/`event` variants
+- `CategoryGrid.tsx` — homepage category hub
+- `FeaturedStrip.tsx` — editor's picks row
+- `CategoryHeader.tsx` — listing page gradient header
+- `FilterBar.tsx` — search + filter pills
+- `PremiumPaywall.tsx` — soft paywall blur + upgrade CTA
+
 ## Environment Variables
 
 **Required**: `DATABASE_URL` (PostgreSQL), `JWT_SECRET` (min 32 chars)
@@ -105,8 +133,17 @@ Prettier: double quotes, semicolons, 2-space indent, es5 trailing commas, `arrow
 - Context providers: `ThemeProvider`, `ProgressProvider`, `TooltipProvider` (see `App.tsx`)
 - Thai pronunciation uses Web Speech API in `InteractiveLessons.tsx`
 - Quiz system uses SM-2 spaced repetition algorithm (`quizPerformance` table)
+- Category data centralized in `client/src/data/categories.ts` — all components import from there
+- Article detail fetches from DB via `trpc.article.getBySlug` (not hardcoded data)
 
 ## Deprecated / Disabled
 
 - **Forum**: Schema tables exist (`forumPosts`, `forumComments`, etc.) but no routes in `App.tsx`
 - **Old lessons route**: `/lessons` kept for backward compat; primary route is `/interactive-lessons`
+- **ContentCarousel**: Removed, replaced by `CategoryGrid` + `FeaturedStrip`
+- **ArticleCard / ArticleCardSkeleton**: Removed, replaced by `ContentCard` with variants
+
+## Known Issues
+
+- `server/newsletterRouter.ts:231` has a pre-existing TypeScript error (`.where()` on Drizzle query) — unrelated to recent changes
+- Premium subscription requires `STRIPE_SECRET_KEY` + `STRIPE_WEBHOOK_SECRET` env vars to function — buttons will error without them
