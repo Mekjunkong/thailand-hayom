@@ -205,12 +205,8 @@ export default function ContentCarousel() {
             {/* Scrollable container */}
             <div
               ref={scrollRef}
-              className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory"
+              className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
               dir="ltr"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
             >
               {cards.map((card) => (
                 <Link
