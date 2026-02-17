@@ -37,26 +37,30 @@ export default function Home() {
     subscribeMutation.mutate({ email });
   };
 
-  // Parallax effect
+  // Cinematic parallax effect
   const heroRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleScroll = () => {
+      const scrolled = window.scrollY;
       if (heroRef.current) {
-        const scrolled = window.scrollY;
-        heroRef.current.style.transform = `translateY(${scrolled * 0.4}px)`;
+        heroRef.current.style.transform = `translateY(${scrolled * 0.5}px) scale(${1.1 + scrolled * 0.0003})`;
+      }
+      if (overlayRef.current) {
+        overlayRef.current.style.opacity = `${Math.min(0.85, 0.3 + scrolled * 0.001)}`;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div className="min-h-screen">
       {/* ============================================================
-          Section 1: Compact Hero (~30vh)
+          Section 1: Cinematic Hero (~65vh)
           ============================================================ */}
-      <section className="relative min-h-[30vh] flex items-center justify-center overflow-hidden">
-        {/* Parallax background image */}
+      <section className="relative min-h-[65vh] flex items-end justify-center overflow-hidden">
+        {/* Parallax background image with zoom-on-scroll */}
         <div
           ref={heroRef}
           className="absolute inset-0 bg-cover bg-center scale-110"
@@ -65,32 +69,37 @@ export default function Home() {
             willChange: "transform",
           }}
         />
-        {/* Heavy bottom gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/70" />
+        {/* Dynamic gradient overlay — darkens as user scrolls */}
+        <div
+          ref={overlayRef}
+          className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"
+          style={{ transition: "opacity 0.05s linear" }}
+        />
 
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto py-14">
+        {/* Content pinned to bottom third for cinematic framing */}
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pb-16 pt-32">
           {/* Bold headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white drop-shadow-lg">
             {t({ he: "תאילנד היום", en: "Thailand Hayom" })}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base md:text-xl mb-6 text-white/90">
+          <p className="text-lg md:text-2xl mb-8 text-white/90 drop-shadow-md max-w-3xl mx-auto">
             {t({
               he: "המדריך שלך לתאילנד — חדשות, שיעורים וטיפים מקומיים בעברית",
               en: "Your guide to Thailand — news, lessons, and local tips in Hebrew",
             })}
           </p>
 
-          {/* Compact inline stat pills */}
+          {/* Stat pills */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">
+            <span className="px-5 py-2.5 bg-white/15 backdrop-blur-md rounded-full text-sm text-white border border-white/25 shadow-lg">
               {t({ he: "30 שיעורים", en: "30 Lessons" })}
             </span>
-            <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">
+            <span className="px-5 py-2.5 bg-white/15 backdrop-blur-md rounded-full text-sm text-white border border-white/25 shadow-lg">
               {t({ he: "150+ מאמרים", en: "150+ Articles" })}
             </span>
-            <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-sm text-white border border-white/20">
+            <span className="px-5 py-2.5 bg-white/15 backdrop-blur-md rounded-full text-sm text-white border border-white/25 shadow-lg">
               {t({ he: "עדכונים שבועיים", en: "Weekly Updates" })}
             </span>
           </div>

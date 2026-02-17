@@ -164,6 +164,81 @@ export const lessonsData: Lesson[] = [
         scenario: "Essential for understanding prices. Most items in Thailand cost between 20-500 baht.",
         culturalTip: "Learn numbers 1-100 to negotiate prices and understand costs without a calculator."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "นี่เท่าไหร่ครับ",
+        phonetic: "nee tao-rai khrap",
+        hebrew: "כמה זה עולה?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "สองร้อยบาทครับ",
+        phonetic: "song roi baht khrap",
+        hebrew: "מאתיים באט"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "แพงไป หนึ่งร้อยได้ไหม",
+        phonetic: "paeng pai neung roi dai mai",
+        hebrew: "יקר מדי, מאה בסדר?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "ร้อยห้าสิบบาทครับ",
+        phonetic: "roi haa-sip baht khrap",
+        hebrew: "מאה חמישים באט"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ได้ครับ เอาครับ",
+        phonetic: "dai khrap ao khrap",
+        hebrew: "בסדר, אני אקח"
+      }
+    ],
+    exercises: [
+      {
+        id: 4,
+        question: "What does 'หนึ่ง' (neung) mean?",
+        questionHebrew: "מה המשמעות של 'หนึ่ง' (נึง)?",
+        options: ["Two / שניים", "One / אחד", "Ten / עשר", "Three / שלוש"],
+        correctAnswer: 1,
+        explanation: "'หนึ่ง' (neung) means 'one' - the most basic number for ordering and counting.",
+        explanationHebrew: "'หนึ่ง' (נึג) פירושו 'אחד' - המספר הבסיסי ביותר להזמנות וספירה."
+      },
+      {
+        id: 5,
+        question: "How do you ask 'How much?' in Thai?",
+        questionHebrew: "איך שואלים 'כמה זה עולה?' בתאילנדית?",
+        options: ["กี่โมง", "เท่าไหร่", "สิบ", "สอง"],
+        correctAnswer: 1,
+        explanation: "'เท่าไหร่' (tao-rai) means 'how much?' - essential for shopping and bargaining.",
+        explanationHebrew: "'เท่าไหร่' (טאו-ไร) פירושו 'כמה?' - חיוני לקניות ומיקוח."
+      },
+      {
+        id: 6,
+        question: "What is unique about Thai counting that tourists should know?",
+        questionHebrew: "מה ייחודי בספירה התאילנדית שתיירים צריכים לדעת?",
+        options: ["Numbers are the same as English / המספרים זהים לאנגלית", "You need classifier words after numbers / צריך מילות סיווג אחרי מספרים", "They only count to 10 / סופרים רק עד 10", "Numbers are written right to left / מספרים נכתבים מימין לשמאל"],
+        correctAnswer: 1,
+        explanation: "Thai uses classifier words after numbers. For example, 'หนึ่งคน' (neung khon) = one person, where 'คน' is the classifier for people.",
+        explanationHebrew: "בתאילנדית משתמשים במילות סיווג אחרי מספרים. למשל, 'หนึ่งคน' (נึג קון) = אדם אחד, כש-'คน' היא מילת הסיווג לאנשים."
+      },
+      {
+        id: 7,
+        question: "How do you say 'twenty' in Thai?",
+        questionHebrew: "איך אומרים 'עשרים' בתאילנדית?",
+        options: ["สิบ (sip)", "ยี่สิบ (yee-sip)", "ร้อย (roi)", "หนึ่ง (neung)"],
+        correctAnswer: 1,
+        explanation: "'ยี่สิบ' (yee-sip) means twenty. Thai numbers follow a pattern: สิบ (10), ยี่สิบ (20), สามสิบ (30), etc.",
+        explanationHebrew: "'ยี่สิบ' (יי-סิป) פירושו עשרים. המספרים בתאילנדית עוקבים אחר דפוס: สิบ (10), ยี่สิบ (20), สามสิบ (30), וכו'."
+      }
     ]
   },
   {
@@ -216,6 +291,81 @@ export const lessonsData: Lesson[] = [
         phonetic: "check bin",
         scenario: "Wave your hand and say this to get the bill at restaurants. You can also make a writing gesture in the air.",
         culturalTip: "In Thailand, you usually pay at the counter, not at the table. Take the bill to the cashier near the entrance."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "Waiter",
+        speakerHebrew: "מלצר",
+        thai: "สั่งอะไรดีครับ",
+        phonetic: "sang arai dee khrap",
+        hebrew: "מה תרצה להזמין?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอผัดไทยไม่เผ็ดครับ",
+        phonetic: "khor pad thai mai phet khrap",
+        hebrew: "אני רוצה פאד תאי לא חריף בבקשה"
+      },
+      {
+        speaker: "Waiter",
+        speakerHebrew: "מלצר",
+        thai: "ไม่เอาหมูใช่ไหมครับ",
+        phonetic: "mai ao muu chai mai khrap",
+        hebrew: "בלי חזיר, נכון?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ใช่ครับ ไม่เอาหมู",
+        phonetic: "chai khrap mai ao muu",
+        hebrew: "נכון, בלי חזיר"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อร่อยมากครับ เช็คบิลด้วย",
+        phonetic: "a-roi maak khrap check bin duay",
+        hebrew: "טעים מאוד! חשבון בבקשה"
+      }
+    ],
+    exercises: [
+      {
+        id: 8,
+        question: "How do you start an order in Thai?",
+        questionHebrew: "איך מתחילים הזמנה בתאילנדית?",
+        options: ["เอา (ao)", "ขอ (khor)", "เช็คบิล (check bin)", "อร่อย (a-roi)"],
+        correctAnswer: 1,
+        explanation: "'ขอ' (khor) means 'I would like...' and is the polite way to start any food order in Thai.",
+        explanationHebrew: "'ขอ' (קור) פירושו 'הייתי רוצה...' וזו הדרך המנומסת להתחיל כל הזמנת אוכל בתאילנדית."
+      },
+      {
+        id: 9,
+        question: "How do you say 'not spicy' in Thai?",
+        questionHebrew: "איך אומרים 'לא חריף' בתאילנדית?",
+        options: ["เผ็ดมาก (phet maak)", "เผ็ดนิดหน่อย (phet nit noi)", "ไม่เผ็ด (mai phet)", "อร่อย (a-roi)"],
+        correctAnswer: 2,
+        explanation: "'ไม่เผ็ด' (mai phet) means 'not spicy'. For absolutely no spice, say 'ไม่เผ็ดเลย' (mai phet loei).",
+        explanationHebrew: "'ไม่เผ็ด' (מאי פט) פירושו 'לא חריף'. בשביל בלי שום חריפות, אמרו 'ไม่เผ็ดเลย' (מאי פט לוי)."
+      },
+      {
+        id: 10,
+        question: "What does 'เจ' (jay) mean for food?",
+        questionHebrew: "מה המשמעות של 'เจ' (ג'יי) בהקשר אוכל?",
+        options: ["Spicy / חריף", "Delicious / טעים", "Strict vegetarian / צמחוני קפדני", "Expensive / יקר"],
+        correctAnswer: 2,
+        explanation: "'เจ' (jay) means strict vegetarian - no meat, eggs, or dairy. Important for kosher travelers to also specify 'ไม่เอาหมู' (no pork).",
+        explanationHebrew: "'เจ' (ג'יי) פירושו צמחוני קפדני - ללא בשר, ביצים או חלב. חשוב לשומרי כשרות לציין גם 'ไม่เอาหมู' (ללא חזיר)."
+      },
+      {
+        id: 11,
+        question: "What should you do if the food is too spicy?",
+        questionHebrew: "מה צריך לעשות אם האוכל חריף מדי?",
+        options: ["Drink water / לשתות מים", "Eat rice or drink milk / לאכול אורז או לשתות חלב", "Add more chili / להוסיף עוד צ'ילי", "Leave immediately / לעזוב מיד"],
+        correctAnswer: 1,
+        explanation: "Rice and milk/yogurt help neutralize spiciness. Water actually makes it worse! This is important cultural knowledge for eating in Thailand.",
+        explanationHebrew: "אורז וחלב/יוגורט עוזרים לנטרל חריפות. מים דווקא מחמירים את המצב! זהו ידע תרבותי חשוב לאכילה בתאילנד."
       }
     ]
   },
@@ -288,6 +438,88 @@ export const lessonsData: Lesson[] = [
         scenario: "For clothing shopping. Replace 'เล็ก' (small) with 'ใหญ่' (yai) for larger.",
         culturalTip: "Thai sizes run small. Try before buying, and don't be shy about asking for different sizes."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "นี่เท่าไหร่ครับ",
+        phonetic: "nee tao-rai khrap",
+        hebrew: "כמה זה עולה?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "สามร้อยบาทค่ะ",
+        phonetic: "saam roi baht kha",
+        hebrew: "שלוש מאות באט"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "แพงไป ลดได้ไหมครับ",
+        phonetic: "paeng pai lot dai mai khrap",
+        hebrew: "יקר מדי, אפשר הנחה?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "สองร้อยห้าสิบค่ะ",
+        phonetic: "song roi haa-sip kha",
+        hebrew: "מאתיים חמישים"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "สองร้อยได้ไหม",
+        phonetic: "song roi dai mai",
+        hebrew: "מאתיים בסדר?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "ได้ค่ะ เอาเลย",
+        phonetic: "dai kha ao loei",
+        hebrew: "בסדר, קח"
+      }
+    ],
+    exercises: [
+      {
+        id: 12,
+        question: "How do you say 'How much is this?' in Thai?",
+        questionHebrew: "איך אומרים 'כמה זה עולה?' בתאילנדית?",
+        options: ["ลดได้ไหม", "นี่เท่าไหร่", "แพงไป", "ดูก่อน"],
+        correctAnswer: 1,
+        explanation: "'นี่เท่าไหร่' (nee tao-rai) means 'How much is this?' - the first phrase you need when shopping.",
+        explanationHebrew: "'นี่เท่าไหร่' (ני טאו-ไร) פירושו 'כמה זה עולה?' - הביטוי הראשון שתצטרכו בקניות."
+      },
+      {
+        id: 13,
+        question: "What does 'แพงไป' (paeng pai) mean?",
+        questionHebrew: "מה המשמעות של 'แพงไป' (แפง ไป)?",
+        options: ["I'll take it / אני אקח את זה", "Too cheap / זול מדי", "Too expensive / יקר מדי", "Just looking / רק מסתכל"],
+        correctAnswer: 2,
+        explanation: "'แพงไป' (paeng pai) means 'too expensive' - use it with a smile to start bargaining at markets.",
+        explanationHebrew: "'แพงไป' (แפง ไป) פירושו 'יקר מדי' - אמרו את זה עם חיוך כדי להתחיל להתמקח בשווקים."
+      },
+      {
+        id: 14,
+        question: "Where is bargaining expected in Thailand?",
+        questionHebrew: "איפה מצופה להתמקח בתאילנד?",
+        options: ["At 7-Eleven / ב-7-Eleven", "At shopping malls / בקניונים", "At markets and street vendors / בשווקים ודוכנים", "At all shops / בכל החנויות"],
+        correctAnswer: 2,
+        explanation: "Bargaining is expected at markets but NOT at malls or convenience stores. Start by offering 50-60% of the asking price.",
+        explanationHebrew: "מיקוח מצופה בשווקים אבל לא בקניונים או מכולות. התחילו בהצעת 50-60% מהמחיר המבוקש."
+      },
+      {
+        id: 15,
+        question: "What happens after you say 'เอา' (ao) to a vendor?",
+        questionHebrew: "מה קורה אחרי שאומרים 'เอา' (או) למוכר?",
+        options: ["You can still negotiate / אפשר עדיין להתמקח", "The deal is done / העסקה נסגרה", "The vendor gives a discount / המוכר נותן הנחה", "You must leave / חייבים לעזוב"],
+        correctAnswer: 1,
+        explanation: "Once you say 'เอา' (ao - I'll take it), the deal is done. Don't back out or the vendor will be upset.",
+        explanationHebrew: "ברגע שאמרתם 'เอา' (או - אני אקח), העסקה נסגרה. אל תחזרו בכם כי המוכר יעלב."
+      }
     ]
   },
   {
@@ -340,6 +572,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "trong pai",
         scenario: "Tell the driver to keep going straight. Combine with 'เลี้ยวซ้าย' or 'เลี้ยวขวา' for full directions.",
         culturalTip: "Use hand gestures along with words - point forward for 'ตรงไป', left for 'เลี้ยวซ้าย', right for 'เลี้ยวขวา'."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ไปเขาสานเปิดมิเตอร์ครับ",
+        phonetic: "pai khao saan pert meter khrap",
+        hebrew: "לקאוסאן, תפעיל מונה בבקשה"
+      },
+      {
+        speaker: "Driver",
+        speakerHebrew: "נהג",
+        thai: "ได้ครับ ขึ้นมาเลย",
+        phonetic: "dai khrap keun maa loei",
+        hebrew: "בסדר, עלה"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ตรงไปครับ แล้วเลี้ยวซ้าย",
+        phonetic: "trong pai khrap laew liao sai",
+        hebrew: "ישר, ואז פנה שמאלה"
+      },
+      {
+        speaker: "Driver",
+        speakerHebrew: "נהג",
+        thai: "เลี้ยวตรงนี้เลยครับ",
+        phonetic: "liao trong nee loei khrap",
+        hebrew: "לפנות כאן?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ใช่ครับ จอดตรงนี้ได้เลย",
+        phonetic: "chai khrap jot trong nee dai loei",
+        hebrew: "כן, תעצור כאן"
+      }
+    ],
+    exercises: [
+      {
+        id: 16,
+        question: "What should you say immediately when getting into a Bangkok taxi?",
+        questionHebrew: "מה צריך לומר מיד כשעולים למונית בבנגקוק?",
+        options: ["จอดตรงนี้ (jot trong nee)", "เลี้ยวซ้าย (liao sai)", "เปิดมิเตอร์ (pert meter)", "ตรงไป (trong pai)"],
+        correctAnswer: 2,
+        explanation: "'เปิดมิเตอร์' (pert meter) means 'use the meter'. Essential to avoid being overcharged. If the driver refuses, find another taxi.",
+        explanationHebrew: "'เปิดมิเตอร์' (เפירט מיטר) פירושו 'הפעל את המונה'. חיוני כדי לא לשלם מחיר מנופח. אם הנהג מסרב, חפשו מונית אחרת."
+      },
+      {
+        id: 17,
+        question: "How do you say 'turn right' in Thai?",
+        questionHebrew: "איך אומרים 'פנה ימינה' בתאילנדית?",
+        options: ["เลี้ยวซ้าย (liao sai)", "ตรงไป (trong pai)", "เลี้ยวขวา (liao khwa)", "จอดตรงนี้ (jot trong nee)"],
+        correctAnswer: 2,
+        explanation: "'เลี้ยวขวา' (liao khwa) means 'turn right'. Point while saying it to make sure the driver understands.",
+        explanationHebrew: "'เลี้ยวขวา' (เลียว ควา) פירושו 'פנה ימינה'. הצביעו תוך כדי אמירה כדי לוודא שהנהג מבין."
+      },
+      {
+        id: 18,
+        question: "What is the starting meter fare in Bangkok taxis?",
+        questionHebrew: "מהו מחיר הפתיחה של מונה במוניות בנגקוק?",
+        options: ["20 baht / באט", "35 baht / באט", "50 baht / באט", "100 baht / באט"],
+        correctAnswer: 1,
+        explanation: "The meter starts at 35 baht. If a driver quotes a flat price without meter, it's usually 3-5x more expensive.",
+        explanationHebrew: "המונה מתחיל ב-35 באט. אם נהג מציע מחיר קבוע בלי מונה, זה בדרך כלל 3-5 פעמים יותר יקר."
       }
     ]
   },
@@ -394,6 +692,72 @@ export const lessonsData: Lesson[] = [
         scenario: "Decide to stay longer? Ask this at reception. They'll usually say yes if rooms are available.",
         culturalTip: "Book early during high season (Nov-Feb) as popular places fill up quickly."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "มีห้องว่างไหมครับ",
+        phonetic: "mee hong wang mai khrap",
+        hebrew: "יש לכם חדר פנוי?"
+      },
+      {
+        speaker: "Receptionist",
+        speakerHebrew: "פקיד קבלה",
+        thai: "มีค่ะ ห้องเดี่ยวหรือห้องคู่คะ",
+        phonetic: "mee kha hong diao rue hong koo kha",
+        hebrew: "כן, חדר ליחיד או לזוג?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ห้องเดี่ยวครับ คืนละเท่าไหร่",
+        phonetic: "hong diao khrap keun la tao-rai",
+        hebrew: "חדר ליחיד, כמה ללילה?"
+      },
+      {
+        speaker: "Receptionist",
+        speakerHebrew: "פקיד קבלה",
+        thai: "แปดร้อยบาทค่ะ รวมอาหารเช้า",
+        phonetic: "paet roi baht kha ruam aa-haan chao",
+        hebrew: "שמונה מאות באט, כולל ארוחת בוקר"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอดูห้องก่อนได้ไหมครับ",
+        phonetic: "khor doo hong gon dai mai khrap",
+        hebrew: "אפשר לראות את החדר קודם?"
+      }
+    ],
+    exercises: [
+      {
+        id: 19,
+        question: "How do you ask if a room is available in Thai?",
+        questionHebrew: "איך שואלים אם יש חדר פנוי בתאילנדית?",
+        options: ["คืนละเท่าไหร่", "มีห้องว่างไหม", "ขอดูห้องก่อนได้ไหม", "แอร์เสีย"],
+        correctAnswer: 1,
+        explanation: "'มีห้องว่างไหม' (mee hong wang mai) means 'Do you have a room available?' - the first question when looking for accommodation.",
+        explanationHebrew: "'มีห้องว่างไหม' (מי הונג וואנג מאי) פירושו 'יש לכם חדר פנוי?' - השאלה הראשונה כשמחפשים לינה."
+      },
+      {
+        id: 20,
+        question: "What does 'แอร์เสีย' (air sia) mean?",
+        questionHebrew: "מה המשמעות של 'แอร์เสีย' (แอร์ เสีย)?",
+        options: ["The room is nice / החדר נחמד", "The AC doesn't work / המזגן לא עובד", "I need a key / אני צריך מפתח", "The view is beautiful / הנוף יפה"],
+        correctAnswer: 1,
+        explanation: "'แอร์เสีย' (air sia) means 'the AC doesn't work' - a critical phrase in Thailand's hot climate!",
+        explanationHebrew: "'แอร์เสีย' (แอร์ เสีย) פירושו 'המזגן לא עובד' - ביטוי קריטי באקלים החם של תאילנד!"
+      },
+      {
+        id: 21,
+        question: "Why should you always ask to see the room before paying?",
+        questionHebrew: "למה תמיד צריך לבקש לראות את החדר לפני התשלום?",
+        options: ["It's cheaper that way / זה יותר זול ככה", "To check AC, hot water, and cleanliness / לבדוק מזגן, מים חמים, וניקיון", "It's not allowed to pay first / אסור לשלם קודם", "To take photos / כדי לצלם"],
+        correctAnswer: 1,
+        explanation: "Always check AC, hot water, and cleanliness before paying. If they refuse to show the room, it's a red flag - find another place.",
+        explanationHebrew: "תמיד בדקו מזגן, מים חמים וניקיון לפני התשלום. אם מסרבים להראות את החדר, זה סימן מחשיד - חפשו מקום אחר."
+      }
     ]
   },
   {
@@ -446,6 +810,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "passport hai",
         scenario: "Go immediately to your embassy and file a police report. Israeli Embassy Bangkok: +66 2 204 9200.",
         culturalTip: "Keep a photocopy of your passport separate from the original. Hotels often accept copies for check-in."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ช่วยด้วยครับ ต้องการหมอ",
+        phonetic: "chuay duay khrap tong-gaan mor",
+        hebrew: "עזרה! אני צריך רופא"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "เป็นอะไรครับ",
+        phonetic: "pen arai khrap",
+        hebrew: "מה קרה?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "โรงพยาบาลอยู่ที่ไหนครับ",
+        phonetic: "rohng-pa-ya-baan yoo tee-nai khrap",
+        hebrew: "איפה בית החולים?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ใกล้ๆ นี่ครับ ผมพาไป",
+        phonetic: "klai klai nee khrap pom paa pai",
+        hebrew: "קרוב מכאן, אני אקח אותך"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอบคุณมากครับ",
+        phonetic: "khop-khun maak khrap",
+        hebrew: "תודה רבה"
+      }
+    ],
+    exercises: [
+      {
+        id: 22,
+        question: "How do you shout 'Help!' in Thai?",
+        questionHebrew: "איך צועקים 'עזרה!' בתאילנדית?",
+        options: ["ขอโทษ (khor-toht)", "ช่วยด้วย (chuay duay)", "โทรตำรวจ (toh tam-ruat)", "ต้องการหมอ (tong-gaan mor)"],
+        correctAnswer: 1,
+        explanation: "'ช่วยด้วย' (chuay duay) means 'Help!' - shout it loudly in emergency situations and Thais will come to assist.",
+        explanationHebrew: "'ช่วยด้วย' (צ'ואי דואי) פירושו 'עזרה!' - צעקו את זה בקול רם במצבי חירום ותאילנדים יבואו לעזור."
+      },
+      {
+        id: 23,
+        question: "What is the Tourist Police number in Thailand?",
+        questionHebrew: "מהו מספר משטרת התיירים בתאילנד?",
+        options: ["911", "999", "1155", "191"],
+        correctAnswer: 2,
+        explanation: "Tourist Police: 1155. They speak English and are more helpful than regular police for tourist issues.",
+        explanationHebrew: "משטרת תיירים: 1155. הם דוברי אנגלית ויעילים יותר מהמשטרה הרגילה לבעיות של תיירים."
+      },
+      {
+        id: 24,
+        question: "What should you do if you lose your passport?",
+        questionHebrew: "מה צריך לעשות אם איבדתם את הדרכון?",
+        options: ["Go to the airport / ללכת לשדה התעופה", "Go to your embassy and file a police report / ללכת לשגרירות ולהגיש תלונה במשטרה", "Buy a new one at 7-Eleven / לקנות חדש ב-7-Eleven", "Wait at the hotel / לחכות במלון"],
+        correctAnswer: 1,
+        explanation: "Go immediately to your embassy and file a police report. Israeli Embassy Bangkok: +66 2 204 9200. Keep a photocopy of your passport separate from the original.",
+        explanationHebrew: "לכו מיד לשגרירות והגישו תלונה במשטרה. שגרירות ישראל בנגקוק: +66 2 204 9200. שמרו צילום של הדרכון בנפרד מהמקור."
       }
     ]
   },
@@ -500,6 +930,81 @@ export const lessonsData: Lesson[] = [
         scenario: "Compliment temples, views, or artwork. Thais are proud of their culture and appreciate foreigners showing respect.",
         culturalTip: "When sitting in temples, never point your feet toward Buddha images. Tuck your feet to the side or behind you."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ถ่ายรูปได้ไหมครับ",
+        phonetic: "tai roop dai mai khrap",
+        hebrew: "אפשר לצלם?"
+      },
+      {
+        speaker: "Guard",
+        speakerHebrew: "שומר",
+        thai: "ข้างนอกได้ครับ ข้างในไม่ได้",
+        phonetic: "khaang nok dai khrap khaang nai mai dai",
+        hebrew: "בחוץ כן, בפנים לא"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ค่าเข้าเท่าไหร่ครับ",
+        phonetic: "kha kao tao-rai khrap",
+        hebrew: "מה דמי הכניסה?"
+      },
+      {
+        speaker: "Guard",
+        speakerHebrew: "שומר",
+        thai: "ร้อยบาทครับ ถอดรองเท้าด้วยนะครับ",
+        phonetic: "roi baht khrap tot rong-tao duay na khrap",
+        hebrew: "מאה באט, ותוריד נעליים"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "สวยมากครับ ขอบคุณครับ",
+        phonetic: "suay maak khrap khop-khun khrap",
+        hebrew: "יפה מאוד, תודה"
+      }
+    ],
+    exercises: [
+      {
+        id: 25,
+        question: "What must you always do before entering a Thai temple building?",
+        questionHebrew: "מה חובה לעשות לפני כניסה לבניין מקדש תאילנדי?",
+        options: ["Pay a fee / לשלם דמי כניסה", "Take a photo / לצלם", "Remove your shoes / להוריד נעליים", "Buy flowers / לקנות פרחים"],
+        correctAnswer: 2,
+        explanation: "Always remove shoes before entering any temple building. Look for the shoe rack near the entrance where shoes are lined up.",
+        explanationHebrew: "תמיד יש להוריד נעליים לפני כניסה לכל בניין מקדש. חפשו את מתקן הנעליים ליד הכניסה."
+      },
+      {
+        id: 26,
+        question: "How do you ask 'Can I take a photo?' in Thai?",
+        questionHebrew: "איך שואלים 'אפשר לצלם?' בתאילנדית?",
+        options: ["สวยมาก (suay maak)", "ค่าเข้าเท่าไหร่ (kha kao tao-rai)", "ถ่ายรูปได้ไหม (tai roop dai mai)", "แต่งตัวแบบนี้ได้ไหม (taeng tua baep nee dai mai)"],
+        correctAnswer: 2,
+        explanation: "'ถ่ายรูปได้ไหม' (tai roop dai mai) means 'Can I take a photo?' Always ask before photographing monks or sacred objects.",
+        explanationHebrew: "'ถ่ายรูปได้ไหม' (טאי רופ ได מאי) פירושו 'אפשר לצלם?' תמיד שאלו לפני צילום נזירים או חפצים קדושים."
+      },
+      {
+        id: 27,
+        question: "What is the dress code for Thai temples?",
+        questionHebrew: "מהו קוד הלבוש למקדשים תאילנדיים?",
+        options: ["Anything is fine / הכל בסדר", "No shoes only / רק בלי נעליים", "Cover shoulders and knees / לכסות כתפיים וברכיים", "Wear white / ללבוש לבן"],
+        correctAnswer: 2,
+        explanation: "Temples require covered shoulders and knees. No shorts, tank tops, or see-through clothing. Many temples rent sarongs if needed.",
+        explanationHebrew: "מקדשים דורשים כיסוי כתפיים וברכיים. אסור מכנסיים קצרים, גופיות, או בגדים שקופים. מקדשים רבים משכירים סארונגים במידת הצורך."
+      },
+      {
+        id: 28,
+        question: "What should you never do while sitting in a Thai temple?",
+        questionHebrew: "מה אסור לעשות בזמן ישיבה במקדש תאילנדי?",
+        options: ["Smile / לחייך", "Point your feet toward Buddha images / להצביע עם הרגליים לעבר פסלי בודהה", "Close your eyes / לעצום עיניים", "Sit quietly / לשבת בשקט"],
+        correctAnswer: 1,
+        explanation: "Never point your feet toward Buddha images. Tuck your feet to the side or behind you. Feet are considered the lowest, dirtiest part of the body in Thai culture.",
+        explanationHebrew: "לעולם אל תצביעו עם הרגליים לעבר פסלי בודהה. הכניסו את הרגליים לצד או מאחור. רגליים נחשבות לחלק הנמוך והמלוכלך ביותר בגוף בתרבות התאילנדית."
+      }
     ]
   },
   {
@@ -552,6 +1057,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "taeng tua baep nee kao dai mai khrap",
         scenario: "You: 'แต่งตัวแบบนี้เข้าได้ไหมครับ' (Can I enter dressed like this?) | Guard: 'กางเกงสั้นไม่ได้ครับ' (No shorts) | You: 'มีผ้าให้ยืมไหมครับ' (Do you have cloth to borrow?) | Guard: 'มีครับ ฝากเงิน 100 บาท' (Yes, 100 baht deposit) | You: 'ขอบคุณครับ' (Thank you)",
         culturalTip: "Many major temples rent sarongs for 100-200 baht deposit (refundable). Bring a light scarf or long pants to avoid this."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "มะม่วงเท่าไหร่ครับ",
+        phonetic: "ma-muang tao-rai khrap",
+        hebrew: "כמה עולה מנגו?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "โลละหกสิบบาทครับ",
+        phonetic: "lo la hok-sip baht khrap",
+        hebrew: "שישים באט לקילו"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "แพงไป ลดได้ไหมครับ",
+        phonetic: "paeng pai lot dai mai khrap",
+        hebrew: "יקר מדי, אפשר הנחה?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "ห้าสิบบาทครับ",
+        phonetic: "haa-sip baht khrap",
+        hebrew: "חמישים באט"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เอาสองโลครับ ขอบคุณ",
+        phonetic: "ao song lo khrap khop-khun",
+        hebrew: "אני אקח שני קילו, תודה"
+      }
+    ],
+    exercises: [
+      {
+        id: 29,
+        question: "In the market dialogue, what does the buyer ask first?",
+        questionHebrew: "בשיחה בשוק, מה הקונה שואל קודם?",
+        options: ["The weight / המשקל", "The price per kilo / המחיר לקילו", "The vendor's name / שם המוכר", "The discount / ההנחה"],
+        correctAnswer: 1,
+        explanation: "The buyer starts with 'มะม่วงเท่าไหร่' (ma-muang tao-rai) - asking the price of mangoes before bargaining.",
+        explanationHebrew: "הקונה מתחיל עם 'มะม่วงเท่าไหร่' (מא-מואנג טאו-ไร) - שואל את מחיר המנגו לפני המיקוח."
+      },
+      {
+        id: 30,
+        question: "When ordering Pad Thai, what extra request should kosher travelers make?",
+        questionHebrew: "כשמזמינים פאד תאי, מה שומרי כשרות צריכים לבקש?",
+        options: ["Extra chili / עוד צ'ילי", "No pork - ไม่เอาหมู / ללא חזיר", "More rice / עוד אורז", "Cold water / מים קרים"],
+        correctAnswer: 1,
+        explanation: "Say 'ไม่เอาหมู' (mai ao muu) - no pork. Pork is very common in Thai food and must be specifically excluded.",
+        explanationHebrew: "אמרו 'ไม่เอาหมู' (מאי או מו) - ללא חזיר. חזיר נפוץ מאוד באוכל תאילנדי וצריך לבקש להוציא אותו במפורש."
+      },
+      {
+        id: 31,
+        question: "In the taxi dialogue, what is the best tip for communicating with the driver?",
+        questionHebrew: "בשיחת המונית, מהי העצה הטובה ביותר לתקשורת עם הנהג?",
+        options: ["Speak loudly / לדבר בקול רם", "Have the hotel address written in Thai / שהכתובת תהיה כתובה בתאילנדית", "Only use English / להשתמש רק באנגלית", "Always sit in the front / תמיד לשבת מלפנים"],
+        correctAnswer: 1,
+        explanation: "Have your hotel address in Thai written down or on your phone. Show it to the driver if they don't understand your pronunciation.",
+        explanationHebrew: "שהכתובת של המלון תהיה כתובה בתאילנדית על נייר או בטלפון. הראו אותה לנהג אם הוא לא מבין את ההגייה שלכם."
       }
     ]
   },
@@ -606,6 +1177,81 @@ export const lessonsData: Lesson[] = [
         scenario: "When you need an address, phone number, or directions written down. Very useful for showing taxi drivers.",
         culturalTip: "Have a small notepad or use your phone's notes app. Thais are usually happy to write things down for you."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอโทษครับ ห้องน้ำอยู่ที่ไหน",
+        phonetic: "khor-toht khrap hong naam yoo tee-nai",
+        hebrew: "סליחה, איפה השירותים?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ตรงไปแล้วเลี้ยวขวาค่ะ",
+        phonetic: "trong pai laew liao khwa kha",
+        hebrew: "ישר ואז ימינה"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ไม่เข้าใจครับ เขียนให้หน่อยได้ไหม",
+        phonetic: "mai kao-jai khrap kian hai noi dai mai",
+        hebrew: "אני לא מבין, אפשר לכתוב את זה?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ได้ค่ะ ตามมาเลย",
+        phonetic: "dai kha taam maa loei",
+        hebrew: "בסדר, בוא אחריי"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอบคุณมากครับ",
+        phonetic: "khop-khun maak khrap",
+        hebrew: "תודה רבה"
+      }
+    ],
+    exercises: [
+      {
+        id: 32,
+        question: "How do you say 'Yes' in Thai?",
+        questionHebrew: "איך אומרים 'כן' בתאילנדית?",
+        options: ["ไม่ใช่ (mai chai)", "ไม่เข้าใจ (mai kao-jai)", "ใช่ (chai)", "แพ้ (pae)"],
+        correctAnswer: 2,
+        explanation: "'ใช่' (chai) means 'yes'. Add 'ครับ/ค่ะ' at the end for politeness: 'ใช่ครับ' or 'ใช่ค่ะ'.",
+        explanationHebrew: "'ใช่' (צ'אי) פירושו 'כן'. הוסיפו 'ครับ/ค่ะ' בסוף לנימוס: 'ใช่ครับ' או 'ใช่ค่ะ'."
+      },
+      {
+        id: 33,
+        question: "How do you say 'I don't understand' in Thai?",
+        questionHebrew: "איך אומרים 'אני לא מבין' בתאילנדית?",
+        options: ["ไม่เป็นไร (mai pen rai)", "ไม่เข้าใจ (mai kao-jai)", "ขอโทษ (khor-toht)", "ไม่ใช่ (mai chai)"],
+        correctAnswer: 1,
+        explanation: "'ไม่เข้าใจ' (mai kao-jai) means 'I don't understand'. Follow with 'พูดภาษาอังกฤษได้ไหม' to ask if they speak English.",
+        explanationHebrew: "'ไม่เข้าใจ' (מאי קאו-ג'אי) פירושו 'אני לא מבין'. המשיכו עם 'พูดภาษาอังกฤษได้ไหม' כדי לשאול אם הם דוברים אנגלית."
+      },
+      {
+        id: 34,
+        question: "How do you say 'I'm allergic to peanuts' in Thai?",
+        questionHebrew: "איך אומרים 'יש לי אלרגיה לבוטנים' בתאילנדית?",
+        options: ["แพ้กุ้ง (pae kung)", "แพ้ถั่ว (pae tua)", "แพ้ไข่ (pae kai)", "แพ้นม (pae nom)"],
+        correctAnswer: 1,
+        explanation: "'แพ้ถั่ว' (pae tua) means 'allergic to peanuts'. Write it down and show it to restaurants for safety.",
+        explanationHebrew: "'แพ้ถั่ว' (แפ ตัว) פירושו 'אלרגי לבוטנים'. כתבו את זה והראו למסעדות לבטיחות."
+      },
+      {
+        id: 35,
+        question: "What is special about Thai bathrooms that tourists should know?",
+        questionHebrew: "מה מיוחד בשירותים תאילנדיים שתיירים צריכים לדעת?",
+        options: ["They are all free / כולם חינם", "Many don't have toilet paper, they use a spray hose / רבים בלי נייר טואלט, משתמשים בצינור התזה", "They are always outside / הם תמיד בחוץ", "You need a key / צריך מפתח"],
+        correctAnswer: 1,
+        explanation: "Many Thai bathrooms use a spray hose instead of toilet paper. Bring tissues with you! Gas stations charge 3-5 baht.",
+        explanationHebrew: "שירותים רבים בתאילנד משתמשים בצינור התזה במקום נייר טואלט. קחו איתכם טישו! תחנות דלק גובות 3-5 באט."
+      }
     ]
   },
   {
@@ -658,6 +1304,79 @@ export const lessonsData: Lesson[] = [
         phonetic: "pae...",
         scenario: "Critical for medical situations. Write your allergies in Thai and carry the note.",
         culturalTip: "Common: 'แพ้ยาปฏิชีวนะ' (antibiotics), 'แพ้อาหารทะเล' (seafood), 'แพ้ถั่ว' (peanuts)."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ปวดท้องมากครับ",
+        phonetic: "puat tong maak khrap",
+        hebrew: "יש לי כאב בטן חזק"
+      },
+      {
+        speaker: "Pharmacist",
+        speakerHebrew: "רוקח",
+        thai: "กินอะไรมาคะ",
+        phonetic: "kin arai maa kha",
+        hebrew: "מה אכלת?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อาหารข้างทางครับ",
+        phonetic: "aa-haan khaang taang khrap",
+        hebrew: "אוכל רחוב"
+      },
+      {
+        speaker: "Pharmacist",
+        speakerHebrew: "רוקח",
+        thai: "นี่ยาแก้ท้องเสียค่ะ กินวันละสามครั้ง",
+        phonetic: "nee yaa kae tong sia kha kin wan la saam krang",
+        hebrew: "הנה תרופה לשלשול, שלוש פעמים ביום"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "แพ้ยาปฏิชีวนะครับ",
+        phonetic: "pae yaa pa-ti-chee-wa-na khrap",
+        hebrew: "יש לי אלרגיה לאנטיביוטיקה"
+      },
+      {
+        speaker: "Pharmacist",
+        speakerHebrew: "רוקח",
+        thai: "ไม่มีปัญหาค่ะ ยานี้ไม่ใช่ยาปฏิชีวนะ",
+        phonetic: "mai mee pan-haa kha yaa nee mai chai yaa pa-ti-chee-wa-na",
+        hebrew: "אין בעיה, התרופה הזו היא לא אנטיביוטיקה"
+      }
+    ],
+    exercises: [
+      {
+        id: 36,
+        question: "How do you say 'I have a headache' in Thai?",
+        questionHebrew: "איך אומרים 'יש לי כאב ראש' בתאילנדית?",
+        options: ["ปวดท้อง (puat tong)", "ปวดหัว (puat hua)", "ต้องการหมอ (tong-kaan mor)", "แพ้ (pae)"],
+        correctAnswer: 1,
+        explanation: "'ปวดหัว' (puat hua) means 'headache'. Common from heat and dehydration. Pharmacies and 7-Eleven sell pain relievers.",
+        explanationHebrew: "'ปวดหัว' (פואט הัว) פירושו 'כאב ראש'. נפוץ בגלל חום והתייבשות. בתי מרקחת ו-7-Eleven מוכרים משככי כאבים."
+      },
+      {
+        id: 37,
+        question: "Where can you find a pharmacy in Thailand?",
+        questionHebrew: "איפה אפשר למצוא בית מרקחת בתאילנד?",
+        options: ["Only in hospitals / רק בבתי חולים", "They are rare / הם נדירים", "They are everywhere, pharmacists often speak English / הם בכל מקום, רוקחים לרוב דוברי אנגלית", "Only at airports / רק בשדות תעופה"],
+        correctAnswer: 2,
+        explanation: "Pharmacies (ร้านขายยา) are everywhere in Thailand. Pharmacists often speak basic English and can recommend over-the-counter medicines.",
+        explanationHebrew: "בתי מרקחת (ร้านขายยา) נמצאים בכל מקום בתאילנד. רוקחים לרוב דוברי אנגלית בסיסית ויכולים להמליץ על תרופות ללא מרשם."
+      },
+      {
+        id: 38,
+        question: "What does 'ปวดท้อง' (puat tong) mean?",
+        questionHebrew: "מה המשמעות של 'ปวดท้อง' (פואט טונג)?",
+        options: ["Headache / כאב ראש", "Stomach pain / כאב בטן", "I need a doctor / אני צריך רופא", "I'm allergic / יש לי אלרגיה"],
+        correctAnswer: 1,
+        explanation: "'ปวดท้อง' (puat tong) means 'stomach pain'. Very common for tourists. Drink only bottled water to prevent issues.",
+        explanationHebrew: "'ปวดท้อง' (פואט טונג) פירושו 'כאב בטן'. נפוץ מאוד אצל תיירים. שתו רק מים מבקבוק כדי למנוע בעיות."
       }
     ]
   },
@@ -712,6 +1431,72 @@ export const lessonsData: Lesson[] = [
         scenario: "Before deciding to walk or take transport. Helps estimate time/cost.",
         culturalTip: "Thais might say 'ไม่ไกล' (not far) even if it's 20 minutes walk. Always ask distance in minutes."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ไปวัดพระแก้วไกลไหมครับ",
+        phonetic: "pai wat pra kaew klai mai khrap",
+        hebrew: "האם ואט פרה קאו רחוק?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ไม่ไกลครับ ตรงไปแล้วเลี้ยวซ้าย",
+        phonetic: "mai klai khrap trong pai laew liao sai",
+        hebrew: "לא רחוק, ישר ואז שמאלה"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เดินกี่นาทีครับ",
+        phonetic: "dern kee naa-tee khrap",
+        hebrew: "כמה דקות הליכה?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "ประมาณสิบนาทีครับ",
+        phonetic: "pra-maan sip naa-tee khrap",
+        hebrew: "בערך עשר דקות"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอบคุณครับ",
+        phonetic: "khop-khun khrap",
+        hebrew: "תודה"
+      }
+    ],
+    exercises: [
+      {
+        id: 39,
+        question: "How do you say 'turn left' in Thai?",
+        questionHebrew: "איך אומרים 'פנה שמאלה' בתאילנדית?",
+        options: ["เลี้ยวขวา (liaw khwa)", "ตรงไป (trong pai)", "เลี้ยวซ้าย (liaw sai)", "จอดตรงนี้ (jot trong nee)"],
+        correctAnswer: 2,
+        explanation: "'เลี้ยวซ้าย' (liaw sai) means 'turn left'. Use with 'ที่นี่' (tee nee - here) to say 'turn left here'.",
+        explanationHebrew: "'เลี้ยวซ้าย' (ליאו ซ้าย) פירושו 'פנה שמאלה'. השתמשו עם 'ที่นี่' (ที นี - כאן) כדי לומר 'פנה שמאלה כאן'."
+      },
+      {
+        id: 40,
+        question: "What does 'ไกลไหม' (klai mai) mean?",
+        questionHebrew: "מה המשמעות של 'ไกลไหม' (קלai มאי)?",
+        options: ["Is it expensive? / זה יקר?", "Is it far? / זה רחוק?", "Is it open? / זה פתוח?", "Is it good? / זה טוב?"],
+        correctAnswer: 1,
+        explanation: "'ไกลไหม' (klai mai) means 'Is it far?' Ask this before deciding to walk or take transport.",
+        explanationHebrew: "'ไกลไหม' (קלai מאי) פירושו 'זה רחוק?' שאלו את זה לפני שמחליטים ללכת ברגל או לקחת תחבורה."
+      },
+      {
+        id: 41,
+        question: "Why should you always ask distance in minutes when Thais say 'not far'?",
+        questionHebrew: "למה תמיד כדאי לשאול מרחק בדקות כשתאילנדים אומרים 'לא רחוק'?",
+        options: ["Because they don't know / כי הם לא יודעים", "Because 'not far' might still be 20 minutes walk / כי 'לא רחוק' עלול להיות 20 דקות הליכה", "Because they lie / כי הם משקרים", "Because minutes are easier / כי דקות יותר קל"],
+        correctAnswer: 1,
+        explanation: "Thais might say 'ไม่ไกล' (not far) even if it's 20 minutes walk. Always ask 'เดินกี่นาที' (how many minutes walking?) for accuracy.",
+        explanationHebrew: "תאילנדים עלולים לומר 'ไม่ไกล' (לא רחוק) גם אם זה 20 דקות הליכה. תמיד שאלו 'เดินกี่นาที' (כמה דקות הליכה?) לדיוק."
+      }
     ]
   },
   {
@@ -764,6 +1549,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "aa-kaat dee",
         scenario: "Perfect small talk. Use in the morning or after rain when it's cooler.",
         culturalTip: "Best weather is November-February: cooler and dry. Perfect for tourism."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อากาศร้อนมากวันนี้",
+        phonetic: "aa-kaat ron maak wan nee",
+        hebrew: "מאוד חם היום"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "ใช่ค่ะ ร้อนมากเลย",
+        phonetic: "chai kha ron maak loei",
+        hebrew: "כן, חם מאוד באמת"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ฝนจะตกไหมครับ",
+        phonetic: "fon ja tok mai khrap",
+        hebrew: "יירד גשם?"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "อาจจะตกตอนบ่ายค่ะ",
+        phonetic: "aat ja tok ton baai kha",
+        hebrew: "אולי יירד אחר הצהריים"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เอาร่มไปดีกว่า",
+        phonetic: "ao rom pai dee kwa",
+        hebrew: "עדיף לקחת מטריה"
+      }
+    ],
+    exercises: [
+      {
+        id: 42,
+        question: "How do you say 'It's hot' in Thai?",
+        questionHebrew: "איך אומרים 'חם' בתאילנדית?",
+        options: ["อากาศหนาว (aa-kaat nao)", "ฝนตก (fon tok)", "อากาศร้อน (aa-kaat ron)", "อากาศดี (aa-kaat dee)"],
+        correctAnswer: 2,
+        explanation: "'อากาศร้อน' (aa-kaat ron) means 'it's hot'. A great small talk opener since Thailand is hot year-round!",
+        explanationHebrew: "'อากาศร้อน' (อา-กาศ รอน) פירושו 'חם'. פתיח מצוין לשיחת חולין כי בתאילנד חם כל השנה!"
+      },
+      {
+        id: 43,
+        question: "What does 'ฝนตก' (fon tok) mean?",
+        questionHebrew: "מה המשמעות של 'ฝนตก' (ฝน ตก)?",
+        options: ["It's hot / חם", "It's cold / קר", "It's raining / יורד גשם", "The weather is nice / מזג האוויר נעים"],
+        correctAnswer: 2,
+        explanation: "'ฝนตก' (fon tok) means 'it's raining'. Rain in Thailand can be sudden and heavy - wait it out at a cafe.",
+        explanationHebrew: "'ฝนตก' (פון ตוก) פירושו 'יורד גשם'. גשם בתאילנד יכול להיות פתאומי וחזק - חכו שיעבור בבית קפה."
+      },
+      {
+        id: 44,
+        question: "When is the best weather for visiting Thailand?",
+        questionHebrew: "מתי מזג האוויר הטוב ביותר לביקור בתאילנד?",
+        options: ["March-May / מרץ-מאי", "June-October / יוני-אוקטובר", "November-February / נובמבר-פברואר", "All year is the same / כל השנה אותו דבר"],
+        correctAnswer: 2,
+        explanation: "November-February is the best time: cooler and dry. June-October is rainy season with afternoon showers common.",
+        explanationHebrew: "נובמבר-פברואר הוא הזמן הטוב ביותר: קריר ויבש. יוני-אוקטובר הוא עונת הגשמים עם מקלחות אחר הצהריים נפוצות."
       }
     ]
   },
@@ -818,6 +1669,72 @@ export const lessonsData: Lesson[] = [
         scenario: "For larger purchases or hotel bills. 1000 baht = 'พันบาท' (pan baht).",
         culturalTip: "ATMs usually dispense 1000฿ notes. Break them at 7-Eleven for smaller bills."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "นี่เท่าไหร่ครับ",
+        phonetic: "nee tao-rai khrap",
+        hebrew: "כמה זה?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "สองร้อยห้าสิบบาทค่ะ",
+        phonetic: "song roi haa-sip baht kha",
+        hebrew: "מאתיים חמישים באט"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เอาสองอันครับ",
+        phonetic: "ao song an khrap",
+        hebrew: "אני אקח שניים"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "ห้าร้อยบาทค่ะ",
+        phonetic: "haa roi baht kha",
+        hebrew: "חמש מאות באט"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "นี่หนึ่งพันบาทครับ",
+        phonetic: "nee neung pan baht khrap",
+        hebrew: "הנה אלף באט"
+      }
+    ],
+    exercises: [
+      {
+        id: 45,
+        question: "What is 'สอง' (song) in English?",
+        questionHebrew: "מה פירוש 'สอง' (ซอง) באנגלית?",
+        options: ["One / אחד", "Two / שניים", "Ten / עשרה", "Hundred / מאה"],
+        correctAnswer: 1,
+        explanation: "'สอง' (song) means 'two'. Use with classifier words: 'สองคน' (song khon) = two people, 'สองอัน' (song an) = two items.",
+        explanationHebrew: "'สอง' (ซอง) פירושו 'שניים'. השתמשו עם מילות סיווג: 'สองคน' (סונג קון) = שני אנשים, 'สองอัน' (סונג אัน) = שני פריטים."
+      },
+      {
+        id: 46,
+        question: "How do you say 'one hundred' in Thai?",
+        questionHebrew: "איך אומרים 'מאה' בתאילנדית?",
+        options: ["หนึ่งพัน (neung pan)", "สิบ (sip)", "หนึ่งร้อย (neung roi)", "ยี่สิบ (yee-sip)"],
+        correctAnswer: 2,
+        explanation: "'หนึ่งร้อย' (neung roi) means 'one hundred'. Common price point: 100 baht = 'ร้อยบาท' (roi baht).",
+        explanationHebrew: "'หนึ่งร้อย' (נึง รอย) פירושו 'מאה'. מחיר נפוץ: 100 באט = 'ร้อยบาท' (רอย באท)."
+      },
+      {
+        id: 47,
+        question: "How are numbers 11-19 formed in Thai?",
+        questionHebrew: "איך נוצרים המספרים 11-19 בתאילנדית?",
+        options: ["Completely different words / מילים שונות לגמרי", "สิบ (sip) + the digit / สิบ (סิפ) + הספרה", "Same as English / כמו באנגלית", "They skip these numbers / מדלגים על המספרים האלה"],
+        correctAnswer: 1,
+        explanation: "Numbers 11-19 follow the pattern สิบ (sip/10) + digit: 11=สิบเอ็ด (sip-et), 12=สิบสอง (sip-song), etc.",
+        explanationHebrew: "המספרים 11-19 עוקבים אחר הדפוס สิบ (סיפ/10) + ספרה: 11=สิบเอ็ด (สิפ-เอ็ด), 12=สิบสอง (สิפ-ซอง), וכו'."
+      }
     ]
   },
   {
@@ -870,6 +1787,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "wan nee wan arai",
         scenario: "When you lose track of days on vacation!",
         culturalTip: "Days: Monday=จันทร์ (jan), Tuesday=อังคาร (ang-kaan), etc. Not essential for tourists."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ทัวร์ออกกี่โมงครับ",
+        phonetic: "tour ok kee mong khrap",
+        hebrew: "באיזו שעה יוצא הטיול?"
+      },
+      {
+        speaker: "Guide",
+        speakerHebrew: "מדריך",
+        thai: "แปดโมงเช้าค่ะ",
+        phonetic: "paet mong chao kha",
+        hebrew: "בשמונה בבוקר"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "พรุ่งนี้ใช่ไหมครับ",
+        phonetic: "proong nee chai mai khrap",
+        hebrew: "מחר, נכון?"
+      },
+      {
+        speaker: "Guide",
+        speakerHebrew: "מדריך",
+        thai: "ใช่ค่ะ พรุ่งนี้วันศุกร์",
+        phonetic: "chai kha proong nee wan suk",
+        hebrew: "כן, מחר יום שישי"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "กลับมากี่โมงครับ",
+        phonetic: "klap maa kee mong khrap",
+        hebrew: "באיזו שעה חוזרים?"
+      }
+    ],
+    exercises: [
+      {
+        id: 48,
+        question: "How do you ask 'What time is it?' in Thai?",
+        questionHebrew: "איך שואלים 'מה השעה?' בתאילנדית?",
+        options: ["วันนี้วันอะไร (wan nee wan arai)", "กี่โมงแล้ว (kee mong laew)", "พรุ่งนี้ (proong nee)", "เมื่อวาน (meua waan)"],
+        correctAnswer: 1,
+        explanation: "'กี่โมงแล้ว' (kee mong laew) means 'What time is it?' Thai time system uses different words for morning, afternoon, and evening hours.",
+        explanationHebrew: "'กี่โมงแล้ว' (กี มอง แล้ว) פירושו 'מה השעה?' מערכת השעות התאילנדית משתמשת במילים שונות לבוקר, אחר הצהריים וערב."
+      },
+      {
+        id: 49,
+        question: "What does 'พรุ่งนี้' (proong nee) mean?",
+        questionHebrew: "מה המשמעות של 'พรุ่งนี้' (פרุ้ง ני)?",
+        options: ["Today / היום", "Yesterday / אתמול", "Tomorrow / מחר", "Next week / שבוע הבא"],
+        correctAnswer: 2,
+        explanation: "'พรุ่งนี้' (proong nee) means 'tomorrow'. Use it for scheduling: 'พรุ่งนี้เจอกัน' (proong nee jer kan) = 'See you tomorrow'.",
+        explanationHebrew: "'พรุ่งนี้' (פרุ้ง ני) פירושו 'מחר'. השתמשו לתיאומים: 'พรุ่งนี้เจอกัน' (פרุ้ง ני ג'ר กัน) = 'נתראה מחר'."
+      },
+      {
+        id: 50,
+        question: "How do you say 'today' in Thai?",
+        questionHebrew: "איך אומרים 'היום' בתאילנדית?",
+        options: ["เมื่อวาน (meua waan)", "วันนี้ (wan nee)", "พรุ่งนี้ (proong nee)", "กี่โมง (kee mong)"],
+        correctAnswer: 1,
+        explanation: "'วันนี้' (wan nee) means 'today'. Combine with activities: 'วันนี้ไปตลาด' (wan nee pai talaat) = 'today go to market'.",
+        explanationHebrew: "'วันนี้' (วัน ני) פירושו 'היום'. שלבו עם פעילויות: 'วันนี้ไปตลาด' (วัน ני ไป ตลาด) = 'היום הולכים לשוק'."
       }
     ]
   },
@@ -924,6 +1907,72 @@ export const lessonsData: Lesson[] = [
         scenario: "Compliment for women, places, or things. Makes people smile!",
         culturalTip: "'สวยมาก' (suay maak) = 'very beautiful'. Thais love compliments!"
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "มีสีแดงไหมครับ",
+        phonetic: "mee see daeng mai khrap",
+        hebrew: "יש לך באדום?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "มีค่ะ สีแดงกับสีน้ำเงิน",
+        phonetic: "mee kha see daeng gap see nam ngern",
+        hebrew: "כן, אדום וכחול"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "สีดำมีไหมครับ",
+        phonetic: "see dam mee mai khrap",
+        hebrew: "יש בשחור?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "ไม่มีค่ะ มีสีขาวนะคะ",
+        phonetic: "mai mee kha mee see khao na kha",
+        hebrew: "אין, יש בלבן"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เอาสีแดงครับ สวยมาก",
+        phonetic: "ao see daeng khrap suay maak",
+        hebrew: "אני אקח את האדום, יפה מאוד"
+      }
+    ],
+    exercises: [
+      {
+        id: 51,
+        question: "How do you say 'red' in Thai?",
+        questionHebrew: "איך אומרים 'אדום' בתאילנדית?",
+        options: ["สีน้ำเงิน (see nam ngern)", "สีขาว (see khao)", "สีแดง (see daeng)", "สีดำ (see dam)"],
+        correctAnswer: 2,
+        explanation: "'สีแดง' (see daeng) means 'red'. Red is considered lucky in Thai culture, popular for celebrations.",
+        explanationHebrew: "'สีแดง' (ซี แดง) פירושו 'אדום'. אדום נחשב למזל טוב בתרבות התאילנדית, פופולרי בחגיגות."
+      },
+      {
+        id: 52,
+        question: "What color is associated with mourning in Thai culture?",
+        questionHebrew: "איזה צבע קשור לאבל בתרבות התאילנדית?",
+        options: ["Red / אדום", "Blue / כחול", "White / לבן", "Black / שחור"],
+        correctAnswer: 2,
+        explanation: "White is worn for funerals in Thailand. Avoid all-white outfits at temples. Black was also worn for mourning the late King.",
+        explanationHebrew: "לבן נלבש לטקסי הלוויה בתאילנד. הימנעו מלבוש לבן לגמרי במקדשים. שחור גם נלבש לאבל על המלך המנוח."
+      },
+      {
+        id: 53,
+        question: "What does 'สวย' (suay) mean?",
+        questionHebrew: "מה המשמעות של 'สวย' (สวย)?",
+        options: ["Expensive / יקר", "Big / גדול", "Beautiful / יפה", "Small / קטן"],
+        correctAnswer: 2,
+        explanation: "'สวย' (suay) means 'beautiful'. Add 'มาก' (maak) for 'very beautiful': 'สวยมาก' (suay maak). Thais love compliments!",
+        explanationHebrew: "'สวย' (สวย) פירושו 'יפה'. הוסיפו 'มาก' (มาก) ל'יפה מאוד': 'สวยมาก' (สวยมาก). תאילנדים אוהבים מחמאות!"
+      }
     ]
   },
   {
@@ -976,6 +2025,79 @@ export const lessonsData: Lesson[] = [
         phonetic: "soht",
         scenario: "Common topic of conversation, especially for younger travelers.",
         culturalTip: "Thais might try to matchmake! It's friendly, not intrusive."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "คุณมีครอบครัวไหมคะ",
+        phonetic: "khun mee krop-krua mai kha",
+        hebrew: "יש לך משפחה?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "มีครับ มีลูกสองคน",
+        phonetic: "mee khrap mee look song khon",
+        hebrew: "כן, יש לי שני ילדים"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "น่ารัก อายุเท่าไหร่คะ",
+        phonetic: "na-rak aa-yu tao-rai kha",
+        hebrew: "חמוד, בני כמה?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ห้าขวบกับสามขวบครับ",
+        phonetic: "haa khuap gap saam khuap khrap",
+        hebrew: "חמש ושלוש"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "นี่เพื่อนคุณใช่ไหมคะ",
+        phonetic: "nee peuan khun chai mai kha",
+        hebrew: "זה החבר שלך?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ใช่ครับ นี่เพื่อนผม",
+        phonetic: "chai khrap nee peuan pom",
+        hebrew: "כן, זה החבר שלי"
+      }
+    ],
+    exercises: [
+      {
+        id: 54,
+        question: "How do you introduce a friend in Thai?",
+        questionHebrew: "איך מציגים חבר בתאילנדית?",
+        options: ["อายุเท่าไหร่ (aa-yu tao-rai)", "นี่เพื่อนผม (nee peuan pom)", "โสด (soht)", "มีลูก (mee look)"],
+        correctAnswer: 1,
+        explanation: "'นี่เพื่อนผม' (nee peuan pom) means 'This is my friend' (male speaker). Females say 'นี่เพื่อนดิฉัน' (nee peuan dichan).",
+        explanationHebrew: "'นี่เพื่อนผม' (ני เพื่อน พม) פירושו 'זה החבר שלי' (דובר גבר). נשים אומרות 'นี่เพื่อนดิฉัน' (ני เพื่อน ดิฉัน)."
+      },
+      {
+        id: 55,
+        question: "Why do Thais commonly ask 'How old are you?'",
+        questionHebrew: "למה תאילנדים נוהגים לשאול 'בן כמה אתה?'",
+        options: ["It's considered rude / זה נחשב גס רוח", "To determine proper pronouns and respect level / כדי לקבוע כינויי פנייה ורמת כבוד", "They are curious / הם סקרנים", "It's a joke / זו בדיחה"],
+        correctAnswer: 1,
+        explanation: "Thais ask age to determine the proper level of respect and pronouns to use. It's not considered rude at all - it shows interest.",
+        explanationHebrew: "תאילנדים שואלים גיל כדי לקבוע את רמת הכבוד וכינויי הפנייה המתאימים. זה בכלל לא נחשב גס רוח - זה מראה עניין."
+      },
+      {
+        id: 56,
+        question: "What does 'แฟน' (faen) mean in Thai?",
+        questionHebrew: "מה המשמעות של 'แฟน' (แฟน) בתאילנדית?",
+        options: ["Fan / מאוורר", "Boyfriend/girlfriend/spouse / חבר/חברה/בן זוג", "Friend / חבר", "Family / משפחה"],
+        correctAnswer: 1,
+        explanation: "'แฟน' (faen) is the casual term for boyfriend, girlfriend, or spouse. The formal terms are 'สามี' (husband) and 'ภรรยา' (wife).",
+        explanationHebrew: "'แฟน' (แฟน) הוא המונח הלא-פורמלי לחבר, חברה, או בן/בת זוג. המונחים הפורמליים הם 'สามี' (בעל) ו-'ภรรยา' (אישה)."
       }
     ]
   },
@@ -1030,6 +2152,79 @@ export const lessonsData: Lesson[] = [
         scenario: "Shows cultural interest. Thais appreciate tourists who respect temples.",
         culturalTip: "'วัด' (wat) = temple. Dress modestly: cover shoulders and knees."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "ชอบทำอะไรคะ",
+        phonetic: "chop tam arai kha",
+        hebrew: "מה אתה אוהב לעשות?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ชอบอาหารไทยมากครับ อร่อยมาก",
+        phonetic: "chop aa-haan thai maak khrap a-roi maak",
+        hebrew: "אני מאוד אוהב אוכל תאילנדי, טעים מאוד"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "แล้วชอบไปเที่ยวที่ไหนคะ",
+        phonetic: "laew chop pai tiao tee nai kha",
+        hebrew: "ולאן אתה אוהב לטייל?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อยากไปวัดครับ รักเมืองไทย",
+        phonetic: "yaak pai wat khrap rak meuang thai",
+        hebrew: "אני רוצה לבקר במקדשים, אני אוהב את תאילנד"
+      },
+      {
+        speaker: "Friend",
+        speakerHebrew: "חבר",
+        thai: "ดีใจค่ะ อยากเรียนภาษาไทยด้วยไหม",
+        phonetic: "dee jai kha yaak rian paa-saa thai duay mai",
+        hebrew: "שמחה לשמוע, רוצה גם ללמוד תאילנדית?"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "อยากเรียนครับ",
+        phonetic: "yaak rian khrap",
+        hebrew: "כן, אני רוצה ללמוד"
+      }
+    ],
+    exercises: [
+      {
+        id: 57,
+        question: "How do you say 'I like Thai food' in Thai?",
+        questionHebrew: "איך אומרים 'אני אוהב אוכל תאילנדי' בתאילנדית?",
+        options: ["รักเมืองไทย (rak meuang thai)", "อยากไปวัด (yaak pai wat)", "ชอบอาหารไทย (chop aa-haan thai)", "ชอบช้อปปิ้ง (chop shopping)"],
+        correctAnswer: 2,
+        explanation: "'ชอบอาหารไทย' (chop aa-haan thai) means 'I like Thai food'. Great conversation starter - Thais are very proud of their cuisine!",
+        explanationHebrew: "'ชอบอาหารไทย' (צ'อบ อา-หาน ไท) פירושו 'אני אוהב אוכל תאילנדי'. פותח שיחה מצוין - תאילנדים מאוד גאים במטבח שלהם!"
+      },
+      {
+        id: 58,
+        question: "What does 'รักเมืองไทย' (rak meuang thai) mean?",
+        questionHebrew: "מה המשמעות של 'รักเมืองไทย' (รัก เมือง ไท)?",
+        options: ["I want to visit temples / אני רוצה לבקר במקדשים", "I love Thailand / אני אוהב את תאילנד", "I like shopping / אני אוהב קניות", "I want to learn Thai / אני רוצה ללמוד תאילנדית"],
+        correctAnswer: 1,
+        explanation: "'รักเมืองไทย' (rak meuang thai) means 'I love Thailand'. The ultimate compliment - Thais beam with pride when tourists say this!",
+        explanationHebrew: "'รักเมืองไทย' (รัก เมือง ไท) פירושו 'אני אוהב את תאילנד'. המחמאה הגדולה ביותר - תאילנדים קורנים מגאווה כששומעים את זה!"
+      },
+      {
+        id: 59,
+        question: "How do you say 'I want to learn Thai' in Thai?",
+        questionHebrew: "איך אומרים 'אני רוצה ללמוד תאילנדית' בתאילנדית?",
+        options: ["ชอบอาหารไทย (chop aa-haan thai)", "อยากเรียนภาษาไทย (yaak rian paa-saa thai)", "อยากไปวัด (yaak pai wat)", "ชอบช้อปปิ้ง (chop shopping)"],
+        correctAnswer: 1,
+        explanation: "'อยากเรียนภาษาไทย' (yaak rian paa-saa thai) means 'I want to learn Thai'. Thais will enthusiastically help you!",
+        explanationHebrew: "'อยากเรียนภาษาไทย' (ยาก เรียน พา-สา ไท) פירושו 'אני רוצה ללמוד תאילנדית'. תאילנדים ישמחו לעזור לכם!"
+      }
     ]
   },
   {
@@ -1082,6 +2277,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "song hai dai mai",
         scenario: "For photos, files, or LINE messages. LINE is Thailand's main messaging app.",
         culturalTip: "Get LINE app before arriving. Thais use it more than WhatsApp."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "รหัสไวไฟอะไรครับ",
+        phonetic: "ra-hat wifi arai khrap",
+        hebrew: "מה סיסמת ה-WiFi?"
+      },
+      {
+        speaker: "Staff",
+        speakerHebrew: "עובד",
+        thai: "รหัสอยู่บนโต๊ะค่ะ",
+        phonetic: "ra-hat yoo bon to kha",
+        hebrew: "הסיסמה על השולחן"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ชาร์จโทรศัพท์ได้ไหมครับ",
+        phonetic: "charge toh-ra-sap dai mai khrap",
+        hebrew: "אפשר לטעון את הטלפון?"
+      },
+      {
+        speaker: "Staff",
+        speakerHebrew: "עובד",
+        thai: "ได้ค่ะ ปลั๊กอยู่ตรงนั้น",
+        phonetic: "dai kha plak yoo trong nan",
+        hebrew: "כן, השקע שם"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอบคุณครับ ซื้อซิมการ์ดที่ไหนดี",
+        phonetic: "khop-khun khrap sue sim card tee nai dee",
+        hebrew: "תודה, איפה כדאי לקנות כרטיס SIM?"
+      }
+    ],
+    exercises: [
+      {
+        id: 60,
+        question: "How do you ask for the WiFi password in Thai?",
+        questionHebrew: "איך שואלים מה סיסמת ה-WiFi בתאילנדית?",
+        options: ["ชาร์จโทรศัพท์ได้ไหม", "รหัสไวไฟอะไร", "ซื้อซิมการ์ดที่ไหน", "โทรศัพท์เสีย"],
+        correctAnswer: 1,
+        explanation: "'รหัสไวไฟอะไร' (ra-hat wifi arai) means 'What is the WiFi password?' Most places in Thailand have free WiFi.",
+        explanationHebrew: "'รหัสไวไฟอะไร' (รา-หัท ไวไฟ อาไร) פירושו 'מה סיסמת ה-WiFi?' רוב המקומות בתאילנד מציעים WiFi חינם."
+      },
+      {
+        id: 61,
+        question: "What messaging app do Thais prefer over WhatsApp?",
+        questionHebrew: "באיזו אפליקציית הודעות תאילנדים מעדיפים על פני WhatsApp?",
+        options: ["Telegram", "WeChat", "LINE", "Facebook Messenger"],
+        correctAnswer: 2,
+        explanation: "LINE is Thailand's main messaging app. Download it before arriving - Thais use it more than WhatsApp for both personal and business communication.",
+        explanationHebrew: "LINE היא אפליקציית ההודעות העיקרית בתאילנד. הורידו אותה לפני ההגעה - תאילנדים משתמשים בה יותר מ-WhatsApp לתקשורת אישית ועסקית."
+      },
+      {
+        id: 62,
+        question: "What does 'โทรศัพท์เสีย' (toh-ra-sap sia) mean?",
+        questionHebrew: "מה המשמעות של 'โทรศัพท์เสีย' (โทรศัพท์ เสีย)?",
+        options: ["I need a phone / אני צריך טלפון", "My phone is broken / הטלפון שלי מקולקל", "Phone number / מספר טלפון", "New phone / טלפון חדש"],
+        correctAnswer: 1,
+        explanation: "'โทรศัพท์เสีย' (toh-ra-sap sia) means 'my phone is broken'. MBK Center in Bangkok has hundreds of phone repair shops with cheap, fast service.",
+        explanationHebrew: "'โทรศัพท์เสีย' (โทรศัพท์ เสีย) פירושו 'הטלפון שלי מקולקל'. ב-MBK Center בבנגקוק יש מאות חנויות תיקוני טלפונים בזול ובמהירות."
       }
     ]
   },
@@ -1136,6 +2397,72 @@ export const lessonsData: Lesson[] = [
         scenario: "Tipping is not mandatory but appreciated for good service.",
         culturalTip: "Round up taxi fares or leave 20-40฿ at restaurants. Small tips go far."
       }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ตู้เอทีเอ็มอยู่ที่ไหนครับ",
+        phonetic: "too ATM yoo tee nai khrap",
+        hebrew: "איפה הכספומט?"
+      },
+      {
+        speaker: "Local",
+        speakerHebrew: "מקומי",
+        thai: "อยู่หน้าเซเว่นค่ะ",
+        phonetic: "yoo naa seven kha",
+        hebrew: "מול הסבן-אילבן"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ร้านนี้รับบัตรเครดิตไหมครับ",
+        phonetic: "raan nee rap bat credit mai khrap",
+        hebrew: "החנות הזו מקבלת כרטיסי אשראי?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "ไม่รับค่ะ เงินสดเท่านั้น",
+        phonetic: "mai rap kha ngern sot tao nan",
+        hebrew: "לא, מזומן בלבד"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ขอทอนด้วยครับ แบงค์พัน",
+        phonetic: "khor ton duay khrap baeng pan",
+        hebrew: "אני צריך עודף, שטר של אלף"
+      }
+    ],
+    exercises: [
+      {
+        id: 63,
+        question: "How much is the ATM withdrawal fee for foreigners in Thailand?",
+        questionHebrew: "מהו דמי המשיכה מכספומט לזרים בתאילנד?",
+        options: ["Free / חינם", "50 baht / באט", "220 baht / באט", "500 baht / באט"],
+        correctAnswer: 2,
+        explanation: "ATMs charge 220 baht per withdrawal for foreign cards. Withdraw large amounts to minimize fees.",
+        explanationHebrew: "כספומטים גובים 220 באט למשיכה עבור כרטיסים זרים. משכו סכומים גדולים כדי למזער עמלות."
+      },
+      {
+        id: 64,
+        question: "How do you say 'Do you accept credit cards?' in Thai?",
+        questionHebrew: "איך אומרים 'אתם מקבלים כרטיסי אשראי?' בתאילנדית?",
+        options: ["ขอทอนด้วย (khor ton duay)", "เก็บเงินทอน (kep ngern ton)", "รับบัตรเครดิตไหม (rap bat credit mai)", "จ่ายด้วยบัตรได้ไหม (jaai duay bat dai mai)"],
+        correctAnswer: 2,
+        explanation: "'รับบัตรเครดิตไหม' (rap bat credit mai) means 'Do you accept credit cards?' Many small shops are cash-only.",
+        explanationHebrew: "'รับบัตรเครดิตไหม' (רัพ บัท เครดิท מาי) פירושו 'אתם מקבלים כרטיסי אשראי?' חנויות קטנות רבות מקבלות מזומן בלבד."
+      },
+      {
+        id: 65,
+        question: "What does 'เก็บเงินทอน' (kep ngern ton) mean?",
+        questionHebrew: "מה המשמעות של 'เก็บเงินทอน' (เก็บ เงิน ทอน)?",
+        options: ["I need change / אני צריך עודף", "Keep the change / שמור על העודף", "Pay with card / לשלם בכרטיס", "Too expensive / יקר מדי"],
+        correctAnswer: 1,
+        explanation: "'เก็บเงินทอน' (kep ngern ton) means 'keep the change'. Tipping isn't mandatory but is appreciated for good service.",
+        explanationHebrew: "'เก็บเงินทอน' (เก็บ เงิน ทอน) פירושו 'שמור על העודף'. טיפ אינו חובה אבל מוערך עבור שירות טוב."
+      }
     ]
   },
   {
@@ -1188,6 +2515,72 @@ export const lessonsData: Lesson[] = [
         phonetic: "mee see eun mai",
         scenario: "When you like the item but not the color.",
         culturalTip: "Vendors often have more stock in back. Don't hesitate to ask."
+      }
+    ],
+    dialogue: [
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "ลองได้ไหมครับ",
+        phonetic: "long dai mai khrap",
+        hebrew: "אפשר למדוד?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "ได้ค่ะ ห้องลองอยู่ข้างหลัง",
+        phonetic: "dai kha hong long yoo khaang lang",
+        hebrew: "כן, חדר ההלבשה מאחורה"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "เล็กไปครับ มีไซส์ใหญ่กว่านี้ไหม",
+        phonetic: "lek pai khrap mee size yai kwa nee mai",
+        hebrew: "קטן מדי, יש מידה גדולה יותר?"
+      },
+      {
+        speaker: "Vendor",
+        speakerHebrew: "מוכר",
+        thai: "มีค่ะ มีสีอื่นด้วยนะคะ",
+        phonetic: "mee kha mee see eun duay na kha",
+        hebrew: "כן, יש גם צבעים אחרים"
+      },
+      {
+        speaker: "You",
+        speakerHebrew: "אתה",
+        thai: "นี่ไซส์อะไรครับ",
+        phonetic: "nee size arai khrap",
+        hebrew: "מה המידה של זה?"
+      }
+    ],
+    exercises: [
+      {
+        id: 66,
+        question: "How do you ask 'Can I try this on?' in Thai?",
+        questionHebrew: "איך שואלים 'אפשר למדוד?' בתאילנדית?",
+        options: ["นี่ไซส์อะไร (nee size arai)", "ลองได้ไหม (long dai mai)", "เล็กไป (lek pai)", "มีสีอื่นไหม (mee see eun mai)"],
+        correctAnswer: 1,
+        explanation: "'ลองได้ไหม' (long dai mai) means 'Can I try this on?' Always try before buying - Thai sizes run small compared to Western sizes.",
+        explanationHebrew: "'ลองได้ไหม' (ลอง ได มาย) פירושו 'אפשר למדוד?' תמיד מדדו לפני קנייה - מידות תאילנדיות קטנות בהשוואה למידות מערביות."
+      },
+      {
+        id: 67,
+        question: "What does 'ใหญ่ไป' (yai pai) mean?",
+        questionHebrew: "מה המשמעות של 'ใหญ่ไป' (ยาย ไป)?",
+        options: ["Too small / קטן מדי", "Too expensive / יקר מדי", "Too big / גדול מדי", "Perfect fit / מידה מושלמת"],
+        correctAnswer: 2,
+        explanation: "'ใหญ่ไป' (yai pai) means 'too big'. Use 'เล็กไป' (lek pai) for 'too small'. Ask 'มีเล็กกว่านี้ไหม' for smaller size.",
+        explanationHebrew: "'ใหญ่ไป' (ยาย ไป) פירושו 'גדול מדי'. השתמשו ב-'เล็กไป' (เล็ก ไป) ל'קטן מדי'. שאלו 'มีเล็กกว่านี้ไหม' למידה קטנה יותר."
+      },
+      {
+        id: 68,
+        question: "What is important to know about Thai clothing sizes?",
+        questionHebrew: "מה חשוב לדעת על מידות בגדים תאילנדיות?",
+        options: ["They are the same as Western / הן זהות למערביות", "XL in Thailand is about M in Western sizing / XL בתאילנד הוא בערך M במידות מערביות", "They only have one size / יש רק מידה אחת", "They use European sizing / הם משתמשים במידות אירופאיות"],
+        correctAnswer: 1,
+        explanation: "Thai sizes run small. XL in Thailand is approximately M in Western sizing. Always check actual measurements, not just labels.",
+        explanationHebrew: "מידות תאילנדיות קטנות. XL בתאילנד שווה בערך ל-M במידות מערביות. תמיד בדקו מידות בפועל, לא רק תוויות."
       }
     ]
   },
