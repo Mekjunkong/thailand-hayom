@@ -32,6 +32,35 @@ export default function Home() {
     },
   });
 
+  // Subscription
+  const { data: user } = trpc.auth.me.useQuery();
+  const { data: subStatus } = trpc.stripe.getSubscriptionStatus.useQuery(undefined, {
+    enabled: !!user,
+  });
+  const isPremium = subStatus?.tier === "premium";
+
+  const subscriptionCheckout = trpc.stripe.createSubscriptionCheckout.useMutation({
+    onSuccess: (data) => {
+      if (data.url) window.location.href = data.url;
+    },
+    onError: (error) => {
+      if (error.message.includes("UNAUTHORIZED")) {
+        toast.error(t({ he: "יש להתחבר כדי להירשם", en: "Please log in to subscribe" }));
+      } else {
+        toast.error(t({ he: "שגיאה", en: "Error creating subscription" }));
+      }
+    },
+  });
+
+  const portalSession = trpc.stripe.createCustomerPortalSession.useMutation({
+    onSuccess: (data) => {
+      if (data.url) window.location.href = data.url;
+    },
+    onError: () => {
+      toast.error(t({ he: "שגיאה", en: "Error opening portal" }));
+    },
+  });
+
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     subscribeMutation.mutate({ email });
@@ -216,7 +245,7 @@ export default function Home() {
 
           {/* --- Pricing cards --- */}
           <ScrollReveal>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {/* Free card */}
               <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-2 text-white">
@@ -231,8 +260,8 @@ export default function Home() {
                 <ul className="space-y-3 mb-8">
                   {[
                     t({
-                      he: "ניוזלטר שבועי עם טיפים כלליים",
-                      en: "Weekly newsletter with general tips",
+                      he: "ניוזלטר שבועי",
+                      en: "Weekly newsletter",
                     }),
                     t({
                       he: "גישה למאמרים ותוכן",
@@ -255,13 +284,14 @@ export default function Home() {
                 </ul>
                 <Button
                   variant="outline"
+                  disabled
                   className="w-full py-5 text-base border-white/20 text-white hover:bg-white/10 rounded-xl"
                 >
                   {t({ he: "התוכנית הנוכחית", en: "Current Plan" })}
                 </Button>
               </div>
 
-              {/* Premium card */}
+              {/* Monthly Premium card */}
               <div className="bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl p-8 relative overflow-hidden">
                 {/* Popular badge */}
                 <div className="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5">
@@ -270,10 +300,10 @@ export default function Home() {
                 </div>
 
                 <h3 className="text-2xl font-bold mb-2 text-white">
-                  {t({ he: "פרימיום", en: "Premium" })}
+                  {t({ he: "פרימיום חודשי", en: "Monthly Premium" })}
                 </h3>
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-4xl font-bold text-white">₪49</span>
+                  <span className="text-4xl font-bold text-white">₪29</span>
                   <span className="text-white/80">
                     {t({ he: "/חודש", en: "/month" })}
                   </span>
@@ -285,19 +315,15 @@ export default function Home() {
                       en: "Everything in Free +",
                     }),
                     t({
-                      he: "התראות בזמן אמת על אירועים",
-                      en: "Real-time event alerts",
+                      he: "מאמרים בלעדיים ומדריכים מפורטים",
+                      en: "Exclusive articles & detailed guides",
                     }),
                     t({
-                      he: "הנחות בלעדיות במסעדות ומלונות",
-                      en: "Exclusive restaurant & hotel discounts",
+                      he: "הנחות במסעדות ומלונות",
+                      en: "Restaurant & hotel discounts",
                     }),
                     t({
-                      he: "מדריכים מפורטים עם כתובות ומחירים",
-                      en: "Detailed guides with addresses & prices",
-                    }),
-                    t({
-                      he: "גישה למקומות נסתרים וטיפים פנימיים",
+                      he: "מקומות נסתרים וטיפים פנימיים",
                       en: "Hidden gems & insider tips",
                     }),
                   ].map((item, i) => (
@@ -311,10 +337,83 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full py-5 text-base bg-white text-blue-600 hover:bg-gray-100 font-bold rounded-xl shadow-lg transition-all">
-                  <Sparkles className="mr-2 h-5 w-5" />
-                  {t({ he: "שדרג לפרימיום", en: "Upgrade to Premium" })}
-                </Button>
+                {isPremium ? (
+                  <Button
+                    onClick={() => portalSession.mutate()}
+                    disabled={portalSession.isPending}
+                    className="w-full py-5 text-base bg-white text-blue-600 hover:bg-gray-100 font-bold rounded-xl shadow-lg transition-all"
+                  >
+                    {t({ he: "ניהול מנוי", en: "Manage Subscription" })}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => subscriptionCheckout.mutate({ plan: "MONTHLY" })}
+                    disabled={subscriptionCheckout.isPending}
+                    className="w-full py-5 text-base bg-white text-blue-600 hover:bg-gray-100 font-bold rounded-xl shadow-lg transition-all"
+                  >
+                    <Sparkles className="mr-2 h-5 w-5" />
+                    {t({ he: "שדרג לפרימיום", en: "Upgrade to Premium" })}
+                  </Button>
+                )}
+              </div>
+
+              {/* Annual card */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-8 relative overflow-hidden">
+                {/* Save badge */}
+                <div className="absolute top-4 right-4 bg-green-500 text-white px-4 py-1.5 rounded-full text-xs font-bold">
+                  {t({ he: "חסוך 41%", en: "Save 41%" })}
+                </div>
+
+                <h3 className="text-2xl font-bold mb-2 text-white">
+                  {t({ he: "שנתי", en: "Annual" })}
+                </h3>
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className="text-4xl font-bold text-white">₪199</span>
+                  <span className="text-gray-400">
+                    {t({ he: "/שנה", en: "/year" })}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-400 mb-6">
+                  {t({ he: "רק ₪17/חודש", en: "Only ₪17/month" })}
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    t({
+                      he: "כל מה שיש בפרימיום",
+                      en: "Everything in Premium",
+                    }),
+                    t({
+                      he: "חיסכון של 41% לעומת חודשי",
+                      en: "41% savings vs monthly",
+                    }),
+                    t({
+                      he: "תשלום אחד לשנה שלמה",
+                      en: "One payment for full year",
+                    }),
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-300">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                {isPremium ? (
+                  <Button
+                    onClick={() => portalSession.mutate()}
+                    disabled={portalSession.isPending}
+                    className="w-full py-5 text-base bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl shadow-lg transition-all"
+                  >
+                    {t({ he: "ניהול מנוי", en: "Manage Subscription" })}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => subscriptionCheckout.mutate({ plan: "ANNUAL" })}
+                    disabled={subscriptionCheckout.isPending}
+                    className="w-full py-5 text-base bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl shadow-lg transition-all"
+                  >
+                    {t({ he: "קבל תוכנית שנתית", en: "Get Annual Plan" })}
+                  </Button>
+                )}
               </div>
             </div>
           </ScrollReveal>
