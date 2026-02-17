@@ -2,7 +2,10 @@ import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import Stripe from "stripe";
 import { TRPCError } from "@trpc/server";
-import { PRODUCTS } from "@shared/products";
+import { PRODUCTS, SUBSCRIPTION_PLANS } from "@shared/products";
+import { getDb } from "./db";
+import { subscriptions } from "../drizzle/schema";
+import { eq, and } from "drizzle-orm";
 
 function getStripe(): Stripe {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -135,4 +138,138 @@ export const stripeRouter = router({
         currency: session.currency,
       };
     }),
+
+  createSubscriptionCheckout: protectedProcedure
+    .input(
+      z.object({
+        plan: z.enum(["MONTHLY", "ANNUAL"]),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { plan } = input;
+      const planConfig = SUBSCRIPTION_PLANS[plan];
+
+      const db = await getDb();
+      if (!db) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Database not available",
+        });
+      }
+
+      // Look up existing Stripe customer ID from subscriptions table
+      const existingSubs = await db
+        .select()
+        .from(subscriptions)
+        .where(eq(subscriptions.userId, ctx.user.id));
+
+      const stripeCustomerId =
+        existingSubs.length > 0 ? existingSubs[0].stripeCustomerId : null;
+
+      const origin = ctx.req.headers.origin || "http://localhost:3000";
+
+      const sessionParams: Stripe.Checkout.SessionCreateParams = {
+        mode: "subscription",
+        line_items: [
+          {
+            price_data: {
+              currency: planConfig.currency,
+              product_data: {
+                name: planConfig.name,
+                description: planConfig.description,
+              },
+              unit_amount: planConfig.priceInAgorot,
+              recurring: {
+                interval: planConfig.interval,
+              },
+            },
+            quantity: 1,
+          },
+        ],
+        metadata: {
+          user_id: ctx.user.id.toString(),
+          plan,
+        },
+        success_url: `${origin}/subscription-success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/#pricing`,
+      };
+
+      if (stripeCustomerId) {
+        sessionParams.customer = stripeCustomerId;
+      } else if (ctx.user.email) {
+        sessionParams.customer_email = ctx.user.email;
+      }
+
+      const session = await getStripe().checkout.sessions.create(sessionParams);
+
+      return {
+        sessionId: session.id,
+        url: session.url || "",
+      };
+    }),
+
+  createCustomerPortalSession: protectedProcedure.mutation(
+    async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Database not available",
+        });
+      }
+
+      // Look up stripeCustomerId from subscriptions table for active subscription
+      const activeSubs = await db
+        .select()
+        .from(subscriptions)
+        .where(
+          and(
+            eq(subscriptions.userId, ctx.user.id),
+            eq(subscriptions.status, "active")
+          )
+        );
+
+      if (activeSubs.length === 0 || !activeSubs[0].stripeCustomerId) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "No active subscription found",
+        });
+      }
+
+      const origin = ctx.req.headers.origin || "http://localhost:3000";
+
+      const portalSession =
+        await getStripe().billingPortal.sessions.create({
+          customer: activeSubs[0].stripeCustomerId,
+          return_url: `${origin}/profile`,
+        });
+
+      return {
+        url: portalSession.url,
+      };
+    }
+  ),
+
+  getSubscriptionStatus: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) {
+      return { tier: "free" as const, status: null, currentPeriodEnd: null };
+    }
+
+    const subs = await db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.userId, ctx.user.id));
+
+    if (subs.length === 0) {
+      return { tier: "free" as const, status: null, currentPeriodEnd: null };
+    }
+
+    const sub = subs[0];
+    return {
+      tier: sub.tier,
+      status: sub.status,
+      currentPeriodEnd: sub.currentPeriodEnd,
+    };
+  }),
 });
