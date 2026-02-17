@@ -252,7 +252,7 @@ export default function Pronunciation() {
           <p className="text-xl text-gray-700 mb-2">Start our interactive lessons with native audio</p>
           <p className="text-lg text-gray-600 mb-8 hebrew-text" dir="rtl">התחילו את השיעורים האינטראקטיביים שלנו עם אודיו מקורי</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/lessons">
+            <Link href="/interactive-lessons">
               <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 shadow-xl">
                 🎓 Start Learning
               </Button>

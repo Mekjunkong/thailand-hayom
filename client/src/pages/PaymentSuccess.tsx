@@ -72,7 +72,7 @@ export default function PaymentSuccess() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Link href="/lessons" className="flex-1">
+            <Link href="/interactive-lessons" className="flex-1">
               <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
                 🎓 Start Learning Thai
               </Button>

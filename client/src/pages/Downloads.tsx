@@ -172,7 +172,7 @@ export default function Downloads() {
                 ✈️ Get Welcome Kit (₪20)
               </Button>
             </Link>
-            <Link href="/lessons">
+            <Link href="/interactive-lessons">
               <Button size="lg" variant="outline" className="border-2">
                 🎓 Start Free Lessons
               </Button>
