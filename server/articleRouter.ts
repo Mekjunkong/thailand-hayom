@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getDb } from "./db";
-import { articles, users } from "../drizzle/schema";
+import { articles, users, subscriptions } from "../drizzle/schema";
 import { eq, desc, and, or, like, sql } from "drizzle-orm";
 
 // Helper function to generate URL-friendly slug
@@ -96,7 +96,7 @@ export const articleRouter = router({
     .input(z.object({
       slug: z.string(),
     }))
-    .query(async ({ input }) => {
+    .query(async ({ ctx, input }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
@@ -123,8 +123,41 @@ export const articleRouter = router({
         .where(eq(users.id, article[0].authorId))
         .limit(1);
 
+      // Check if user has premium access
+      let isPremiumUser = false;
+      if (ctx.user) {
+        const sub = await db
+          .select({ tier: subscriptions.tier, status: subscriptions.status })
+          .from(subscriptions)
+          .where(and(
+            eq(subscriptions.userId, ctx.user.id),
+            eq(subscriptions.status, "active")
+          ))
+          .limit(1);
+        isPremiumUser = sub.length > 0 && sub[0].tier === "premium";
+      }
+
+      // Gate premium content for non-premium users
+      const articleData = article[0];
+      if (articleData.isPremium && !isPremiumUser) {
+        const truncate = (text: string) => {
+          const words = text.split(/\s+/);
+          if (words.length <= 200) return text;
+          return words.slice(0, 200).join(" ") + "...";
+        };
+
+        return {
+          ...articleData,
+          content: truncate(articleData.content),
+          contentHe: truncate(articleData.contentHe),
+          gated: true,
+          author: author[0] || null,
+        };
+      }
+
       return {
-        ...article[0],
+        ...articleData,
+        gated: false,
         author: author[0] || null,
       };
     }),
