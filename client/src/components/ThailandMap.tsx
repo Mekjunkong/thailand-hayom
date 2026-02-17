@@ -19,8 +19,8 @@ const cities: City[] = [
     id: "chiang-mai",
     name: "Chiang Mai",
     nameHe: "צ'אנג מאי",
-    x: 150,
-    y: 115,
+    x: 105,
+    y: 99,
     keywords: ["chiang mai", "chiangmai", "צ'אנג מאי"],
     description: "Mountains & temples",
     descriptionHe: "הרים ומקדשים",
@@ -29,8 +29,8 @@ const cities: City[] = [
     id: "bangkok",
     name: "Bangkok",
     nameHe: "בנגקוק",
-    x: 230,
-    y: 330,
+    x: 163,
+    y: 276,
     keywords: ["bangkok", "בנגקוק"],
     description: "Capital city & cultural hub",
     descriptionHe: "בירה ומרכז תרבותי",
@@ -39,8 +39,8 @@ const cities: City[] = [
     id: "pattaya",
     name: "Pattaya",
     nameHe: "פטאיה",
-    x: 255,
-    y: 360,
+    x: 178,
+    y: 304,
     keywords: ["pattaya", "פטאיה"],
     description: "Beach resort city",
     descriptionHe: "עיר נופש על החוף",
@@ -49,8 +49,8 @@ const cities: City[] = [
     id: "phuket",
     name: "Phuket",
     nameHe: "פוקט",
-    x: 145,
-    y: 500,
+    x: 107,
+    y: 480,
     keywords: ["phuket", "פוקט"],
     description: "Beaches & islands",
     descriptionHe: "חופים ואיים",
@@ -59,8 +59,8 @@ const cities: City[] = [
     id: "krabi",
     name: "Krabi",
     nameHe: "קראבי",
-    x: 165,
-    y: 480,
+    x: 127,
+    y: 440,
     keywords: ["krabi", "קראבי"],
     description: "Limestone cliffs & beaches",
     descriptionHe: "צוקי גיר וחופים",
@@ -82,9 +82,9 @@ export default function ThailandMap() {
             className="w-full h-auto"
             style={{ maxHeight: "600px" }}
           >
-            {/* Thailand outline — recognizable shape with northern mountains, central plains, and southern peninsula */}
+            {/* Thailand outline — accurate country shape from geographic data */}
             <path
-              d="M 170 60 L 190 55 L 210 60 L 225 50 L 240 55 L 250 70 L 260 65 L 270 75 L 265 90 L 255 100 L 260 115 L 255 130 L 265 140 L 275 155 L 280 170 L 290 180 L 295 195 L 290 210 L 280 220 L 275 240 L 280 255 L 290 270 L 300 280 L 305 295 L 295 310 L 280 320 L 270 335 L 260 345 L 255 360 L 250 375 L 240 385 L 225 390 L 215 400 L 210 415 L 200 425 L 195 440 L 185 450 L 175 460 L 168 475 L 160 485 L 150 495 L 140 510 L 135 525 L 130 540 L 140 545 L 148 535 L 155 520 L 160 510 L 170 505 L 175 495 L 168 485 L 175 475 L 185 465 L 190 450 L 200 440 L 205 425 L 215 415 L 220 400 L 210 395 L 195 390 L 185 380 L 175 370 L 165 355 L 155 340 L 145 330 L 135 320 L 130 305 L 125 290 L 120 275 L 115 260 L 110 245 L 115 230 L 120 215 L 115 200 L 110 185 L 115 170 L 125 155 L 130 140 L 125 125 L 130 110 L 140 100 L 145 85 L 155 75 L 170 60 Z"
+              d="M 301.4 257.0 L 309.7 240.9 L 306.9 210.9 L 278.1 180.4 L 270.9 145.4 L 243.7 116.6 L 219.8 114.4 L 215.4 126.6 L 197.6 127.7 L 187.6 121.0 L 158.2 142.1 L 152.7 110.5 L 154.9 73.3 L 133.8 71.6 L 128.8 50.5 L 114.4 40.0 L 97.7 47.8 L 82.2 63.3 L 60.5 65.0 L 52.2 103.3 L 40.0 109.4 L 59.4 140.4 L 82.2 166.0 L 98.3 189.3 L 90.5 220.4 L 81.1 226.5 L 90.5 244.2 L 113.8 272.5 L 119.4 292.0 L 120.5 308.6 L 136.0 340.8 L 121.6 373.5 L 109.4 410.2 L 102.2 444.0 L 100.5 465.7 L 107.2 485.6 L 111.0 464.5 L 127.1 481.8 L 144.9 501.2 L 151.0 518.9 L 164.3 532.3 L 169.3 526.1 L 195.4 541.7 L 198.7 560.0 L 219.3 555.6 L 228.7 541.1 L 211.5 522.8 L 192.6 518.4 L 174.3 498.4 L 166.5 467.9 L 152.1 435.7 L 131.6 434.6 L 127.7 409.1 L 135.5 378.0 L 147.7 326.4 L 146.6 287.5 L 173.7 287.0 L 172.1 314.7 L 198.2 314.2 L 227.6 330.2 L 215.9 287.5 L 232.6 258.7 L 272.0 251.4 L 301.4 257.0 Z"
               fill="url(#gradient)"
               stroke="#60a5fa"
               strokeWidth="2"
