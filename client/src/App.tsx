@@ -3,7 +3,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { ProgressProvider } from "./contexts/ProgressContext";
 import AIConcierge from "./components/AIConcierge";
 import Navbar from "./components/Navbar";
 import AnimatedPage from "./components/AnimatedPage";
@@ -21,8 +20,6 @@ import Admin from "./pages/Admin";
 import AdminContent from "./pages/AdminContent";
 import AdminFinancial from "./pages/AdminFinancial";
 import Profile from "./pages/Profile";
-import LessonList from "./pages/LessonList";
-import LessonDetail from "./pages/LessonDetail";
 import InteractiveLessons from "./pages/InteractiveLessons";
 import Quiz from "./pages/Quiz";
 import EmergencyScripts from "./pages/EmergencyScripts";
@@ -77,10 +74,6 @@ function Router() {
       <Route path="/profile">
         <AnimatedRoute component={Profile} />
       </Route>
-      <Route path={"/lessons"}>
-        <AnimatedRoute component={LessonList} />
-      </Route>
-      <Route path="/lesson/:id" component={LessonDetail} />
       <Route path="/interactive-lessons">
         <AnimatedRoute component={InteractiveLessons} />
       </Route>
@@ -113,15 +106,13 @@ function App() {
         defaultTheme="light"
         // switchable
       >
-        <ProgressProvider>
-          <TooltipProvider>
-            <Toaster />
-            <ScrollToTop />
-            <Navbar />
-            <Router />
-            <AIConcierge />
-          </TooltipProvider>
-        </ProgressProvider>
+        <TooltipProvider>
+          <Toaster />
+          <ScrollToTop />
+          <Navbar />
+          <Router />
+          <AIConcierge />
+        </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
