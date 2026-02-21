@@ -99,6 +99,22 @@ The webhook route **must** be registered before `express.json()` middleware beca
 
 **DB table:** `subscriptions` — `userId`, `tier` (free/premium), `status` (active/canceled/expired/past_due), `stripeSubscriptionId`, `stripeCustomerId`, `currentPeriodStart/End`.
 
+### Curated Trip Routes
+
+Pre-built trip itineraries displayed as horizontal sliding card carousels. Data defined in `shared/tripRoutes.ts`, components in `client/src/components/trips/`.
+
+**Current routes:**
+- `/trips/chiang-mai-one-day` — 6-stop Chiang Mai day trip (Doi Inthanon → Mae Wang → Doi Suthep → Mae Rim → Samoeng Loop → Mae Kampong)
+
+**Components:**
+- `TripStopCard.tsx` — card with photo, stop number, time badges, expandable activities, drive-to-next
+- `RouteMap.tsx` — SVG mini-map with dots, drive times, pulsing current-stop indicator
+- `TripSummaryFooter.tsx` — stats bar (departure, total time, driving, budget)
+
+**Adding a new trip:** Define a new `TripRoute` object in `shared/tripRoutes.ts`, add it to the `tripRoutes` registry, create a page that imports it and passes it to the carousel, and register the route in `App.tsx`.
+
+**Photo URLs:** Each stop has a `photoUrl` field. Replace placeholders with real location-specific photos. Falls back to gradient on load failure.
+
 ### Content Organization (Category-First Hub)
 
 Seven content categories defined in `client/src/data/categories.ts`: Thai Lessons (amber), Travel (teal), Food (rose), Visa (blue), Events (violet), Safety (orange), Premium (gold gradient).
