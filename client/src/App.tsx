@@ -26,6 +26,7 @@ import EmergencyScripts from "./pages/EmergencyScripts";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
+import ChiangMaiTrip from "./pages/ChiangMaiTrip";
 import ScrollToTop from "./components/ScrollToTop";
 
 function AnimatedRoute({
@@ -91,6 +92,9 @@ function Router() {
         <AnimatedRoute component={Articles} />
       </Route>
       <Route path="/articles/:slug" component={ArticleDetail} />
+      <Route path="/trips/chiang-mai-one-day">
+        <AnimatedRoute component={ChiangMaiTrip} />
+      </Route>
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
