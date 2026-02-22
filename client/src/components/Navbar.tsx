@@ -57,8 +57,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isHome = location === "/";
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -74,10 +72,8 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || !isHome
-          ? "bg-white/95 backdrop-blur-md shadow-md"
-          : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md ${
+        scrolled ? "shadow-md" : ""
       }`}
     >
       <div className="container mx-auto px-4">
@@ -86,9 +82,7 @@ export default function Navbar() {
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer">
               <span
-                className={`text-xl font-bold transition-colors duration-300 ${
-                  scrolled || !isHome ? "text-gray-900" : "text-white"
-                }`}
+                className="text-xl font-bold text-gray-900"
                 style={{
                   fontFamily:
                     language === "he"
@@ -108,12 +102,8 @@ export default function Navbar() {
                 <button
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive(link.href)
-                      ? scrolled || !isHome
-                        ? "bg-blue-50 text-blue-600"
-                        : "bg-white/20 text-white"
-                      : scrolled || !isHome
-                        ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                        : "text-white/80 hover:text-white hover:bg-white/10"
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                   }`}
                 >
                   {language === "he" ? link.labelHe : link.labelEn}
@@ -156,11 +146,7 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={`md:hidden ${
-                    scrolled || !isHome
-                      ? "text-gray-700 hover:bg-gray-100"
-                      : "text-white hover:bg-white/10"
-                  }`}
+                  className="md:hidden text-gray-700 hover:bg-gray-100"
                 >
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">
