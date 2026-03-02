@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { ProgressProvider } from "./contexts/ProgressContext";
 import AIConcierge from "./components/AIConcierge";
 import Navbar from "./components/Navbar";
 import AnimatedPage from "./components/AnimatedPage";
@@ -114,13 +115,15 @@ function App() {
         defaultTheme="light"
         // switchable
       >
-        <TooltipProvider>
-          <Toaster />
-          <ScrollToTop />
-          <Navbar />
-          <Router />
-          <AIConcierge />
-        </TooltipProvider>
+        <ProgressProvider>
+          <TooltipProvider>
+            <Toaster />
+            <ScrollToTop />
+            <Navbar />
+            <Router />
+            <AIConcierge />
+          </TooltipProvider>
+        </ProgressProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
