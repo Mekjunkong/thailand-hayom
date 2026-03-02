@@ -131,7 +131,7 @@ export default function Home() {
             >
               <div className="flex items-center gap-3">
                 <Crown className="h-5 w-5 text-white" />
-                <div className="text-left">
+                <div className="text-start">
                   <p className="text-sm font-semibold text-white">
                     {t({ he: "שדרג לפרימיום", en: "Unlock Premium" })}
                   </p>

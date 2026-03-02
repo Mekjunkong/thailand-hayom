@@ -36,7 +36,7 @@ export default function LearningProgressCard() {
                   })}
                 </h3>
               </div>
-              <ArrowRight className="h-4 w-4 text-gray-400" />
+              <ArrowRight className="h-4 w-4 text-gray-400 rtl:rotate-180" />
             </div>
 
             {allComplete ? (
@@ -85,7 +85,7 @@ export default function LearningProgressCard() {
                 {/* Progress bar */}
                 <div className="flex items-center gap-3">
                   <Progress value={percentage} className="h-2 flex-1" />
-                  <span className="text-xs font-medium text-gray-500 w-10 text-right">
+                  <span className="text-xs font-medium text-gray-500 w-10 text-end">
                     {percentage}%
                   </span>
                 </div>
