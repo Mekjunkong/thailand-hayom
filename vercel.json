@@ -1,7 +1,7 @@
 {
   "buildCommand": "pnpm install && pnpm build",
   "outputDirectory": "dist",
-  "framework": "other",
+  "framework": "vite",
   "functions": {
     "api/**/*.ts": {
       "runtime": "@vercel/node@3.1.0",
