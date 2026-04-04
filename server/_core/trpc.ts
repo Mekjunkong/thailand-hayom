@@ -25,7 +25,11 @@ const requireUser = t.middleware(async opts => {
   });
 });
 
-export const protectedProcedure = t.procedure.use(requireUser);
+// TODO: Replace with proper JWT auth after Vercel migration
+// protectedProcedure temporarily falls back to publicProcedure if OAUTH_SERVER_URL is not set
+export const protectedProcedure = process.env.OAUTH_SERVER_URL
+  ? t.procedure.use(requireUser)
+  : t.procedure;
 
 export const adminProcedure = t.procedure.use(
   t.middleware(async opts => {

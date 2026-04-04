@@ -1,10 +1,9 @@
 import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
-// vite-plugin-manus-runtime removed — not needed outside Manus AI environment
+
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
@@ -27,7 +26,6 @@ export default defineConfig({
   server: {
     host: true,
     allowedHosts: [
-      // Manus AI hosts removed — not needed outside Manus AI environment
       "localhost",
       "127.0.0.1",
     ],
