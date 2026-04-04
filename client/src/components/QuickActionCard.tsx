@@ -7,8 +7,7 @@ interface QuickActionCardProps {
   icon: LucideIcon;
   labelEn: string;
   labelHe: string;
-  tintBg: string;
-  tintText: string;
+  bgClass: string;
 }
 
 export default function QuickActionCard({
@@ -16,18 +15,17 @@ export default function QuickActionCard({
   icon: Icon,
   labelEn,
   labelHe,
-  tintBg,
-  tintText,
+  bgClass,
 }: QuickActionCardProps) {
   const { language } = useLanguage();
 
   return (
     <Link href={href}>
       <div
-        className={`flex flex-col items-center justify-center gap-2 p-4 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer ${tintBg}`}
+        className={`flex flex-col items-center justify-center gap-2 p-4 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all duration-200 cursor-pointer ${bgClass}`}
       >
-        <Icon className={`h-7 w-7 ${tintText}`} />
-        <span className="text-xs font-medium text-gray-700 text-center leading-tight">
+        <Icon className="h-6 w-6 text-white" />
+        <span className="text-[11px] font-semibold text-white text-center leading-tight">
           {language === "he" ? labelHe : labelEn}
         </span>
       </div>

@@ -41,9 +41,9 @@ export default function ContentFeedCard({
 
   return (
     <Link href={`/articles/${slug}`}>
-      <div className="flex gap-4 p-3 bg-white rounded-xl hover:bg-gray-50 transition-colors cursor-pointer">
+      <div className="flex gap-4 p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all cursor-pointer">
         {/* Thumbnail */}
-        <div className="flex-shrink-0 w-[100px] h-[75px] rounded-lg overflow-hidden">
+        <div className="flex-shrink-0 w-[100px] h-[75px] rounded-xl overflow-hidden shadow-sm">
           {coverImage ? (
             <img
               src={coverImage}

@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://thailandhayom.com/sitemap.xml
+
+# Block admin pages
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+
+# Block payment pages from being indexed
+Disallow: /payment-success
+Disallow: /subscription-success

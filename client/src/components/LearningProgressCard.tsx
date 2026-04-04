@@ -24,11 +24,13 @@ export default function LearningProgressCard() {
     <section className="px-4 py-2">
       <div className="max-w-lg mx-auto">
         <Link href="/interactive-lessons">
-          <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-5 cursor-pointer">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200 p-5 cursor-pointer">
             {/* Header */}
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <GraduationCap className="h-5 w-5 text-blue-500" />
+                <div className="p-1.5 bg-blue-100 rounded-lg">
+                  <GraduationCap className="h-4 w-4 text-blue-600" />
+                </div>
                 <h3 className="text-sm font-semibold text-gray-900">
                   {t({
                     he: allComplete ? "כל הכבוד!" : "המשך ללמוד",

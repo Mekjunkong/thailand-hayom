@@ -42,6 +42,11 @@ export default function ContentFeed() {
   return (
     <section className="px-4 py-4">
       <div className="max-w-lg mx-auto">
+        {/* Section title */}
+        <h2 className="text-base font-bold text-gray-900 mb-3">
+          {t({ he: "מאמרים אחרונים", en: "Latest Articles" })}
+        </h2>
+
         {/* Category filter pills */}
         <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide">
           {filterPills.map(pill => (
@@ -60,7 +65,7 @@ export default function ContentFeed() {
         </div>
 
         {/* Feed cards */}
-        <div className="space-y-2">
+        <div className="space-y-3">
           {isLoading ? (
             Array.from({ length: 5 }, (_, i) => (
               <div key={i} className="flex gap-4 p-3">

@@ -30,6 +30,9 @@ export const users = pgTable("users", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
+  /** Local password auth fields — set for email/password users (Railway deployment) */
+  passwordHash: varchar("passwordHash", { length: 128 }),
+  passwordSalt: varchar("passwordSalt", { length: 64 }),
 });
 
 export type User = typeof users.$inferSelect;
