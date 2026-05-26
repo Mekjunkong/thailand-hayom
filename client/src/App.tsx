@@ -21,6 +21,7 @@ import Admin from "./pages/Admin";
 import AdminContent from "./pages/AdminContent";
 import AdminFinancial from "./pages/AdminFinancial";
 import Profile from "./pages/Profile";
+import Auth from "./pages/Auth";
 import InteractiveLessons from "./pages/InteractiveLessons";
 import Quiz from "./pages/Quiz";
 import EmergencyScripts from "./pages/EmergencyScripts";
@@ -77,6 +78,9 @@ function Router() {
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={AdminContent} />
       <Route path="/admin/financial" component={AdminFinancial} />
+      <Route path="/login">
+        <AnimatedRoute component={Auth} />
+      </Route>
       <Route path="/profile">
         <AnimatedRoute component={Profile} />
       </Route>

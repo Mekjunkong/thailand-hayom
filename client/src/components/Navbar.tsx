@@ -2,12 +2,55 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Search, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
+import { hasCourseAccess } from "@/lib/courseAccess";
+import { trpc } from "@/lib/trpc";
 import SearchOverlay from "./SearchOverlay";
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { data: user } = trpc.auth.me.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+  const { data: purchases = [] } = trpc.user.getPurchaseHistory.useQuery(
+    undefined,
+    {
+      enabled: Boolean(user),
+    },
+  );
+  const hasPaidAccess = hasCourseAccess(purchases);
+  const cta = !user
+    ? { href: "/login", label: t({ he: "התחילו חינם", en: "Start free" }) }
+    : hasPaidAccess
+      ? {
+          href: "/interactive-lessons",
+          label: t({ he: "המשך שיעור", en: "Continue lesson" }),
+        }
+      : {
+          href: "/welcome-kit",
+          label: t({ he: "פתח קורס", en: "Unlock course" }),
+        };
+  const navLinks = [
+    {
+      href: "/interactive-lessons",
+      label: t({ he: "הקורס", en: "Course" }),
+    },
+    {
+      href: "/interactive-lessons?sample=1",
+      label: t({ he: "שיעור חינם", en: "Free lesson" }),
+    },
+    {
+      href: "/articles",
+      label: t({ he: "מאמרים", en: "Articles" }),
+    },
+    {
+      href: "/emergency",
+      label: t({ he: "חירום", en: "Emergency" }),
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,8 +87,26 @@ export default function Navbar() {
               </div>
             </Link>
 
+            <div className="hidden items-center gap-5 md:flex">
+              {navLinks.map(link => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-semibold text-gray-600 transition-colors hover:text-gray-950"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
             {/* Right cluster */}
             <div className="flex items-center gap-2">
+              <Link href={cta.href} className="hidden sm:block">
+                <Button className="h-9 rounded-full bg-stone-950 px-4 text-sm font-bold text-white hover:bg-stone-800">
+                  {cta.label}
+                </Button>
+              </Link>
+
               {/* Search */}
               <button
                 onClick={() => setSearchOpen(true)}
