@@ -13,11 +13,14 @@ export function UnlockCoursePanel() {
       <p className="mt-3 text-sm leading-6 text-stone-200">
         כולל תרגול שמע, PDF ביטויים, תסריטי חירום וצ'יט שיט לטלפון.
       </p>
-      <Link href="/welcome-kit">
-        <Button className="mt-5 w-full rounded-xl bg-amber-400 font-bold text-stone-950 hover:bg-amber-300">
+      <Button
+        asChild
+        className="mt-5 w-full rounded-xl bg-amber-400 font-bold text-stone-950 hover:bg-amber-300"
+      >
+        <Link href="/welcome-kit">
           פתחו ב-₪{TOURIST_COURSE.priceIls}
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     </aside>
   );
 }
