@@ -27,7 +27,7 @@ describe("courseAccess", () => {
 
   it("treats completed course-compatible product purchases as paid access", () => {
     expect(isCoursePurchase(completedPurchase)).toBe(true);
-    expect(isCoursePurchase({ productType: "single", status: "completed" })).toBe(true);
+    expect(isCoursePurchase({ productType: "single", status: "completed" })).toBe(false);
     expect(isCoursePurchase({ productType: "single", status: "pending" })).toBe(false);
     expect(isCoursePurchase({ productType: "monthly", status: "completed" })).toBe(false);
   });

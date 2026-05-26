@@ -2,9 +2,11 @@ import { TOURIST_COURSE } from "@/data/touristCourse";
 
 export const COURSE_PRODUCT_TYPES = [
   "tourist_survival_thai_course",
-  "smart_tourist_pack",
-  "single",
 ] as const;
+
+const courseProductTypeSet = new Set<string>(COURSE_PRODUCT_TYPES);
+const freeLessonIdSet = new Set<number>(TOURIST_COURSE.freeLessonIds);
+const paidLessonIdSet = new Set<number>(TOURIST_COURSE.paidLessonIds);
 
 export type CourseAccessKind = "visitor" | "free" | "paid";
 
@@ -20,7 +22,7 @@ export type UserLike = {
 export function isCoursePurchase(purchase: PurchaseLike): boolean {
   return (
     purchase.status === "completed" &&
-    COURSE_PRODUCT_TYPES.includes(purchase.productType as (typeof COURSE_PRODUCT_TYPES)[number])
+    courseProductTypeSet.has(purchase.productType ?? "")
   );
 }
 
@@ -47,10 +49,10 @@ export function canAccessLesson({
   lessonId: number;
   hasPaidAccess: boolean;
 }): boolean {
-  if (hasPaidAccess) return TOURIST_COURSE.paidLessonIds.includes(lessonId as never);
-  return TOURIST_COURSE.freeLessonIds.includes(lessonId as never);
+  if (hasPaidAccess) return paidLessonIdSet.has(lessonId);
+  return freeLessonIdSet.has(lessonId);
 }
 
 export function isFreeLesson(lessonId: number): boolean {
-  return TOURIST_COURSE.freeLessonIds.includes(lessonId as never);
+  return freeLessonIdSet.has(lessonId);
 }

@@ -10,7 +10,7 @@ export const TOURIST_COURSE = {
   currency: "ils",
   freeLessonIds: [1, 3],
   paidLessonIds: [1, 5, 3, 4, 6, 7, 9],
-  checkoutProductType: "single",
+  checkoutProductType: "tourist_survival_thai_course",
   whatsAppUrl:
     "https://wa.me/66929894495?text=Hi!%20I%20want%20the%20Tourist%20Survival%20Thai%20Course",
 } as const;
