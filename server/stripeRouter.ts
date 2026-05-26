@@ -23,7 +23,7 @@ export const stripeRouter = router({
   createCheckoutSession: publicProcedure
     .input(
       z.object({
-        productType: z.enum(["single", "bulk_10", "bulk_20"]),
+        productType: z.enum(["tourist_survival_thai_course", "single", "bulk_10", "bulk_20"]),
         customerEmail: z.string().email().optional(),
         customerName: z.string().optional(),
       })
@@ -34,9 +34,13 @@ export const stripeRouter = router({
       let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[];
       let metadata: Record<string, string> = {
         product_type: productType,
+        course_access:
+          productType === "tourist_survival_thai_course"
+            ? "tourist_survival_thai_course"
+            : "legacy_or_bulk",
       };
 
-      if (productType === "single") {
+      if (productType === "tourist_survival_thai_course" || productType === "single") {
         lineItems = [
           {
             price_data: {

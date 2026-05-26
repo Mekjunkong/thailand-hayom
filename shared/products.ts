@@ -1,34 +1,35 @@
 export const PRODUCTS = {
   SMART_TOURIST_PACK: {
-    name: "Smart Tourist Pack",
-    description: "Complete travel companion for Thailand with 24/7 AI Concierge, Welcome Kit, and local guidance",
-    price: 20, // ILS (Shekels)
-    priceUSD: 5.50, // Approximate USD equivalent
+    name: "Tourist Survival Thai Course",
+    description:
+      "Hebrew-first Thai speaking course for Israeli tourists, with survival phrases, audio practice, PDF phrasebook, and emergency scripts",
+    price: 79, // ILS (Shekels)
+    priceUSD: 22, // Approximate USD equivalent
     currency: "ils",
     features: [
-      "24/7 AI Travel Concierge",
-      "Full Tourist Welcome Kit (PDF + website access)",
-      "Local guidance for food, transport, culture",
-      "Thai phrase support and translation",
-      "Safety tips and practical travel advice",
-      "Chiang Mai discounts and recommendations",
-      "Custom itineraries based on weather and budget"
-    ]
+      "7-day practical Thai speaking course",
+      "Hebrew explanations for Israeli tourists",
+      "Thai phrases for taxis, food, hotels, shopping, and emergencies",
+      "Audio practice and listen-repeat flow",
+      "Downloadable PDF phrasebook",
+      "Emergency scripts and phone cheat sheet",
+      "Lifetime access to the course materials",
+    ],
   },
   BULK_PRICING: {
     "10_PACKS": {
       quantity: 10,
-      price: 160, // ILS (Shekels)
-      pricePerPack: 16,
-      savings: 40
+      price: 690, // ILS (Shekels)
+      pricePerPack: 69,
+      savings: 100,
     },
     "20_PACKS": {
       quantity: 20,
-      price: 300, // ILS (Shekels)
-      pricePerPack: 15,
-      savings: 100
-    }
-  }
+      price: 1180, // ILS (Shekels)
+      pricePerPack: 59,
+      savings: 400,
+    },
+  },
 } as const;
 
 export type ProductKey = keyof typeof PRODUCTS;
