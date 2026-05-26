@@ -3,11 +3,25 @@ import { lessonsData } from "@/data/lessonsData";
 import { useAuth } from "@/_core/hooks/useAuth";
 import LessonBrowser from "@/components/LessonBrowser";
 import FlashcardPlayer from "@/components/FlashcardPlayer";
+import { TOURIST_COURSE_MODULES } from "@/data/touristCourse";
+import { canAccessLesson, getCourseAccessState } from "@/lib/courseAccess";
+import { trpc } from "@/lib/trpc";
 
 export default function InteractiveLessons() {
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const { data: purchases = [] } = trpc.user.getPurchaseHistory.useQuery(
+    undefined,
+    {
+      enabled: Boolean(user),
+    }
+  );
   const [selectedLessonId, setSelectedLessonId] = useState<number | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<number>>(new Set());
+  const access = getCourseAccessState({ user, purchases });
+  const courseLessonIds = TOURIST_COURSE_MODULES.map(module => module.lessonId);
+  const courseLessons = courseLessonIds
+    .map(lessonId => lessonsData.find(lesson => lesson.id === lessonId))
+    .filter((lesson): lesson is NonNullable<typeof lesson> => Boolean(lesson));
 
   // Load progress from database
   useEffect(() => {
@@ -43,7 +57,19 @@ export default function InteractiveLessons() {
     }
   };
 
-  const selectedLesson = lessonsData.find(l => l.id === selectedLessonId);
+  const selectedLesson = courseLessons.find(l => l.id === selectedLessonId);
+
+  const handleSelectLesson = (lessonId: number) => {
+    if (!isAuthenticated) {
+      window.location.href = "/login?redirect=/interactive-lessons";
+      return;
+    }
+    if (!canAccessLesson({ lessonId, hasPaidAccess: access.hasPaidAccess })) {
+      window.location.href = "/welcome-kit";
+      return;
+    }
+    setSelectedLessonId(lessonId);
+  };
 
   const handleComplete = () => {
     if (!selectedLessonId) return;
@@ -55,9 +81,12 @@ export default function InteractiveLessons() {
 
   const handleNext = () => {
     if (!selectedLessonId) return;
-    const idx = lessonsData.findIndex(l => l.id === selectedLessonId);
-    if (idx < lessonsData.length - 1) {
-      setSelectedLessonId(lessonsData[idx + 1].id);
+    const accessibleCourseLessons = courseLessons.filter(lesson =>
+      canAccessLesson({ lessonId: lesson.id, hasPaidAccess: access.hasPaidAccess })
+    );
+    const idx = accessibleCourseLessons.findIndex(l => l.id === selectedLessonId);
+    if (idx >= 0 && idx < accessibleCourseLessons.length - 1) {
+      setSelectedLessonId(accessibleCourseLessons[idx + 1].id);
     } else {
       setSelectedLessonId(null);
     }
@@ -76,9 +105,11 @@ export default function InteractiveLessons() {
 
   return (
     <LessonBrowser
-      lessons={lessonsData}
+      lessons={courseLessons}
       completedLessons={completedLessons}
-      onSelectLesson={setSelectedLessonId}
+      onSelectLesson={handleSelectLesson}
+      hasPaidAccess={access.hasPaidAccess}
+      accessKind={access.kind}
     />
   );
 }
