@@ -7,6 +7,8 @@ import { getDb } from "./db";
 import { subscriptions } from "../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 
+const COURSE_PRODUCT_TYPE = "tourist_survival_thai_course";
+
 function getStripe(): Stripe {
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new TRPCError({
@@ -30,17 +32,19 @@ export const stripeRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       const { productType, customerEmail, customerName } = input;
+      const purchasedProductType =
+        productType === "single" ? COURSE_PRODUCT_TYPE : productType;
 
       let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[];
       let metadata: Record<string, string> = {
-        product_type: productType,
+        product_type: purchasedProductType,
         course_access:
-          productType === "tourist_survival_thai_course"
-            ? "tourist_survival_thai_course"
+          purchasedProductType === COURSE_PRODUCT_TYPE
+            ? COURSE_PRODUCT_TYPE
             : "legacy_or_bulk",
       };
 
-      if (productType === "tourist_survival_thai_course" || productType === "single") {
+      if (purchasedProductType === COURSE_PRODUCT_TYPE) {
         lineItems = [
           {
             price_data: {

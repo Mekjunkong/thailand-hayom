@@ -27,6 +27,24 @@ describe("Stripe product and currency configuration", () => {
     expect(productsContent).toContain("Hebrew-first Thai speaking course");
   });
 
+  it("normalizes legacy single checkout metadata to course access", async () => {
+    const stripeRouterContent = await read("server/stripeRouter.ts");
+
+    expect(stripeRouterContent).toContain(
+      'const COURSE_PRODUCT_TYPE = "tourist_survival_thai_course";'
+    );
+    expect(stripeRouterContent).toContain("const purchasedProductType =");
+    expect(stripeRouterContent).toContain(
+      'productType === "single" ? COURSE_PRODUCT_TYPE : productType'
+    );
+    expect(stripeRouterContent).toContain("product_type: purchasedProductType");
+    expect(stripeRouterContent).toContain(
+      "purchasedProductType === COURSE_PRODUCT_TYPE"
+    );
+    expect(stripeRouterContent).toContain("if (purchasedProductType === COURSE_PRODUCT_TYPE)");
+    expect(stripeRouterContent).not.toContain("product_type: productType");
+  });
+
   it("still displays shekel symbol in admin and profile pages", async () => {
     const adminContent = await read("client/src/pages/Admin.tsx");
     const profileContent = await read("client/src/pages/Profile.tsx");
