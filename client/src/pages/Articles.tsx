@@ -41,6 +41,44 @@ export default function Articles() {
       categories.find(c => c.articleCategory === selectedCategory)) ||
     getCategoryById("travel")!;
   const HeaderIcon = headerCategory.icon;
+  const trimmedSearchQuery = searchQuery.trim();
+  const emptyStateKind = trimmedSearchQuery
+    ? "search"
+    : selectedCategory
+      ? "category"
+      : "general";
+  const emptyState = {
+    search: {
+      title: t({
+        he: "לא נמצאו מאמרים שמתאימים לחיפוש",
+        en: "No matching articles found",
+      }),
+      description: t({
+        he: "נסו חיפוש קצר יותר או נקו את שורת החיפוש כדי לראות את כל המדריכים.",
+        en: "Try a shorter search or clear the search field to see all guides.",
+      }),
+    },
+    category: {
+      title: t({
+        he: "אין מאמרים בקטגוריה הזאת כרגע",
+        en: "No articles in this category yet",
+      }),
+      description: t({
+        he: "אפשר להתחיל מהקורס ולחזור למדריכים כשנוסיף תוכן חדש.",
+        en: "Start with the course now and come back to the guides when new articles are added.",
+      }),
+    },
+    general: {
+      title: t({
+        he: "מדריכי התמיכה בדרך",
+        en: "Supporting guides are on the way",
+      }),
+      description: t({
+        he: "בינתיים אפשר להתחיל לתרגל תאית שימושית לטיול בתאילנד.",
+        en: "For now, start practicing practical Thai for your trip to Thailand.",
+      }),
+    },
+  }[emptyStateKind];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -94,20 +132,30 @@ export default function Articles() {
           ) : articles.length === 0 ? (
             <div
               className="mx-auto max-w-xl rounded-2xl border border-stone-200 bg-white p-8 text-center"
-              dir="rtl"
+              dir={t({ he: "rtl", en: "ltr" })}
             >
               <h2 className="text-2xl font-bold text-stone-950">
-                אין מאמרים בקטגוריה הזאת כרגע
+                {emptyState.title}
               </h2>
               <p className="mt-3 text-stone-600">
-                אפשר להתחיל מהקורס ולחזור למדריכים כשנוסיף תוכן חדש.
+                {emptyState.description}
               </p>
-              <Link
-                href="/interactive-lessons"
-                className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-stone-950 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
-              >
-                התחילו שיעור חינם
-              </Link>
+              {emptyStateKind === "search" ? (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-stone-950 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
+                >
+                  {t({ he: "נקו חיפוש", en: "Clear search" })}
+                </button>
+              ) : (
+                <Link
+                  href="/interactive-lessons"
+                  className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-stone-950 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
+                >
+                  {t({ he: "התחילו שיעור חינם", en: "Start a free lesson" })}
+                </Link>
+              )}
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
