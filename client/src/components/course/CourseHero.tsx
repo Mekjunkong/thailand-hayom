@@ -17,16 +17,16 @@ export function CourseHero() {
             תלמדו את המשפטים שבאמת צריך: מונית, אוכל, מלון, שוק, עזרה, וחיוך מכבד מול מקומיים.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/login">
-              <Button className="h-13 rounded-xl bg-stone-950 px-7 text-base font-bold text-white hover:bg-stone-800">
+            <Button asChild className="h-13 rounded-xl bg-stone-950 px-7 text-base font-bold text-white hover:bg-stone-800">
+              <Link href="/login">
                 התחילו שיעור חינם
-              </Button>
-            </Link>
-            <Link href="/welcome-kit">
-              <Button variant="outline" className="h-13 rounded-xl border-stone-300 px-7 text-base font-bold">
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="h-13 rounded-xl border-stone-300 px-7 text-base font-bold">
+              <Link href="/welcome-kit">
                 פתחו את הקורס המלא ₪{TOURIST_COURSE.priceIls}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
           <p className="mt-4 text-sm text-stone-500">
             בלי מנוי חודשי. שיעורי ניסיון בחינם, תשלום חד פעמי לקורס המלא.

@@ -15,11 +15,11 @@ export function FreePaidComparison() {
               <li>שמירת התקדמות</li>
               <li>תצוגה של כל מסלול הקורס</li>
             </ul>
-            <Link href="/login">
-              <Button variant="outline" className="mt-6 rounded-xl">
+            <Button asChild variant="outline" className="mt-6 rounded-xl">
+              <Link href="/login">
                 התחילו חינם
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
           <div className="rounded-2xl border-2 border-stone-950 bg-stone-950 p-6 text-white">
             <h3 className="text-2xl font-bold">הקורס המלא ₪{TOURIST_COURSE.priceIls}</h3>
@@ -30,11 +30,11 @@ export function FreePaidComparison() {
                 <li key={bonus.titleEn}>{bonus.titleHe}</li>
               ))}
             </ul>
-            <Link href="/welcome-kit">
-              <Button className="mt-6 rounded-xl bg-amber-400 text-stone-950 hover:bg-amber-300">
+            <Button asChild className="mt-6 rounded-xl bg-amber-400 text-stone-950 hover:bg-amber-300">
+              <Link href="/welcome-kit">
                 פתחו את הקורס
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

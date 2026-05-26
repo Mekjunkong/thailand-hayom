@@ -70,11 +70,11 @@ export default function WelcomeKit() {
               >
                 {createCheckout.isPending ? "פותח תשלום..." : `פתחו את הקורס ₪${TOURIST_COURSE.priceIls}`}
               </Button>
-              <Link href="/interactive-lessons">
-                <Button variant="outline" className="h-13 rounded-xl border-stone-300 px-8 text-base font-bold">
+              <Button asChild variant="outline" className="h-13 rounded-xl border-stone-300 px-8 text-base font-bold">
+                <Link href="/interactive-lessons">
                   ראו שיעורי ניסיון
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
             <p className="mt-4 text-sm text-stone-500">
               התחברות נדרשת לפני תשלום כדי לשייך את הגישה לחשבון שלכם.
