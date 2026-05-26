@@ -231,3 +231,20 @@
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+@layer components {
+  .course-hero {
+    background:
+      linear-gradient(135deg, oklch(0.985 0.012 82), oklch(0.94 0.035 82)),
+      oklch(0.97 0.015 80);
+  }
+
+  .h-13 {
+    height: 3.25rem;
+  }
+
+  .py-18 {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+}
