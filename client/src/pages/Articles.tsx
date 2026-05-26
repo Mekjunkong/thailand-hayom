@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import ContentCard, { CardSkeleton } from "@/components/ContentCard";
-import CategoryHeader from "@/components/CategoryHeader";
 import FilterBar from "@/components/FilterBar";
 import { getCategoryById, categories } from "@/data/categories";
 
@@ -40,10 +40,38 @@ export default function Articles() {
     (selectedCategory &&
       categories.find(c => c.articleCategory === selectedCategory)) ||
     getCategoryById("travel")!;
+  const HeaderIcon = headerCategory.icon;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <CategoryHeader category={headerCategory} count={articles.length} />
+      <section
+        className={`bg-gradient-to-r ${headerCategory.gradientFrom} ${headerCategory.gradientTo} py-16 pt-32 text-white`}
+      >
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <HeaderIcon className="mx-auto mb-4 h-12 w-12 text-white/90" />
+          <h1
+            className="text-4xl font-black text-white md:text-6xl"
+            dir={t({ he: "rtl", en: "ltr" })}
+          >
+            {t({
+              he: "מדריכי טיול שעוזרים לדבר בתאילנד",
+              en: "Travel guides that help you speak Thai in Thailand",
+            })}
+          </h1>
+          <p
+            className="mt-4 text-lg text-white/85 md:text-xl"
+            dir={t({ he: "rtl", en: "ltr" })}
+          >
+            {t({
+              he: "אוכל, תחבורה, ויזה ובטיחות, עם דגש על מה להגיד בפועל כשאתם שם.",
+              en: "Food, transport, visas, and safety with a focus on what to actually say while you are there.",
+            })}
+          </p>
+          <p className="mt-3 text-sm text-white/70">
+            {t({ en: `${articles.length} items`, he: `${articles.length} פריטים` })}
+          </p>
+        </div>
+      </section>
 
       <FilterBar
         searchQuery={searchQuery}
@@ -64,10 +92,22 @@ export default function Articles() {
               ))}
             </div>
           ) : articles.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-xl text-gray-500">
-                {t({ he: "לא נמצאו מאמרים", en: "No articles found" })}
+            <div
+              className="mx-auto max-w-xl rounded-2xl border border-stone-200 bg-white p-8 text-center"
+              dir="rtl"
+            >
+              <h2 className="text-2xl font-bold text-stone-950">
+                אין מאמרים בקטגוריה הזאת כרגע
+              </h2>
+              <p className="mt-3 text-stone-600">
+                אפשר להתחיל מהקורס ולחזור למדריכים כשנוסיף תוכן חדש.
               </p>
+              <Link
+                href="/interactive-lessons"
+                className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-stone-950 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
+              >
+                התחילו שיעור חינם
+              </Link>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
