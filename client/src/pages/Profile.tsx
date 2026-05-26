@@ -1,15 +1,17 @@
-import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, BookmarkIcon, TrendingUp, ShoppingBag, Trash2 } from 'lucide-react';
 import { Link } from 'wouter';
+import { TOURIST_COURSE, TOURIST_COURSE_MODULES } from '@/data/touristCourse';
+import { getCourseAccessState } from '@/lib/courseAccess';
 
 export default function Profile() {
   const { data: user } = trpc.auth.me.useQuery();
   const { data: progress = [] } = trpc.user.getProgress.useQuery();
   const { data: bookmarks = [] } = trpc.user.getBookmarks.useQuery();
   const { data: purchases = [] } = trpc.user.getPurchaseHistory.useQuery();
+  const access = getCourseAccessState({ user, purchases });
   
   const removeBookmarkMutation = trpc.user.removeBookmark.useMutation({
     onSuccess: () => {
@@ -35,8 +37,10 @@ export default function Profile() {
     );
   }
 
-  const completedLessons = progress.filter(p => p.completed === true).length;
-  const totalLessons = 10;
+  const courseLessonIds = new Set(TOURIST_COURSE_MODULES.map(module => module.lessonId));
+  const courseProgress = progress.filter(item => courseLessonIds.has(item.lessonId));
+  const completedLessons = courseProgress.filter(p => p.completed === true).length;
+  const totalLessons = TOURIST_COURSE_MODULES.length;
   const completionPercentage = Math.round((completedLessons / totalLessons) * 100);
 
   return (
@@ -44,9 +48,9 @@ export default function Profile() {
       <div className="container max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/">
-            <Button variant="outline" className="mb-4">← Back to Home</Button>
-          </Link>
+          <Button asChild variant="outline" className="mb-4">
+            <Link href="/">← Back to Home</Link>
+          </Button>
           <h1 className="text-4xl font-bold text-gray-900 font-playfair mb-2">My Profile</h1>
           <p className="text-gray-600">Track your progress and manage your learning</p>
         </div>
@@ -64,6 +68,33 @@ export default function Profile() {
               <p><strong>Name:</strong> {user.name || 'Not set'}</p>
               <p><strong>Email:</strong> {user.email || 'Not set'}</p>
               <p><strong>Member since:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Course Status */}
+        <Card className="mb-6 border-2 border-stone-200">
+          <CardHeader>
+            <CardTitle dir="rtl">סטטוס הקורס</CardTitle>
+          </CardHeader>
+          <CardContent dir="rtl">
+            <p className="text-lg font-bold text-stone-950">
+              {access.kind === "paid" ? "הקורס המלא פתוח" : "חשבון חינמי"}
+            </p>
+            <p className="mt-2 text-stone-600">
+              {access.kind === "paid"
+                ? "כל השיעורים והבונוסים זמינים לך."
+                : "שיעורי ניסיון פתוחים. אפשר לפתוח את הקורס המלא בכל רגע."}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Button asChild className="rounded-xl bg-stone-950 text-white hover:bg-stone-800">
+                <Link href="/interactive-lessons">המשך ללמוד</Link>
+              </Button>
+              {access.kind !== "paid" && (
+                <Button asChild variant="outline" className="rounded-xl">
+                  <Link href="/welcome-kit">פתח קורס</Link>
+                </Button>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -102,7 +133,7 @@ export default function Profile() {
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg text-center">
                   <p className="text-3xl font-bold text-green-600">
-                    {progress.filter(p => p.quizScore && p.quizScore >= 80).length}
+                    {courseProgress.filter(p => p.quizScore && p.quizScore >= 80).length}
                   </p>
                   <p className="text-gray-600">Quizzes Passed</p>
                 </div>
@@ -112,8 +143,8 @@ export default function Profile() {
               <div className="mt-6">
                 <h3 className="font-semibold mb-3">Lesson Details</h3>
                 <div className="space-y-2">
-                  {progress.length > 0 ? (
-                    progress.map((p) => (
+                  {courseProgress.length > 0 ? (
+                    courseProgress.map((p) => (
                       <div key={p.id} className="flex items-center justify-between p-3 bg-white rounded-lg">
                         <span>Lesson {p.lessonId}</span>
                         <div className="flex items-center gap-4">
@@ -198,9 +229,9 @@ export default function Profile() {
               </div>
             ) : (
               <p className="text-gray-500 text-center py-4">
-                No purchases yet.{' '}
-                <Link href="/welcome-kit" className="text-amber-600 hover:underline">
-                  Get the Smart Tourist Pack
+                עדיין לא פתחת את הקורס המלא.{" "}
+                <Link href="/welcome-kit" className="text-amber-700 font-semibold hover:underline">
+                  פתח את כל השיעורים ב-₪{TOURIST_COURSE.priceIls}
                 </Link>
               </p>
             )}
