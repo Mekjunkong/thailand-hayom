@@ -42,7 +42,7 @@ Modify:
 
 - `vitest.config.ts`: Include pure client unit tests.
 - `shared/products.ts`: Rename one-time product from Smart Tourist Pack to Tourist Survival Thai Course and set launch pricing.
-- `server/stripeRouter.ts`: Keep checkout flow but ensure single product metadata names course access.
+- `server/stripeRouter.ts`: Add a course-specific checkout product type and ensure purchase metadata names course access.
 - `server/stripe-currency.test.ts`: Replace hardcoded `/home/ubuntu` paths with repo-relative paths and assert the course product stays ILS.
 - `client/src/const.ts`: Make `getLoginUrl()` return `/login` when OAuth config is absent.
 - `client/src/App.tsx`: Add `/login` route.
@@ -100,8 +100,8 @@ describe("courseAccess", () => {
 
   it("treats completed course-compatible product purchases as paid access", () => {
     expect(isCoursePurchase(completedPurchase)).toBe(true);
-    expect(isCoursePurchase({ productType: "single", status: "completed" })).toBe(true);
-    expect(isCoursePurchase({ productType: "single", status: "pending" })).toBe(false);
+    expect(isCoursePurchase({ productType: "tourist_survival_thai_course", status: "completed" })).toBe(true);
+    expect(isCoursePurchase({ productType: "single", status: "completed" })).toBe(false);
     expect(isCoursePurchase({ productType: "monthly", status: "completed" })).toBe(false);
   });
 
@@ -168,7 +168,7 @@ export const TOURIST_COURSE = {
   currency: "ils",
   freeLessonIds: [1, 3],
   paidLessonIds: [1, 5, 3, 4, 6, 7, 9],
-  checkoutProductType: "single",
+  checkoutProductType: "tourist_survival_thai_course",
   whatsAppUrl:
     "https://wa.me/66929894495?text=Hi!%20I%20want%20the%20Tourist%20Survival%20Thai%20Course",
 } as const;
@@ -288,7 +288,6 @@ import { TOURIST_COURSE } from "@/data/touristCourse";
 export const COURSE_PRODUCT_TYPES = [
   "tourist_survival_thai_course",
   "smart_tourist_pack",
-  "single",
 ] as const;
 
 export type CourseAccessKind = "visitor" | "free" | "paid";
@@ -464,18 +463,47 @@ export const PRODUCTS = {
 } as const;
 ```
 
-- [ ] **Step 4: Add checkout metadata compatibility**
+- [ ] **Step 4: Add course-specific checkout product type**
 
-In `server/stripeRouter.ts`, keep `productType: "single"` accepted, but add course metadata inside the initial metadata object:
+In `server/stripeRouter.ts`, extend checkout input so the new course SKU is accepted:
+
+```ts
+productType: z.enum(["tourist_survival_thai_course", "single", "bulk_10", "bulk_20"]),
+```
+
+Update product branching so `"tourist_survival_thai_course"` uses the course product. Keep `"single"` accepted as a legacy checkout alias, but do not use it for new course unlocks:
+
+```ts
+if (productType === "tourist_survival_thai_course" || productType === "single") {
+  lineItems = [
+    {
+      price_data: {
+        currency: "ils",
+        product_data: {
+          name: PRODUCTS.SMART_TOURIST_PACK.name,
+          description: PRODUCTS.SMART_TOURIST_PACK.description,
+        },
+        unit_amount: PRODUCTS.SMART_TOURIST_PACK.price * 100,
+      },
+      quantity: 1,
+    },
+  ];
+}
+```
+
+Add course metadata inside the initial metadata object:
 
 ```ts
 let metadata: Record<string, string> = {
   product_type: productType,
-  course_access: productType === "single" ? "tourist_survival_thai_course" : "bulk_course_access",
+  course_access:
+    productType === "tourist_survival_thai_course"
+      ? "tourist_survival_thai_course"
+      : "legacy_or_bulk",
 };
 ```
 
-Expected behavior: existing callers still pass `{ productType: "single" }`, and new frontend copy sells it as the course.
+Expected behavior: new course checkout passes `{ productType: "tourist_survival_thai_course" }`. Legacy callers using `{ productType: "single" }` still get a checkout session, but `single` does not grant course access in frontend access helpers.
 
 - [ ] **Step 5: Run tests**
 
@@ -1312,7 +1340,9 @@ const handlePurchase = async () => {
 
   try {
     toast.info(t({ he: "מעביר לדף תשלום מאובטח...", en: "Redirecting to secure checkout..." }));
-    const result = await createCheckout.mutateAsync({ productType: "single" });
+    const result = await createCheckout.mutateAsync({
+      productType: TOURIST_COURSE.checkoutProductType,
+    });
     if (result.url) window.location.href = result.url;
   } catch {
     toast.error(t({ he: "שגיאה. נסה דרך WhatsApp.", en: "Failed. Please try via WhatsApp." }));
