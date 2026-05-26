@@ -39,7 +39,7 @@ export default function Navbar() {
       label: t({ he: "הקורס", en: "Course" }),
     },
     {
-      href: "/interactive-lessons?sample=1",
+      href: "/interactive-lessons",
       label: t({ he: "שיעור חינם", en: "Free lesson" }),
     },
     {
@@ -51,6 +51,10 @@ export default function Navbar() {
       label: t({ he: "חירום", en: "Emergency" }),
     },
   ];
+  const profileHref = user ? "/profile" : "/login";
+  const profileLabel = user
+    ? t({ he: "פרופיל", en: "Profile" })
+    : t({ he: "כניסה", en: "Login" });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,10 +147,10 @@ export default function Navbar() {
               </div>
 
               {/* Profile */}
-              <Link href="/profile">
+              <Link href={profileHref}>
                 <button
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label={t({ he: "פרופיל", en: "Profile" })}
+                  aria-label={profileLabel}
                 >
                   <User className="h-5 w-5 text-gray-600" />
                 </button>

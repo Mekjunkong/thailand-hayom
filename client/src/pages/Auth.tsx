@@ -5,6 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { submitAuth, type AuthMode } from "@/lib/authApi";
 
+const FALLBACK_REDIRECT = "/interactive-lessons";
+
+function getSafeRedirect(search: string) {
+  const redirect = new URLSearchParams(search).get("redirect");
+
+  if (!redirect) return FALLBACK_REDIRECT;
+  if (!redirect.startsWith("/") || redirect.startsWith("//")) {
+    return FALLBACK_REDIRECT;
+  }
+  if (
+    redirect === "/login" ||
+    redirect.startsWith("/login?") ||
+    redirect.startsWith("/login#")
+  ) {
+    return FALLBACK_REDIRECT;
+  }
+
+  return redirect;
+}
+
 export default function Auth() {
   const [, setLocation] = useLocation();
   const [mode, setMode] = useState<AuthMode>("register");
@@ -13,8 +33,7 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const params = new URLSearchParams(window.location.search);
-  const redirect = params.get("redirect") || "/interactive-lessons";
+  const redirect = getSafeRedirect(window.location.search);
   const isRegister = mode === "register";
 
   const handleSubmit = async (event: FormEvent) => {
