@@ -220,8 +220,9 @@ export default function FlashcardPlayer({
               <X className="w-5 h-5" />
             </button>
             <div className="text-center flex-1 mx-4">
-              <h1 className="text-lg font-bold text-black truncate">
-                {lesson.icon} {lesson.title}
+              <p className="text-xs font-bold text-emerald-700">תרגול דיבור</p>
+              <h1 className="truncate text-lg font-bold text-stone-950">
+                {lesson.icon} {lesson.titleHebrew}
               </h1>
             </div>
             <span className="text-sm font-medium text-gray-500 tabular-nums">
@@ -278,22 +279,29 @@ export default function FlashcardPlayer({
             >
               {/* Front */}
               <div className="backface-hidden absolute inset-0 flex flex-col items-center justify-center rounded-2xl border-2 border-black bg-white p-8">
-                <span
-                  className="text-4xl sm:text-5xl font-bold text-black mb-4 leading-tight text-center"
+                <p className="text-sm font-bold text-stone-500">אמרו בקול</p>
+                <div
+                  className="mt-4 text-5xl font-black text-stone-950 text-center leading-tight"
                   lang="th"
                 >
                   {currentPhrase.thai}
-                </span>
-                <span className="text-lg sm:text-xl text-gray-500 mb-6 text-center">
+                </div>
+                <div className="mt-4 text-2xl font-semibold text-emerald-800 text-center">
                   {currentPhrase.phonetic}
-                </span>
+                </div>
+                <div
+                  className="mt-2 text-xl font-bold text-stone-950 text-center hebrew-text"
+                  dir="rtl"
+                >
+                  {currentPhrase.hebrew}
+                </div>
                 <button
                   onClick={e => {
                     e.stopPropagation();
                     playPronunciation(currentPhrase.thai);
                   }}
                   disabled={isPlaying}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-black text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50"
+                  className="mt-6 flex items-center gap-2 px-4 py-2 rounded-full border-2 border-black text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50"
                 >
                   <Volume2 className="w-4 h-4" />
                   {isPlaying
@@ -348,7 +356,7 @@ export default function FlashcardPlayer({
             </div>
           </div>
 
-          {/* "I practiced this" button */}
+          {/* "I said it out loud" button */}
           <div className="flex justify-center mb-6">
             {isPracticed ? (
               <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-green-100 text-green-800 text-sm font-medium border-2 border-green-300">
@@ -360,7 +368,7 @@ export default function FlashcardPlayer({
                 onClick={markPracticed}
                 className="px-6 py-2.5 rounded-full bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors"
               >
-                {t({ en: "I practiced this", he: "\u05EA\u05E8\u05D2\u05DC\u05EA\u05D9 \u05D0\u05EA \u05D6\u05D4" })}
+                {t({ en: "I said it out loud", he: "\u05D0\u05DE\u05E8\u05EA\u05D9 \u05D1\u05E7\u05D5\u05DC" })}
               </button>
             )}
           </div>
