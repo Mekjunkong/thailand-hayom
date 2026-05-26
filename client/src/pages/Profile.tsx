@@ -11,7 +11,7 @@ export default function Profile() {
   const { data: progress = [] } = trpc.user.getProgress.useQuery();
   const { data: bookmarks = [] } = trpc.user.getBookmarks.useQuery();
   const { data: purchases = [] } = trpc.user.getPurchaseHistory.useQuery();
-  const access = getCourseAccessState({ user, purchases });
+  const access = getCourseAccessState({ user: user ?? null, purchases });
   
   const removeBookmarkMutation = trpc.user.removeBookmark.useMutation({
     onSuccess: () => {
