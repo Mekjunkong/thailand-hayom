@@ -20,7 +20,7 @@ import { users } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { sdk } from "./sdk";
 import { getSessionCookieOptions } from "./cookies";
-import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
+import { COOKIE_NAME, ONE_YEAR_MS } from "../../shared/const";
 import { ENV } from "./env";
 
 // Simple password hashing using built-in crypto (no bcrypt dep needed)

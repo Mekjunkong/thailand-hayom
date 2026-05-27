@@ -1,9 +1,9 @@
-import express, { Request, Response } from "express";
+import express, { type Request, type Response } from "express";
 import { getDb, getUserByOpenId } from "./db";
 import { forumCategories, forumPosts, forumComments, forumLikes, users } from "../drizzle/schema";
 import { eq, desc, sql, and } from "drizzle-orm";
 import { sdk } from "./_core/sdk";
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME } from "../shared/const";
 
 const router = express.Router();
 

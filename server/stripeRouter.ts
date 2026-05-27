@@ -2,7 +2,7 @@ import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import Stripe from "stripe";
 import { TRPCError } from "@trpc/server";
-import { PRODUCTS, SUBSCRIPTION_PLANS } from "@shared/products";
+import { PRODUCTS, SUBSCRIPTION_PLANS } from "../shared/products";
 import { getDb } from "./db";
 import { subscriptions } from "../drizzle/schema";
 import { eq, and } from "drizzle-orm";

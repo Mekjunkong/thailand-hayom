@@ -1,9 +1,9 @@
-import { Router, Request, Response } from "express";
+import { Router, type Request, type Response } from "express";
 import { eq, and, lte } from "drizzle-orm";
 import { getDb, getUserByOpenId } from "./db";
 import { userProgress, quizPerformance } from "../drizzle/schema";
 import { sdk } from "./_core/sdk";
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME } from "../shared/const";
 
 const router = Router();
 
