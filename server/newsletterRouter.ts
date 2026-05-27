@@ -1,7 +1,13 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getDb } from "./db";
-import { newsletterSubscribers, subscriptions, users, articles, events } from "../drizzle/schema";
+import {
+  newsletterSubscribers,
+  subscriptions,
+  users,
+  articles,
+  events,
+} from "../drizzle/schema";
 import { eq, and, desc, inArray } from "drizzle-orm";
 import { Resend } from "resend";
 
@@ -12,9 +18,17 @@ function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
 }
 
-async function sendEmail({ to, subject, html }: { to: string; subject: string; html: string }) {
+async function sendEmail({
+  to,
+  subject,
+  html,
+}: {
+  to: string;
+  subject: string;
+  html: string;
+}) {
   return await getResend().emails.send({
-    from: 'Thailand Hayom <noreply@manus.space>',
+    from: "Thailand Hayom <noreply@manus.space>",
     to,
     subject,
     html,
@@ -24,10 +38,12 @@ async function sendEmail({ to, subject, html }: { to: string; subject: string; h
 export const newsletterRouter = router({
   // Subscribe to newsletter (free tier)
   subscribe: publicProcedure
-    .input(z.object({
-      email: z.string().email(),
-      name: z.string().optional(),
-    }))
+    .input(
+      z.object({
+        email: z.string().email(),
+        name: z.string().optional(),
+      })
+    )
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
@@ -113,9 +129,11 @@ export const newsletterRouter = router({
 
   // Unsubscribe from newsletter
   unsubscribe: publicProcedure
-    .input(z.object({
-      email: z.string().email(),
-    }))
+    .input(
+      z.object({
+        email: z.string().email(),
+      })
+    )
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
@@ -132,35 +150,41 @@ export const newsletterRouter = router({
     }),
 
   // Get subscriber stats (admin only)
-  getStats: protectedProcedure
-    .query(async ({ ctx }) => {
-      if (ctx.user.role !== "admin") {
-        throw new Error("Unauthorized");
-      }
+  getStats: protectedProcedure.query(async ({ ctx }) => {
+    if (ctx.user.role !== "admin") {
+      throw new Error("Unauthorized");
+    }
 
-      const db = await getDb();
-      if (!db) throw new Error("Database not available");
+    const db = await getDb();
+    if (!db) throw new Error("Database not available");
 
-      const allSubscribers = await db.select().from(newsletterSubscribers);
-      
-      const stats = {
-        total: allSubscribers.length,
-        active: allSubscribers.filter(s => s.status === "active").length,
-        free: allSubscribers.filter(s => s.tier === "free" && s.status === "active").length,
-        premium: allSubscribers.filter(s => s.tier === "premium" && s.status === "active").length,
-        unsubscribed: allSubscribers.filter(s => s.status === "unsubscribed").length,
-      };
+    const allSubscribers = await db.select().from(newsletterSubscribers);
 
-      return stats;
-    }),
+    const stats = {
+      total: allSubscribers.length,
+      active: allSubscribers.filter(s => s.status === "active").length,
+      free: allSubscribers.filter(
+        s => s.tier === "free" && s.status === "active"
+      ).length,
+      premium: allSubscribers.filter(
+        s => s.tier === "premium" && s.status === "active"
+      ).length,
+      unsubscribed: allSubscribers.filter(s => s.status === "unsubscribed")
+        .length,
+    };
+
+    return stats;
+  }),
 
   // Get all subscribers (admin only)
   getSubscribers: protectedProcedure
-    .input(z.object({
-      page: z.number().default(1),
-      limit: z.number().default(50),
-      tier: z.enum(["all", "free", "premium"]).default("all"),
-    }))
+    .input(
+      z.object({
+        page: z.number().default(1),
+        limit: z.number().default(50),
+        tier: z.enum(["all", "free", "premium"]).default("all"),
+      })
+    )
     .query(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new Error("Unauthorized");
@@ -186,15 +210,17 @@ export const newsletterRouter = router({
 
   // Send newsletter (admin only)
   sendNewsletter: protectedProcedure
-    .input(z.object({
-      subject: z.string().min(1),
-      subjectHe: z.string().min(1),
-      articleIds: z.array(z.number()).optional(),
-      eventIds: z.array(z.number()).optional(),
-      customContent: z.string().optional(),
-      customContentHe: z.string().optional(),
-      tier: z.enum(["all", "free", "premium"]).default("all"),
-    }))
+    .input(
+      z.object({
+        subject: z.string().min(1),
+        subjectHe: z.string().min(1),
+        articleIds: z.array(z.number()).optional(),
+        eventIds: z.array(z.number()).optional(),
+        customContent: z.string().optional(),
+        customContentHe: z.string().optional(),
+        tier: z.enum(["all", "free", "premium"]).default("all"),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new Error("Unauthorized");
@@ -221,17 +247,20 @@ export const newsletterRouter = router({
           .where(inArray(events.id, input.eventIds));
       }
 
-      // Get subscribers based on tier
-      let subscribersQuery = db
+      // Get subscribers based on tier — combine conditions with and() to avoid
+      // chaining .where() which Drizzle's type system does not support.
+      const tierFilter =
+        input.tier !== "all"
+          ? and(
+              eq(newsletterSubscribers.status, "active"),
+              eq(newsletterSubscribers.tier, input.tier)
+            )
+          : eq(newsletterSubscribers.status, "active");
+
+      const subscribers = await db
         .select()
         .from(newsletterSubscribers)
-        .where(eq(newsletterSubscribers.status, "active"));
-
-      if (input.tier !== "all") {
-        subscribersQuery = subscribersQuery.where(eq(newsletterSubscribers.tier, input.tier)) as any;
-      }
-
-      const subscribers = await subscribersQuery;
+        .where(tierFilter);
 
       if (subscribers.length === 0) {
         throw new Error("No active subscribers found");
@@ -254,7 +283,7 @@ export const newsletterRouter = router({
         const batch = subscribers.slice(i, i + batchSize);
 
         await Promise.allSettled(
-          batch.map(async (subscriber) => {
+          batch.map(async subscriber => {
             try {
               await sendEmail({
                 to: subscriber.email,
@@ -292,12 +321,14 @@ export const newsletterRouter = router({
 
   // Preview newsletter HTML (admin only)
   previewNewsletter: protectedProcedure
-    .input(z.object({
-      articleIds: z.array(z.number()).optional(),
-      eventIds: z.array(z.number()).optional(),
-      customContent: z.string().optional(),
-      customContentHe: z.string().optional(),
-    }))
+    .input(
+      z.object({
+        articleIds: z.array(z.number()).optional(),
+        eventIds: z.array(z.number()).optional(),
+        customContent: z.string().optional(),
+        customContentHe: z.string().optional(),
+      })
+    )
     .query(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new Error("Unauthorized");
@@ -348,7 +379,8 @@ function generateNewsletterHTML({
   customContent?: string;
   customContentHe?: string;
 }) {
-  const frontendUrl = process.env.VITE_FRONTEND_FORGE_API_URL || "http://localhost:3000";
+  const frontendUrl =
+    process.env.VITE_FRONTEND_FORGE_API_URL || "http://localhost:3000";
 
   return `
 <!DOCTYPE html>
@@ -462,48 +494,72 @@ function generateNewsletterHTML({
     </div>
 
     <div class="content">
-      ${customContentHe ? `
+      ${
+        customContentHe
+          ? `
         <div class="custom-content">
           <div dir="rtl">${customContentHe}</div>
         </div>
-      ` : ''}
+      `
+          : ""
+      }
 
-      ${articles.length > 0 ? `
+      ${
+        articles.length > 0
+          ? `
         <h2 class="section-title">מאמרים חדשים | New Articles</h2>
-        ${articles.map(article => `
+        ${articles
+          .map(
+            article => `
           <div class="article-card">
-            ${article.isPremium ? '<span class="premium-badge">PREMIUM</span>' : ''}
+            ${article.isPremium ? '<span class="premium-badge">PREMIUM</span>' : ""}
             <div class="article-title" dir="rtl">${article.titleHe}</div>
             <div class="article-title" dir="ltr">${article.title}</div>
-            ${article.excerptHe ? `<div class="article-excerpt" dir="rtl">${article.excerptHe}</div>` : ''}
+            ${article.excerptHe ? `<div class="article-excerpt" dir="rtl">${article.excerptHe}</div>` : ""}
             <a href="${frontendUrl}/articles/${article.slug}" class="read-more">קרא עוד | Read More</a>
           </div>
-        `).join('')}
-      ` : ''}
+        `
+          )
+          .join("")}
+      `
+          : ""
+      }
 
-      ${events.length > 0 ? `
+      ${
+        events.length > 0
+          ? `
         <h2 class="section-title">אירועים קרובים | Upcoming Events</h2>
-        ${events.map(event => `
+        ${events
+          .map(
+            event => `
           <div class="event-card">
-            ${event.isPremium ? '<span class="premium-badge">PREMIUM</span>' : ''}
+            ${event.isPremium ? '<span class="premium-badge">PREMIUM</span>' : ""}
             <div class="event-title" dir="rtl">${event.titleHe}</div>
             <div class="event-title" dir="ltr">${event.title}</div>
             <div class="event-meta">
-              📅 ${new Date(event.eventDate).toLocaleDateString('he-IL')}
-              ${event.location ? ` | 📍 ${event.locationHe || event.location}` : ''}
-              ${event.price ? ` | 💰 ₪${event.price}` : ' | 🆓 חינם'}
+              📅 ${new Date(event.eventDate).toLocaleDateString("he-IL")}
+              ${event.location ? ` | 📍 ${event.locationHe || event.location}` : ""}
+              ${event.price ? ` | 💰 ₪${event.price}` : " | 🆓 חינם"}
             </div>
-            ${event.descriptionHe ? `<div class="event-description" dir="rtl">${event.descriptionHe.substring(0, 200)}...</div>` : ''}
-            ${event.registrationUrl ? `<a href="${event.registrationUrl}" class="read-more">הרשמה | Register</a>` : ''}
+            ${event.descriptionHe ? `<div class="event-description" dir="rtl">${event.descriptionHe.substring(0, 200)}...</div>` : ""}
+            ${event.registrationUrl ? `<a href="${event.registrationUrl}" class="read-more">הרשמה | Register</a>` : ""}
           </div>
-        `).join('')}
-      ` : ''}
+        `
+          )
+          .join("")}
+      `
+          : ""
+      }
 
-      ${customContent ? `
+      ${
+        customContent
+          ? `
         <div class="custom-content" dir="ltr">
           ${customContent}
         </div>
-      ` : ''}
+      `
+          : ""
+      }
     </div>
 
     <div class="footer">
