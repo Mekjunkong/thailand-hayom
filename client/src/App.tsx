@@ -29,6 +29,7 @@ import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 import ChiangMaiTrip from "./pages/ChiangMaiTrip";
+import LessonPlayer from "./pages/LessonPlayer";
 import ScrollToTop from "./components/ScrollToTop";
 
 function AnimatedRoute({
@@ -97,6 +98,7 @@ function Router() {
         <AnimatedRoute component={Articles} />
       </Route>
       <Route path="/articles/:slug" component={ArticleDetail} />
+      <Route path="/lesson/:id" component={LessonPlayer} />
       <Route path="/trips/chiang-mai-one-day">
         <AnimatedRoute component={ChiangMaiTrip} />
       </Route>
