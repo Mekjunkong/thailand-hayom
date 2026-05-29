@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Search, User } from "lucide-react";
+import { Menu, Search, User, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { hasCourseAccess } from "@/lib/courseAccess";
 import { trpc } from "@/lib/trpc";
 import SearchOverlay from "./SearchOverlay";
+import GamificationBar from "./GamificationBar";
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { data: user } = trpc.auth.me.useQuery(undefined, {
     retry: false,
     refetchOnWindowFocus: false,
@@ -19,14 +21,14 @@ export default function Navbar() {
     undefined,
     {
       enabled: Boolean(user),
-    },
+    }
   );
   const hasPaidAccess = hasCourseAccess(purchases);
   const cta = !user
     ? { href: "/login", label: t({ he: "התחילו חינם", en: "Start free" }) }
     : hasPaidAccess
       ? {
-          href: "/interactive-lessons",
+          href: "/course",
           label: t({ he: "המשך שיעור", en: "Continue lesson" }),
         }
       : {
@@ -35,11 +37,11 @@ export default function Navbar() {
         };
   const navLinks = [
     {
-      href: "/interactive-lessons",
+      href: "/course",
       label: t({ he: "הקורס", en: "Course" }),
     },
     {
-      href: "/interactive-lessons",
+      href: "/lesson/airport-arrival",
       label: t({ he: "שיעור חינם", en: "Free lesson" }),
     },
     {
@@ -105,6 +107,10 @@ export default function Navbar() {
 
             {/* Right cluster */}
             <div className="flex items-center gap-2">
+              <div className="hidden sm:block">
+                <GamificationBar />
+              </div>
+
               <Link href={cta.href} className="hidden sm:block">
                 <Button className="h-9 rounded-full bg-stone-950 px-4 text-sm font-bold text-white hover:bg-stone-800">
                   {cta.label}

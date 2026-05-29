@@ -11,16 +11,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 pnpm install          # Install dependencies
 pnpm dev              # Dev server with hot reload (tsx watch, http://localhost:3000)
-pnpm build            # Production build → dist/public (frontend) + dist/index.js (backend)
+pnpm build            # Production build → dist/public (frontend) + dist/index.js (backend) + dist/api.js (Vercel)
 pnpm start            # Run production build
 pnpm check            # TypeScript type-check (tsc --noEmit)
 pnpm format           # Prettier format all files
-pnpm test             # Run tests (vitest)
+pnpm test             # Run all tests (vitest)
+pnpm test -- server/stripe-currency.test.ts   # Run a single test file
 pnpm db:push          # Generate + apply DB migrations (drizzle-kit generate && drizzle-kit migrate)
 npx drizzle-kit studio  # Visual DB browser
 ```
 
-Tests are server-side only: `vitest` runs files matching `server/**/*.test.ts` and `server/**/*.spec.ts`.
+Tests run files matching `server/**/*.test.ts`, `server/**/*.spec.ts`, `client/src/**/*.test.ts`, `client/src/**/*.spec.ts`.
 
 ## Tech Stack
 
@@ -29,7 +30,7 @@ Tests are server-side only: `vitest` runs files matching `server/**/*.test.ts` a
 - **Database**: PostgreSQL (Supabase), schema at `drizzle/schema.ts`
 - **Payments**: Stripe (ILS currency), one-time products + subscriptions defined in `shared/products.ts`
 - **Email**: Resend API (`server/emailService.ts`)
-- **Auth**: Manus OAuth (optional — bypass for local dev by swapping `protectedProcedure` → `publicProcedure`)
+- **Auth**: Manus OAuth (optional — when `OAUTH_SERVER_URL` is absent, `protectedProcedure` auto-falls back to a local admin user; no manual procedure swapping needed)
 - **Package Manager**: pnpm (with patched wouter)
 
 ## Path Aliases
@@ -46,7 +47,15 @@ Configured in both `vite.config.ts` and `tsconfig.json`.
 
 ### Monorepo, Single Process
 
-Client and server run in the same Node.js process. In dev, Vite dev server is embedded in Express (`server/_core/vite.ts`). In production, Express serves the static build from `dist/public`.
+Client and server run in the same Node.js process. In dev, Vite dev server is embedded in Express (`server/_core/vite.ts`). In production, Express serves the static build from `dist/public`. For Vercel deployments, `server/vercelHandler.ts` is compiled separately as `dist/api.js`.
+
+### Shared Code (`shared/`)
+
+Imported by both client and server — keep free of browser-only or Node-only APIs:
+- `shared/products.ts` — `PRODUCTS`, `SUBSCRIPTION_PLANS` (prices, Stripe metadata)
+- `shared/tripRoutes.ts` — curated trip itinerary data
+- `shared/types.ts` — cross-boundary TypeScript types
+- `shared/const.ts` — shared error messages and constants
 
 ### API Layer: Mixed tRPC + Express
 
@@ -54,16 +63,17 @@ Client and server run in the same Node.js process. In dev, Vite dev server is em
 - `auth`, `chat`, `stripe`, `admin`, `user`, `newsletter`, `article`, `event`, `financial`
 
 **Plain Express routes** exist alongside tRPC for specific needs:
-- `progressRouter` — lesson progress tracking
-- `phraseCardsRouter` — PDF phrase card generation
+- `progressRouter` — lesson progress tracking (`server/progressRouter.ts`)
+- `phraseCardsRouter` — PDF phrase card generation (`server/phraseCardsRouter.ts`)
 - Stripe webhook at `/api/stripe/webhook` (raw body, registered before `express.json()`)
 - OAuth callback at `/api/oauth/callback`
+- Local JWT auth at `/api/auth/*` for email/password login (`server/_core/localAuth.ts`) — used for Railway deployment
 
 ### tRPC Procedure Types
 
 Defined in `server/_core/trpc.ts`:
 - `publicProcedure` — no auth required
-- `protectedProcedure` — requires logged-in user (`ctx.user`)
+- `protectedProcedure` — requires logged-in user (`ctx.user`). **When `OAUTH_SERVER_URL` is not set, automatically uses `DEV_FALLBACK_USER` (admin role) — no code changes needed for local dev.**
 - `adminProcedure` — requires `ctx.user.role === 'admin'`
 
 ### Database Access
@@ -81,13 +91,32 @@ Schema uses camelCase columns. Types are exported from `drizzle/schema.ts` as `$
 
 All user-facing content has dual columns: `title`/`titleHe`, `content`/`contentHe`, etc. Hebrew is RTL. Language toggle uses `LanguageContext` from `client/src/contexts/LanguageContext.tsx`.
 
+**In components**, always use the `useLanguage` hook — never hardcode `dir="rtl"` or raw Hebrew strings in JSX:
+```tsx
+const { language, t } = useLanguage();
+const dir = language === "he" ? "rtl" : "ltr";
+// Simple strings:
+t({ he: "שלום", en: "Hello" })
+// Bilingual data fields (titleHe/titleEn, etc.):
+language === "he" ? item.titleHe : item.titleEn
+```
+
+### Course Access Gating
+
+`client/src/lib/courseAccess.ts` is the single source of truth for lesson access:
+- `hasCourseAccess(purchases)` — true if user has a completed course purchase
+- `canAccessLesson({ lessonId, hasPaidAccess })` — checks against `TOURIST_COURSE.freeLessonIds` / `paidLessonIds`
+- `getCourseAccessState({ user, purchases })` — returns `kind: "visitor" | "free" | "paid"`
+
+Free lesson IDs and paid lesson IDs are defined in `client/src/data/touristCourse.ts` under `TOURIST_COURSE`.
+
 ### Stripe Webhook Ordering
 
 The webhook route **must** be registered before `express.json()` middleware because Stripe signature verification requires the raw request body. This is handled in `server/_core/index.ts`.
 
 ### Premium Subscription System
 
-**Products:** Smart Tourist Pack (₪20 one-time), Premium Monthly (₪29/month), Premium Annual (₪199/year). Defined in `shared/products.ts`.
+**Products:** Tourist Survival Thai Course (₪79 one-time), Premium Monthly (₪29/month), Premium Annual (₪199/year). Defined in `shared/products.ts`.
 
 **Flow:** User clicks upgrade → `trpc.stripe.createSubscriptionCheckout` → Stripe Checkout (mode: subscription) → webhook `customer.subscription.created` → `subscriptions` table updated → content unlocked.
 
@@ -95,7 +124,7 @@ The webhook route **must** be registered before `express.json()` middleware beca
 
 **Subscription management:** Stripe Customer Portal via `trpc.stripe.createCustomerPortalSession`. Self-service cancel/update/invoices.
 
-**Webhook events handled** (in `server/webhookHandler.ts`): `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.payment_failed`.
+**Webhook events handled** (in `server/webhookHandler.ts`): `checkout.session.completed`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.payment_failed`.
 
 **DB table:** `subscriptions` — `userId`, `tier` (free/premium), `status` (active/canceled/expired/past_due), `stripeSubscriptionId`, `stripeCustomerId`, `currentPeriodStart/End`.
 
@@ -103,23 +132,11 @@ The webhook route **must** be registered before `express.json()` middleware beca
 
 Pre-built trip itineraries displayed as horizontal sliding card carousels. Data defined in `shared/tripRoutes.ts`, components in `client/src/components/trips/`.
 
-**Current routes:**
-- `/trips/chiang-mai-one-day` — 6-stop Chiang Mai day trip (Doi Inthanon → Mae Wang → Doi Suthep → Mae Rim → Samoeng Loop → Mae Kampong)
-
-**Components:**
-- `TripStopCard.tsx` — card with photo, stop number, time badges, expandable activities, drive-to-next
-- `RouteMap.tsx` — SVG mini-map with dots, drive times, pulsing current-stop indicator
-- `TripSummaryFooter.tsx` — stats bar (departure, total time, driving, budget)
-
 **Adding a new trip:** Define a new `TripRoute` object in `shared/tripRoutes.ts`, add it to the `tripRoutes` registry, create a page that imports it and passes it to the carousel, and register the route in `App.tsx`.
-
-**Photo URLs:** Each stop has a `photoUrl` field. Replace placeholders with real location-specific photos. Falls back to gradient on load failure.
 
 ### Content Organization (Category-First Hub)
 
 Seven content categories defined in `client/src/data/categories.ts`: Thai Lessons (amber), Travel (teal), Food (rose), Visa (blue), Events (violet), Safety (orange), Premium (gold gradient).
-
-**Homepage layout:** Cinematic hero (65vh parallax) → CategoryGrid → FeaturedStrip → Thailand Map → Newsletter + Pricing (3-card: Free/Monthly/Annual).
 
 **Shared components:**
 - `ContentCard.tsx` — unified card with `article`/`lesson`/`event` variants

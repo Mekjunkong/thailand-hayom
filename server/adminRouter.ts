@@ -1,6 +1,6 @@
 import { protectedProcedure, router } from "./_core/trpc";
 import { getDb } from "./db";
-import { purchases, chatLogs, users } from "../drizzle/schema";
+import { purchases, chatLogs, users, userProgress } from "../drizzle/schema";
 import { eq, desc, count, sum, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
@@ -14,12 +14,18 @@ export const adminRouter = router({
   // Get payment analytics
   getPaymentAnalytics: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user.role !== "admin") {
-      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Admin access required",
+      });
     }
 
     const db = await getDb();
     if (!db) {
-      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database not available",
+      });
     }
 
     const totalRevenue = await db
@@ -66,12 +72,18 @@ export const adminRouter = router({
     )
     .query(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
-        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Admin access required",
+        });
       }
 
       const db = await getDb();
       if (!db) {
-        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Database not available",
+        });
       }
 
       const logs = await db
@@ -92,12 +104,18 @@ export const adminRouter = router({
   // Get all users
   getUsers: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user.role !== "admin") {
-      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Admin access required",
+      });
     }
 
     const db = await getDb();
     if (!db) {
-      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database not available",
+      });
     }
 
     return await db.select().from(users).orderBy(desc(users.createdAt));
@@ -106,12 +124,18 @@ export const adminRouter = router({
   // Get bulk orders (purchases with quantity > 1)
   getBulkOrders: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user.role !== "admin") {
-      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Admin access required",
+      });
     }
 
     const db = await getDb();
     if (!db) {
-      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database not available",
+      });
     }
 
     return await db
@@ -119,5 +143,50 @@ export const adminRouter = router({
       .from(purchases)
       .where(sql`${purchases.productType} IN ('bulk_10', 'bulk_20')`)
       .orderBy(desc(purchases.createdAt));
+  }),
+
+  // Course analytics — per-lesson completions + purchaser count
+  getCourseAnalytics: protectedProcedure.query(async ({ ctx }) => {
+    if (ctx.user.role !== "admin") {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Admin access required",
+      });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database not available",
+      });
+    }
+
+    const coursePurchasers = await db
+      .select({ count: count() })
+      .from(purchases)
+      .where(
+        sql`${purchases.status} = 'completed' AND ${purchases.productType} IN ('tourist_course', 'subscription_monthly', 'subscription_annual')`
+      );
+
+    const lessonCompletions = await db
+      .select({
+        lessonId: userProgress.lessonId,
+        completions: count(),
+      })
+      .from(userProgress)
+      .where(eq(userProgress.completed, true))
+      .groupBy(userProgress.lessonId)
+      .orderBy(userProgress.lessonId);
+
+    const totalLearners = await db
+      .select({ count: count() })
+      .from(userProgress);
+
+    return {
+      coursePurchasers: coursePurchasers[0]?.count ?? 0,
+      totalLearners: totalLearners[0]?.count ?? 0,
+      lessonCompletions,
+    };
   }),
 });

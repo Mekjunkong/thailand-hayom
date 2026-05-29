@@ -106,7 +106,7 @@ export function CourseHero() {
               asChild
               className="h-12 rounded-xl bg-stone-950 px-7 text-base font-bold text-white hover:bg-stone-800"
             >
-              <Link href="/login">
+              <Link href="/lesson/airport-arrival">
                 {t({ he: "התחילו שיעור חינם", en: "Start free lesson" })}
               </Link>
             </Button>
@@ -115,10 +115,10 @@ export function CourseHero() {
               variant="outline"
               className="h-12 rounded-xl border-stone-300 px-7 text-base font-bold"
             >
-              <Link href="/welcome-kit">
+              <Link href="/course">
                 {t({
-                  he: `פתחו את הקורס המלא ₪${TOURIST_COURSE.priceIls}`,
-                  en: `Get full course ₪${TOURIST_COURSE.priceIls}`,
+                  he: "ראו את כל הקורס",
+                  en: "See the full course",
                 })}
               </Link>
             </Button>

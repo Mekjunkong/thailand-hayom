@@ -30,7 +30,9 @@ import ArticleDetail from "./pages/ArticleDetail";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 import ChiangMaiTrip from "./pages/ChiangMaiTrip";
 import LessonPlayer from "./pages/LessonPlayer";
+import CourseDashboard from "./pages/CourseDashboard";
 import ScrollToTop from "./components/ScrollToTop";
+import { GamificationProvider } from "./contexts/GamificationContext";
 
 function AnimatedRoute({
   component: Component,
@@ -98,6 +100,9 @@ function Router() {
         <AnimatedRoute component={Articles} />
       </Route>
       <Route path="/articles/:slug" component={ArticleDetail} />
+      <Route path="/course">
+        <AnimatedRoute component={CourseDashboard} />
+      </Route>
       <Route path="/lesson/:id" component={LessonPlayer} />
       <Route path="/trips/chiang-mai-one-day">
         <AnimatedRoute component={ChiangMaiTrip} />
@@ -121,15 +126,17 @@ function App() {
         defaultTheme="light"
         // switchable
       >
-        <ProgressProvider>
-          <TooltipProvider>
-            <Toaster />
-            <ScrollToTop />
-            <Navbar />
-            <Router />
-            <AIConcierge />
-          </TooltipProvider>
-        </ProgressProvider>
+        <GamificationProvider>
+          <ProgressProvider>
+            <TooltipProvider>
+              <Toaster />
+              <ScrollToTop />
+              <Navbar />
+              <Router />
+              <AIConcierge />
+            </TooltipProvider>
+          </ProgressProvider>
+        </GamificationProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
