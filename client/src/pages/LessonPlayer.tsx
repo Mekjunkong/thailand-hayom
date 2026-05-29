@@ -15,6 +15,7 @@ import { useGamification } from "@/contexts/GamificationContext";
 import { hasCourseAccess } from "@/lib/courseAccess";
 import { trpc } from "@/lib/trpc";
 import { cn } from "@/lib/utils";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // slugs that are free without a purchase
 const FREE_SLUGS = new Set(["airport-arrival", "food-restaurant"]);
@@ -2425,6 +2426,7 @@ export default function LessonPlayer() {
   const { recordPractice } = useGamification();
   const dir = language === "he" ? "rtl" : "ltr";
   const he = language === "he";
+  usePageTitle(he ? lesson.titleHe : lesson.titleEn);
 
   const { data: user } = trpc.auth.me.useQuery(undefined, {
     retry: false,

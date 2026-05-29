@@ -4,13 +4,19 @@ import { FreePaidComparison } from "@/components/course/FreePaidComparison";
 import { PhrasePracticePreview } from "@/components/course/PhrasePracticePreview";
 import ContentFeed from "@/components/ContentFeed";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Home() {
   const { language, t } = useLanguage();
   const dir = language === "he" ? "rtl" : "ltr";
+  usePageTitle(
+    language === "he"
+      ? "תאילנד היום — המדריך לישראלים בתאילנד"
+      : "Thailand Hayom — Guide for Israelis in Thailand"
+  );
 
   return (
-    <main className="min-h-screen bg-[oklch(0.97_0.015_80)]">
+    <main id="main-content" className="min-h-screen bg-[oklch(0.97_0.015_80)]">
       <CourseHero />
       <PhrasePracticePreview />
       <CoursePath />

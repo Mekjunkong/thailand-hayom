@@ -3,14 +3,15 @@
 
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <link rel="icon" type="image/png" href="%VITE_APP_LOGO%" />
-    <link rel="apple-touch-icon" href="%VITE_APP_LOGO%" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/hero-beach.png" />
+    <link rel="apple-touch-icon" href="/images/hero-beach.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <title>תאילנד היום | Thailand Hayom — המדריך לישראלים בתאילנד</title>
 
     <!-- Primary SEO Meta Tags -->
-    <meta name="description" content="תאילנד היום — המדריך המקיף לישראלים בתאילנד. ויזה, בטיחות, תרבות, שיעורי תאי ועוד. חבילת התייר החכם ₪20 עם כל מה שצריך לנסיעה לתאילנד." />
-    <meta name="keywords" content="תאילנד, ישראלים בתאילנד, מדריך לתאילנד, ויזה לתאילנד, צ'אנג מאי, בנגקוק, תאילנד היום, Thailand Hayom, Israeli travelers Thailand, Thailand visa guide Hebrew" />
+    <meta name="description" content="תאילנד היום — המדריך המקיף לישראלים בתאילנד. קורס תאית מעשי ב-7 ימים, ויזה, בטיחות, תרבות ועוד. ₪79 תשלום חד פעמי." />
+    <meta name="keywords" content="תאילנד, ישראלים בתאילנד, מדריך לתאילנד, ויזה לתאילנד, קורס תאית, צ'אנג מאי, בנגקוק, תאילנד היום, Thailand Hayom, Israeli travelers Thailand, Thailand visa guide Hebrew" />
     <meta name="author" content="Thailand Hayom" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="Hebrew" />
@@ -21,7 +22,7 @@
     <meta property="og:url" content="https://thailandhayom.com/" />
     <meta property="og:site_name" content="תאילנד היום | Thailand Hayom" />
     <meta property="og:title" content="תאילנד היום — המדריך לישראלים בתאילנד | Thailand Hayom" />
-    <meta property="og:description" content="כל מה שצריך לדעת על תאילנד — ויזה, בטיחות, תרבות, שיעורי תאי ועוד. חבילת התייר החכם ₪20." />
+    <meta property="og:description" content="קורס תאית מעשי ב-7 ימים לישראלים שטסים לתאילנד. ויזה, בטיחות, תרבות ועוד. ₪79 תשלום חד פעמי." />
     <meta property="og:image" content="https://thailandhayom.com/images/hero-beach.png" />
     <meta property="og:image:alt" content="Thailand Hayom — Guide for Israelis in Thailand" />
     <meta property="og:locale" content="he_IL" />
@@ -31,17 +32,17 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://thailandhayom.com/" />
     <meta property="twitter:title" content="תאילנד היום | Thailand Hayom — המדריך לישראלים בתאילנד" />
-    <meta property="twitter:description" content="כל מה שצריך לדעת על תאילנד — ויזה, בטיחות, תרבות, שיעורי תאי. חבילת התייר החכם ₪20" />
+    <meta property="twitter:description" content="קורס תאית מעשי ב-7 ימים לישראלים. ₪79 תשלום חד פעמי — ללא מנוי." />
     <meta property="twitter:image" content="https://thailandhayom.com/images/hero-beach.png" />
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data (JSON-LD) — WebSite -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "תאילנד היום | Thailand Hayom",
       "url": "https://thailandhayom.com",
-      "description": "המדריך המקיף לישראלים בתאילנד — ויזה, בטיחות, תרבות ועוד",
+      "description": "המדריך המקיף לישראלים בתאילנד — קורס תאית, ויזה, בטיחות, תרבות ועוד",
       "inLanguage": ["he", "en"],
       "potentialAction": {
         "@type": "SearchAction",
@@ -51,19 +52,75 @@
     }
     </script>
 
+    <!-- Structured Data (JSON-LD) — Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Tourist Survival Thai Course — קורס תאית לשרידות תיירים",
+      "description": "קורס תאית מעשי ב-7 שיעורים לישראלים שטסים לתאילנד. למדו משפטים אמיתיים: מונית, אוכל, מלון, שוק, עזרה.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Thailand Hayom",
+        "url": "https://thailandhayom.com"
+      },
+      "url": "https://thailandhayom.com/course",
+      "inLanguage": "he",
+      "numberOfCredits": 7,
+      "offers": {
+        "@type": "Offer",
+        "price": "79",
+        "priceCurrency": "ILS",
+        "availability": "https://schema.org/InStock",
+        "url": "https://thailandhayom.com/welcome-kit"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "courseWorkload": "PT7H"
+      }
+    }
+    </script>
+
+    <!-- Structured Data (JSON-LD) — Product -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Tourist Survival Thai Course",
+      "description": "קורס תאית מעשי ב-7 שיעורים אינטראקטיביים לישראלים שטסים לתאילנד",
+      "url": "https://thailandhayom.com/course",
+      "brand": {
+        "@type": "Brand",
+        "name": "Thailand Hayom"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "79",
+        "priceCurrency": "ILS",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31",
+        "url": "https://thailandhayom.com/welcome-kit"
+      }
+    }
+    </script>
+
     <!-- Google Fonts for Multilingual Design -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Kanit:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- LCP preload -->
+    <link rel="preload" as="image" href="/images/hero-beach.png" />
   </head>
 
   <body>
+    <a href="#main-content" class="skip-nav-link" style="position:absolute;top:-999px;left:0;z-index:9999;padding:8px 16px;background:#1a1a1a;color:#fff;font-size:14px;border-radius:0 0 4px 0;transition:top 0.1s">
+      Skip to main content
+    </a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
   </body>
 
 </html>

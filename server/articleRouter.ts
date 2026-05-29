@@ -8,26 +8,29 @@ import { eq, desc, and, or, like, sql } from "drizzle-orm";
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
     .trim();
 }
 
 export const articleRouter = router({
   // Get all articles (public, with filters)
   list: publicProcedure
-    .input(z.object({
-      page: z.number().default(1),
-      limit: z.number().default(20),
-      category: z.string().optional(),
-      search: z.string().optional(),
-      isPremium: z.boolean().optional(),
-      isPublished: z.boolean().optional().default(true), // Only show published by default
-    }))
+    .input(
+      z.object({
+        page: z.number().default(1),
+        limit: z.number().default(20),
+        category: z.string().optional(),
+        search: z.string().optional(),
+        isPremium: z.boolean().optional(),
+        isPublished: z.boolean().optional().default(true), // Only show published by default
+      })
+    )
     .query(async ({ input }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database not available");
+      if (!db)
+        return { articles: [], total: 0, page: input.page, limit: input.limit };
 
       const conditions = [];
 
@@ -53,49 +56,60 @@ export const articleRouter = router({
         );
       }
 
-      const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+      const whereClause =
+        conditions.length > 0 ? and(...conditions) : undefined;
 
-      const allArticles = await db
-        .select({
-          id: articles.id,
-          title: articles.title,
-          titleHe: articles.titleHe,
-          slug: articles.slug,
-          excerpt: articles.excerpt,
-          excerptHe: articles.excerptHe,
-          category: articles.category,
-          coverImage: articles.coverImage,
-          isPremium: articles.isPremium,
-          isPublished: articles.isPublished,
-          views: articles.views,
-          publishedAt: articles.publishedAt,
-          createdAt: articles.createdAt,
-          authorId: articles.authorId,
-        })
-        .from(articles)
-        .where(whereClause)
-        .orderBy(desc(articles.publishedAt), desc(articles.createdAt))
-        .limit(input.limit)
-        .offset((input.page - 1) * input.limit);
+      try {
+        const allArticles = await db
+          .select({
+            id: articles.id,
+            title: articles.title,
+            titleHe: articles.titleHe,
+            slug: articles.slug,
+            excerpt: articles.excerpt,
+            excerptHe: articles.excerptHe,
+            category: articles.category,
+            coverImage: articles.coverImage,
+            isPremium: articles.isPremium,
+            isPublished: articles.isPublished,
+            views: articles.views,
+            publishedAt: articles.publishedAt,
+            createdAt: articles.createdAt,
+            authorId: articles.authorId,
+          })
+          .from(articles)
+          .where(whereClause)
+          .orderBy(desc(articles.publishedAt), desc(articles.createdAt))
+          .limit(input.limit)
+          .offset((input.page - 1) * input.limit);
 
-      const totalCount = await db
-        .select({ count: sql<number>`count(*)` })
-        .from(articles)
-        .where(whereClause);
+        const totalCount = await db
+          .select({ count: sql<number>`count(*)` })
+          .from(articles)
+          .where(whereClause);
 
-      return {
-        articles: allArticles,
-        total: Number(totalCount[0]?.count || 0),
-        page: input.page,
-        limit: input.limit,
-      };
+        return {
+          articles: allArticles,
+          total: Number(totalCount[0]?.count || 0),
+          page: input.page,
+          limit: input.limit,
+        };
+      } catch (err) {
+        console.error(
+          "[articleRouter.list] DB query failed:",
+          err instanceof Error ? err.message : "unknown error"
+        );
+        return { articles: [], total: 0, page: input.page, limit: input.limit };
+      }
     }),
 
   // Get single article by slug (public)
   getBySlug: publicProcedure
-    .input(z.object({
-      slug: z.string(),
-    }))
+    .input(
+      z.object({
+        slug: z.string(),
+      })
+    )
     .query(async ({ ctx, input }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
@@ -129,10 +143,12 @@ export const articleRouter = router({
         const sub = await db
           .select({ tier: subscriptions.tier, status: subscriptions.status })
           .from(subscriptions)
-          .where(and(
-            eq(subscriptions.userId, ctx.user.id),
-            eq(subscriptions.status, "active")
-          ))
+          .where(
+            and(
+              eq(subscriptions.userId, ctx.user.id),
+              eq(subscriptions.status, "active")
+            )
+          )
           .limit(1);
         isPremiumUser = sub.length > 0 && sub[0].tier === "premium";
       }
@@ -164,9 +180,11 @@ export const articleRouter = router({
 
   // Get article by ID (admin only)
   getById: protectedProcedure
-    .input(z.object({
-      id: z.number(),
-    }))
+    .input(
+      z.object({
+        id: z.number(),
+      })
+    )
     .query(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new Error("Unauthorized");
@@ -190,18 +208,20 @@ export const articleRouter = router({
 
   // Create article (admin only)
   create: protectedProcedure
-    .input(z.object({
-      title: z.string().min(1),
-      titleHe: z.string().min(1),
-      excerpt: z.string().optional(),
-      excerptHe: z.string().optional(),
-      content: z.string().min(1),
-      contentHe: z.string().min(1),
-      category: z.string().min(1),
-      coverImage: z.string().optional(),
-      isPremium: z.boolean().default(false),
-      isPublished: z.boolean().default(false),
-    }))
+    .input(
+      z.object({
+        title: z.string().min(1),
+        titleHe: z.string().min(1),
+        excerpt: z.string().optional(),
+        excerptHe: z.string().optional(),
+        content: z.string().min(1),
+        contentHe: z.string().min(1),
+        category: z.string().min(1),
+        coverImage: z.string().optional(),
+        isPremium: z.boolean().default(false),
+        isPublished: z.boolean().default(false),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new Error("Unauthorized");
@@ -239,19 +259,21 @@ export const articleRouter = router({
 
   // Update article (admin only)
   update: protectedProcedure
-    .input(z.object({
-      id: z.number(),
-      title: z.string().min(1).optional(),
-      titleHe: z.string().min(1).optional(),
-      excerpt: z.string().optional(),
-      excerptHe: z.string().optional(),
-      content: z.string().min(1).optional(),
-      contentHe: z.string().min(1).optional(),
-      category: z.string().min(1).optional(),
-      coverImage: z.string().optional(),
-      isPremium: z.boolean().optional(),
-      isPublished: z.boolean().optional(),
-    }))
+    .input(
+      z.object({
+        id: z.number(),
+        title: z.string().min(1).optional(),
+        titleHe: z.string().min(1).optional(),
+        excerpt: z.string().optional(),
+        excerptHe: z.string().optional(),
+        content: z.string().min(1).optional(),
+        contentHe: z.string().min(1).optional(),
+        category: z.string().min(1).optional(),
+        coverImage: z.string().optional(),
+        isPremium: z.boolean().optional(),
+        isPublished: z.boolean().optional(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new Error("Unauthorized");
@@ -268,10 +290,7 @@ export const articleRouter = router({
         const existing = await db
           .select()
           .from(articles)
-          .where(and(
-            eq(articles.slug, newSlug),
-            sql`${articles.id} != ${id}`
-          ))
+          .where(and(eq(articles.slug, newSlug), sql`${articles.id} != ${id}`))
           .limit(1);
 
         if (existing.length === 0) {
@@ -310,9 +329,11 @@ export const articleRouter = router({
 
   // Delete article (admin only)
   delete: protectedProcedure
-    .input(z.object({
-      id: z.number(),
-    }))
+    .input(
+      z.object({
+        id: z.number(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") {
         throw new Error("Unauthorized");
@@ -334,20 +355,19 @@ export const articleRouter = router({
     }),
 
   // Get article categories with counts (public)
-  getCategories: publicProcedure
-    .query(async () => {
-      const db = await getDb();
-      if (!db) throw new Error("Database not available");
+  getCategories: publicProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) throw new Error("Database not available");
 
-      const categories = await db
-        .select({
-          category: articles.category,
-          count: sql<number>`count(*)`,
-        })
-        .from(articles)
-        .where(eq(articles.isPublished, true))
-        .groupBy(articles.category);
+    const categories = await db
+      .select({
+        category: articles.category,
+        count: sql<number>`count(*)`,
+      })
+      .from(articles)
+      .where(eq(articles.isPublished, true))
+      .groupBy(articles.category);
 
-      return categories;
-    }),
+    return categories;
+  }),
 });

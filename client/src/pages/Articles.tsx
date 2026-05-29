@@ -5,6 +5,7 @@ import { trpc } from "@/lib/trpc";
 import ContentCard, { CardSkeleton } from "@/components/ContentCard";
 import FilterBar from "@/components/FilterBar";
 import { getCategoryById, categories } from "@/data/categories";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const articleFilters = [
   { id: "food", nameEn: "Food", nameHe: "אוכל" },
@@ -16,13 +17,16 @@ const articleFilters = [
 ];
 
 export default function Articles() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  usePageTitle(
+    language === "he" ? "מאמרים על תאילנד" : "Articles about Thailand"
+  );
 
   const urlParams = new URLSearchParams(window.location.search);
   const initialCategory = urlParams.get("category") || undefined;
 
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(
-    initialCategory,
+    initialCategory
   );
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -106,7 +110,10 @@ export default function Articles() {
             })}
           </p>
           <p className="mt-3 text-sm text-white/70">
-            {t({ en: `${articles.length} items`, he: `${articles.length} פריטים` })}
+            {t({
+              en: `${articles.length} items`,
+              he: `${articles.length} פריטים`,
+            })}
           </p>
         </div>
       </section>
@@ -137,9 +144,7 @@ export default function Articles() {
               <h2 className="text-2xl font-bold text-stone-950">
                 {emptyState.title}
               </h2>
-              <p className="mt-3 text-stone-600">
-                {emptyState.description}
-              </p>
+              <p className="mt-3 text-stone-600">{emptyState.description}</p>
               {emptyStateKind === "search" ? (
                 <button
                   type="button"

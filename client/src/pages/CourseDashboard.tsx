@@ -7,6 +7,7 @@ import { useGamification } from "@/contexts/GamificationContext";
 import { TOURIST_COURSE, TOURIST_COURSE_MODULES } from "@/data/touristCourse";
 import { hasCourseAccess } from "@/lib/courseAccess";
 import { trpc } from "@/lib/trpc";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // ─── design tokens ────────────────────────────────────────────────────────────
 const C = {
@@ -626,6 +627,11 @@ function DayCard({
 export default function CourseDashboard() {
   const { language, t } = useLanguage();
   const { streak, xp } = useGamification();
+  usePageTitle(
+    language === "he"
+      ? "קורס תאית לישראלים — 7 שיעורים"
+      : "Thai Survival Course — 7 Lessons"
+  );
   const { data: user } = trpc.auth.me.useQuery(undefined, {
     retry: false,
     refetchOnWindowFocus: false,

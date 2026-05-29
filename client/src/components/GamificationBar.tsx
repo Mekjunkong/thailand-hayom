@@ -7,6 +7,9 @@ export default function GamificationBar() {
   const { language } = useLanguage();
   const dir = language === "he" ? "rtl" : "ltr";
 
+  // Don't show to visitors who haven't started any lessons yet
+  if (streak === 0 && xp === 0 && gems === 0) return null;
+
   return (
     <div
       dir={dir}
