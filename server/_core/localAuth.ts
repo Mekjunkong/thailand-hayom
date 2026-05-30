@@ -99,7 +99,10 @@ export function registerLocalAuthRoutes(app: Express) {
       });
 
       const cookieOptions = getSessionCookieOptions(req);
-      res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+      res.cookie(COOKIE_NAME, sessionToken, {
+        ...cookieOptions,
+        maxAge: ONE_YEAR_MS,
+      });
       res.json({ success: true });
     } catch (error) {
       console.error("[LocalAuth] Register failed", error);
@@ -151,11 +154,93 @@ export function registerLocalAuthRoutes(app: Express) {
       });
 
       const cookieOptions = getSessionCookieOptions(req);
-      res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+      res.cookie(COOKIE_NAME, sessionToken, {
+        ...cookieOptions,
+        maxAge: ONE_YEAR_MS,
+      });
       res.json({ success: true, name: user.name });
     } catch (error) {
       console.error("[LocalAuth] Login failed", error);
       res.status(500).json({ error: "Login failed" });
+    }
+  });
+
+  // POST /api/auth/google  { credential: <Google ID token> }
+  app.post("/api/auth/google", async (req: Request, res: Response) => {
+    const { credential } = req.body ?? {};
+    if (!credential) {
+      res.status(400).json({ error: "Google credential required" });
+      return;
+    }
+
+    try {
+      // Verify ID token with Google's tokeninfo endpoint (no extra package needed)
+      const tokenRes = await fetch(
+        `https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`
+      );
+      if (!tokenRes.ok) {
+        res.status(401).json({ error: "Invalid Google token" });
+        return;
+      }
+      const googleUser = (await tokenRes.json()) as {
+        sub: string;
+        email: string;
+        name: string;
+        picture?: string;
+        aud: string;
+      };
+
+      // Validate audience matches our client ID
+      const expectedClientId = ENV.googleClientId;
+      if (expectedClientId && googleUser.aud !== expectedClientId) {
+        res.status(401).json({ error: "Token audience mismatch" });
+        return;
+      }
+
+      const db = await getDb();
+      if (!db) {
+        res.status(500).json({ error: "Database not available" });
+        return;
+      }
+
+      const googleOpenId = `google_${googleUser.sub}`;
+
+      // Find or create user
+      const existing = await db
+        .select()
+        .from(users)
+        .where(eq(users.openId, googleOpenId))
+        .limit(1);
+
+      if (existing.length === 0) {
+        await db.insert(users).values({
+          openId: googleOpenId,
+          email: googleUser.email,
+          name: googleUser.name,
+          loginMethod: "google",
+          lastSignedIn: new Date(),
+        });
+      } else {
+        await db
+          .update(users)
+          .set({ lastSignedIn: new Date() })
+          .where(eq(users.openId, googleOpenId));
+      }
+
+      const sessionToken = await sdk.createSessionToken(googleOpenId, {
+        name: googleUser.name,
+        expiresInMs: ONE_YEAR_MS,
+      });
+
+      const cookieOptions = getSessionCookieOptions(req);
+      res.cookie(COOKIE_NAME, sessionToken, {
+        ...cookieOptions,
+        maxAge: ONE_YEAR_MS,
+      });
+      res.json({ success: true, name: googleUser.name });
+    } catch (error) {
+      console.error("[LocalAuth] Google login failed", error);
+      res.status(500).json({ error: "Google login failed" });
     }
   });
 }

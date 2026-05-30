@@ -7,4 +7,5 @@ export const ENV = {
   isProduction: process.env.NODE_ENV === "production",
   forgeApiUrl: process.env.OPENAI_BASE_URL ?? "",
   forgeApiKey: process.env.OPENAI_API_KEY ?? "",
+  googleClientId: process.env.VITE_GOOGLE_CLIENT_ID ?? "",
 };

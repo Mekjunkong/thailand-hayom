@@ -23,3 +23,20 @@ export async function submitAuth(mode: AuthMode, payload: AuthPayload) {
 
   return data as { success: true; name?: string };
 }
+
+export async function loginWithGoogle(credential: string) {
+  const response = await fetch("/api/auth/google", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ credential }),
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.error || "Google login failed");
+  }
+
+  return data as { success: true; name?: string };
+}

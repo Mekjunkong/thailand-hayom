@@ -1,9 +1,10 @@
 import { type FormEvent, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { toast } from "sonner";
+import { GoogleLogin } from "@react-oauth/google";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { submitAuth, type AuthMode } from "@/lib/authApi";
+import { submitAuth, loginWithGoogle, type AuthMode } from "@/lib/authApi";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -37,6 +38,27 @@ export default function Auth() {
 
   const redirect = getSafeRedirect(window.location.search);
   const isRegister = mode === "register";
+
+  const handleGoogleSuccess = async (credentialResponse: {
+    credential?: string;
+  }) => {
+    if (!credentialResponse.credential) return;
+    setIsSubmitting(true);
+    try {
+      await loginWithGoogle(credentialResponse.credential);
+      toast.success(
+        t({ he: "התחברת בהצלחה עם Google", en: "Signed in with Google" })
+      );
+      setLocation(redirect);
+      window.location.reload();
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Google login failed"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -113,6 +135,36 @@ export default function Auth() {
             >
               {t({ he: "כניסה", en: "Login" })}
             </button>
+          </div>
+
+          {/* Google Sign-In */}
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() =>
+                toast.error(
+                  t({
+                    he: "כניסה עם Google נכשלה",
+                    en: "Google sign-in failed",
+                  })
+                )
+              }
+              text={isRegister ? "signup_with" : "signin_with"}
+              shape="rectangular"
+              size="large"
+              width="320"
+            />
+          </div>
+
+          <div className="relative my-5">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-stone-200" />
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-white px-3 text-stone-400">
+                {t({ he: "או המשיכו עם אימייל", en: "or continue with email" })}
+              </span>
+            </div>
           </div>
 
           <h2 className="text-2xl font-bold text-stone-950">
