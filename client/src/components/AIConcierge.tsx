@@ -1,180 +1,157 @@
-import { useState, useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MessageCircle, X, Send, Bot, User, Mic, MicOff } from 'lucide-react';
-import { trpc } from '@/lib/trpc';
+import { useState, useEffect, useRef } from "react";
+import { MessageCircle, X, Send, Bot, User, Mic, MicOff, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { trpc } from "@/lib/trpc";
+import { useLanguage } from "@/contexts/LanguageContext";
 
+// ─── design tokens ────────────────────────────────────────────────────────────
+const C = {
+  orange: "oklch(68% 0.19 40)",
+  orangeDark: "oklch(55% 0.19 40)",
+  orangeLight: "oklch(95% 0.06 78)",
+  teal: "oklch(52% 0.15 175)",
+  tealLight: "oklch(95% 0.04 175)",
+  surface: "oklch(100% 0 0)",
+  bg: "oklch(98% 0.012 82)",
+  border: "oklch(90% 0.015 82)",
+  text: "oklch(16% 0.015 55)",
+  muted: "oklch(52% 0.015 55)",
+};
+
+// ─── types ───────────────────────────────────────────────────────────────────
 interface Message {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
   timestamp: Date;
 }
 
-const SYSTEM_PROMPT = `You are the official assistant for the "Smart Tourist Pack" on our website.
-Your job is to clearly explain, sell, and support visitors who are interested in our 1,000-baht travel solution.
+// ─── system prompt ────────────────────────────────────────────────────────────
+const SYSTEM_PROMPT = `You are the official AI assistant for Thailand Hayom — a bilingual Hebrew/English travel platform for Israeli tourists in Thailand.
 
-Your tone must be warm, professional, and friendly — easy for tourists to understand.
+Your primary role is to help users with the Tourist Survival Thai Course and general Thailand travel questions.
 
-**IMPORTANT LANGUAGE RULE:**
-- Detect the language the user is writing in
-- If the user writes in Hebrew, respond ENTIRELY in Hebrew
+**LANGUAGE RULE:**
+- If the user writes in Hebrew, respond ENTIRELY in Hebrew (natural, conversational, not formal)
 - If the user writes in English, respond in English
-- If the user writes in Thai, respond in Thai
 - Match the user's language in every response
-- For Israeli travelers, be especially helpful with Hebrew responses
-- Use natural, conversational Hebrew (not formal or translated-sounding)
 
-Your goals:
-1. Explain what the Smart Tourist Pack includes
-2. Show the benefits and remove confusion
-3. Highlight why it's helpful for travelers in Thailand
-4. Guide users to take action (buy, contact, or chat on WhatsApp)
-5. Support tour agents and hostel owners who want to buy in bulk
-6. Answer detailed questions about how the AI Concierge works
-7. Help the user trust the service by giving clear, calm answers
-8. Give examples of how the pack helps in real travel situations
+**About the product:**
+The Tourist Survival Thai Course (₪79 one-time, no subscription) includes:
+• 7 interactive lessons covering real travel situations
+• Lesson 1: Greetings & Politeness (FREE)
+• Lesson 2: Taxis & Directions (paid)
+• Lesson 3: Food & Restaurants (FREE)
+• Lesson 4: Shopping & Bargaining (paid)
+• Lesson 5: Hotel Check-in (paid)
+• Lesson 6: Emergency & Health (paid)
+• Lesson 7: Small Talk & Review (paid)
+• Audio pronunciation for every phrase (Web Speech API)
+• Gamification: XP, streaks, gems, quiz with heart lives
+• PDF phrase cards for offline use
+• Emergency scripts
 
-Product Description:
-The Smart Tourist Pack (₪20) includes:
-• A friendly AI Travel Concierge available 24/7
-• Our full Tourist Welcome Kit (PDF + website access)
-• Local guidance for food, transport, culture, and daily planning
-• Thai phrase support and translation
-• Safety tips and practical travel advice
-• Discounts and recommendations in Chiang Mai
-• Simple itineraries based on weather, budget, and travel style
+**Your goals:**
+1. Help users understand what they'll learn in the course
+2. Encourage them to try the 2 free lessons (airport-arrival, food-restaurant)
+3. Answer Thailand travel questions (food, transport, culture, safety, visa)
+4. Help with Thai language questions
+5. Guide users to purchase if they ask about the full course
 
-The AI Concierge can help with:
-• Directions to any landmark in Chiang Mai
-• Planning 1–14 day itineraries
-• Temple rules and cultural etiquette
-• Finding vegan/halal/street food
-• Booking suggestions (non-commission)
-• Emergency guidance
-• Thai ↔ English translation
-• Tips for families, backpackers, solo travelers, and Israeli tourists
+**Behavior:**
+- Be warm, practical, and direct
+- Use real Thai phrases with transliteration when relevant
+- For travel questions, give specific, actionable answers
+- Never make up phone numbers or prices you're not sure of
+- Emergency numbers in Thailand: Tourist Police 1155, Emergency 191, Ambulance 1669`;
 
-Behavior Rules:
-1. Keep answers calm, friendly, and direct.
-2. When a tourist seems confused, offer step-by-step guidance.
-3. When a user is hesitant, gently explain why the pack gives peace of mind and saves time.
-4. When a tour agent or hostel owner asks, explain bulk pricing and the white-label option.
-5. Never pressure — instead, guide and reassure.
-6. Always offer a next step: Buy now, Try the concierge, Open WhatsApp, See the Welcome Kit, Ask a question
-
-Sales Examples:
-• "If this is your first time in Thailand, the pack will remove a lot of stress."
-• "The AI Concierge answers instantly, day or night."
-• "You'll have clear directions, prices, and local recommendations."
-• "Many travelers use it to plan each day based on weather and mood."
-• "Tour agents love this because it makes their customers feel supported."
-
-Special Behavior for Tour Agents & Hostel Owners:
-• Explain white-label (branding with their logo)
-• Explain bulk pricing: 10 packs: 8,000 THB, 20 packs: 15,000 THB
-• Explain WhatsApp integration
-• Explain how it reduces staffing time and improves customer satisfaction`;
-
-const QUICK_ACTIONS = [
-  { label: '🏛️ Show me temples', query: 'What are the best temples to visit in Chiang Mai?' },
-  { label: '🍜 Find food nearby', query: 'Where can I find good local food in Chiang Mai?' },
-  { label: '⚠️ Safety tips', query: 'What safety tips should I know for Chiang Mai?' },
-  { label: '📅 3-day itinerary', query: 'Can you create a 3-day itinerary for Chiang Mai?' },
-  { label: '💰 What\'s included?', query: 'What does the Smart Tourist Pack include?' },
-  { label: '🏨 For tour agents', query: 'I\'m a tour agent interested in bulk pricing' },
+// ─── quick actions ────────────────────────────────────────────────────────────
+const QUICK_ACTIONS_HE = [
+  { label: "🎓 מה בקורס?", query: "מה כלול בקורס התאית?" },
+  { label: "✈️ שיעור חינם", query: "איך מתחילים שיעור חינם?" },
+  { label: "🍜 אוכל בתאילנד", query: "מה כדאי לאכול בתאילנד?" },
+  { label: "🚕 מוניות ו-Grab", query: "איך להשתמש ב-Grab בתאילנד?" },
+  { label: "🆘 חירום", query: "מה מספרי החירום בתאילנד?" },
+  { label: "💳 ויזה לתאילנד", query: "איזה ויזה צריך לתאילנד?" },
 ];
 
-const QUICK_ACTIONS_HEBREW = [
-  { label: '🏛️ מקדשים', query: 'אילו מקדשים כדאי לבקר בצ׳אנג מאי?' },
-  { label: '🍜 אוכל מקומי', query: 'איפה אפשר למצוא אוכל מקומי טוב בצ׳אנג מאי?' },
-  { label: '⚠️ טיפים לבטיחות', query: 'אילו טיפים לבטיחות חשוב לדעת על צ׳אנג מאי?' },
-  { label: '📅 מסלול 3 ימים', query: 'תוכל להכין לי מסלול ל-3 ימים בצ׳אנג מאי?' },
-  { label: '💰 מה כלול?', query: 'מה כלול בחבילת התייר החכם?' },
-  { label: '🏨 לסוכני טיולים', query: 'אני סוכן טיולים מעוניין במחירים לרכישה בכמויות' },
+const QUICK_ACTIONS_EN = [
+  { label: "🎓 What's in the course?", query: "What does the Thai course include?" },
+  { label: "✈️ Free lesson", query: "How do I start a free lesson?" },
+  { label: "🍜 Food in Thailand", query: "What food should I try in Thailand?" },
+  { label: "🚕 Taxis & Grab", query: "How do I use Grab in Thailand?" },
+  { label: "🆘 Emergency", query: "What are emergency numbers in Thailand?" },
+  { label: "💳 Thailand visa", query: "What visa do I need for Thailand?" },
 ];
 
+// ─── component ────────────────────────────────────────────────────────────────
 export default function AIConcierge() {
+  const { language } = useLanguage();
+  const he = language === "he";
+
+  const greeting: Message = {
+    role: "assistant",
+    content: he
+      ? "สวัสดี! 🙏 שלום! אני העוזר של Thailand Hayom.\n\nאני יכול לעזור לך עם קורס התאית, שאלות על טיול בתאילנד, אוכל, תחבורה, ויזה ועוד.\n\nמה תרצה לדעת?"
+      : "สวัสดี! 🙏 Hi! I'm the Thailand Hayom assistant.\n\nI can help with the Thai Survival Course, travel questions, food, transport, visas, and more.\n\nWhat would you like to know?",
+    timestamp: new Date(),
+  };
+
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: 'Sawasdee! 🙏 Welcome to the Smart Tourist Pack assistant.\nשלום! ברוכים הבאים לעוזר חבילת התייר החכם.\n\nI\'m here to help you explore Chiang Mai with confidence! I can assist with directions, food, cultural tips, itineraries, and more.\nאני כאן כדי לעזור לך לחקור את צ׳אנג מאי בבטחה! אפשר לשאול אותי בעברית או אנגלית.\n\nHow can I assist you today? / איך אפשר לעזור?',
-      timestamp: new Date()
-    }
-  ]);
-  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<Message[]>([greeting]);
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(true);
-  const [isHebrew, setIsHebrew] = useState(false);
-  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
+  const [sessionId] = useState(
+    () => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+  );
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
-  
   const sendMessageMutation = trpc.chat.sendMessage.useMutation();
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Initialize speech recognition
+  // Speech recognition setup
   useEffect(() => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = 'en-US';
+    const SR =
+      (window as any).webkitSpeechRecognition ||
+      (window as any).SpeechRecognition;
+    if (!SR) return;
+    const rec = new SR();
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.lang = he ? "he-IL" : "en-US";
+    rec.onresult = (e: any) => {
+      setInput(e.results[0][0].transcript);
+      setIsListening(false);
+    };
+    rec.onerror = () => setIsListening(false);
+    rec.onend = () => setIsListening(false);
+    recognitionRef.current = rec;
+  }, [he]);
 
-      recognitionRef.current.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInput(transcript);
-        setIsListening(false);
-      };
-
-      recognitionRef.current.onerror = () => {
-        setIsListening(false);
-      };
-
-      recognitionRef.current.onend = () => {
-        setIsListening(false);
-      };
-    }
-  }, []);
-
-  // Load chat history from localStorage
+  // Persist chat
   useEffect(() => {
-    const savedMessages = localStorage.getItem('ai_concierge_chat');
-    if (savedMessages) {
+    const saved = localStorage.getItem("th_concierge_chat");
+    if (saved) {
       try {
-        const parsed = JSON.parse(savedMessages);
-        setMessages(parsed.map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp)
-        })));
-      } catch (e) {
-        console.error('Failed to load chat history', e);
-      }
+        const parsed = JSON.parse(saved);
+        setMessages(
+          parsed.map((m: any) => ({ ...m, timestamp: new Date(m.timestamp) }))
+        );
+      } catch {}
     }
   }, []);
 
-  // Save chat history to localStorage
   useEffect(() => {
-    if (messages.length > 1) {
-      localStorage.setItem('ai_concierge_chat', JSON.stringify(messages));
-    }
+    if (messages.length > 1)
+      localStorage.setItem("th_concierge_chat", JSON.stringify(messages));
   }, [messages]);
 
-  const toggleVoiceInput = () => {
-    if (!recognitionRef.current) {
-      alert('Voice input is not supported in your browser. Please use Chrome, Edge, or Safari.');
-      return;
-    }
-
+  const toggleVoice = () => {
+    if (!recognitionRef.current) return;
     if (isListening) {
       recognitionRef.current.stop();
       setIsListening(false);
@@ -184,280 +161,423 @@ export default function AIConcierge() {
     }
   };
 
-  const handleQuickAction = (query: string) => {
-    setInput(query);
+  const handleSend = async (text?: string) => {
+    const msg = (text ?? input).trim();
+    if (!msg) return;
+    setInput("");
     setShowQuickActions(false);
-    // Auto-send after a brief delay
-    setTimeout(() => handleSend(query), 100);
-  };
-
-  const handleSend = async (customInput?: string) => {
-    const messageText = customInput || input;
-    if (!messageText.trim()) return;
-
-    const userMessage: Message = {
-      role: 'user',
-      content: messageText,
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
+    setMessages(prev => [...prev, { role: "user", content: msg, timestamp: new Date() }]);
     setIsLoading(true);
-    setShowQuickActions(false);
-
     try {
-      // Call AI API
-      const response = await callAIAPI(messageText, messages);
-      
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: response,
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
-      console.error('AI response error:', error);
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: 'I apologize, but I\'m having trouble responding right now. Please try again in a moment, or contact us directly on WhatsApp at +66929894495.',
-        timestamp: new Date()
-      }]);
+      const history = messages.map(m => ({ role: m.role, content: m.content }));
+      const res = await sendMessageMutation.mutateAsync({ message: msg, sessionId, history });
+      setMessages(prev => [
+        ...prev,
+        { role: "assistant", content: res.message, timestamp: new Date() },
+      ]);
+    } catch {
+      setMessages(prev => [
+        ...prev,
+        {
+          role: "assistant",
+          content: he
+            ? "מצטער, יש תקלה כרגע. נסה שוב בעוד רגע."
+            : "Sorry, something went wrong. Please try again in a moment.",
+          timestamp: new Date(),
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const callAIAPI = async (userInput: string, conversationHistory: Message[]): Promise<string> => {
-    try {
-      const history = conversationHistory.map(msg => ({
-        role: msg.role,
-        content: msg.content
-      }));
-
-      const response = await sendMessageMutation.mutateAsync({
-        message: userInput,
-        sessionId,
-        history
-      });
-
-      // Response is always a string now
-      return response.message;
-    } catch (error) {
-      console.error('AI API call failed:', error);
-      throw error;
-    }
-  };
-
-  const simulateAIResponse = async (userInput: string): Promise<string> => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    const input = userInput.toLowerCase();
-
-    // Smart Tourist Pack specific responses
-    if (input.includes('smart tourist pack') || input.includes('what') && input.includes('include')) {
-      return `Great question! The **Smart Tourist Pack** (₪20) is your complete travel companion for Thailand. Here's what you get:\n\n✅ **24/7 AI Travel Concierge** - Ask me anything, anytime\n✅ **Full Tourist Welcome Kit** - PDF guide + website access\n✅ **Local Guidance** - Food, transport, culture, daily planning\n✅ **Thai Phrase Support** - Translation and pronunciation help\n✅ **Safety Tips** - Scam warnings and practical advice\n✅ **Chiang Mai Discounts** - Exclusive recommendations\n✅ **Custom Itineraries** - Based on weather, budget, and your style\n\nIf this is your first time in Thailand, the pack will remove a lot of stress. You'll have clear directions, prices, and local recommendations instantly.\n\n**Ready to get started?** 👉 [Buy Now](/welcome-kit) or chat with us on WhatsApp: +66929894495`;
-    }
-
-    if (input.includes('price') || input.includes('cost') || input.includes('how much')) {
-      return `The Smart Tourist Pack is **₪20** (about $5.50 USD).\n\nThis one-time payment gives you:\n• Unlimited access to the AI Concierge during your trip\n• All Welcome Kit materials\n• Custom itineraries and daily planning\n• 24/7 support\n\n**For Tour Agents & Hostel Owners:**\n• 10 packs: ₪160 (₪16 each)\n• 20 packs: 7,₪20 (375 THB each)\n• White-label branding available\n\nMany travelers use it to plan each day based on weather and mood. It's like having a local friend in your pocket!\n\n**Want to purchase?** Contact us on WhatsApp: +66929894495`;
-    }
-
-    if (input.includes('tour agent') || input.includes('hostel') || input.includes('bulk') || input.includes('business')) {
-        return `Excellent! We love working with tour agents and hostel owners. Here's what we offer:
-
-📦 **Bulk Pricing:**
-• 10 packs: ₪160 (₪16 each)
-• 20 packs: 7,₪20 (375 THB each))\n• Custom packages for larger orders\n\n🎨 **White-Label Option:**\n• Brand the concierge with your logo\n• Integrate with your WhatsApp Business\n• Custom welcome messages\n\n💼 **Benefits for Your Business:**\n• Reduces staffing time for common questions\n• Improves customer satisfaction\n• Provides 24/7 support to your guests\n• Makes your service stand out\n\nTour agents love this because it makes their customers feel supported throughout their trip.\n\n**Ready to discuss?** WhatsApp us: +66929894495 or email: Pasuthunjunkong@gmail.com`;
-    }
-
-    if (input.includes('buy') || input.includes('purchase') || input.includes('get started')) {
-      return `Perfect! Here's how to get your Smart Tourist Pack:\n\n**Option 1: WhatsApp (Fastest)**\nMessage us at +66929894495 and say "I want the Smart Tourist Pack"\n\n**Option 2: Website**\nVisit our [Welcome Kit page](/welcome-kit) and click "Purchase Now"\n\n**Option 3: Email**\nSend your inquiry to Pasuthunjunkong@gmail.com\n\n**What happens next:**\n1. You'll receive payment instructions\n2. Once paid, you get instant access to the AI Concierge\n3. Download the Welcome Kit PDF\n4. Start planning your amazing Thailand trip!\n\nThe AI Concierge answers instantly, day or night. You'll have peace of mind knowing help is always available.\n\n**Any questions before you start?**`;
-    }
-
-    // Chiang Mai travel responses
-    if (input.includes('temple') || input.includes('wat')) {
-      return `Chiang Mai has beautiful temples! Here are my top recommendations:\n\n🏛️ **Wat Phra That Doi Suthep** - The most iconic temple with stunning city views. Take a red truck (60-80 THB) or Grab (150-200 THB). Entry: 30 THB.\n\n🏛️ **Wat Chedi Luang** - Historic temple in Old City. Free entry, donations welcome.\n\n🏛️ **Wat Phra Singh** - Beautiful Lanna architecture. Entry: 40 THB.\n\n**Temple Etiquette**: Cover shoulders and knees, remove shoes before entering, speak quietly, and don't point feet at Buddha images.\n\n💡 **Pro tip:** With the Smart Tourist Pack, you get detailed temple guides, cultural etiquette tips, and custom itineraries. Want to learn more?`;
-    }
-
-    if (input.includes('food') || input.includes('restaurant') || input.includes('eat')) {
-      return `Chiang Mai has amazing food! Here are some must-tries:\n\n🍜 **Khao Soi** (Northern Thai curry noodles) - Try Khao Soi Khun Yai (40-60 THB)\n\n🥘 **Street Food** - Visit Ploen Ruedee Night Market or Chang Phueak Gate\n\n🌱 **Vegan** - Goodsouls Kitchen, Pun Pun Organic Restaurant\n\n🇮🇱 **Israeli Food** - Shalom Hummus, Baba's House\n\n**Food Safety Tips:**\n• Eat where locals eat\n• Look for busy stalls\n• Drink bottled water\n\n💡 **With the Smart Tourist Pack**, I can create personalized food itineraries based on your dietary preferences and budget. Interested?`;
-    }
-
-    if (input.includes('itinerary') || input.includes('plan') || input.includes('day')) {
-      return `I'd love to help you plan your Chiang Mai itinerary! Here's a sample 3-day plan:\n\n**Day 1: Old City & Temples**\n• Morning: Wat Phra Singh, Wat Chedi Luang\n• Lunch: Khao Soi at local restaurant\n• Afternoon: Three Kings Monument, City Arts & Cultural Centre\n• Evening: Sunday Walking Street (if Sunday) or Night Bazaar\n\n**Day 2: Nature & Adventure**\n• Morning: Doi Suthep Temple\n• Lunch: Viewpoint restaurant\n• Afternoon: Sticky Waterfalls or Elephant Sanctuary\n• Evening: Nimman area for dinner and cafes\n\n**Day 3: Markets & Culture**\n• Morning: Warorot Market\n• Lunch: Street food tour\n• Afternoon: Thai cooking class or massage\n• Evening: Riverside dinner\n\n💡 **Want a custom itinerary?** The Smart Tourist Pack creates personalized plans based on weather, your budget, and interests. Check it out!`;
-    }
-
-    if (input.includes('safety') || input.includes('scam')) {
-      return `Here are important safety tips for Chiang Mai:\n\n⚠️ **Common Scams to Avoid:**\n• Gem shop scams (don't buy expensive gems)\n• Overpriced tuk-tuks (agree on price first)\n• Fake tour operators (book through hotels)\n\n🏍️ **Motorbike Safety:**\n• Always wear a helmet (₪20 fine)\n• Need International Driving Permit\n• Insurance recommended\n\n📞 **Emergency Numbers:**\n• Tourist Police: 1155\n• Emergency: 191\n• Ambulance: 1669\n\n💡 **Smart Tourist Pack includes:** Complete safety guide, scam warnings, emergency contacts, and 24/7 support. Want to learn more?`;
-    }
-
-    // Default response
-    return `I can help you with:\n\n📍 **Directions & Navigation** - How to get anywhere in Chiang Mai\n🍜 **Food Recommendations** - Best places to eat\n🏛️ **Cultural Tips** - Temple etiquette and Thai customs\n⚠️ **Safety Advice** - Scams to avoid and emergency contacts\n📅 **Itinerary Planning** - Custom trip planning\n🗣️ **Thai Translations** - Learn useful phrases\n\n💡 **About the Smart Tourist Pack (₪20):**\nGet 24/7 AI support, full Welcome Kit, custom itineraries, and local guidance throughout your trip. It's like having a local friend in your pocket!\n\nWhat would you like to know about "${userInput}"?\n\n**Ready to explore?** [Learn More](/welcome-kit) or WhatsApp: +66929894495`;
-  };
-
   const clearChat = () => {
-    setMessages([{
-      role: 'assistant',
-      content: 'Sawasdee! 🙏 Welcome to the Smart Tourist Pack assistant. I\'m here to help you explore Chiang Mai with confidence!\n\nI can help you with directions, food recommendations, cultural tips, itineraries, and more. How can I assist you today?',
-      timestamp: new Date()
-    }]);
+    setMessages([{ ...greeting, timestamp: new Date() }]);
     setShowQuickActions(true);
-    localStorage.removeItem('ai_concierge_chat');
+    localStorage.removeItem("th_concierge_chat");
   };
+
+  const quickActions = he ? QUICK_ACTIONS_HE : QUICK_ACTIONS_EN;
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* FAB */}
       {!isOpen && (
-        <Button
+        <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 z-50 flex items-center justify-center animate-pulse"
-          size="lg"
+          aria-label={he ? "פתח עוזר AI" : "Open AI assistant"}
+          style={{
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            background: `linear-gradient(135deg, ${C.orange}, ${C.orangeDark})`,
+            border: "none",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 4px 24px oklch(68% 0.19 40 / 40%)",
+            zIndex: 50,
+            transition: "transform 0.15s, box-shadow 0.15s",
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.08)";
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+          }}
         >
-          <MessageCircle className="w-8 h-8 text-white" />
-        </Button>
+          <MessageCircle style={{ width: 26, height: 26, color: "#fff" }} />
+        </button>
       )}
 
-      {/* Chat Window */}
+      {/* Chat window */}
       {isOpen && (
-        <Card className="fixed bottom-6 right-6 w-96 h-[600px] shadow-2xl z-50 flex flex-col border-2 border-blue-300">
-          <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-lg pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <Bot className="w-6 h-6" />
-                </div>
-                <div>
-                  <CardTitle className="text-lg">Smart Tourist Pack</CardTitle>
-                  <p className="text-xs text-white/80">AI Travel Assistant</p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearChat}
-                  className="text-white hover:bg-white/20 h-8 w-8 p-0"
-                  title="Clear chat"
-                >
-                  🗑️
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setIsOpen(false)}
-                  className="text-white hover:bg-white/20 h-8 w-8 p-0"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
+        <div
+          style={{
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            width: 360,
+            height: 580,
+            borderRadius: 20,
+            boxShadow: "0 8px 48px oklch(16% 0.015 55 / 18%)",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            zIndex: 50,
+            border: `1px solid ${C.border}`,
+            background: C.surface,
+          }}
+        >
+          {/* Header */}
+          <div
+            style={{
+              background: `linear-gradient(135deg, ${C.orange}, ${C.orangeDark})`,
+              padding: "14px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <div
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: "50%",
+                background: "oklch(100% 0 0 / 22%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
+              <Bot style={{ width: 20, height: 20, color: "#fff" }} />
             </div>
-          </CardHeader>
+            <div style={{ flex: 1 }}>
+              <p style={{ color: "#fff", fontWeight: 700, fontSize: 14, margin: 0 }}>
+                {he ? "עוזר תאילנד היום" : "Thailand Hayom Assistant"}
+              </p>
+              <p style={{ color: "oklch(100% 0 0 / 78%)", fontSize: 11, margin: 0 }}>
+                {he ? "עוזר AI לטיול בתאילנד" : "AI travel & course assistant"}
+              </p>
+            </div>
+            <button
+              onClick={clearChat}
+              aria-label={he ? "נקה שיחה" : "Clear chat"}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 6,
+                borderRadius: 8,
+                color: "oklch(100% 0 0 / 80%)",
+                display: "flex",
+              }}
+            >
+              <Trash2 style={{ width: 16, height: 16 }} />
+            </button>
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label={he ? "סגור" : "Close"}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 6,
+                borderRadius: 8,
+                color: "oklch(100% 0 0 / 80%)",
+                display: "flex",
+              }}
+            >
+              <X style={{ width: 18, height: 18 }} />
+            </button>
+          </div>
 
-          <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-            {messages.map((message, idx) => (
+          {/* Messages */}
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: 16,
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+              background: C.bg,
+            }}
+            dir={he ? "rtl" : "ltr"}
+          >
+            {messages.map((m, i) => (
               <div
-                key={idx}
-                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                key={i}
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  justifyContent: m.role === "user" ? "flex-end" : "flex-start",
+                  alignItems: "flex-end",
+                }}
               >
-                {message.role === 'assistant' && (
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-5 h-5 text-white" />
+                {m.role === "assistant" && (
+                  <div
+                    style={{
+                      width: 28,
+                      height: 28,
+                      borderRadius: "50%",
+                      background: C.orange,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Bot style={{ width: 15, height: 15, color: "#fff" }} />
                   </div>
                 )}
                 <div
-                  className={`max-w-[75%] rounded-lg p-3 ${
-                    message.role === 'user'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-white border border-gray-200 text-gray-800'
-                  }`}
+                  style={{
+                    maxWidth: "78%",
+                    padding: "10px 14px",
+                    borderRadius: m.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+                    background: m.role === "user" ? C.orange : C.surface,
+                    color: m.role === "user" ? "#fff" : C.text,
+                    border: m.role === "user" ? "none" : `1px solid ${C.border}`,
+                    fontSize: 13,
+                    lineHeight: 1.55,
+                    whiteSpace: "pre-wrap",
+                    boxShadow: m.role === "assistant" ? "0 1px 4px oklch(16% 0.015 55 / 8%)" : "none",
+                  }}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                  <p className={`text-xs mt-1 ${message.role === 'user' ? 'text-blue-100' : 'text-gray-400'}`}>
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  {m.content}
+                  <p
+                    style={{
+                      fontSize: 10,
+                      marginTop: 4,
+                      color: m.role === "user" ? "oklch(100% 0 0 / 65%)" : C.muted,
+                    }}
+                  >
+                    {m.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </p>
                 </div>
-                {message.role === 'user' && (
-                  <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
-                    <User className="w-5 h-5 text-gray-600" />
+                {m.role === "user" && (
+                  <div
+                    style={{
+                      width: 28,
+                      height: 28,
+                      borderRadius: "50%",
+                      background: C.tealLight,
+                      border: `1px solid ${C.teal}`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <User style={{ width: 14, height: 14, color: C.teal }} />
                   </div>
                 )}
               </div>
             ))}
 
-            {/* Quick Action Buttons */}
+            {/* Quick actions */}
             {showQuickActions && messages.length === 1 && (
-              <div className="space-y-2 pt-2">
-                <p className="text-xs text-gray-500 text-center font-semibold">Quick Actions:</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {QUICK_ACTIONS.map((action, idx) => (
-                    <Button
-                      key={idx}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleQuickAction(action.query)}
-                      className="text-xs h-auto py-2 px-2 whitespace-normal text-left hover:bg-blue-50"
+              <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 4 }}>
+                <p style={{ fontSize: 11, color: C.muted, textAlign: "center", fontWeight: 600 }}>
+                  {he ? "שאלות נפוצות:" : "Quick questions:"}
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+                  {quickActions.map((a, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handleSend(a.query)}
+                      style={{
+                        padding: "7px 10px",
+                        borderRadius: 10,
+                        border: `1px solid ${C.border}`,
+                        background: C.surface,
+                        color: C.text,
+                        fontSize: 11,
+                        fontWeight: 500,
+                        cursor: "pointer",
+                        textAlign: he ? "right" : "left",
+                        lineHeight: 1.4,
+                        transition: "background 0.15s",
+                      }}
+                      onMouseEnter={e =>
+                        ((e.currentTarget as HTMLButtonElement).style.background = C.orangeLight)
+                      }
+                      onMouseLeave={e =>
+                        ((e.currentTarget as HTMLButtonElement).style.background = C.surface)
+                      }
                     >
-                      {action.label}
-                    </Button>
+                      {a.label}
+                    </button>
                   ))}
                 </div>
               </div>
             )}
 
+            {/* Typing indicator */}
             {isLoading && (
-              <div className="flex gap-3 justify-start">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                  <Bot className="w-5 h-5 text-white" />
+              <div style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: "50%",
+                    background: C.orange,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Bot style={{ width: 15, height: 15, color: "#fff" }} />
                 </div>
-                <div className="bg-white border border-gray-200 rounded-lg p-3">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                  </div>
+                <div
+                  style={{
+                    padding: "12px 16px",
+                    borderRadius: "16px 16px 16px 4px",
+                    background: C.surface,
+                    border: `1px solid ${C.border}`,
+                    display: "flex",
+                    gap: 4,
+                  }}
+                >
+                  {[0, 150, 300].map(delay => (
+                    <div
+                      key={delay}
+                      style={{
+                        width: 7,
+                        height: 7,
+                        borderRadius: "50%",
+                        background: C.muted,
+                        animation: `bounce 1s infinite ${delay}ms`,
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
-          </CardContent>
+          </div>
 
-          <div className="p-4 border-t bg-white rounded-b-lg">
-            <div className="flex gap-2">
+          {/* Input bar */}
+          <div
+            style={{
+              padding: "12px 14px",
+              borderTop: `1px solid ${C.border}`,
+              background: C.surface,
+            }}
+            dir={he ? "rtl" : "ltr"}
+          >
+            <div style={{ display: "flex", gap: 8 }}>
               <input
                 type="text"
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
-                placeholder="Ask me anything..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && !isLoading && handleSend()}
+                placeholder={he ? "שאל אותי כל דבר..." : "Ask me anything..."}
                 disabled={isLoading}
+                style={{
+                  flex: 1,
+                  padding: "9px 14px",
+                  borderRadius: 12,
+                  border: `1px solid ${C.border}`,
+                  fontSize: 13,
+                  outline: "none",
+                  background: C.bg,
+                  color: C.text,
+                  direction: he ? "rtl" : "ltr",
+                }}
               />
-              <Button
-                onClick={toggleVoiceInput}
+              <button
+                onClick={toggleVoice}
                 disabled={isLoading}
-                className={`${isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-500 hover:bg-gray-600'}`}
-                title="Voice input"
+                aria-label={isListening ? "Stop voice" : "Voice input"}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 10,
+                  border: "none",
+                  background: isListening ? "oklch(55% 0.22 27)" : C.tealLight,
+                  color: isListening ? "#fff" : C.teal,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
               >
-                {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
-              </Button>
-              <Button
+                {isListening ? (
+                  <MicOff style={{ width: 16, height: 16 }} />
+                ) : (
+                  <Mic style={{ width: 16, height: 16 }} />
+                )}
+              </button>
+              <button
                 onClick={() => handleSend()}
                 disabled={isLoading || !input.trim()}
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                aria-label={he ? "שלח" : "Send"}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 10,
+                  border: "none",
+                  background: input.trim() && !isLoading ? C.orange : C.border,
+                  color: input.trim() && !isLoading ? "#fff" : C.muted,
+                  cursor: input.trim() && !isLoading ? "pointer" : "default",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  transition: "background 0.15s",
+                }}
               >
-                <Send className="w-5 h-5" />
-              </Button>
+                <Send style={{ width: 16, height: 16 }} />
+              </button>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">
-              Smart Tourist Pack • ₪20
+            <p
+              style={{
+                fontSize: 10,
+                color: C.muted,
+                textAlign: "center",
+                marginTop: 8,
+              }}
+            >
+              {he ? "קורס תאית · ₪79 תשלום חד פעמי" : "Thai Course · ₪79 one-time payment"}
             </p>
           </div>
-        </Card>
+        </div>
       )}
+
+      <style>{`
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+      `}</style>
     </>
   );
 }

@@ -1469,14 +1469,14 @@ function speakThai(text: string) {
 // ─── design tokens (dark lesson player) ───────────────────────────────────────
 
 const C = {
-  bg: "oklch(12% 0.01 264)",
-  surface: "oklch(18% 0.015 264)",
-  surfaceHigh: "oklch(22% 0.018 264)",
-  border: "oklch(28% 0.02 264)",
-  text: "oklch(93% 0.005 264)",
-  muted: "oklch(58% 0.012 264)",
-  indigo: "oklch(52% 0.24 264)",
-  indigoLight: "oklch(70% 0.18 264)",
+  bg: "oklch(11% 0.015 175)",
+  surface: "oklch(17% 0.02 175)",
+  surfaceHigh: "oklch(22% 0.025 175)",
+  border: "oklch(28% 0.03 175)",
+  text: "oklch(93% 0.008 82)",
+  muted: "oklch(58% 0.015 175)",
+  indigo: "oklch(55% 0.16 175)", // Thai jade teal
+  indigoLight: "oklch(72% 0.12 175)",
   orange: "oklch(68% 0.19 40)",
   orangeLight: "oklch(80% 0.14 40)",
   green: "oklch(62% 0.18 145)",

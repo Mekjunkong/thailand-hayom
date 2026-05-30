@@ -11,19 +11,19 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 // ─── design tokens ────────────────────────────────────────────────────────────
 const C = {
-  bg: "oklch(97% 0.005 264)",
+  bg: "oklch(98% 0.012 82)",
   surface: "oklch(100% 0 0)",
-  border: "oklch(88% 0.01 264)",
-  text: "oklch(20% 0.01 264)",
-  muted: "oklch(55% 0.01 264)",
+  border: "oklch(90% 0.015 82)",
+  text: "oklch(16% 0.015 55)",
+  muted: "oklch(52% 0.015 55)",
   orange: "oklch(68% 0.19 40)",
-  orangeLight: "oklch(94% 0.06 40)",
-  indigo: "oklch(52% 0.24 264)",
-  indigoLight: "oklch(94% 0.06 264)",
-  green: "oklch(58% 0.18 145)",
-  greenLight: "oklch(94% 0.06 145)",
-  locked: "oklch(90% 0.005 264)",
-  lockedText: "oklch(65% 0.01 264)",
+  orangeLight: "oklch(95% 0.06 78)",
+  indigo: "oklch(52% 0.15 175)", // Thai jade teal
+  indigoLight: "oklch(95% 0.04 175)",
+  green: "oklch(55% 0.16 145)",
+  greenLight: "oklch(95% 0.05 145)",
+  locked: "oklch(92% 0.008 82)",
+  lockedText: "oklch(62% 0.012 55)",
 };
 
 // ─── lesson slug map ──────────────────────────────────────────────────────────

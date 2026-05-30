@@ -115,7 +115,7 @@ export default function GamificationBar() {
             style={{
               fontSize: 13,
               fontWeight: 700,
-              color: "oklch(50% 0.2 230)",
+              color: "oklch(55% 0.15 85)",
               fontVariantNumeric: "tabular-nums",
             }}
           >
