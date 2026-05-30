@@ -28,7 +28,7 @@ export function FreePaidComparison() {
   const dir = language === "he" ? "rtl" : "ltr";
 
   return (
-    <section className="bg-[oklch(0.97_0.015_80)] py-20" dir={dir}>
+    <section className="bg-[#F8FAFC] py-20" dir={dir}>
       <div className="container">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-bold text-stone-950 md:text-5xl">

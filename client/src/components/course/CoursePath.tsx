@@ -1,141 +1,280 @@
-import { Lock } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
+import { Link } from "wouter";
 import { TOURIST_COURSE, TOURIST_COURSE_MODULES } from "@/data/touristCourse";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const SITUATION_META: Record<
-  string,
-  { icon: string; bg: string; accent: string; labelHe: string; labelEn: string }
-> = {
-  arrival: {
-    icon: "✈️",
-    bg: "bg-amber-50",
-    accent: "text-amber-700",
-    labelHe: "הגעה",
-    labelEn: "Arrival",
-  },
-  taxi: {
-    icon: "🛺",
-    bg: "bg-sky-50",
-    accent: "text-sky-700",
-    labelHe: "תחבורה",
-    labelEn: "Transport",
-  },
-  food: {
-    icon: "🍜",
-    bg: "bg-orange-50",
-    accent: "text-orange-700",
-    labelHe: "אוכל",
-    labelEn: "Food",
-  },
-  shopping: {
-    icon: "🛍️",
-    bg: "bg-violet-50",
-    accent: "text-violet-700",
-    labelHe: "קניות",
-    labelEn: "Shopping",
-  },
-  hotel: {
-    icon: "🏨",
-    bg: "bg-teal-50",
-    accent: "text-teal-700",
-    labelHe: "מלון",
-    labelEn: "Hotel",
-  },
-  emergency: {
-    icon: "🆘",
-    bg: "bg-red-50",
-    accent: "text-red-700",
-    labelHe: "חירום",
-    labelEn: "Emergency",
-  },
-  social: {
-    icon: "💬",
-    bg: "bg-emerald-50",
-    accent: "text-emerald-700",
-    labelHe: "שיחה",
-    labelEn: "Conversation",
-  },
+const LESSON_IMAGES: Record<string, string> = {
+  arrival: "/images/lesson1-greetings.jpg",
+  taxi: "/images/lesson5-transportation.jpg",
+  food: "/images/lesson3-food.jpg",
+  shopping: "/images/lesson4-shopping.jpg",
+  hotel: "/images/lesson6-accommodation.jpg",
+  emergency: "/images/lesson7-emergency.jpg",
+  social: "/images/lesson8-culture.jpg",
+};
+
+const LESSON_SLUGS: Record<number, string> = {
+  1: "airport-arrival",
+  3: "food-restaurant",
+  4: "shopping-market",
+  5: "taxi-transport",
+  6: "emergency-health",
+  7: "small-talk",
+  9: "hotel-checkin",
+};
+
+const PHRASE_COUNTS: Record<string, number> = {
+  arrival: 8,
+  taxi: 9,
+  food: 10,
+  shopping: 8,
+  hotel: 7,
+  emergency: 9,
+  social: 8,
 };
 
 export function CoursePath() {
   const { language, t } = useLanguage();
   const freeSet = new Set<number>(TOURIST_COURSE.freeLessonIds);
   const dir = language === "he" ? "rtl" : "ltr";
+  const he = language === "he";
 
   return (
-    <section className="bg-[oklch(0.97_0.015_80)] py-20" dir={dir}>
+    <section
+      dir={dir}
+      style={{ background: "#FFFFFF", padding: "80px 0" }}
+    >
       <div className="container">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-bold text-stone-950 md:text-5xl">
-            {t({ he: "מסלול של 7 ימים", en: "7-day course path" })}
+        {/* Section header */}
+        <div style={{ maxWidth: 600, marginBottom: 48 }}>
+          <h2
+            style={{
+              fontSize: "clamp(1.8rem, 3vw, 2.8rem)",
+              fontWeight: 800,
+              color: "#0F172A",
+              letterSpacing: "-0.02em",
+              fontFamily: he ? "Assistant, sans-serif" : "Outfit, sans-serif",
+              marginBottom: 12,
+            }}
+          >
+            {t({ he: "גלו 7 שיעורי תאית 🔥", en: "Explore 7 Thai Lessons 🔥" })}
           </h2>
-          <p className="mt-4 text-lg leading-8 text-stone-700">
+          <p
+            style={{
+              fontSize: "1.05rem",
+              color: "#64748B",
+              lineHeight: 1.7,
+              fontFamily: "Outfit, sans-serif",
+            }}
+          >
             {t({
-              he: "כל יום מתמקד בסיטואציה אחת אמיתית מהטיול. פחות דקדוק, יותר לדבר.",
-              en: "Each day focuses on one real situation from your trip. Less grammar, more speaking.",
+              he: "כל שיעור מכסה סיטואציה אמיתית מהטיול. פחות דקדוק, יותר לדבר.",
+              en: "Each lesson covers one real travel situation. Less grammar, more speaking.",
             })}
           </p>
         </div>
 
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7">
+        {/* Destination chips grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
+            gap: 20,
+          }}
+        >
           {TOURIST_COURSE_MODULES.map(module => {
-            const meta =
-              SITUATION_META[module.situation] ?? SITUATION_META["arrival"];
+            const img = LESSON_IMAGES[module.situation] ?? LESSON_IMAGES["arrival"];
             const isFree = freeSet.has(module.lessonId);
-            const situationLabel =
-              language === "he" ? meta.labelHe : meta.labelEn;
-            const title =
-              language === "he" ? module.titleHe : module.titleEn;
-            const outcome =
-              language === "he" ? module.outcomeHe : module.outcomeEn;
+            const slug = LESSON_SLUGS[module.lessonId] ?? "airport-arrival";
+            const phraseCount = PHRASE_COUNTS[module.situation] ?? 8;
+            const title = he ? module.titleHe : module.titleEn;
 
             return (
-              <article
-                key={module.day}
-                className={`relative flex flex-col rounded-2xl border border-stone-100 ${meta.bg} p-5 shadow-sm transition-shadow hover:shadow-md`}
-              >
-                {/* Day badge */}
-                <span
-                  className={`mb-3 inline-flex w-fit rounded-full border border-current/20 px-2.5 py-0.5 text-xs font-black tracking-wider ${meta.accent}`}
+              <Link href={`/lesson/${slug}`} key={module.day}>
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1px solid #F1F5F9",
+                    borderRadius: 20,
+                    padding: 16,
+                    cursor: "pointer",
+                    transition: "box-shadow 0.2s, transform 0.2s",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLDivElement).style.boxShadow =
+                      "0 12px 32px rgba(0,0,0,0.12)";
+                    (e.currentTarget as HTMLDivElement).style.transform =
+                      "translateY(-2px)";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLDivElement).style.boxShadow =
+                      "0 2px 8px rgba(0,0,0,0.06)";
+                    (e.currentTarget as HTMLDivElement).style.transform =
+                      "translateY(0)";
+                  }}
                 >
-                  {t({ he: `יום ${module.day}`, en: `Day ${module.day}` })}
-                </span>
+                  {/* Circular image */}
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      paddingBottom: "100%",
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      marginBottom: 14,
+                    }}
+                  >
+                    <img
+                      src={img}
+                      alt={title}
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                    {/* Day badge */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 6,
+                        left: 6,
+                        background: "rgba(255,255,255,0.92)",
+                        borderRadius: 999,
+                        padding: "2px 8px",
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: "#0F172A",
+                      }}
+                    >
+                      {he ? `יום ${module.day}` : `Day ${module.day}`}
+                    </div>
+                  </div>
 
-                {/* Situation icon */}
-                <span
-                  className="mb-3 text-3xl leading-none"
-                  aria-label={situationLabel}
-                  role="img"
-                >
-                  {meta.icon}
-                </span>
+                  {/* Info */}
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-between",
+                        gap: 4,
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 700,
+                          color: "#0F172A",
+                          margin: 0,
+                          lineHeight: 1.3,
+                          fontFamily: he ? "Assistant, sans-serif" : "Outfit, sans-serif",
+                        }}
+                      >
+                        {title}
+                      </p>
+                      <ArrowUpRight
+                        style={{
+                          width: 14,
+                          height: 14,
+                          color: "#94A3B8",
+                          flexShrink: 0,
+                          marginTop: 2,
+                        }}
+                      />
+                    </div>
 
-                {/* Title */}
-                <h3 className="min-h-10 text-base font-bold leading-snug text-stone-950">
-                  {title}
-                </h3>
+                    <p
+                      style={{
+                        fontSize: 11,
+                        color: "#94A3B8",
+                        margin: "4px 0 8px",
+                        fontFamily: "Outfit, sans-serif",
+                      }}
+                    >
+                      {phraseCount} {t({ he: "משפטים", en: "phrases" })}
+                    </p>
 
-                {/* Outcome */}
-                <p className="mt-2 text-xs leading-5 text-stone-600">
-                  {outcome}
-                </p>
-
-                {/* Free / Locked badge */}
-                <div className="mt-4 flex items-center gap-1">
-                  {isFree ? (
-                    <span className="rounded-md bg-emerald-600 px-2 py-0.5 text-[10px] font-bold text-white">
-                      {t({ he: "חינם", en: "Free" })}
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-1 rounded-md bg-stone-200 px-2 py-0.5 text-[10px] font-medium text-stone-500">
-                      <Lock className="h-2.5 w-2.5" />
-                      {t({ he: "קורס מלא", en: "Full course" })}
-                    </span>
-                  )}
+                    {isFree ? (
+                      <span
+                        style={{
+                          display: "inline-block",
+                          background: "#ECFDF5",
+                          color: "#059669",
+                          fontSize: 10,
+                          fontWeight: 700,
+                          borderRadius: 999,
+                          padding: "3px 10px",
+                        }}
+                      >
+                        {t({ he: "חינם", en: "Free" })}
+                      </span>
+                    ) : (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
+                          background: "#F8FAFC",
+                          color: "#94A3B8",
+                          fontSize: 10,
+                          fontWeight: 600,
+                          borderRadius: 999,
+                          padding: "3px 10px",
+                        }}
+                      >
+                        <Lock style={{ width: 9, height: 9 }} />
+                        {t({ he: "קורס מלא", en: "Full course" })}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </article>
+              </Link>
             );
           })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div
+          style={{
+            marginTop: 48,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Link href="/course">
+            <button
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#0F172A",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: 999,
+                padding: "14px 32px",
+                fontSize: 15,
+                fontWeight: 700,
+                cursor: "pointer",
+                fontFamily: "Outfit, sans-serif",
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={e =>
+                ((e.currentTarget as HTMLButtonElement).style.background =
+                  "#1E293B")
+              }
+              onMouseLeave={e =>
+                ((e.currentTarget as HTMLButtonElement).style.background =
+                  "#0F172A")
+              }
+            >
+              {t({ he: "ראו את כל הקורס", en: "View Full Course" })}
+              <ArrowUpRight style={{ width: 16, height: 16 }} />
+            </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Volume2, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Play, Star } from "lucide-react";
 import { TOURIST_COURSE } from "@/data/touristCourse";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -9,8 +8,8 @@ const SAMPLE_PHRASES = [
   {
     thai: "ไม่เผ็ดครับ",
     roman: "mai phet khrap",
-    he: "לא חריף בבקשה (גבר)",
-    en: "Not spicy please (male)",
+    he: "לא חריף בבקשה",
+    en: "Not spicy please",
     contextHe: "במסעדה",
     contextEn: "At a restaurant",
   },
@@ -25,21 +24,26 @@ const SAMPLE_PHRASES = [
   {
     thai: "ไปสนามบินครับ",
     roman: "pai sanam bin khrap",
-    he: "לשדה התעופה בבקשה",
-    en: "To the airport, please",
+    he: "לשדה התעופה",
+    en: "To the airport",
     contextHe: "במונית",
     contextEn: "In a taxi",
   },
 ];
 
-const MODULE_LABELS = [
-  { he: "ברכות", en: "Greetings" },
-  { he: "מוניות", en: "Taxis" },
-  { he: "אוכל", en: "Food" },
-  { he: "קניות", en: "Shopping" },
-  { he: "מלון", en: "Hotel" },
-  { he: "חירום", en: "Emergency" },
-  { he: "שיחה", en: "Conversation" },
+const PARTNER_LOGOS = [
+  { name: "TripAdvisor", style: "font-bold text-[#00AF87]" },
+  { name: "Expedia", style: "font-bold text-[#003580]" },
+  { name: "Airbnb", style: "font-bold text-[#FF5A5F]" },
+  { name: "ORBITZ", style: "font-bold tracking-widest text-[#1A1A2E]" },
+  { name: "Booking.com", style: "font-bold text-[#003580]" },
+];
+
+const STATS = [
+  { valueHe: "7 שיעורים", valueEn: "7 Lessons" },
+  { valueHe: "50+ משפטים", valueEn: "50+ Phrases" },
+  { valueHe: "הגייה בשמע", valueEn: "Audio" },
+  { valueHe: "ללא מנוי", valueEn: "No Sub." },
 ];
 
 export function CourseHero() {
@@ -47,151 +51,435 @@ export function CourseHero() {
   const [phraseIdx, setPhraseIdx] = useState(0);
   const phrase = SAMPLE_PHRASES[phraseIdx];
   const dir = language === "he" ? "rtl" : "ltr";
+  const he = language === "he";
 
-  const play = () => {
+  const playAudio = () => {
     if (!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(phrase.thai);
-    utterance.lang = "th-TH";
-    utterance.rate = 0.72;
-    window.speechSynthesis.speak(utterance);
+    const u = new SpeechSynthesisUtterance(phrase.thai);
+    u.lang = "th-TH";
+    u.rate = 0.72;
+    window.speechSynthesis.speak(u);
   };
 
   return (
-    <section className="course-hero bg-[oklch(0.97_0.015_80)]" dir={dir}>
-      <div className="container grid min-h-[calc(100vh-56px)] gap-12 py-20 md:grid-cols-[1fr_400px] md:items-center">
-        {/* Left: copy */}
-        <div>
-          <p className="mb-5 text-sm font-bold tracking-[0.08em] text-emerald-700 uppercase">
-            {t({
-              he: "קורס תאית מעשי לישראלים שטסים לתאילנד",
-              en: "Practical Thai course for Israelis traveling to Thailand",
-            })}
-          </p>
-          <h1 className="max-w-3xl text-5xl font-black leading-[1.05] text-stone-950 md:text-7xl">
-            {t({
-              he: "לדבר תאית בסיסית לטיול בתאילנד תוך 7 ימים",
-              en: "Speak basic Thai for your Thailand trip in 7 days",
-            })}
+    <section
+      dir={dir}
+      style={{
+        background: "#FFFFFF",
+        paddingTop: 80,
+        paddingBottom: 0,
+        overflow: "hidden",
+      }}
+    >
+      <div
+        className="container"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 48,
+          alignItems: "center",
+          minHeight: "calc(100vh - 56px)",
+        }}
+      >
+        {/* ── LEFT: copy ── */}
+        <div style={{ paddingBottom: 80 }}>
+          {/* Badge */}
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              background: "#F1F5F9",
+              borderRadius: 999,
+              padding: "8px 16px",
+              marginBottom: 28,
+            }}
+          >
+            <span style={{ fontSize: 16 }}>🌏</span>
+            <span
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                color: "#1E293B",
+                fontFamily: "Outfit, sans-serif",
+              }}
+            >
+              {t({
+                he: "הכינו את הטיול שלכם עם שפה",
+                en: "Prepare Your Travel With Language",
+              })}
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h1
+            style={{
+              fontSize: "clamp(2.8rem, 5vw, 4.5rem)",
+              fontWeight: 900,
+              lineHeight: 1.05,
+              color: "#0F172A",
+              letterSpacing: "-0.02em",
+              fontFamily: he ? "Assistant, sans-serif" : "Outfit, sans-serif",
+              marginBottom: 24,
+            }}
+          >
+            {he ? (
+              <>
+                לדבר תאית
+                <br />
+                לטייל טוב יותר.
+                <br />
+                <span style={{ color: "#F97316" }}>✈️</span>
+              </>
+            ) : (
+              <>
+                Speak Thai.
+                <br />
+                Travel Better.
+                <br />
+                <span style={{ color: "#F97316" }}>✈️</span>
+              </>
+            )}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-stone-600 md:text-xl">
+
+          {/* Subtitle */}
+          <p
+            style={{
+              fontSize: "1.125rem",
+              lineHeight: 1.75,
+              color: "#64748B",
+              maxWidth: 480,
+              marginBottom: 36,
+              fontFamily: "Outfit, sans-serif",
+            }}
+          >
             {t({
               he: "המשפטים שבאמת צריך: מונית, אוכל, מלון, שוק, עזרה וחיוך מכבד מול מקומיים.",
               en: "The phrases you actually need: taxis, food, hotels, markets, help, and a respectful smile with locals.",
             })}
           </p>
 
-          {/* Social proof */}
-          <div className="mt-7 flex flex-wrap items-center gap-4 text-sm text-stone-500">
-            <span className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-emerald-600" />
-              {t({ he: "7 שיעורים", en: "7 lessons" })}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-emerald-600" />
-              {t({ he: "50+ משפטים", en: "50+ phrases" })}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-emerald-600" />
-              {t({ he: "הגייה בשמע", en: "Audio pronunciation" })}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-emerald-600" />
-              {t({ he: "ללא מנוי", en: "No subscription" })}
-            </span>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button
-              asChild
-              className="h-12 rounded-xl bg-stone-950 px-7 text-base font-bold text-white hover:bg-stone-800"
-            >
-              <Link href="/lesson/airport-arrival">
-                {t({ he: "התחילו שיעור חינם", en: "Start free lesson" })}
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="h-12 rounded-xl border-stone-300 px-7 text-base font-bold"
-            >
-              <Link href="/course">
-                {t({
-                  he: "ראו את כל הקורס",
-                  en: "See the full course",
-                })}
-              </Link>
-            </Button>
-          </div>
-          <p className="mt-4 text-xs text-stone-400">
-            {t({ he: "תשלום חד פעמי ·", en: "One-time payment ·" })}{" "}
-            <s className="text-stone-400">₪{TOURIST_COURSE.originalPriceIls}</s>{" "}
-            ₪{TOURIST_COURSE.priceIls}{" "}
-            {t({ he: "עד סוף החודש", en: "until end of month" })}
-          </p>
-        </div>
-
-        {/* Right: live lesson sample card */}
-        <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-md">
-          {/* Card header */}
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-bold tracking-wide text-stone-400 uppercase">
-              {t({ he: "נסו משפט עכשיו", en: "Try a phrase now" })}
-            </p>
-            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
-              {language === "he" ? phrase.contextHe : phrase.contextEn}
-            </span>
-          </div>
-
-          {/* Thai phrase */}
-          <p
-            className="mt-5 text-5xl font-black leading-none text-stone-950"
-            lang="th"
+          {/* CTAs */}
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              flexWrap: "wrap",
+              marginBottom: 36,
+            }}
           >
-            {phrase.thai}
-          </p>
-          <p className="mt-2.5 text-base text-stone-500 tracking-wide">
-            {phrase.roman}
-          </p>
-          <p className="mt-1.5 text-xl font-semibold text-stone-800">
-            {language === "he" ? phrase.he : phrase.en}
-          </p>
+            <Link href="/lesson/airport-arrival">
+              <button
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#0F172A",
+                  color: "#FFFFFF",
+                  border: "none",
+                  borderRadius: 999,
+                  padding: "14px 28px",
+                  fontSize: 15,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  fontFamily: "Outfit, sans-serif",
+                  transition: "background 0.2s",
+                }}
+                onMouseEnter={e =>
+                  ((e.currentTarget as HTMLButtonElement).style.background =
+                    "#1E293B")
+                }
+                onMouseLeave={e =>
+                  ((e.currentTarget as HTMLButtonElement).style.background =
+                    "#0F172A")
+                }
+              >
+                {t({ he: "התחילו שיעור חינם", en: "Get Started" })}
+                <ArrowRight style={{ width: 16, height: 16 }} />
+              </button>
+            </Link>
 
-          {/* Buttons */}
-          <div className="mt-6 flex gap-2">
-            <Button
-              onClick={play}
-              size="sm"
-              className="rounded-lg bg-emerald-700 text-white hover:bg-emerald-800"
+            <button
+              onClick={playAudio}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "transparent",
+                color: "#0F172A",
+                border: "2px solid #E2E8F0",
+                borderRadius: 999,
+                padding: "14px 24px",
+                fontSize: 15,
+                fontWeight: 600,
+                cursor: "pointer",
+                fontFamily: "Outfit, sans-serif",
+                transition: "border-color 0.2s",
+              }}
+              onMouseEnter={e =>
+                ((e.currentTarget as HTMLButtonElement).style.borderColor =
+                  "#0F172A")
+              }
+              onMouseLeave={e =>
+                ((e.currentTarget as HTMLButtonElement).style.borderColor =
+                  "#E2E8F0")
+              }
             >
-              <Volume2 className="me-1.5 h-3.5 w-3.5" />
-              {t({ he: "שמע הגייה", en: "Hear pronunciation" })}
-            </Button>
-            <Button
-              onClick={() => setPhraseIdx(i => (i + 1) % SAMPLE_PHRASES.length)}
-              size="sm"
-              variant="outline"
-              className="rounded-lg border-stone-200 text-stone-600"
-            >
-              {t({ he: "משפט הבא", en: "Next phrase" })}
-            </Button>
+              <div
+                style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: "50%",
+                  background: "#0F172A",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <Play
+                  style={{
+                    width: 12,
+                    height: 12,
+                    color: "#fff",
+                    marginLeft: 2,
+                  }}
+                  fill="white"
+                />
+              </div>
+              {t({ he: "שמע דוגמה", en: "Watch Demo" })}
+            </button>
           </div>
 
-          {/* Course module pills */}
-          <div className="mt-6 border-t border-stone-100 pt-5">
-            <p className="mb-2.5 text-xs font-medium text-stone-400">
-              {t({ he: "7 שיעורים בקורס", en: "7 lessons in the course" })}
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {MODULE_LABELS.map(label => (
-                <span
-                  key={label.en}
-                  className="rounded-md bg-stone-100 px-2 py-1 text-xs text-stone-600"
+          {/* Social proof */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <div style={{ display: "flex" }}>
+              {["#F97316", "#0D9488", "#6366F1", "#EC4899"].map((c, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: "50%",
+                    background: c,
+                    border: "2px solid white",
+                    marginLeft: i === 0 ? 0 : -8,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "white",
+                  }}
                 >
-                  {language === "he" ? label.he : label.en}
-                </span>
+                  {["א", "ב", "ג", "ד"][i]}
+                </div>
               ))}
             </div>
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                {[1, 2, 3, 4, 5].map(s => (
+                  <Star
+                    key={s}
+                    style={{ width: 14, height: 14, color: "#F97316" }}
+                    fill="#F97316"
+                  />
+                ))}
+                <span
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: "#0F172A",
+                    marginLeft: 4,
+                  }}
+                >
+                  4.9
+                </span>
+              </div>
+              <p style={{ fontSize: 12, color: "#94A3B8", margin: 0 }}>
+                {t({
+                  he: "לקוחות מרוצים",
+                  en: "Happy Customers",
+                })}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── RIGHT: hero image + phrase card ── */}
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+            height: "80vh",
+            maxHeight: 700,
+          }}
+        >
+          {/* Background blob */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "radial-gradient(ellipse 80% 80% at 50% 60%, oklch(95% 0.06 78) 0%, transparent 70%)",
+              borderRadius: "50%",
+            }}
+          />
+
+          {/* Hero image */}
+          <img
+            src="/images/hero-beach.png"
+            alt="Thailand travel"
+            style={{
+              position: "relative",
+              height: "95%",
+              width: "100%",
+              objectFit: "cover",
+              objectPosition: "top center",
+              borderRadius: "24px 24px 0 0",
+            }}
+          />
+
+          {/* Floating phrase card */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 24,
+              left: he ? "auto" : 0,
+              right: he ? 0 : "auto",
+              background: "white",
+              borderRadius: 16,
+              padding: "14px 18px",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+              minWidth: 200,
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              setPhraseIdx(i => (i + 1) % SAMPLE_PHRASES.length);
+              playAudio();
+            }}
+          >
+            <p
+              style={{
+                fontSize: 10,
+                color: "#94A3B8",
+                marginBottom: 4,
+                fontWeight: 600,
+                letterSpacing: "0.05em",
+                textTransform: "uppercase",
+              }}
+            >
+              {he ? phrase.contextHe : phrase.contextEn}
+            </p>
+            <p
+              style={{
+                fontSize: 22,
+                fontWeight: 900,
+                color: "#0F172A",
+                fontFamily: "Kanit, sans-serif",
+                margin: 0,
+                lineHeight: 1.2,
+              }}
+              lang="th"
+            >
+              {phrase.thai}
+            </p>
+            <p style={{ fontSize: 12, color: "#94A3B8", margin: "2px 0 0" }}>
+              {phrase.roman}
+            </p>
+            <p
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#1E293B",
+                margin: "2px 0 0",
+              }}
+            >
+              {he ? phrase.he : phrase.en}
+            </p>
+          </div>
+
+          {/* Stats chip */}
+          <div
+            style={{
+              position: "absolute",
+              top: 24,
+              right: he ? "auto" : 0,
+              left: he ? 0 : "auto",
+              background: "white",
+              borderRadius: 16,
+              padding: "12px 16px",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.10)",
+              display: "flex",
+              gap: 16,
+            }}
+          >
+            {STATS.map((s, i) => (
+              <div key={i} style={{ textAlign: "center" }}>
+                <p
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "#0F172A",
+                    margin: 0,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {he ? s.valueHe : s.valueEn}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Partner logos strip ── */}
+      <div
+        style={{
+          borderTop: "1px solid #F1F5F9",
+          marginTop: 0,
+          padding: "24px 0",
+          background: "#FAFAFA",
+        }}
+      >
+        <div className="container">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 48,
+              flexWrap: "wrap",
+            }}
+          >
+            {PARTNER_LOGOS.map(p => (
+              <span
+                key={p.name}
+                className={p.style}
+                style={{
+                  fontSize: 15,
+                  opacity: 0.6,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {p.name}
+              </span>
+            ))}
           </div>
         </div>
       </div>

@@ -16,12 +16,12 @@ export default function Home() {
   );
 
   return (
-    <main id="main-content" className="min-h-screen bg-[oklch(0.97_0.015_80)]">
+    <main id="main-content" className="min-h-screen bg-white">
       <CourseHero />
       <PhrasePracticePreview />
       <CoursePath />
       <FreePaidComparison />
-      <section className="bg-[oklch(0.97_0.015_80)] py-16" dir={dir}>
+      <section className="bg-[#F8FAFC] py-20" dir={dir}>
         <div className="container">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-bold text-stone-950">
