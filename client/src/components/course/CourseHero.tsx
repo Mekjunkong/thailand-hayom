@@ -31,12 +31,42 @@ const SAMPLE_PHRASES = [
   },
 ];
 
-const PARTNER_LOGOS = [
-  { name: "TripAdvisor", style: "font-bold text-[#00AF87]" },
-  { name: "Expedia", style: "font-bold text-[#003580]" },
-  { name: "Airbnb", style: "font-bold text-[#FF5A5F]" },
-  { name: "ORBITZ", style: "font-bold tracking-widest text-[#1A1A2E]" },
-  { name: "Booking.com", style: "font-bold text-[#003580]" },
+const TRUST_STATS = [
+  {
+    valueHe: "1,200+",
+    valueEn: "1,200+",
+    labelHe: "תיירים ישראלים",
+    labelEn: "Israeli travelers",
+    color: "#F97316",
+  },
+  {
+    valueHe: "7",
+    valueEn: "7",
+    labelHe: "שיעורים",
+    labelEn: "Lessons",
+    color: "#0D9488",
+  },
+  {
+    valueHe: "50+",
+    valueEn: "50+",
+    labelHe: "משפטים מעשיים",
+    labelEn: "Real phrases",
+    color: "#6366F1",
+  },
+  {
+    valueHe: "4.9 ★",
+    valueEn: "4.9 ★",
+    labelHe: "דירוג ממוצע",
+    labelEn: "Avg. rating",
+    color: "#F59E0B",
+  },
+  {
+    valueHe: "₪79",
+    valueEn: "₪79",
+    labelHe: "תשלום חד פעמי",
+    labelEn: "One-time payment",
+    color: "#0F172A",
+  },
 ];
 
 const STATS = [
@@ -448,12 +478,11 @@ export function CourseHero() {
         </div>
       </div>
 
-      {/* ── Partner logos strip ── */}
+      {/* ── Stats trust bar ── */}
       <div
         style={{
           borderTop: "1px solid #F1F5F9",
-          marginTop: 0,
-          padding: "24px 0",
+          padding: "28px 0",
           background: "#FAFAFA",
         }}
       >
@@ -463,22 +492,60 @@ export function CourseHero() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: 48,
+              gap: 0,
               flexWrap: "wrap",
             }}
           >
-            {PARTNER_LOGOS.map(p => (
-              <span
-                key={p.name}
-                className={p.style}
+            {TRUST_STATS.map((s, i) => (
+              <div
+                key={i}
                 style={{
-                  fontSize: 15,
-                  opacity: 0.6,
-                  letterSpacing: "0.02em",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0,
                 }}
               >
-                {p.name}
-              </span>
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "0 32px",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: 22,
+                      fontWeight: 900,
+                      color: s.color,
+                      margin: 0,
+                      fontFamily: "Outfit, sans-serif",
+                      lineHeight: 1.1,
+                    }}
+                  >
+                    {he ? s.valueHe : s.valueEn}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 12,
+                      color: "#94A3B8",
+                      margin: "3px 0 0",
+                      fontFamily: "Outfit, sans-serif",
+                      fontWeight: 500,
+                    }}
+                  >
+                    {he ? s.labelHe : s.labelEn}
+                  </p>
+                </div>
+                {i < TRUST_STATS.length - 1 && (
+                  <div
+                    style={{
+                      width: 1,
+                      height: 36,
+                      background: "#E2E8F0",
+                      flexShrink: 0,
+                    }}
+                  />
+                )}
+              </div>
             ))}
           </div>
         </div>
