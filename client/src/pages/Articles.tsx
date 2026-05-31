@@ -6,6 +6,7 @@ import ContentCard, { CardSkeleton } from "@/components/ContentCard";
 import FilterBar from "@/components/FilterBar";
 import { getCategoryById, categories } from "@/data/categories";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { featuredArticles } from "@/data/featuredArticles";
 
 const articleFilters = [
   { id: "food", nameEn: "Food", nameHe: "אוכל" },
@@ -38,14 +39,28 @@ export default function Articles() {
     isPublished: true,
   });
 
-  const articles = data?.articles || [];
+  const dbArticles = data?.articles || [];
+  const trimmedSearchQuery = searchQuery.trim();
+  const normalizedSearch = trimmedSearchQuery.toLowerCase();
+  const staticArticles = featuredArticles.filter((article) => {
+    const matchesCategory = selectedCategory
+      ? article.category === selectedCategory
+      : true;
+    const matchesSearch = normalizedSearch
+      ? [article.title, article.titleHe, article.excerpt, article.excerptHe]
+          .join(" ")
+          .toLowerCase()
+          .includes(normalizedSearch)
+      : true;
+    return article.isPublished && matchesCategory && matchesSearch;
+  });
+  const articles = [...staticArticles, ...dbArticles];
 
   const headerCategory =
     (selectedCategory &&
       categories.find(c => c.articleCategory === selectedCategory)) ||
     getCategoryById("travel")!;
   const HeaderIcon = headerCategory.icon;
-  const trimmedSearchQuery = searchQuery.trim();
   const emptyStateKind = trimmedSearchQuery
     ? "search"
     : selectedCategory

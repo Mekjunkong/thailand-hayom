@@ -10,6 +10,7 @@ import AnimatedPage from "./components/AnimatedPage";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import WelcomeKit from "./pages/WelcomeKit";
+import FreePhrasePack from "./pages/FreePhrasePack";
 import Emergency from "./pages/Emergency";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -55,6 +56,9 @@ function Router() {
       </Route>
       <Route path="/welcome-kit">
         <AnimatedRoute component={WelcomeKit} />
+      </Route>
+      <Route path="/free">
+        <AnimatedRoute component={FreePhrasePack} />
       </Route>
       <Route path="/emergency">
         <AnimatedRoute component={Emergency} />

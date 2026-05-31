@@ -13,16 +13,19 @@ import { useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import PremiumPaywall from "@/components/PremiumPaywall";
 import { getCategoryByArticleCategory } from "@/data/categories";
+import { getFeaturedArticleBySlug } from "@/data/featuredArticles";
 
 export default function ArticleDetail() {
   const [, params] = useRoute("/articles/:slug");
   const { language, t } = useLanguage();
   const slug = params?.slug || "";
+  const staticArticle = getFeaturedArticleBySlug(slug);
 
-  const { data: article, isLoading, error } = trpc.article.getBySlug.useQuery(
+  const { data: dbArticle, isLoading, error } = trpc.article.getBySlug.useQuery(
     { slug },
-    { enabled: !!slug },
+    { enabled: !!slug && !staticArticle },
   );
+  const article = staticArticle ?? dbArticle;
 
   // Set page title for SEO
   useEffect(() => {
@@ -149,11 +152,11 @@ export default function ArticleDetail() {
             prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline"
           dangerouslySetInnerHTML={{
             __html: content
-              .replace(/\n/g, "<br />")
-              .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-              .replace(/^## (.*$)/gim, "<h2>$1</h2>")
               .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"),
+              .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+              .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+              .replace(/\n/g, "<br />"),
           }}
         />
 
@@ -163,26 +166,37 @@ export default function ArticleDetail() {
 
       {/* CTA Section (only for non-gated articles) */}
       {!article.gated && (
-        <section className="py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-teal-500 text-white">
+        <section className="py-20 bg-[oklch(50%_0.20_265)] text-white">
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                {t({ he: "אהבת את המאמר?", en: "Enjoyed This Article?" })}
+                {t({ he: "רוצים לתרגל את זה לפני הטיסה?", en: "Want to practice this before the flight?" })}
               </h2>
               <p className="text-xl mb-10 opacity-90">
                 {t({
-                  he: "הצטרף לניוזלטר שלנו וקבל מאמרים חדשים ישירות למייל",
-                  en: "Join our newsletter and get new articles directly to your inbox",
+                  he: "הורידו את חבילת 50 הביטויים בחינם, ואז המשיכו לשני השיעורים החינמיים בקורס. אין כאן הבטחות קסם — רק תרגול מעשי למטיילים.",
+                  en: "Download the free 50-phrase pack, then continue to the two free course lessons. No magic promises — just practical practice for travelers.",
                 })}
               </p>
-              <Link href="/#newsletter">
-                <Button
-                  size="lg"
-                  className="px-12 py-7 text-xl bg-white text-blue-600 hover:bg-gray-50 font-bold rounded-xl shadow-2xl"
-                >
-                  {t({ he: "הצטרף לניוזלטר", en: "Join Newsletter" })}
-                </Button>
-              </Link>
+              <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                <Link href="/free">
+                  <Button
+                    size="lg"
+                    className="px-10 py-7 text-lg bg-white text-[oklch(50%_0.20_265)] hover:bg-gray-50 font-bold rounded-xl shadow-2xl"
+                  >
+                    {t({ he: "פתחו את החבילה החינמית", en: "Open the free pack" })}
+                  </Button>
+                </Link>
+                <Link href="/course">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="px-10 py-7 text-lg border-white bg-transparent text-white hover:bg-white/10 font-bold rounded-xl"
+                  >
+                    {t({ he: "ראו את הקורס", en: "See the course" })}
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
