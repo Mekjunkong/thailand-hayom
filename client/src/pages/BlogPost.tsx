@@ -101,19 +101,19 @@ export default function BlogPost() {
               {language === "english" ? "Ready for Your Thailand Adventure?" : "מוכנים להרפתקה התאילנדית שלכם?"}
             </h3>
             <p className="text-center text-gray-700 mb-6">
-              {language === "english" 
-                ? "Get our complete Welcome Kit with essential survival guides" 
-                : "קבלו את ערכת הקבלה המלאה שלנו עם מדריכי הישרדות חיוניים"}
+              {language === "english"
+                ? "Get 50 practical Thai phrases for landing, taxis, hotels, food, and emergencies — free."
+                : "קבלו בחינם 50 ביטויים שימושיים בתאית לנחיתה, מוניות, מלון, אוכל וחירום."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/welcome-kit">
+              <Link href="/free">
                 <Button size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700">
-                  ✈️ Get Welcome Kit (₪20)
+                  {language === "english" ? "✈️ Get the Free Phrase Pack" : "✈️ קבלו את חבילת הביטויים בחינם"}
                 </Button>
               </Link>
-              <Link href="/interactive-lessons">
+              <Link href="/articles/thai-airport-phrases-israeli-travelers">
                 <Button size="lg" variant="outline" className="border-2">
-                  🎓 Start Free Thai Lessons
+                  {language === "english" ? "🇹🇭 Read the Arrival Guide" : "🇹🇭 קראו את מדריך הנחיתה"}
                 </Button>
               </Link>
             </div>

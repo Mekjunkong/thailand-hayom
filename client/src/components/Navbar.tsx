@@ -25,7 +25,7 @@ export default function Navbar() {
   );
   const hasPaidAccess = hasCourseAccess(purchases);
   const cta = !user
-    ? { href: "/login", label: t({ he: "התחילו חינם", en: "Start free" }) }
+    ? { href: "/free", label: t({ he: "קבלו 50 ביטויים", en: "Get 50 phrases" }) }
     : hasPaidAccess
       ? {
           href: "/course",
@@ -43,6 +43,10 @@ export default function Navbar() {
     {
       href: "/lesson/airport-arrival",
       label: t({ he: "שיעור חינם", en: "Free lesson" }),
+    },
+    {
+      href: "/free",
+      label: t({ he: "50 ביטויים", en: "50 phrases" }),
     },
     {
       href: "/articles",

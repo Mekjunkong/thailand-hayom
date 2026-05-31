@@ -115,27 +115,27 @@ export default function Blog() {
             </h2>
             <p className="text-xl text-gray-700 mb-8">
               {t({
-                he: "קבלו את ערכת הקבלה המלאה שלנו עם מדריכים חיוניים",
-                en: "Get our complete Welcome Kit with essential guides",
+                he: "קבלו בחינם 50 ביטויים שימושיים בתאית לשדה התעופה, מוניות, מלון ואוכל",
+                en: "Get 50 useful Thai phrases for the airport, taxis, hotels, and food — free",
               })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/welcome-kit">
+              <Link href="/free">
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 shadow-xl"
                 >
                   {t({
-                    he: "ערכת קבלה (₪20)",
-                    en: "Get Welcome Kit (₪20)",
+                    he: "קבלו את חבילת הביטויים בחינם",
+                    en: "Get the free phrase pack",
                   })}
                 </Button>
               </Link>
-              <Link href="/interactive-lessons">
+              <Link href="/articles/thai-airport-phrases-israeli-travelers">
                 <Button size="lg" variant="outline" className="border-2">
                   {t({
-                    he: "התחל שיעורים חינם",
-                    en: "Start Free Lessons",
+                    he: "קראו את מדריך הנחיתה",
+                    en: "Read the arrival guide",
                   })}
                 </Button>
               </Link>
