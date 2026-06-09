@@ -2,6 +2,8 @@ import "dotenv/config";
 import express, { type Request, type Response } from "express";
 import { createServer } from "http";
 import net from "net";
+import fs from "fs";
+import path from "path";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { registerLocalAuthRoutes } from "./localAuth";
@@ -80,6 +82,15 @@ async function startServer() {
       createContext,
     })
   );
+
+  // ThaiRecipe — auto-generated recipes
+  // Generated on VPS every 6h, copied into public/recipes/ for deployment
+  const recipePublicPath = path.resolve(import.meta.dirname, "../public/recipes");
+  if (fs.existsSync(recipePublicPath)) {
+    app.use("/recipes", express.static(recipePublicPath));
+    console.log("🍜 ThaiRecipe mounted at /recipes/");
+  }
+
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
