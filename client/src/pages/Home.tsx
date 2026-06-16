@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Download, Gift, Headphones } from "lucide-react";
+import { Download, Gift, Headphones, MessageCircle, Route } from "lucide-react";
 import { CourseHero } from "@/components/course/CourseHero";
 import { CoursePath } from "@/components/course/CoursePath";
 import { FreePaidComparison } from "@/components/course/FreePaidComparison";
@@ -20,6 +20,37 @@ export default function Home() {
   return (
     <main id="main-content" className="min-h-screen bg-white">
       <CourseHero />
+      <section className="bg-[oklch(17%_0.02_255)] py-14 text-white" dir={dir}>
+        <div className="container">
+          <div className="grid gap-6 rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl md:grid-cols-[1fr_auto] md:items-center md:p-8">
+            <div>
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[oklch(86%_0.15_86)] px-3 py-1 text-sm font-black text-stone-950">
+                <Route className="h-4 w-4" />
+                {t({ he: "חדש: עזרה אישית בתכנון הטיול", en: "New: personal trip planning help" })}
+              </div>
+              <h2 className="text-3xl font-black text-white md:text-5xl">
+                {t({
+                  he: "לא בטוחים לאן ללכת בתאילנד? קבעו שיחת תכנון ב-₪149.",
+                  en: "Not sure where to go in Thailand? Book a planning call for ₪149.",
+                })}
+              </h2>
+              <p className="mt-3 max-w-3xl text-white/75">
+                {t({
+                  he: "מסלול, תקציב, איים, תחבורה, טעויות שכדאי להימנע מהן וסיכום קצר בוואטסאפ אחרי השיחה. הקורס נשאר בונוס — העזרה האמיתית היא לעשות סדר בהחלטות.",
+                  en: "Route, budget, islands, transport, mistakes to avoid, and a short WhatsApp summary after the call. The course stays as a bonus — the real help is getting clear decisions.",
+                })}
+              </p>
+            </div>
+            <Link
+              href="/planning-call"
+              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-[oklch(55%_0.16_145)] px-7 text-base font-black text-white shadow-lg transition-transform hover:-translate-y-0.5"
+            >
+              <MessageCircle className="h-5 w-5" />
+              {t({ he: "ראו את ההצעה", en: "See the offer" })}
+            </Link>
+          </div>
+        </div>
+      </section>
       <section className="bg-[oklch(98%_0.016_88)] py-14" dir={dir}>
         <div className="container">
           <div className="grid gap-6 rounded-[2rem] border border-[oklch(88%_0.025_82)] bg-white p-6 shadow-sm md:grid-cols-[1fr_auto] md:items-center md:p-8">

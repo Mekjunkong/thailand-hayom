@@ -25,7 +25,7 @@ export default function Navbar() {
   );
   const hasPaidAccess = hasCourseAccess(purchases);
   const cta = !user
-    ? { href: "/free", label: t({ he: "קבלו 50 ביטויים", en: "Get 50 phrases" }) }
+    ? { href: "/planning-call", label: t({ he: "שיחת תכנון", en: "Planning call" }) }
     : hasPaidAccess
       ? {
           href: "/course",
@@ -36,6 +36,10 @@ export default function Navbar() {
           label: t({ he: "פתח קורס", en: "Unlock course" }),
         };
   const navLinks = [
+    {
+      href: "/planning-call",
+      label: t({ he: "תכנון טיול", en: "Trip planning" }),
+    },
     {
       href: "/course",
       label: t({ he: "הקורס", en: "Course" }),

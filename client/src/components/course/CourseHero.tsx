@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, Play, Star } from "lucide-react";
+import { ArrowRight, MessageCircle, Play, Star } from "lucide-react";
 import { TOURIST_COURSE } from "@/data/touristCourse";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -33,38 +33,38 @@ const SAMPLE_PHRASES = [
 
 const TRUST_STATS = [
   {
-    valueHe: "1,200+",
-    valueEn: "1,200+",
-    labelHe: "תיירים ישראלים",
-    labelEn: "Israeli travelers",
+    valueHe: "₪149",
+    valueEn: "₪149",
+    labelHe: "שיחת תכנון",
+    labelEn: "Planning call",
     color: "#F97316",
   },
   {
-    valueHe: "7",
-    valueEn: "7",
-    labelHe: "שיעורים",
-    labelEn: "Lessons",
+    valueHe: "45 דק׳",
+    valueEn: "45 min",
+    labelHe: "ייעוץ אישי",
+    labelEn: "Personal help",
     color: "#0D9488",
   },
   {
     valueHe: "50+",
     valueEn: "50+",
-    labelHe: "משפטים מעשיים",
-    labelEn: "Real phrases",
+    labelHe: "ביטויים חינם",
+    labelEn: "Free phrases",
     color: "#6366F1",
   },
   {
-    valueHe: "4.9 ★",
-    valueEn: "4.9 ★",
-    labelHe: "דירוג ממוצע",
-    labelEn: "Avg. rating",
+    valueHe: "₪399+",
+    valueEn: "₪399+",
+    labelHe: "מסלול מותאם",
+    labelEn: "Custom itinerary",
     color: "#F59E0B",
   },
   {
     valueHe: "₪79",
     valueEn: "₪79",
-    labelHe: "תשלום חד פעמי",
-    labelEn: "One-time payment",
+    labelHe: "קורס תאית",
+    labelEn: "Thai course",
     color: "#0F172A",
   },
 ];
@@ -136,8 +136,8 @@ export function CourseHero() {
               }}
             >
               {t({
-                he: "הכינו את הטיול שלכם עם שפה",
-                en: "Prepare Your Travel With Language",
+                he: "עזרה אמיתית לישראלים לפני תאילנד",
+                en: "Real Thailand help for Israelis",
               })}
             </span>
           </div>
@@ -156,17 +156,17 @@ export function CourseHero() {
           >
             {he ? (
               <>
-                לדבר תאית
+                לתכנן תאילנד
                 <br />
-                לטייל טוב יותר.
+                בלי בלבול.
                 <br />
                 <span style={{ color: "#F97316" }}>✈️</span>
               </>
             ) : (
               <>
-                Speak Thai.
+                Plan Thailand.
                 <br />
-                Travel Better.
+                Travel Clear.
                 <br />
                 <span style={{ color: "#F97316" }}>✈️</span>
               </>
@@ -185,8 +185,8 @@ export function CourseHero() {
             }}
           >
             {t({
-              he: "המשפטים שבאמת צריך: מונית, אוכל, מלון, שוק, עזרה וחיוך מכבד מול מקומיים.",
-              en: "The phrases you actually need: taxis, food, hotels, markets, help, and a respectful smile with locals.",
+              he: "שיחת תכנון אישית, מסלול ברור, טעויות שכדאי להימנע מהן, וביטויים בתאית שיעזרו לכם בשטח.",
+              en: "A personal planning call, a clearer route, mistakes to avoid, and Thai phrases that help on the ground.",
             })}
           </p>
 
@@ -199,7 +199,7 @@ export function CourseHero() {
               marginBottom: 36,
             }}
           >
-            <Link href="/lesson/airport-arrival">
+            <Link href="/planning-call">
               <button
                 style={{
                   display: "inline-flex",
@@ -225,7 +225,29 @@ export function CourseHero() {
                     "#0F172A")
                 }
               >
-                {t({ he: "התחילו שיעור חינם", en: "Get Started" })}
+                {t({ he: "קבעו שיחת תכנון", en: "Book planning call" })}
+                <MessageCircle style={{ width: 16, height: 16 }} />
+              </button>
+            </Link>
+
+            <Link href="/free">
+              <button
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#F97316",
+                  color: "#FFFFFF",
+                  border: "none",
+                  borderRadius: 999,
+                  padding: "14px 24px",
+                  fontSize: 15,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  fontFamily: "Outfit, sans-serif",
+                }}
+              >
+                {t({ he: "50 ביטויים בחינם", en: "50 free phrases" })}
                 <ArrowRight style={{ width: 16, height: 16 }} />
               </button>
             </Link>

@@ -32,6 +32,7 @@ import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 import ChiangMaiTrip from "./pages/ChiangMaiTrip";
 import LessonPlayer from "./pages/LessonPlayer";
 import CourseDashboard from "./pages/CourseDashboard";
+import PlanningCall from "./pages/PlanningCall";
 import ScrollToTop from "./components/ScrollToTop";
 import { GamificationProvider } from "./contexts/GamificationContext";
 
@@ -106,6 +107,9 @@ function Router() {
       <Route path="/articles/:slug" component={ArticleDetail} />
       <Route path="/course">
         <AnimatedRoute component={CourseDashboard} />
+      </Route>
+      <Route path="/planning-call">
+        <AnimatedRoute component={PlanningCall} />
       </Route>
       <Route path="/lesson/:id" component={LessonPlayer} />
       <Route path="/trips/chiang-mai-one-day">
